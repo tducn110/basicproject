@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { RotateCcw, SquarePlus } from "lucide-react"
 import type { WinResult } from "../game/core/types"
 import type { GameMode } from "../game/behaviors/match/MatchState"
+import { playButtonClick } from "../utils/buttonClick"
 
 // ── Win Banner ───────────────────────────────────────────────────────────────
 
@@ -64,13 +65,13 @@ export function WinBanner({
         </div>
       </div>
       <div style={{ display: "flex", gap: 8 }}>
-        <button className="paper-btn" onClick={onReplay} aria-label={t("common.retry")}>
+        <button className="paper-btn" onClick={() => { playButtonClick(); onReplay(); }} aria-label={t("common.retry")}>
           <RotateCcw size={13} />
           <span>{t("common.retry")}</span>
         </button>
         <button
           className="paper-btn primary"
-          onClick={onNewGame}
+          onClick={() => { playButtonClick(); onNewGame(); }}
           aria-label={t("common.play")}
         >
           <SquarePlus size={13} />

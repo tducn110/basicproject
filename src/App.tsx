@@ -21,6 +21,7 @@ import type { BotDifficulty } from "./game/ai/contracts"
 import { useWinkIntegration } from "./integrations/wink/useWinkIntegration"
 import { preloadCriticalResources, preloadNonCriticalResources } from "./utils/game-loader";
 import { completeGameLoading, onGameLoadingDismiss, setGameLoadingProgress } from "./utils/loading-controller";
+import { playButtonClick } from "./utils/buttonClick";
 
 
 // ── Main App ─────────────────────────────────────────────────────────────────
@@ -47,6 +48,26 @@ export default function App() {
     });
     return unbind;
   }, [wink.readyPromise]);
+
+  useEffect(() => {
+    const blockCopyAction = (event: Event) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener("copy", blockCopyAction, true);
+    document.addEventListener("cut", blockCopyAction, true);
+    document.addEventListener("selectstart", blockCopyAction, true);
+    document.addEventListener("dragstart", blockCopyAction, true);
+    document.addEventListener("contextmenu", blockCopyAction, true);
+
+    return () => {
+      document.removeEventListener("copy", blockCopyAction, true);
+      document.removeEventListener("cut", blockCopyAction, true);
+      document.removeEventListener("selectstart", blockCopyAction, true);
+      document.removeEventListener("dragstart", blockCopyAction, true);
+      document.removeEventListener("contextmenu", blockCopyAction, true);
+    };
+  }, []);
 
   const roundStartedRef = useRef(false)
   const controllerRef = useRef<GameController | null>(null)
@@ -118,6 +139,7 @@ export default function App() {
   )
 
   const handleReplay = useCallback(() => {
+    playButtonClick()
     if (roundStartedRef.current) {
       wink.gameplayStop()
       roundStartedRef.current = false
@@ -126,6 +148,7 @@ export default function App() {
   }, [controller, wink])
 
   const handleNewGame = useCallback((newMode?: GameMode) => {
+    playButtonClick()
     if (roundStartedRef.current) {
       wink.gameplayStop()
       roundStartedRef.current = false
@@ -250,7 +273,7 @@ export default function App() {
             className="paper-btn"
             style={{ padding: "6px 10px", fontSize: 12 }}
             aria-label={t("leaderboard.title", "Bảng xếp hạng")}
-            onClick={() => setShowLeaderboard(true)}
+            onClick={() => { playButtonClick(); setShowLeaderboard(true); }}
           >
             <Trophy size={14} color="var(--x-color)" />
           </button>
@@ -259,7 +282,7 @@ export default function App() {
             className="paper-btn"
             style={{ padding: "6px 10px", fontSize: 12 }}
             aria-label={t("settings.language")}
-            onClick={() => void i18n.changeLanguage(nextLanguage)}
+            onClick={() => { playButtonClick(); void i18n.changeLanguage(nextLanguage); }}
           >
             <Globe size={14} />
             <span>{nextLanguage.toUpperCase()}</span>
@@ -303,7 +326,7 @@ export default function App() {
                 type="button"
                 className={`difficulty-button ${difficulty === level ? "selected" : ""}`}
                 aria-pressed={difficulty === level}
-                onClick={() => controller.setDifficulty(level)}
+                onClick={() => { playButtonClick(); controller.setDifficulty(level); }}
               >
                 {t(`game.difficulty${level.charAt(0).toUpperCase()}${level.slice(1)}`)}
               </button>
