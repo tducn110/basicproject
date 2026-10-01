@@ -39,7 +39,10 @@ basicproject/
 ├── Week3/                        # UI Architecture, State Decoupling & Component Design
 ├── Week4/                        # Rule-based bot, pattern detection, heuristic implementation
 ├── Week5/                        # Minimax algorithm research, game tree & depth limits
-└── Week6/                        # Alpha-Beta pruning, search time & visited nodes benchmark
+├── Week6/                        # Alpha-Beta pruning, search time & visited nodes benchmark
+├── benchmark/                    # Benchmark harness: Rust (Native) vs TypeScript (V8)
+├── docs/                         # Empirical research reports (Rust vs TS benchmark)
+└── assets/                       # High-resolution research charts (300 DPI) & diagrams
 ```
 
 ## Quick References

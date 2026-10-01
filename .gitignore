@@ -9,6 +9,8 @@ build/
 .obsidian/workspace*.json
 __pycache__/
 *.pyc
+target/
+**/target/
 
 # Roadmap files
 /roadmap.md

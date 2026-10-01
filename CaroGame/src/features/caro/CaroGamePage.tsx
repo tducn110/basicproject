@@ -1,4 +1,5 @@
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Volume2, VolumeX } from "lucide-react"
+import { useCallback } from "react"
 import {
   BoardGrid,
   GameActions,
@@ -10,8 +11,11 @@ import {
 } from "./components"
 import { useCaroGame } from "./hooks/useCaroGame"
 import { useGameTimer } from "./hooks/useGameTimer"
+import { useGameAudio } from "./hooks/useGameAudio"
 
 export function CaroGamePage() {
+  const audio = useGameAudio()
+
   const {
     board,
     currentPlayer,
@@ -25,10 +29,33 @@ export function CaroGamePage() {
     handleCellClick,
     handleReplay,
     handleNewGame,
-  } = useCaroGame()
+  } = useCaroGame({
+    onMoveSuccess: (player, result, isDraw) => {
+      if (result) {
+        audio.playWin()
+      } else if (isDraw) {
+        audio.playDraw()
+      } else {
+        audio.playPlacePiece(player)
+      }
+    },
+    onActionClick: () => {
+      audio.playButtonClick()
+    },
+  })
 
   // TimerState — lifecycle hoàn toàn độc lập, không re-render BoardGrid
-  const { elapsed } = useGameTimer(gameStarted, isGameOver)
+  const timer = useGameTimer(gameStarted, isGameOver)
+
+  const onReplayAction = useCallback(() => {
+    handleReplay()
+    timer.reset()
+  }, [handleReplay, timer])
+
+  const onNewGameAction = useCallback(() => {
+    handleNewGame()
+    timer.reset()
+  }, [handleNewGame, timer])
 
   const p1label = "Người chơi 1"
   const p2label = "Người chơi 2"
@@ -86,7 +113,21 @@ export function CaroGamePage() {
           </p>
         </div>
 
-        <div className="header-right" />
+        <div className="header-right">
+          <button
+            className={`paper-btn ${audio.isMuted ? "muted" : ""}`}
+            style={{ padding: "6px 12px", fontSize: 12, gap: 6 }}
+            onClick={() => {
+              audio.playButtonClick()
+              audio.toggleMute()
+            }}
+            aria-label={audio.isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+            title={audio.isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+          >
+            {audio.isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+            <span className="sm-inline">{audio.isMuted ? "Tắt tiếng" : "Âm thanh"}</span>
+          </button>
+        </div>
       </header>
 
       {/* ── Mobile player bar (hidden on desktop ≥ 1024px) ── */}
@@ -128,7 +169,7 @@ export function CaroGamePage() {
 
         {/* Right (Desktop) / Below (Tablet & Mobile): Info + History */}
         <aside className="game-sidebar">
-          <GameInfo elapsed={elapsed} />
+          <GameInfo elapsed={timer.elapsed} />
           <MoveHistory history={history} />
         </aside>
       </main>
@@ -138,16 +179,16 @@ export function CaroGamePage() {
         <WinBanner
           winner={winner}
           isDraw={isDraw}
-          onReplay={handleReplay}
-          onNewGame={handleNewGame}
+          onReplay={onReplayAction}
+          onNewGame={onNewGameAction}
         />
       </div>
 
       {/* ── Footer actions ── */}
       <GameActions
         isGameOver={isGameOver}
-        onReplay={handleReplay}
-        onNewGame={handleNewGame}
+        onReplay={onReplayAction}
+        onNewGame={onNewGameAction}
       />
     </div>
   )

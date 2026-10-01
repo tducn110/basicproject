@@ -22,8 +22,8 @@ Caro (Gomoku) 15×15 web game with vintage parchment/paper aesthetic. Pure DOM/R
 | `game-mobile-web-quirks` | mobile viewport, touch, selection, overscroll behavior | `src/index.css` (`box-sizing`, `overflow: hidden`, touch targets) | met |
 | `game-ui-components` | reusable shared HUD, button, modal, and overlay components | `src/App.tsx` (`BoardCell`, `BoardGrid`, `PlayerCard`, `MobilePlayerBar`, `WinBanner`, `InfoCard`, `HistoryPanel`) | met |
 | `dedup-merge` | shared gameplay/UI/reuse boundary and deliberately separate variants | `src/App.tsx` (Inline sub-components in single file; gap for component extraction) | gap |
-| `game-audio-design` | semantic event-to-SFX contract and evidence status | N/A — Audio engine not yet implemented | gap |
-| `game-audio-mastering` | buses, limiter, gesture unlock, mute lifecycle | N/A — Web Audio API not yet configured | gap |
+| `game-audio-design` | semantic event-to-SFX contract and evidence status | `src/features/caro/audio/soundManager.ts` (wood/paper tap, win chime, draw, click) | met |
+| `game-audio-mastering` | buses, limiter, gesture unlock, mute lifecycle | `src/features/caro/audio/soundManager.ts` (Master Bus, DynamicsCompressorNode limiter) | met |
 | `game-review-gates` | state, lifecycle, and ownership review before patches | `LAYOUT.md` | met |
 | `gameplay-experience-gate` | player outcome, research evidence, fairness, feedback, acceptance checks | `src/game.ts` (5-in-a-row deterministic win rule, pure 1v1 model) | met |
 | `game-wink-sdk-v1` | required for Wink targets; record standalone reason otherwise | N/A — Standalone Web App, Wink SDK v1 not integrated | gap |
@@ -51,9 +51,12 @@ CaroGame/
         │   ├── constants.ts  # BOARD_SIZE (15), WIN_COUNT (5), DIRS
         │   ├── types.ts      # Player, Cell, Board, Move, WinResult contracts
         │   └── index.ts      # Public domain barrel export
-        ├── hooks/        # Trung chuyển layer (State coordination)
-        │   ├── useCaroGame.ts   # Authoritative GameState coordinator (board, turn, winner)
-        │   └── useGameTimer.ts  # Independent TimerState coordinator (1s tick, reset)
+        ├── audio/        # Implement layer (Web Audio API Synthesizer)
+        │   └── soundManager.ts # Master Bus, Brick-wall Limiter, semantic vintage paper SFX
+        ├── hooks/        # Trung chuyển layer (State & Effect coordination)
+        │   ├── useCaroGame.ts   # Authoritative GameState coordinator (useReducer pure model)
+        │   ├── useGameTimer.ts  # Independent TimerState coordinator (1s tick, reset)
+        │   └── useGameAudio.ts  # Audio state and event triggers coordinator
         └── components/   # Presentation layer (Pure view components)
             ├── BoardCell.tsx    # Single cell button with SVG piece & win highlight
             ├── BoardGrid.tsx    # 15×15 CSS Grid container
@@ -82,6 +85,8 @@ Pipeline stage reference:
 | **Player HUD** | **Presentation** | `OUTPUT` | React DOM | Thẻ người chơi 1/2 desktop, thanh VS mobile (`PlayerSlot`) | [`src/features/caro/components/PlayerCard.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/PlayerCard.tsx), [`PlayerBar.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/PlayerBar.tsx) |
 | **Match Banner** | **Presentation** | `OUTPUT / INPUT` | React DOM | Banner chiến thắng / hòa cờ với nút Chơi lại và Ván mới | [`src/features/caro/components/WinBanner.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/WinBanner.tsx) |
 | **Game Info & History**| **Presentation** | `OUTPUT` | React DOM | Hiển thị thông số ván đấu và danh sách lịch sử nước đi | [`src/features/caro/components/GameInfo.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/GameInfo.tsx) |
+| **Audio Synthesizer** | **Implement** | `SIDE EFFECT` | Web Audio API | Tổng hợp âm thanh gõ cờ gỗ/giấy, thắng trận, hòa cờ, limiter bus | [`src/features/caro/audio/soundManager.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/audio/soundManager.ts) |
+| **Audio Coordination** | **Trung chuyển** | `EVENT -> SIDE EFFECT` | React Hook | Điều phối phát âm thanh theo sự kiện và quản lý trạng thái bật/tắt tiếng | [`src/features/caro/hooks/useGameAudio.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/hooks/useGameAudio.ts) |
 | **Design System Tokens** | **Asset / Style** | `OUTPUT` | CSS Variables | Bảng màu giấy cổ vintage (`--paper`, `--ink`, `--x-color`, `--o-color`) | [`src/index.css`](file:///home/pro/Downloads/basicproject/CaroGame/src/index.css) |
 
 ## State Single-Responsibility Invariant & Flows
@@ -90,7 +95,7 @@ Mỗi state trong User Flow chỉ chịu trách nhiệm duy nhất cho **1 mục
 
 1. **Authoritative Game State** (`board`, `currentPlayer`, `winner`, `isDraw`, `history`):
    - *Mục tiêu*: Tính toàn vẹn của ván cờ.
-   - *Flow*: `User Click` (`INPUT`) → `handleCellClick` (`EVENT`) → `checkWinner` (`PROCESS`) → Cập nhật `board`, `currentPlayer` (`STATE`) → Báo chiến thắng nếu đạt 5 quân liên tiếp.
+   - *Flow*: `User Click` (`INPUT`) → `handleCellClick` (`EVENT`) → `caroReducer` (`PROCESS`) → Cập nhật `board`, `currentPlayer` (`STATE`) → Phát âm thanh tương ứng (`SIDE EFFECT`) → Báo chiến thắng nếu đạt 5 quân liên tiếp.
 2. **Match Timer State** (`elapsedSeconds`, `isRunning`):
    - *Mục tiêu*: Đo thời gian trận đấu độc lập.
    - *Flow*: Khởi động khi ván mới, tick mỗi 1000ms (`SIDE EFFECT`), pause khi game over (`FEEDBACK`). Tuyệt đối không làm re-render bàn cờ `BoardGrid`.
@@ -125,8 +130,8 @@ Mỗi state trong User Flow chỉ chịu trách nhiệm duy nhất cho **1 mục
 
 1. **[RESOLVED] State Overload in `src/App.tsx`**: Đã phân rã thành công thành 3 lớp kiến trúc:
    - Implement: `src/features/caro/domain/board.ts`
-   - Trung chuyển: `useCaroGame.ts` (pure GameState) & `useGameTimer.ts` (pure TimerState)
+   - Trung chuyển: `useCaroGame.ts` (pure GameState qua useReducer) & `useGameTimer.ts` (pure TimerState)
    - Presentation: `src/features/caro/components/` (9 components đơn nhiệm, không inline styles dư thừa)
    - Shell: `App.tsx` rút gọn còn 5 dòng.
-2. **No Audio Feedback**: Chưa có âm thanh tiếng gõ cờ giấy, tiếng chuông thắng trận (Phase 6 backlog).
+2. **[RESOLVED] Audio Feedback & Mastering**: Đã tích hợp Web Audio API (`src/features/caro/audio/soundManager.ts` & `src/features/caro/hooks/useGameAudio.ts`) với Master Bus, Limiter chống méo, âm thanh đặt cờ gỗ/giấy, thắng cuộc, hòa cờ, và nút toggle mute trên header.
 3. **No Persistent Storage**: Chưa lưu trữ số ván thắng/hòa của Người chơi 1 vs Người chơi 2 vào `localStorage`.

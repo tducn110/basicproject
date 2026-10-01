@@ -1,0 +1,86 @@
+{
+  "rust": [
+    {
+      "engine": "Rust",
+      "fixture": "midgame",
+      "depth": 1,
+      "time_ms": 0.0422,
+      "nodes": 45,
+      "cutoffs": 0,
+      "knps": 1066.66,
+      "score": 99990
+    },
+    {
+      "engine": "Rust",
+      "fixture": "midgame",
+      "depth": 2,
+      "time_ms": 0.359,
+      "nodes": 609,
+      "cutoffs": 39,
+      "knps": 1696.32,
+      "score": 19990
+    },
+    {
+      "engine": "Rust",
+      "fixture": "midgame",
+      "depth": 3,
+      "time_ms": 8.8725,
+      "nodes": 16184,
+      "cutoffs": 454,
+      "knps": 1824.07,
+      "score": 9999997
+    },
+    {
+      "engine": "Rust",
+      "fixture": "midgame",
+      "depth": 4,
+      "time_ms": 280.0898,
+      "nodes": 496790,
+      "cutoffs": 16350,
+      "knps": 1773.68,
+      "score": 9999997
+    }
+  ],
+  "typescript": [
+    {
+      "engine": "TypeScript",
+      "fixture": "midgame",
+      "depth": 1,
+      "time_ms": 0.6057,
+      "nodes": 45,
+      "cutoffs": 0,
+      "knps": 74.29,
+      "score": 99990
+    },
+    {
+      "engine": "TypeScript",
+      "fixture": "midgame",
+      "depth": 2,
+      "time_ms": 5.7635,
+      "nodes": 609,
+      "cutoffs": 39,
+      "knps": 105.66,
+      "score": 19990
+    },
+    {
+      "engine": "TypeScript",
+      "fixture": "midgame",
+      "depth": 3,
+      "time_ms": 153.0973,
+      "nodes": 16184,
+      "cutoffs": 454,
+      "knps": 105.71,
+      "score": 9999997
+    },
+    {
+      "engine": "TypeScript",
+      "fixture": "midgame",
+      "depth": 4,
+      "time_ms": 4728.6039,
+      "nodes": 496790,
+      "cutoffs": 16350,
+      "knps": 105.06,
+      "score": 9999997
+    }
+  ]
+}

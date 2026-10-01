@@ -644,3 +644,8 @@ body {
     transition: none;
   }
 }
+
+.paper-btn.muted {
+  opacity: 0.7;
+  border-style: dashed;
+}
