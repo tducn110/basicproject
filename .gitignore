@@ -7,3 +7,8 @@ build/
 *.log
 .DS_Store
 .obsidian/workspace*.json
+
+# Roadmap files
+roadmap.md
+ROADMAP.md
+*.roadmap.md

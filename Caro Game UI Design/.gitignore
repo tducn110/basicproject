@@ -19,3 +19,8 @@ logs/
 /.plugins/
 /.opencode-skills/
 .vercel
+
+# Roadmap
+roadmap.md
+ROADMAP.md
+*.roadmap.md
