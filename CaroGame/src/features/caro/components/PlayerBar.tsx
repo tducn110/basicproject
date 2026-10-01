@@ -9,6 +9,86 @@ export interface PlayerBarProps {
   p2label?: string
 }
 
+/** Player side slot — one half of the mobile VS bar */
+function PlayerSlot({
+  player,
+  label,
+  isActive,
+  reverse = false,
+}: {
+  player: Player
+  label: string
+  isActive: boolean
+  reverse?: boolean
+}) {
+  const p = player.toLowerCase()
+  const bg = isActive
+    ? player === "X"
+      ? "rgba(168,75,42,0.10)"
+      : "rgba(49,90,114,0.10)"
+    : "transparent"
+  const border = isActive ? `var(--${p}-color)` : "transparent"
+  const borderProp = reverse ? "borderRight" : "borderLeft"
+
+  return (
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        flexDirection: reverse ? "row-reverse" : "row",
+        gap: 8,
+        padding: "6px 10px",
+        borderRadius: 6,
+        background: bg,
+        [borderProp]: `3px solid ${border}`,
+        transition: "background 120ms",
+      }}
+    >
+      <div className={`piece-avatar sm ${p}`}>
+        <Piece player={player} />
+      </div>
+      <div style={{ minWidth: 0, textAlign: reverse ? "right" : "left" }}>
+        <div
+          style={{ fontSize: 10, fontWeight: 700, color: `var(--${p}-color)` }}
+        >
+          {player}
+        </div>
+        <div
+          style={{
+            fontSize: 9,
+            color: "var(--ink-muted)",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {label}
+        </div>
+      </div>
+      {isActive && (
+        <span
+          style={{
+            [reverse ? "marginRight" : "marginLeft"]: "auto",
+            fontSize: 8,
+            fontWeight: 700,
+            letterSpacing: "0.05em",
+            padding: "1px 5px",
+            borderRadius: 4,
+            background:
+              player === "X"
+                ? "rgba(168,75,42,0.12)"
+                : "rgba(49,90,114,0.12)",
+            color: `var(--${p}-color)`,
+          }}
+        >
+          ↩
+        </span>
+      )}
+    </div>
+  )
+}
+
 export const PlayerBar = memo(function PlayerBar({
   currentPlayer,
   isGameOver,
@@ -19,73 +99,8 @@ export const PlayerBar = memo(function PlayerBar({
   const activeO = !isGameOver && currentPlayer === "O"
 
   return (
-    <div
-      className="paper-card mx-3 flex items-center gap-1"
-      style={{ padding: "8px 12px", borderRadius: "var(--radius-sm)" }}
-    >
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "6px 10px",
-          borderRadius: 6,
-          background: activeX ? "rgba(168,75,42,0.10)" : "transparent",
-          borderLeft: activeX
-            ? "3px solid var(--x-color)"
-            : "3px solid transparent",
-          transition: "background 120ms",
-        }}
-      >
-        <div
-          style={{
-            width: 22,
-            height: 22,
-            flexShrink: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Piece player="X" />
-        </div>
-        <div style={{ minWidth: 0 }}>
-          <div
-            style={{ fontSize: 10, fontWeight: 700, color: "var(--x-color)" }}
-          >
-            X
-          </div>
-          <div
-            style={{
-              fontSize: 9,
-              color: "var(--ink-muted)",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {p1label}
-          </div>
-        </div>
-        {activeX && (
-          <span
-            style={{
-              marginLeft: "auto",
-              fontSize: 8,
-              fontWeight: 700,
-              letterSpacing: "0.05em",
-              padding: "1px 5px",
-              borderRadius: 4,
-              background: "rgba(168,75,42,0.12)",
-              color: "var(--x-color)",
-            }}
-          >
-            ↩
-          </span>
-        )}
-      </div>
-
+    <div className="paper-card mobile-player-bar">
+      <PlayerSlot player="X" label={p1label} isActive={activeX} />
       <span
         className="font-display"
         style={{
@@ -97,70 +112,7 @@ export const PlayerBar = memo(function PlayerBar({
       >
         VS
       </span>
-
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "row-reverse",
-          gap: 8,
-          padding: "6px 10px",
-          borderRadius: 6,
-          background: activeO ? "rgba(49,90,114,0.10)" : "transparent",
-          borderRight: activeO
-            ? "3px solid var(--o-color)"
-            : "3px solid transparent",
-          transition: "background 120ms",
-        }}
-      >
-        <div
-          style={{
-            width: 22,
-            height: 22,
-            flexShrink: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Piece player="O" />
-        </div>
-        <div style={{ minWidth: 0, textAlign: "right" }}>
-          <div
-            style={{ fontSize: 10, fontWeight: 700, color: "var(--o-color)" }}
-          >
-            O
-          </div>
-          <div
-            style={{
-              fontSize: 9,
-              color: "var(--ink-muted)",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {p2label}
-          </div>
-        </div>
-        {activeO && (
-          <span
-            style={{
-              marginRight: "auto",
-              fontSize: 8,
-              fontWeight: 700,
-              letterSpacing: "0.05em",
-              padding: "1px 5px",
-              borderRadius: 4,
-              background: "rgba(49,90,114,0.12)",
-              color: "var(--o-color)",
-            }}
-          >
-            ↩
-          </span>
-        )}
-      </div>
+      <PlayerSlot player="O" label={p2label} isActive={activeO} reverse />
     </div>
   )
 })

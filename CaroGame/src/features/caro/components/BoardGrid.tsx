@@ -18,29 +18,14 @@ export const BoardGrid = memo(function BoardGrid({
   onCellClick,
 }: BoardGridProps) {
   return (
-    <div
-      className="paper-card"
-      style={{
-        padding: 8,
-        width: "min(calc(100vw - 32px), calc(100dvh - 210px), 620px)",
-        aspectRatio: "1",
-        borderTop: "3px solid var(--paper-deep)",
-        flexShrink: 0,
-      }}
-    >
+    <div className="paper-card board-card">
       <div
         role="grid"
         aria-label="Bàn cờ Caro"
+        className="board-grid"
         style={{
-          display: "grid",
           gridTemplateColumns: `repeat(${BOARD_SIZE}, 1fr)`,
           gridTemplateRows: `repeat(${BOARD_SIZE}, 1fr)`,
-          width: "100%",
-          height: "100%",
-          borderLeft: "1px solid var(--grid-line)",
-          borderTop: "1px solid var(--grid-line)",
-          borderRadius: 4,
-          overflow: "hidden",
         }}
       >
         {board.map((row, rowIndex) =>

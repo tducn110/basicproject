@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import {
   BOARD_SIZE,
   type Board,
@@ -19,12 +19,15 @@ export interface UseCaroGameReturn {
   lastMove: [number, number] | null
   gameStarted: boolean
   winCellSet: Set<string>
-  elapsed: number
   handleCellClick: (row: number, col: number) => void
   handleReplay: () => void
   handleNewGame: () => void
 }
 
+/**
+ * Pure game state coordinator — quản lý duy nhất GameState.
+ * TimerState được quản lý độc lập bởi useGameTimer.
+ */
 export function useCaroGame(): UseCaroGameReturn {
   const [board, setBoard] = useState<Board>(() => createBoard())
   const [currentPlayer, setCurrentPlayer] = useState<Player>("X")
@@ -33,7 +36,6 @@ export function useCaroGame(): UseCaroGameReturn {
   const [history, setHistory] = useState<Move[]>([])
   const [lastMove, setLastMove] = useState<[number, number] | null>(null)
   const [gameStarted, setGameStarted] = useState(false)
-  const [elapsed, setElapsed] = useState(0)
 
   const isGameOver = !!winner || isDraw
 
@@ -98,22 +100,11 @@ export function useCaroGame(): UseCaroGameReturn {
     setHistory([])
     setLastMove(null)
     setGameStarted(false)
-    setElapsed(0)
   }, [])
 
   const handleNewGame = useCallback(() => {
     handleReplay()
   }, [handleReplay])
-
-  useEffect(() => {
-    if (!gameStarted || isGameOver) return
-    const id = setInterval(() => setElapsed((e) => e + 1), 1000)
-    return () => clearInterval(id)
-  }, [gameStarted, isGameOver])
-
-  useEffect(() => {
-    if (!gameStarted) setElapsed(0)
-  }, [gameStarted])
 
   return {
     board,
@@ -125,7 +116,6 @@ export function useCaroGame(): UseCaroGameReturn {
     lastMove,
     gameStarted,
     winCellSet,
-    elapsed,
     handleCellClick,
     handleReplay,
     handleNewGame,

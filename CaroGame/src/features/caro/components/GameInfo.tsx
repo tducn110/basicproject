@@ -1,13 +1,17 @@
 import type React from "react"
 import { memo } from "react"
-import { Clock3, Grid3X3, UsersRound } from "lucide-react"
-import { BOARD_SIZE } from "../domain"
+import { Clock3, Grid3X3, History, UsersRound } from "lucide-react"
+import { BOARD_SIZE, type Move } from "../domain"
+
+// ── Shared formatters ────────────────────────────────────────────────────────
 
 export function formatTime(s: number): string {
   return `${Math.floor(s / 60)
     .toString()
     .padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`
 }
+
+// ── Shared InfoRow ───────────────────────────────────────────────────────────
 
 export interface InfoRowProps {
   icon: React.ReactNode
@@ -36,6 +40,8 @@ export function InfoRow({ icon, label, value, mono }: InfoRowProps) {
   )
 }
 
+// ── GameInfo ─────────────────────────────────────────────────────────────────
+
 export interface GameInfoProps {
   elapsed: number
   compact?: boolean
@@ -46,38 +52,9 @@ export const GameInfo = memo(function GameInfo({
   compact,
 }: GameInfoProps) {
   return (
-    <div
-      className="paper-card"
-      style={{
-        padding: 12,
-        display: "flex",
-        flexDirection: compact ? "row" : "column",
-        gap: compact ? 16 : 8,
-      }}
-    >
-      {!compact && (
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: "var(--ink-muted)",
-            paddingBottom: 6,
-            borderBottom: "1px solid var(--divider)",
-          }}
-        >
-          Thông tin
-        </div>
-      )}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: compact ? "row" : "column",
-          gap: compact ? 16 : 8,
-          flex: 1,
-        }}
-      >
+    <div className={`paper-card game-info-card ${compact ? "compact" : ""}`}>
+      {!compact && <div className="game-info-header">Thông tin</div>}
+      <div className="game-info-body">
         <InfoRow
           icon={<UsersRound size={12} />}
           label="Chế độ"
@@ -100,3 +77,50 @@ export const GameInfo = memo(function GameInfo({
 })
 
 export const InfoCard = GameInfo
+
+// ── MoveHistory ──────────────────────────────────────────────────────────────
+
+export interface MoveHistoryProps {
+  history: Move[]
+  compact?: boolean
+}
+
+export const MoveHistory = memo(function MoveHistory({
+  history,
+  compact,
+}: MoveHistoryProps) {
+  const recent = [...history].reverse().slice(0, compact ? 4 : 22)
+
+  return (
+    <div className={`paper-card move-history-card ${compact ? "compact" : ""}`}>
+      <div className="move-history-header">
+        <History size={11} />
+        <span>Lịch sử nước đi</span>
+      </div>
+      <div className="move-history-list">
+        {recent.length === 0 ? (
+          <div className="move-history-empty">Chưa có nước đi nào</div>
+        ) : (
+          recent.map((m) => (
+            <div key={m.index} className="move-history-item">
+              <span className="move-index">{m.index}.</span>
+              <span
+                className="move-player"
+                style={{
+                  color: m.player === "X" ? "var(--x-color)" : "var(--o-color)",
+                }}
+              >
+                {m.player}
+              </span>
+              <span className="move-coords">
+                ({m.col + 1},{m.row + 1})
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  )
+})
+
+export const HistoryPanel = MoveHistory

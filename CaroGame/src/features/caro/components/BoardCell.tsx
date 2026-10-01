@@ -34,16 +34,7 @@ export const BoardCell = memo(function BoardCell({
       aria-label={value ?? "ô trống"}
     >
       {value && (
-        <span
-          className="piece-enter"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
+        <span className="piece-enter piece-enter-wrap">
           <Piece player={value} />
         </span>
       )}
