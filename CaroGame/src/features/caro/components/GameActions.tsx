@@ -14,16 +14,7 @@ export function GameActions({
   onExit,
 }: GameActionsProps) {
   return (
-    <footer
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        gap: 8,
-        padding: "4px 16px 16px",
-        position: "relative",
-        zIndex: 1,
-      }}
-    >
+    <footer className="game-actions-footer">
       {!isGameOver && (
         <>
           <button

@@ -9,7 +9,10 @@ export interface UseGameTimerReturn {
  * Standalone timer hook — tick mỗi 1s khi gameStarted=true và !isGameOver.
  * Hoàn toàn độc lập với GameState; không gây re-render BoardGrid.
  */
-export function useGameTimer(gameStarted: boolean, isGameOver: boolean): UseGameTimerReturn {
+export function useGameTimer(
+  gameStarted: boolean,
+  isGameOver: boolean,
+): UseGameTimerReturn {
   const [elapsed, setElapsed] = useState(0)
   const resetRef = useRef(false)
 

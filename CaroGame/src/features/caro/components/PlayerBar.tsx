@@ -76,9 +76,7 @@ function PlayerSlot({
             padding: "1px 5px",
             borderRadius: 4,
             background:
-              player === "X"
-                ? "rgba(168,75,42,0.12)"
-                : "rgba(49,90,114,0.12)",
+              player === "X" ? "rgba(168,75,42,0.12)" : "rgba(49,90,114,0.12)",
             color: `var(--${p}-color)`,
           }}
         >

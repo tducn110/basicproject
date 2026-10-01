@@ -40,10 +40,31 @@ CaroGame/
 ├── LAYOUT.md             # Architecture and subsystem ownership map
 └── src/
     ├── main.tsx          # React application root entry point (StrictMode mount)
-    ├── App.tsx           # Monolithic UI shell, state machine, sub-components, and board render
-    ├── game.ts           # Pure simulation: board model, win detection (Implement layer)
-    ├── index.css         # Paper theme tokens, fonts, animations, responsive rules
-    └── vite-env.d.ts     # Vite client type definitions
+    ├── App.tsx           # Thin UI mount root (5 lines, renders CaroGamePage)
+    ├── game.ts           # Pure simulation re-export shim
+    ├── index.css         # Paper theme tokens, fonts, utility classes, responsive rules
+    ├── lib/game.ts       # Re-export shim for game core
+    └── features/caro/    # Domain-Driven Caro Subsystem
+        ├── CaroGamePage.tsx # Page layout assembly and responsive orchestration
+        ├── domain/       # Implement layer (Pure TS, deterministic)
+        │   ├── board.ts      # 15×15 matrix creation & 4-axis win detection
+        │   ├── constants.ts  # BOARD_SIZE (15), WIN_COUNT (5), DIRS
+        │   ├── types.ts      # Player, Cell, Board, Move, WinResult contracts
+        │   └── index.ts      # Public domain barrel export
+        ├── hooks/        # Trung chuyển layer (State coordination)
+        │   ├── useCaroGame.ts   # Authoritative GameState coordinator (board, turn, winner)
+        │   └── useGameTimer.ts  # Independent TimerState coordinator (1s tick, reset)
+        └── components/   # Presentation layer (Pure view components)
+            ├── BoardCell.tsx    # Single cell button with SVG piece & win highlight
+            ├── BoardGrid.tsx    # 15×15 CSS Grid container
+            ├── PlayerCard.tsx   # Desktop active turn cards with variant tokens
+            ├── PlayerBar.tsx    # Mobile responsive player VS bar with PlayerSlot
+            ├── WinBanner.tsx    # End-game victory/draw overlay announcement
+            ├── GameInfo.tsx     # Match info & MoveHistory drawer
+            ├── MoveHistory.tsx  # Re-export shim for GameInfo MoveHistory
+            ├── GameActions.tsx  # Replay / New Game action footer
+            ├── Piece.tsx        # Standardized SVG X and O piece renderer
+            └── index.ts         # Components barrel export
 ```
 
 ## Architecture, Ownership & Data Pipeline Mapping
@@ -53,14 +74,15 @@ Pipeline stage reference:
 
 | Layer / Subsystem | Phân loại | Pipeline Stage | Owner | Responsibilities | Key Files |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Game Simulation** | **Implement** | `PROCESS` | Pure TS | 15×15 Board matrix, 4-direction win detection, deterministic move validation | [`src/game.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/game.ts) |
-| **Game Coordination** | **Trung chuyển** | `EVENT <-> STATE` | React Hook / Controller | Điều phối lượt chơi (X/O), dispatch move, kiểm tra điều kiện ván đấu | `src/App.tsx` (cần tách `useCaroGame.ts`) |
-| **Match Timer** | **Trung chuyển** | `SIDE EFFECT -> STATE` | React Hook | Vòng đời đồng hồ bấm giờ (1s interval tick), tách rời khỏi nước cờ | `src/App.tsx` (cần tách `useGameTimer.ts`) |
-| **UI Shell & Header** | **Presentation** | `OUTPUT / INPUT` | React 19 | Khung ứng dụng, thanh tiêu đề 1v1, nút chức năng (Chơi lại, Ván mới) | [`src/App.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/App.tsx) |
-| **Board View** | **Presentation** | `OUTPUT / INPUT` | CSS Grid / React DOM | Render 225 ô cờ giấy, quân cờ SVG, highlight đường thắng, nhận click | `src/App.tsx` (cần tách `BoardGrid.tsx`, `BoardCell.tsx`) |
-| **Player & History HUD** | **Presentation** | `OUTPUT` | React DOM | Thẻ người chơi 1/2, thanh VS mobile, danh sách lịch sử nước đi | `src/App.tsx` (cần tách `PlayerCard.tsx`, `HistoryPanel.tsx`) |
-| **Match Banner** | **Presentation** | `OUTPUT / INPUT` | React DOM | Modal / banner vinh danh chiến thắng hoặc hòa cờ | `src/App.tsx` (cần tách `WinBanner.tsx`) |
-| **Design System Tokens** | **Asset / Style** | `OUTPUT` | CSS Variables | Bảng màu giấy cổ vintage (`--bg-paper`, `--ink`, `--vermilion`, `--indigo`) | [`src/index.css`](file:///home/pro/Downloads/basicproject/CaroGame/src/index.css) |
+| **Game Simulation** | **Implement** | `PROCESS` | Pure TS | 15×15 Board matrix, 4-direction win detection, deterministic move validation | [`src/features/caro/domain/board.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/domain/board.ts) |
+| **Game Coordination** | **Trung chuyển** | `EVENT <-> STATE` | React Hook | Điều phối lượt chơi (X/O), dispatch move, kiểm tra điều kiện ván đấu | [`src/features/caro/hooks/useCaroGame.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/hooks/useCaroGame.ts) |
+| **Match Timer** | **Trung chuyển** | `SIDE EFFECT -> STATE` | React Hook | Vòng đời đồng hồ bấm giờ (1s interval tick), tách rời khỏi nước cờ | [`src/features/caro/hooks/useGameTimer.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/hooks/useGameTimer.ts) |
+| **UI Page Shell** | **Presentation** | `OUTPUT / INPUT` | React 19 | Khung trang ứng dụng, header, bố cục 3 cột desktop / 1 cột mobile | [`src/features/caro/CaroGamePage.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/CaroGamePage.tsx) |
+| **Board View** | **Presentation** | `OUTPUT / INPUT` | CSS Grid / React DOM | Render 225 ô cờ giấy, quân cờ SVG, highlight đường thắng, nhận click | [`src/features/caro/components/BoardGrid.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/BoardGrid.tsx) |
+| **Player HUD** | **Presentation** | `OUTPUT` | React DOM | Thẻ người chơi 1/2 desktop, thanh VS mobile (`PlayerSlot`) | [`src/features/caro/components/PlayerCard.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/PlayerCard.tsx), [`PlayerBar.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/PlayerBar.tsx) |
+| **Match Banner** | **Presentation** | `OUTPUT / INPUT` | React DOM | Banner chiến thắng / hòa cờ với nút Chơi lại và Ván mới | [`src/features/caro/components/WinBanner.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/WinBanner.tsx) |
+| **Game Info & History**| **Presentation** | `OUTPUT` | React DOM | Hiển thị thông số ván đấu và danh sách lịch sử nước đi | [`src/features/caro/components/GameInfo.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/GameInfo.tsx) |
+| **Design System Tokens** | **Asset / Style** | `OUTPUT` | CSS Variables | Bảng màu giấy cổ vintage (`--paper`, `--ink`, `--x-color`, `--o-color`) | [`src/index.css`](file:///home/pro/Downloads/basicproject/CaroGame/src/index.css) |
 
 ## State Single-Responsibility Invariant & Flows
 
@@ -77,19 +99,34 @@ Mỗi state trong User Flow chỉ chịu trách nhiệm duy nhất cho **1 mục
 
 ## Viewport & Responsive Layout
 
-- **Board Sizing**: `width: min(calc(100vw - 32px), calc(100dvh - 210px), 620px)` with 1:1 square aspect ratio.
-- **Desktop (>= 1024px)**: 3-column layout (`.desktop-row`):
-  - Left column (200px): Player Cards (`PlayerCard` for X and O).
-  - Center column: `BoardGrid` (square paper board).
-  - Right column (210px): `InfoCard` + `HistoryPanel`.
-- **Mobile (< 1024px)**: Stacked single-column layout:
-  - Top bar: `MobilePlayerBar`.
-  - Center: `BoardGrid` (`.mobile-board`).
-  - Bottom: Compact `InfoCard` + `HistoryPanel` (`.mobile-info`).
+- **Single DOM Instance Architecture**: Bàn cờ `BoardGrid` và các cụm thông tin được mount duy nhất một lần trên DOM tree, loại bỏ hoàn toàn việc nhân đôi DOM elements giữa desktop và mobile.
+- **Board Sizing**:
+  - Desktop: `width: min(calc(100vw - 24px), calc(100dvh - 210px), 620px)`
+  - Tablet (641px - 1023px): `width: min(calc(100vw - 24px), calc(100dvh - 220px), 520px)`
+  - Mobile (≤ 640px): `width: min(calc(100vw - 16px), calc(100dvh - 200px), 440px)`
+  - Small Mobile (≤ 380px): `width: min(calc(100vw - 10px), calc(100dvh - 180px), 360px)`
+- **Breakpoints**:
+  - **Desktop (≥ 1024px)**: Bố cục 3 cột (`.game-layout`):
+    - Left column (200px): Thẻ người chơi 1 & 2 (`PlayerCard`).
+    - Center: Bàn cờ vuông 15×15 (`BoardGrid`).
+    - Right column (210px): Bảng thông tin (`GameInfo`) + Lịch sử nước đi (`MoveHistory`).
+    - `MobilePlayerBar`: ẩn (`display: none`).
+  - **Tablet (641px - 1023px)**: Bố cục cột thích ứng:
+    - Top: Thanh hiển thị VS người chơi (`PlayerBar`).
+    - Center: Bàn cờ 15×15 (`BoardGrid`).
+    - Bottom: Grid 2 cột cho `GameInfo` và `MoveHistory` ngang hàng.
+  - **Mobile (≤ 640px)**: Bố cục dọc tối ưu màn hình cảm ứng:
+    - Safe area support với `viewport-fit=cover` và `env(safe-area-inset-*)`.
+    - `touch-action: manipulation` loại bỏ delay 300ms khi bấm cờ.
+    - Cuộn dọc mượt mà (`overflow-y: auto`, `-webkit-overflow-scrolling: touch`), không bị tràn ngang (`overflow-x: hidden`).
+    - `GameInfo` và `MoveHistory` xếp chồng nhỏ gọn dưới bàn cờ.
 
 ## Discovered Gaps & Architectural Issues (Mapped to Roadmap)
 
-1. **State Overload in `src/App.tsx`**: `App.tsx` đang cùng lúc gánh 3 vai trò (Implement Game Loop, Trung chuyển Timer, Render toàn bộ UI) và giữ cả 3 state (`GameState`, `TimerState`, `UIState`) trong cùng một component.
-   - *Giải pháp*: Phân tách thành Custom Hooks (`useCaroGame`, `useGameTimer`) và tách các presentation components vào `src/components/`.
-2. **No Audio Feedback**: Chưa có âm thanh tiếng gõ cờ giấy, tiếng chuông thắng trận.
+1. **[RESOLVED] State Overload in `src/App.tsx`**: Đã phân rã thành công thành 3 lớp kiến trúc:
+   - Implement: `src/features/caro/domain/board.ts`
+   - Trung chuyển: `useCaroGame.ts` (pure GameState) & `useGameTimer.ts` (pure TimerState)
+   - Presentation: `src/features/caro/components/` (9 components đơn nhiệm, không inline styles dư thừa)
+   - Shell: `App.tsx` rút gọn còn 5 dòng.
+2. **No Audio Feedback**: Chưa có âm thanh tiếng gõ cờ giấy, tiếng chuông thắng trận (Phase 6 backlog).
 3. **No Persistent Storage**: Chưa lưu trữ số ván thắng/hòa của Người chơi 1 vs Người chơi 2 vào `localStorage`.

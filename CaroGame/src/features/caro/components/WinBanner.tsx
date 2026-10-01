@@ -31,12 +31,6 @@ export function WinBanner({
     <div
       className="win-banner paper-card"
       style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 16,
-        padding: "12px 20px",
-        maxWidth: 480,
-        margin: "0 auto",
         borderTop: `3px solid ${color}`,
       }}
     >

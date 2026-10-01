@@ -24,7 +24,13 @@ export const PlayerCard = memo(function PlayerCard({
       style={{ transition: "border-color 150ms, box-shadow 150ms" }}
     >
       {/* Top row: label + turn badge */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <span className="section-label">{label}</span>
         {isActive && <span className={`turn-badge ${p}`}>Đến lượt</span>}
       </div>
@@ -35,10 +41,19 @@ export const PlayerCard = memo(function PlayerCard({
           <UsersRound size={17} style={{ color: `var(--${p}-color)` }} />
         </div>
         <div>
-          <div className="font-display" style={{ fontWeight: 600, fontSize: 15, color: "var(--ink)" }}>
+          <div
+            className="font-display"
+            style={{ fontWeight: 600, fontSize: 15, color: "var(--ink)" }}
+          >
             {label}
           </div>
-          <div style={{ fontSize: 11, fontWeight: 700, color: `var(--${p}-color)` }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              color: `var(--${p}-color)`,
+            }}
+          >
             {piece === "X" ? "× Quân X" : "○ Quân O"}
           </div>
         </div>
