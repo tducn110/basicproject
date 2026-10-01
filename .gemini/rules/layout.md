@@ -10,3 +10,12 @@
    - **Fix or small change**: an item under `## Maintenance: fixes and small changes` (create that phase once, then reuse it), then start.
    - **Big** (a new subsystem, major engine/platform refactor, several components, or several days): a phase with the item `[ ] Plan approved by the user`, a plan from the roadmap-planner skill, and no code until the user approves.
    - Already on the roadmap: work from that item instead of adding a new one. Questions, and follow-ups that continue the current task, need no entry. Not sure of the size? Ask the user.
+5. **File Responsibility & Data Pipeline Mapping.** Mọi file trong `{layout}` phải được định nghĩa rõ ràng vai trò kiến trúc và vị trí đảm nhiệm trong dây chuyền dữ liệu (`INPUT -> PROCESS -> STATE -> EVENT -> SIDE EFFECT -> OUTPUT -> FEEDBACK`):
+   - **Implement (Pure Domain/Simulation)**: Quy tắc nghiệp vụ thuần túy, tính toán tất định (`PROCESS`), không phụ thuộc UI/Platform/Audio/DOM.
+   - **Trung chuyển (Controller/Hook/Mediator)**: Cầu nối điều phối giữa UI Presentation và Pure Domain (`EVENT <-> STATE -> SIDE EFFECT`), dispatch action và quản lý lifecycle cục bộ.
+   - **Presentation / Render**: Render trực quan (`OUTPUT`), giao diện người dùng, thu nhận thao tác người dùng (`INPUT`/`FEEDBACK`), hoàn toàn thụ động (dumb/presentation).
+   - **Adapter / Persistence**: Quản lý lưu trữ (`localStorage`), Web Audio, kết nối SDK nền tảng (`SIDE EFFECT -> FEEDBACK`).
+6. **State Single-Responsibility Invariant (Quy tắc đơn nhiệm của State trong User Flow).**
+   - Tuyệt đối không để 1 state hoặc 1 controller gánh đồng thời 2 task hoặc 2 goal (dù là sub-task hay macro-task).
+   - Nếu 1 state vừa quản lý quy tắc cốt lõi (Game Truth) vừa xử lý tiến trình thời gian (Timer), hoặc vừa quản lý dữ liệu vừa quản lý hiệu ứng UI/trạng thái tạm thời (Transient UI/Modal/Animation), **PHẢI TÁCH RỜI NGAY LẬP TỨC TRONG USER FLOW** thành các state/hook trực giao, độc lập vòng đời.
+   - Tránh hiện tượng derived state trở thành authoritative state, và ngăn ngừa re-render bão táp chéo giữa các luồng dữ liệu độc lập.

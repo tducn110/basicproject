@@ -9,6 +9,10 @@ build/
 .obsidian/workspace*.json
 
 # Roadmap files
-roadmap.md
-ROADMAP.md
+/roadmap.md
+/ROADMAP.md
+/src/ROADMAP.md
+/src/roadmap.md
 *.roadmap.md
+!rules/roadmap.md
+!.gemini/rules/roadmap.md
