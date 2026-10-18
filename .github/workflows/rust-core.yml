@@ -1,0 +1,26 @@
+name: Rust Core CI
+on:
+  push:
+    paths:
+      - "Cargo.toml"
+      - "caro-core/**"
+      - "benchmark/rust_bench/**"
+      - ".github/workflows/rust-core.yml"
+  pull_request:
+    paths:
+      - "Cargo.toml"
+      - "caro-core/**"
+      - "benchmark/rust_bench/**"
+      - ".github/workflows/rust-core.yml"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Test Rust workspace
+        run: cargo test --workspace
+      - name: Build WASM target
+        run: cargo build -p caro-core --release --target wasm32-unknown-unknown --features wasm
