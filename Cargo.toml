@@ -1,0 +1,3 @@
+[workspace]
+members = ["caro-core", "benchmark/rust_bench"]
+resolver = "2"
