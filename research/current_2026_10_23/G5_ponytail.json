@@ -1,0 +1,29 @@
+{
+  "gate": "G5",
+  "reviewed_at": "2026-10-23T04:51:51.844654+00:00",
+  "result": "Lean already. Ship.",
+  "net_lines_removable": 0,
+  "reason": "Undo/state restore, small feedback component and fitted viewport owner meet concrete requested behavior; preserve existing visual and host code.",
+  "files": [
+    {
+      "path": "10_caro/src/App.tsx",
+      "sha256": "c0fba3abb4f94de40aaa01a0875ec4d2e35a708606eb96b1d7e4aa95a786293e"
+    },
+    {
+      "path": "10_caro/src/app/GameController.ts",
+      "sha256": "4badda99a492e4488497b216844e5538e6bab531ec47f5151ac3ec089acd7d2f"
+    },
+    {
+      "path": "10_caro/src/game/core/GameState.ts",
+      "sha256": "a6e9a3e2d60aad3b60d3abeaa1270cdf064816dbac64b689f126e2eb26dea210"
+    },
+    {
+      "path": "10_caro/src/components/SearchFeedback.tsx",
+      "sha256": "dfc64a51479a5de820bc8e73fdfa06318ad459cdf3447840b84263072305628e"
+    },
+    {
+      "path": "10_caro/src/pixi/CaroScene.ts",
+      "sha256": "eb0af9e5adb25052574c9b99c82d6decb67c018c3b62284f468259ef7a5d916d"
+    }
+  ]
+}

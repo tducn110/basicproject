@@ -125,5 +125,7 @@ def export_mermaid(code: str, output_path: str):
             return False
 
 if __name__ == '__main__':
+    docs_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.chdir(docs_dir)
     export_mermaid(DIAGRAM_1_FLOW, "Week3/assets/ui_architecture_flow.png")
     export_mermaid(DIAGRAM_2_HIERARCHY, "Week3/assets/component_hierarchy.png")

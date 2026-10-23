@@ -11,12 +11,5 @@ __pycache__/
 *.pyc
 target/
 **/target/
-
-# Roadmap files
-/roadmap.md
-/ROADMAP.md
-/src/ROADMAP.md
-/src/roadmap.md
-*.roadmap.md
-!rules/roadmap.md
-!.gemini/rules/roadmap.md
+.vercel/
+**/.vercel/

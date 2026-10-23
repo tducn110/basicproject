@@ -1,0 +1,11 @@
+{
+  "gate": "G1",
+  "reviewed_at": "2026-10-23T04:35:55.080826+00:00",
+  "source": "gomoku-main/engine/src/board.rs",
+  "sha256": "a6d28fd8ec2501c6eab79824277fcfb20f1fd5a698c5b95fd640dd6c28872750",
+  "command": "/home/pro/.cargo/bin/cargo test --manifest-path gomoku-main/engine/Cargo.toml --locked --offline board::tests",
+  "exit_code": 0,
+  "tmb": "Independent ownership review PASS. Board invariants, Game chronological history, search apply/undo owner. Candidate output first-discovery order, not global row-major.",
+  "ponytail": "Lean already. Ship. Net removable lines: 0.",
+  "acceptance": "not requested/not assigned"
+}

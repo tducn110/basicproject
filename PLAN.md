@@ -118,7 +118,7 @@ Kế hoạch tổng thể hợp nhất giữa đề cương nghiên cứu học 
 - Tỷ lệ pass của bộ unit test (100%).
 
 **Write**
-- Cập nhật tài liệu [`Week2/Tuan 2.md`](file:///home/pro/Downloads/basicproject/Week2/Tuan%202.md) và [`Week2/week2.md`](file:///home/pro/Downloads/basicproject/Week2/week2.md).
+- Cập nhật tài liệu chuẩn [`Week2/Tuan 2.md`](file:///home/pro/Downloads/basicproject/docs/Week2/Tuan%202.md) (bản nháp review cũ đã lưu tại [`docs/archived/week2_review_draft.md`](file:///home/pro/Downloads/basicproject/docs/archived/week2_review_draft.md)).
 
 **Exit criteria**: Toàn bộ unit tests pass; logic cờ deterministic không phụ thuộc UI.
 

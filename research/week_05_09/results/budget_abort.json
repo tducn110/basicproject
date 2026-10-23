@@ -1,0 +1,10 @@
+{
+  "direct_budget": 10,
+  "direct_abort_restores_root": true,
+  "iterative_budget": 50,
+  "iterative_budget_exhausted": true,
+  "last_complete_depth": 2,
+  "aggregate_reported_nodes": 40,
+  "aggregate_includes_aborted_iteration": false,
+  "iterative_restores_root": true
+}

@@ -1,0 +1,8 @@
+[package]
+name = "caro-week-05-09-experiments"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+caro-core-reference = { path = "../../caro-core-reference" }

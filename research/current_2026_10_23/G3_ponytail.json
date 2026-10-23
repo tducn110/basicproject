@@ -1,0 +1,22 @@
+{
+  "gate": "G3",
+  "reviewed_at": "2026-10-23T04:51:51.844307+00:00",
+  "skill": "/home/pro/.gemini/config/plugins/ponytail/skills/ponytail-review/SKILL.md",
+  "result": "Lean already. Ship.",
+  "net_lines_removable": 0,
+  "reason": "Shared recursion provides a measured no-pruning baseline and AB with same policy; config/stats structs, concrete enum and one private context. No speculative trait hierarchy or raw-pointer layer. Native transaction entrypoint isolates JS serialization for real tests.",
+  "files": [
+    {
+      "path": "gomoku-main/engine/src/search.rs",
+      "sha256": "3bea1e8366054a78b7ce4165319b3beb6fbd24144d6504201e26d25a1fbba1dd"
+    },
+    {
+      "path": "gomoku-main/engine/src/ai.rs",
+      "sha256": "4e118d28036c321c9dd9835b92428a11340aa0220a8a9fcf34b1072d1433ba62"
+    },
+    {
+      "path": "gomoku-main/engine/src/lib.rs",
+      "sha256": "916d8e8d61587c24cbd3ba06d95577a10d07c31c18f77aa2c691a4301685d539"
+    }
+  ]
+}

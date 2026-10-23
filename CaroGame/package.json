@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
+    "build:wasm": "PATH=$HOME/.cargo/bin:$PATH wasm-pack build engine --target web --release --out-dir ../src/features/caro/wasm/engine",
     "preview": "vite preview",
     "format": "oxfmt"
   },

@@ -117,5 +117,7 @@ def export_board_state(output_path="assets/debug/board_state_example.png"):
     print(f"✓ Đã xuất hình ảnh trực quan bàn cờ: {output_path}")
 
 if __name__ == "__main__":
+    docs_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.chdir(docs_dir)
     export_benchmark_chart()
     export_board_state()

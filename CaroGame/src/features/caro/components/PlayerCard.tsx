@@ -1,60 +1,70 @@
 import { memo } from "react"
-import { UsersRound } from "lucide-react"
+import { Bot, Trophy, UsersRound } from "lucide-react"
 import type { Player } from "../domain"
 
 export interface PlayerCardProps {
   label: string
   piece: Player
   isActive: boolean
+  isBot?: boolean
+  isThinking?: boolean
+  calcTimeMs?: number | null
+  score?: number
 }
 
 export const PlayerCard = memo(function PlayerCard({
   label,
   piece,
   isActive,
+  isBot = false,
+  isThinking = false,
+  calcTimeMs,
+  score = 0,
 }: PlayerCardProps) {
-  const p = piece.toLowerCase() // "x" | "o" — maps to CSS modifier classes
+  const p = piece.toLowerCase() // "x" | "o"
 
   return (
     <div
-      className={[
-        "paper-card p-4 flex flex-col gap-2",
-        isActive ? `player-card-active ${p}` : "",
-      ].join(" ")}
-      style={{ transition: "border-color 150ms, box-shadow 150ms" }}
+      className={`player-card-shell ${p} ${isActive ? "active" : ""}`}
     >
-      {/* Top row: label + turn badge */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <span className="section-label">{label}</span>
-        {isActive && <span className={`turn-badge ${p}`}>Đến lượt</span>}
-      </div>
-
-      {/* Bottom row: avatar + name */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <div className={`piece-avatar md ${p}`}>
-          <UsersRound size={17} style={{ color: `var(--${p}-color)` }} />
+      <div className="player-card-core">
+        {/* Top Header: Eyebrow label & Turn badge */}
+        <div className="player-card-header">
+          <span className="player-card-eyebrow">{isBot ? "RUST AI BOT" : "NGƯỜI CHƠI"}</span>
+          {isActive ? (
+            <span className={`player-turn-badge ${p} animate-pulse`}>
+              {isThinking ? "Đang tính..." : "Đến lượt"}
+            </span>
+          ) : (
+            <span className="player-score-badge" title="Số trận thắng">
+              <Trophy size={10} className="inline mr-1 opacity-70" />
+              {score} thắng
+            </span>
+          )}
         </div>
-        <div>
-          <div
-            className="font-display"
-            style={{ fontWeight: 600, fontSize: 15, color: "var(--ink)" }}
-          >
-            {label}
+
+        {/* Content Row: Avatar & Name */}
+        <div className="player-card-content">
+          <div className={`player-avatar-ring ${p} ${isActive ? "ring-active" : ""}`}>
+            {isBot ? (
+              <Bot size={20} className={`piece-icon ${p}`} />
+            ) : (
+              <UsersRound size={20} className={`piece-icon ${p}`} />
+            )}
           </div>
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: `var(--${p}-color)`,
-            }}
-          >
-            {piece === "X" ? "× Quân X" : "○ Quân O"}
+
+          <div className="player-meta">
+            <h3 className="font-display player-name">{label}</h3>
+            <div className="player-subinfo">
+              <span className={`piece-token-label ${p}`}>
+                {piece === "X" ? "× Quân X" : "○ Quân O"}
+              </span>
+              {isBot && calcTimeMs != null && (
+                <span className="latency-badge" title="Độ trễ tính toán Rust WASM">
+                  {calcTimeMs.toFixed(1)}ms
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>

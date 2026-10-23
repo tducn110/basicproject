@@ -1,0 +1,50 @@
+{
+  "recorded_at": "2026-10-23T04:33:32.435222+00:00",
+  "scope": "local basicProject only",
+  "files": [
+    {
+      "path": "gomoku-main/engine/src/ai.rs",
+      "baseline_sha256": "1f3e3c8f21405cfc04edaf60116f34af4dd097f41c196be9f99dbada3df431fb"
+    },
+    {
+      "path": "gomoku-main/engine/src/board.rs",
+      "baseline_sha256": "d35b03fdd0cb7c595dffd61d1d4dac220027e71d33b503f7298d12c32c696f68"
+    },
+    {
+      "path": "gomoku-main/engine/src/eval.rs",
+      "baseline_sha256": "0e4494f43bf78404a74a63b1fde0c9b523b6557f5f0c612f28f79760f84a87c9"
+    },
+    {
+      "path": "gomoku-main/engine/src/lib.rs",
+      "baseline_sha256": "99a0a87e5577ae5a0869725810c8e82656c379aac84225bc1437bc02ab8c9231"
+    },
+    {
+      "path": "gomoku-main/engine/Cargo.toml",
+      "baseline_sha256": "427514ef32eeeeba4c9572b7783436c2e943a2ae30a61720b5c0fdb92ee6cdaa"
+    },
+    {
+      "path": "10_caro/src/App.tsx",
+      "baseline_sha256": "9d31df414d18ee130813fe875d086b3b4938f1a773c354330b7253d7b090900d"
+    },
+    {
+      "path": "10_caro/src/i18n.ts",
+      "baseline_sha256": "de9a5f48d485ed2f982675a5043d5eb73ef0f0344e912afc749e9ec66f45e798"
+    },
+    {
+      "path": "10_caro/src/game/core/GameState.ts",
+      "baseline_sha256": "66c69cd095055a1a1c4e7950bc468658f2d65ca8b6f8a8b12a496898ee8759f6"
+    },
+    {
+      "path": "10_caro/src/game/wasm/worker.ts",
+      "baseline_sha256": "5ae37ed42d391b4e3f4bae49ba8d5e30ac71f6a7029bc44798257e0f860fde79"
+    },
+    {
+      "path": "10_caro/src/game/wasm/contracts.ts",
+      "baseline_sha256": "0280cc992c68e2700f638effb57c48a2073b75b953c21ee135ce0cfb3980878b"
+    },
+    {
+      "path": "10_caro/src/game/ai/contracts.ts",
+      "baseline_sha256": "229aefd8b002cfea67e1c35497b461c4a1436b8601a018d0dc1a60f90d90cc2e"
+    }
+  ]
+}

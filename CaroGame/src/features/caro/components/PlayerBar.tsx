@@ -1,4 +1,5 @@
 import { memo } from "react"
+import { Trophy } from "lucide-react"
 import type { Player } from "../domain"
 import { Piece } from "./Piece"
 
@@ -7,82 +8,55 @@ export interface PlayerBarProps {
   isGameOver: boolean
   p1label?: string
   p2label?: string
+  isThinking?: boolean
+  p1Score?: number
+  p2Score?: number
 }
 
-/** Player side slot — one half of the mobile VS bar */
-function PlayerSlot({
+function PlayerMobileSlot({
   player,
   label,
   isActive,
   reverse = false,
+  isThinking = false,
+  score = 0,
 }: {
   player: Player
   label: string
   isActive: boolean
   reverse?: boolean
+  isThinking?: boolean
+  score?: number
 }) {
   const p = player.toLowerCase()
-  const bg = isActive
-    ? player === "X"
-      ? "rgba(168,75,42,0.10)"
-      : "rgba(49,90,114,0.10)"
-    : "transparent"
-  const border = isActive ? `var(--${p}-color)` : "transparent"
-  const borderProp = reverse ? "borderRight" : "borderLeft"
 
   return (
     <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        flexDirection: reverse ? "row-reverse" : "row",
-        gap: 8,
-        padding: "6px 10px",
-        borderRadius: 6,
-        background: bg,
-        [borderProp]: `3px solid ${border}`,
-        transition: "background 120ms",
-      }}
+      className={`mobile-player-slot ${p} ${isActive ? "active" : ""}`}
+      style={{ flexDirection: reverse ? "row-reverse" : "row" }}
     >
-      <div className={`piece-avatar sm ${p}`}>
+      <div className={`mobile-avatar-circle ${p}`}>
         <Piece player={player} />
       </div>
-      <div style={{ minWidth: 0, textAlign: reverse ? "right" : "left" }}>
-        <div
-          style={{ fontSize: 10, fontWeight: 700, color: `var(--${p}-color)` }}
-        >
-          {player}
+
+      <div className={`mobile-slot-info ${reverse ? "text-right" : "text-left"}`}>
+        <div className="mobile-slot-name-row">
+          <span className={`mobile-piece-tag ${p}`}>{player}</span>
+          <span className="mobile-player-name">{label}</span>
         </div>
-        <div
-          style={{
-            fontSize: 9,
-            color: "var(--ink-muted)",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {label}
+        <div className="mobile-slot-status">
+          {isActive ? (
+            <span className={`mobile-turn-text ${p} animate-pulse`}>
+              {isThinking ? "Đang tính..." : "Đến lượt"}
+            </span>
+          ) : (
+            <span className="mobile-score-text">
+              <Trophy size={11} className="inline mr-0.5 opacity-70" />
+              {score} thắng
+            </span>
+          )}
         </div>
       </div>
-      {isActive && (
-        <span
-          style={{
-            [reverse ? "marginRight" : "marginLeft"]: "auto",
-            fontSize: 8,
-            fontWeight: 700,
-            letterSpacing: "0.05em",
-            padding: "1px 5px",
-            borderRadius: 4,
-            background:
-              player === "X" ? "rgba(168,75,42,0.12)" : "rgba(49,90,114,0.12)",
-            color: `var(--${p}-color)`,
-          }}
-        >
-          ↩
-        </span>
-      )}
     </div>
   )
 }
@@ -92,25 +66,32 @@ export const PlayerBar = memo(function PlayerBar({
   isGameOver,
   p1label = "Người chơi 1",
   p2label = "Người chơi 2",
+  isThinking = false,
+  p1Score = 0,
+  p2Score = 0,
 }: PlayerBarProps) {
   const activeX = !isGameOver && currentPlayer === "X"
   const activeO = !isGameOver && currentPlayer === "O"
 
   return (
-    <div className="paper-card mobile-player-bar">
-      <PlayerSlot player="X" label={p1label} isActive={activeX} />
-      <span
-        className="font-display"
-        style={{
-          fontSize: 11,
-          color: "var(--ink-muted)",
-          flexShrink: 0,
-          padding: "0 4px",
-        }}
-      >
-        VS
-      </span>
-      <PlayerSlot player="O" label={p2label} isActive={activeO} reverse />
+    <div className="mobile-player-bar-capsule">
+      <PlayerMobileSlot
+        player="X"
+        label={p1label}
+        isActive={activeX}
+        score={p1Score}
+      />
+      <div className="mobile-vs-divider">
+        <span className="font-display vs-text">VS</span>
+      </div>
+      <PlayerMobileSlot
+        player="O"
+        label={p2label}
+        isActive={activeO}
+        reverse
+        isThinking={isThinking}
+        score={p2Score}
+      />
     </div>
   )
 })

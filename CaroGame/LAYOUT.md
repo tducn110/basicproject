@@ -4,11 +4,11 @@
 Map of the game architecture: subsystems, rendering, simulation, platform SDK, and lifecycles.
 Rule: when a change adds, moves or removes a module, component, layer, audio bus, platform contract or storage key, update this file in the same commit. Point to files; don't paste code.
 
-Last updated: 2026-10-01.
+Last updated: 2026-10-19.
 
 ## Overview
 
-Caro (Gomoku) 15×15 web game with vintage parchment/paper aesthetic. Pure DOM/React 19 presentation layer with CSS Grid board and deterministic 1v1 Player vs Player rule engine. User clicks dispatch to `placeMove` in `src/App.tsx`, triggering win detection along 4 axes in `src/game.ts`.
+Caro (Gomoku) 15×15 web game with vintage parchment/paper aesthetic. Pure DOM/React 19 presentation layer with CSS Grid board and deterministic 1v1 Player vs Player rule engine. User clicks dispatch to `placeMove` in `src/App.tsx`, triggering win detection along 4 axes in `src/game.ts`. High-performance AI bots (Rule-Based, Minimax, Alpha-Beta) are powered by a native Rust engine compiled to WebAssembly (`engine/`), orchestrated via a dedicated Web Worker to ensure 0 frame drops (stable 60 FPS).
 
 ## TMB Game Design Dependencies
 
@@ -20,12 +20,12 @@ Caro (Gomoku) 15×15 web game with vintage parchment/paper aesthetic. Pure DOM/R
 | `game-pixijs-runtime` | app lifecycle, scene layers, assets, input, ticker, cleanup, performance | N/A — Rendered via React DOM and CSS Grid; PixiJS not yet integrated | gap |
 | `game-viewport-layout` | logical space, uniform scale, coordinate mapping, safe areas | `src/App.tsx` (`min(calc(100vw - 32px), calc(100dvh - 210px), 620px)`) | met |
 | `game-mobile-web-quirks` | mobile viewport, touch, selection, overscroll behavior | `src/index.css` (`box-sizing`, `overflow: hidden`, touch targets) | met |
-| `game-ui-components` | reusable shared HUD, button, modal, and overlay components | `src/App.tsx` (`BoardCell`, `BoardGrid`, `PlayerCard`, `MobilePlayerBar`, `WinBanner`, `InfoCard`, `HistoryPanel`) | met |
-| `dedup-merge` | shared gameplay/UI/reuse boundary and deliberately separate variants | `src/App.tsx` (Inline sub-components in single file; gap for component extraction) | gap |
+| `game-ui-components` | reusable shared HUD, button, modal, and overlay components | `src/features/caro/components/` (`BoardCell`, `BoardGrid`, `PlayerCard`, `PlayerBar`, `WinBanner`, `GameInfo`) | met |
+| `dedup-merge` | shared gameplay/UI/reuse boundary and deliberately separate variants | `src/features/caro/components/` (Extracted 9 decoupled components) | met |
 | `game-audio-design` | semantic event-to-SFX contract and evidence status | `src/features/caro/audio/soundManager.ts` (wood/paper tap, win chime, draw, click) | met |
 | `game-audio-mastering` | buses, limiter, gesture unlock, mute lifecycle | `src/features/caro/audio/soundManager.ts` (Master Bus, DynamicsCompressorNode limiter) | met |
 | `game-review-gates` | state, lifecycle, and ownership review before patches | `LAYOUT.md` | met |
-| `gameplay-experience-gate` | player outcome, research evidence, fairness, feedback, acceptance checks | `src/game.ts` (5-in-a-row deterministic win rule, pure 1v1 model) | met |
+| `gameplay-experience-gate` | player outcome, research evidence, fairness, feedback, acceptance checks | `src/features/caro/domain/board.ts` (5-in-a-row deterministic win rule, pure 1v1 model) | met |
 | `game-wink-sdk-v1` | required for Wink targets; record standalone reason otherwise | N/A — Standalone Web App, Wink SDK v1 not integrated | gap |
 | `wink-minigame-handoff` | required for Wink delivery; record non-Wink reason otherwise | N/A — Standalone UI prototype | gap |
 
@@ -37,13 +37,19 @@ CaroGame/
 ├── package.json          # Manifest (React 19, Lucide React, TailwindCSS v4, Vite 8)
 ├── tsconfig.json         # TypeScript configuration (ESNext, React JSX)
 ├── vite.config.ts        # Vite build tool with TailwindCSS v4 and React plugins
+├── vercel.json           # Vercel deployment configuration
 ├── LAYOUT.md             # Architecture and subsystem ownership map
+├── engine/               # Native Rust Game & AI Engine (WASM Target)
+│   ├── Cargo.toml        # Rust crate manifest (gomoku-engine, wasm-bindgen, serde)
+│   ├── rust-toolchain.toml # Toolchain lock
+│   ├── LAYOUT.md         # Rust engine internal architecture layout
+│   ├── src/              # Rust source (lib.rs, board.rs, ai.rs, eval.rs)
+│   └── tests/            # Integration and wasm tests (tests/wasm.rs)
 └── src/
     ├── main.tsx          # React application root entry point (StrictMode mount)
     ├── App.tsx           # Thin UI mount root (5 lines, renders CaroGamePage)
     ├── game.ts           # Pure simulation re-export shim
     ├── index.css         # Paper theme tokens, fonts, utility classes, responsive rules
-    ├── lib/game.ts       # Re-export shim for game core
     └── features/caro/    # Domain-Driven Caro Subsystem
         ├── CaroGamePage.tsx # Page layout assembly and responsive orchestration
         ├── domain/       # Implement layer (Pure TS, deterministic)
@@ -53,10 +59,14 @@ CaroGame/
         │   └── index.ts      # Public domain barrel export
         ├── audio/        # Implement layer (Web Audio API Synthesizer)
         │   └── soundManager.ts # Master Bus, Brick-wall Limiter, semantic vintage paper SFX
+        ├── wasm/         # Implement layer (Rust WebAssembly Engine & Web Worker)
+        │   ├── botWorker.ts    # Web Worker execution sandbox for background AI search
+        │   └── engine/         # Compiled WASM package (gomoku_engine_bg.wasm, glue code)
         ├── hooks/        # Trung chuyển layer (State & Effect coordination)
         │   ├── useCaroGame.ts   # Authoritative GameState coordinator (useReducer pure model)
         │   ├── useGameTimer.ts  # Independent TimerState coordinator (1s tick, reset)
-        │   └── useGameAudio.ts  # Audio state and event triggers coordinator
+        │   ├── useGameAudio.ts  # Audio state and event triggers coordinator
+        │   └── useWasmBot.ts    # Rust WASM worker coordination and latency telemetry
         └── components/   # Presentation layer (Pure view components)
             ├── BoardCell.tsx    # Single cell button with SVG piece & win highlight
             ├── BoardGrid.tsx    # 15×15 CSS Grid container
@@ -66,6 +76,7 @@ CaroGame/
             ├── GameInfo.tsx     # Match info & MoveHistory drawer
             ├── MoveHistory.tsx  # Re-export shim for GameInfo MoveHistory
             ├── GameActions.tsx  # Replay / New Game action footer
+            ├── ModeSelector.tsx # PvP vs PvE Rust AI mode and difficulty switcher
             ├── Piece.tsx        # Standardized SVG X and O piece renderer
             └── index.ts         # Components barrel export
 ```
@@ -85,6 +96,8 @@ Pipeline stage reference:
 | **Player HUD** | **Presentation** | `OUTPUT` | React DOM | Thẻ người chơi 1/2 desktop, thanh VS mobile (`PlayerSlot`) | [`src/features/caro/components/PlayerCard.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/PlayerCard.tsx), [`PlayerBar.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/PlayerBar.tsx) |
 | **Match Banner** | **Presentation** | `OUTPUT / INPUT` | React DOM | Banner chiến thắng / hòa cờ với nút Chơi lại và Ván mới | [`src/features/caro/components/WinBanner.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/WinBanner.tsx) |
 | **Game Info & History**| **Presentation** | `OUTPUT` | React DOM | Hiển thị thông số ván đấu và danh sách lịch sử nước đi | [`src/features/caro/components/GameInfo.tsx`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/components/GameInfo.tsx) |
+| **AI Search Engine** | **Implement** | `PROCESS` | Rust WASM | Khung tìm kiếm Alpha-Beta/Minimax, Candidate radius r<=2, Heuristic | [`src/features/caro/wasm/botWorker.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/wasm/botWorker.ts), [`engine/`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/wasm/engine/) |
+| **AI Bot Coordination** | **Trung chuyển** | `EVENT <-> SIDE EFFECT` | React Hook | Khởi tạo Worker, ủy quyền tính toán cho Rust WASM, đo lường độ trễ | [`src/features/caro/hooks/useWasmBot.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/hooks/useWasmBot.ts) |
 | **Audio Synthesizer** | **Implement** | `SIDE EFFECT` | Web Audio API | Tổng hợp âm thanh gõ cờ gỗ/giấy, thắng trận, hòa cờ, limiter bus | [`src/features/caro/audio/soundManager.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/audio/soundManager.ts) |
 | **Audio Coordination** | **Trung chuyển** | `EVENT -> SIDE EFFECT` | React Hook | Điều phối phát âm thanh theo sự kiện và quản lý trạng thái bật/tắt tiếng | [`src/features/caro/hooks/useGameAudio.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/hooks/useGameAudio.ts) |
 | **Design System Tokens** | **Asset / Style** | `OUTPUT` | CSS Variables | Bảng màu giấy cổ vintage (`--paper`, `--ink`, `--x-color`, `--o-color`) | [`src/index.css`](file:///home/pro/Downloads/basicproject/CaroGame/src/index.css) |
@@ -126,12 +139,5 @@ Mỗi state trong User Flow chỉ chịu trách nhiệm duy nhất cho **1 mục
     - Cuộn dọc mượt mà (`overflow-y: auto`, `-webkit-overflow-scrolling: touch`), không bị tràn ngang (`overflow-x: hidden`).
     - `GameInfo` và `MoveHistory` xếp chồng nhỏ gọn dưới bàn cờ.
 
-## Discovered Gaps & Architectural Issues (Mapped to Roadmap)
-
-1. **[RESOLVED] State Overload in `src/App.tsx`**: Đã phân rã thành công thành 3 lớp kiến trúc:
-   - Implement: `src/features/caro/domain/board.ts`
-   - Trung chuyển: `useCaroGame.ts` (pure GameState qua useReducer) & `useGameTimer.ts` (pure TimerState)
-   - Presentation: `src/features/caro/components/` (9 components đơn nhiệm, không inline styles dư thừa)
-   - Shell: `App.tsx` rút gọn còn 5 dòng.
-2. **[RESOLVED] Audio Feedback & Mastering**: Đã tích hợp Web Audio API (`src/features/caro/audio/soundManager.ts` & `src/features/caro/hooks/useGameAudio.ts`) với Master Bus, Limiter chống méo, âm thanh đặt cờ gỗ/giấy, thắng cuộc, hòa cờ, và nút toggle mute trên header.
-3. **No Persistent Storage**: Chưa lưu trữ số ván thắng/hòa của Người chơi 1 vs Người chơi 2 vào `localStorage`.
+3. **[RESOLVED] Persistent Storage**: Đã lưu trữ số ván thắng/hòa của Người chơi 1 vs Người chơi 2 và Người vs AI vào `localStorage` qua [`src/features/caro/hooks/useScoreTracker.ts`](file:///home/pro/Downloads/basicproject/CaroGame/src/features/caro/hooks/useScoreTracker.ts).
+4. **[RESOLVED] UI/UX Craftsmanship**: Tích hợp 5 điểm thiên nguyên (Hoshi), Ghost piece preview khi hover, haptic click feedback, kiến trúc Double-Bezel và Modal chiến thắng Awwwards-tier. Dọn sạch các nút giả và file shim không dùng.

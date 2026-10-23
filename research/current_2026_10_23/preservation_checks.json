@@ -1,0 +1,6 @@
+{
+  "src/integrations/wink/__tests__/winkIntegration.test.ts": true,
+  "src/integrations/wink/types.ts": true,
+  "src/integrations/wink/useWinkIntegration.ts": true,
+  "preexisting_staged_patch_unchanged": true
+}

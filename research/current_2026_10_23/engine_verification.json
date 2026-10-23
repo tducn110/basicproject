@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "native_only": true,
+  "browser_or_wasm_exercised": false,
+  "controlled_fixtures": 4,
+  "seeded_positions": 16,
+  "timing_repeats": 3,
+  "search_csv_rows": 816,
+  "root_restoration_checks": 820,
+  "minimax_alpha_beta_pairs": 408,
+  "ordering_value_pairs": 408,
+  "repeated_decision_counter_checks": 544,
+  "candidate_configurations": 84,
+  "tactical_completion_retention_checks": 12,
+  "terminal_checks": 4,
+  "native_address_offset_checks": 225,
+  "difficulty_rows": 18,
+  "search_timer_excludes_root_clone": true,
+  "timing_order_randomized": false,
+  "cpu_pinning": false
+}

@@ -36,7 +36,7 @@ def run_benchmarks():
     print(f"  ✓ Rust hoàn thành {len(rust_data)} cấp độ sâu.")
 
     print("▶ Đang thực thi TypeScript Benchmark (Node.js/V8)...")
-    ts_cmd = ["npx", "tsx", "benchmark/ts_bench/benchmark.ts", "midgame"]
+    ts_cmd = ["npx", "-y", "tsx", "benchmark/ts_bench/benchmark.ts", "midgame"]
     ts_proc = subprocess.run(ts_cmd, capture_output=True, text=True, check=True)
     
     ts_out = ts_proc.stdout.strip()
@@ -125,6 +125,8 @@ def generate_charts(rust_data, ts_data, output_path="assets/charts/rust_vs_ts_pe
     print(f"✓ Đã kết xuất biểu đồ benchmark thực nghiệm: {output_path}")
 
 def main():
+    docs_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.chdir(docs_dir)
     rust_data, ts_data = run_benchmarks()
     
     # Lưu dataset thô

@@ -1,0 +1,317 @@
+{
+  "captured_at_utc": "2026-10-23T04:53:49.858539+00:00",
+  "scope": "local uncommitted implementation, not a new Git commit",
+  "versions": {
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+    "wasm_pack": "wasm-pack 0.15.0",
+    "node": "v22.23.3"
+  },
+  "app_git": {
+    "head": "c1e7447532e4c5ff5590f2c5562dd21cd0acf7b9",
+    "branch": "main",
+    "status": "D  pnpm-lock.yaml\n M src/App.tsx\n M src/app/GameController.ts\n M src/game/ai/AIController.ts\n M src/game/ai/contracts.ts\n M src/game/behaviors/match/MatchController.ts\n M src/game/bot/index.ts\n M src/game/core/GameState.ts\n M src/game/wasm/GomokuWasmEngine.ts\n M src/game/wasm/contracts.ts\n M src/game/wasm/engine/gomoku_engine.d.ts\n M src/game/wasm/engine/gomoku_engine.js\n M src/game/wasm/engine/gomoku_engine_bg.wasm\n M src/game/wasm/engine/gomoku_engine_bg.wasm.d.ts\n M src/game/wasm/worker.ts\n M src/i18n.ts\n M src/index.css\n M src/integrations/wink/__tests__/winkIntegration.test.ts\n M src/integrations/wink/types.ts\n M src/integrations/wink/useWinkIntegration.ts\n M src/pixi/CaroScene.ts\n M tests/game/core.test.ts\n M tests/game/wasm-contract.test.ts\n M tests/pixi/scene.test.ts\n?? package-lock.json\n?? src/components/SearchFeedback.tsx\n?? src/game/wasm/executeSearch.ts\n?? tests/game/app-controls.test.tsx\n?? tests/game/controller-lifecycle.test.ts\n?? tests/game/wasm-runtime.test.ts\n?? tests/game/worker-lifecycle.test.ts"
+  },
+  "sources": [
+    {
+      "path": "10_caro/package-lock.json",
+      "sha256": "96dcd9af1bcd6a432d275071ef4053531e80f460a8cfb7133ebb24d0c79f9794"
+    },
+    {
+      "path": "10_caro/package.json",
+      "sha256": "8899907f64f5eb41d5d7ac6596a44bee0950176f6b0a098cce871448f6959e18"
+    },
+    {
+      "path": "10_caro/src/App.tsx",
+      "sha256": "c0fba3abb4f94de40aaa01a0875ec4d2e35a708606eb96b1d7e4aa95a786293e"
+    },
+    {
+      "path": "10_caro/src/app/GameController.ts",
+      "sha256": "4badda99a492e4488497b216844e5538e6bab531ec47f5151ac3ec089acd7d2f"
+    },
+    {
+      "path": "10_caro/src/board/input/BoardInputController.ts",
+      "sha256": "284a1b746d5794790aba0cf846fe15b417fbda4b0c35e4e5f113909c3e05ccc3"
+    },
+    {
+      "path": "10_caro/src/board/render/GridRenderer.ts",
+      "sha256": "52fe46615d9211ffac6dc0d9802b9fb820f6105354e7f9b9270018d05076df70"
+    },
+    {
+      "path": "10_caro/src/board/render/HighlightRenderer.ts",
+      "sha256": "18181a6bc7211fe0f830b2dbc1c3093b2f3f282d80e37f2906f598ff3bbfa0da"
+    },
+    {
+      "path": "10_caro/src/board/render/StoneRenderer.ts",
+      "sha256": "cceca6316ed730640c636d3992ac267c7b1da60f85e6b0233b55870a58ee83e1"
+    },
+    {
+      "path": "10_caro/src/board/spatial/Camera.ts",
+      "sha256": "1d7f4746cd298dd195ee73b3ea34e22b9cb61281da1ea218eca8ecde16a67574"
+    },
+    {
+      "path": "10_caro/src/board/spatial/CoordinateTransform.ts",
+      "sha256": "5f7489d2215331856021441ad9890994efd11c668fd2b04ed3eb78c189797eef"
+    },
+    {
+      "path": "10_caro/src/board/spatial/VisibleBounds.ts",
+      "sha256": "1d2c5c0ba468c23f293a08b94fdea52a4ea6b9a66be496eafdeac184012a184b"
+    },
+    {
+      "path": "10_caro/src/components/Info.tsx",
+      "sha256": "b94fff32c70025334e85a5a59894b5cc90c0175d8007a19aee9093bb829383ba"
+    },
+    {
+      "path": "10_caro/src/components/LeaderboardModal.tsx",
+      "sha256": "bb92c81a3c6574cf271f7d3fd66731e1329a82d7ee36a6a2286b81971c2ea453"
+    },
+    {
+      "path": "10_caro/src/components/Piece.tsx",
+      "sha256": "fc46cdc954672485425151d46ce6fc659677aed7d115c39d0c8c8a1701785246"
+    },
+    {
+      "path": "10_caro/src/components/Player.tsx",
+      "sha256": "54aa28eb8d3eb15965dc55ab030863e04fd383b76f4ed47baaa9e691f2f066ce"
+    },
+    {
+      "path": "10_caro/src/components/SearchFeedback.tsx",
+      "sha256": "dfc64a51479a5de820bc8e73fdfa06318ad459cdf3447840b84263072305628e"
+    },
+    {
+      "path": "10_caro/src/components/WinBanner.tsx",
+      "sha256": "186a7f68816f6424eb515a0d1c408101509b59551b435330f7785ff860ccd78e"
+    },
+    {
+      "path": "10_caro/src/game/ai/AIController.ts",
+      "sha256": "cf1489775f51e39f6b221882206005bdddadfcc47f2e876b2ace0b848cfbd439"
+    },
+    {
+      "path": "10_caro/src/game/ai/SearchPositionBuilder.ts",
+      "sha256": "5f5e5fc4e68f16037fc054ed4ba43923de70af5907303c8a4c4d98422beedc5c"
+    },
+    {
+      "path": "10_caro/src/game/ai/TacticalMoveResolver.ts",
+      "sha256": "8e2411cb671f351793525b1aaea4fff4d413a6b28ce930663ffdf3f6e2045943"
+    },
+    {
+      "path": "10_caro/src/game/ai/contracts.ts",
+      "sha256": "4b79d945971b8f717f1039b119448b7cdf971ba3d847c3e486d6d2a90d94456c"
+    },
+    {
+      "path": "10_caro/src/game/behaviors/match/MatchController.ts",
+      "sha256": "8d37f164970bb761f1708637d83da1292e778f8ac9e3dcd419c9cfb153bd2ba4"
+    },
+    {
+      "path": "10_caro/src/game/behaviors/match/MatchState.ts",
+      "sha256": "4aec5f0041c768e922126f0633cc7f848cbfbd5bc5baae5c0daba0ecc19223e2"
+    },
+    {
+      "path": "10_caro/src/game/behaviors/move/PlayMove.ts",
+      "sha256": "52c014e68930174d3525137afa8e1950bc3a4a6d5c4142aa3fb6f232daa12240"
+    },
+    {
+      "path": "10_caro/src/game/bot/board.ts",
+      "sha256": "5a6f75198459603c97bd5b996b71cf441bd9d9bd433e21d19f5c3ca324a97046"
+    },
+    {
+      "path": "10_caro/src/game/bot/eval.ts",
+      "sha256": "1b8b1d0401518e5cb2c49641930389bffc3b658795e6fce40491f5251c0bd3f3"
+    },
+    {
+      "path": "10_caro/src/game/bot/index.ts",
+      "sha256": "36d8eba391f7011882c3dcd5248560b39ee74f56c0d66b9dd0dea5e3ca9d9063"
+    },
+    {
+      "path": "10_caro/src/game/bot/interface.ts",
+      "sha256": "98bab595413899372e0d094b6418c79fa05ecf07e5df2d42aaf50080fea75e63"
+    },
+    {
+      "path": "10_caro/src/game/bot/search.ts",
+      "sha256": "257221e2d8509026b4880c87ff9f26f3330abe5a2e353683939ace15e0bd3c2c"
+    },
+    {
+      "path": "10_caro/src/game/bot/worker.ts",
+      "sha256": "7dd0e5b0f2d18159a3ff4a0d9ecee0d4f303ba66190c696b18af481eaf31b0fd"
+    },
+    {
+      "path": "10_caro/src/game/core/BoardBounds.ts",
+      "sha256": "7736c3cffb7a5e480268ee924926cda79a66480cb9e98ca934da0b9f764c9895"
+    },
+    {
+      "path": "10_caro/src/game/core/GameState.ts",
+      "sha256": "a6e9a3e2d60aad3b60d3abeaa1270cdf064816dbac64b689f126e2eb26dea210"
+    },
+    {
+      "path": "10_caro/src/game/core/MoveRules.ts",
+      "sha256": "fb72881be5c36e83fa7f4ac594ab064d09b003dce490c9b46fb41982b1f04f79"
+    },
+    {
+      "path": "10_caro/src/game/core/WinRules.ts",
+      "sha256": "8b9b1ac03cb562f5dbad695cb5281fb068ed5ef5c10d232a60ff7dab21f3101a"
+    },
+    {
+      "path": "10_caro/src/game/core/types.ts",
+      "sha256": "11a0ccaf0bfd069eef44da190a8af4771b060b0f0ee8bfdf585fa456efaf2c1b"
+    },
+    {
+      "path": "10_caro/src/game/rules.ts",
+      "sha256": "fc07ff770f859107cd36381380322ba26b772ca066c28714c044602cd8ef1072"
+    },
+    {
+      "path": "10_caro/src/game/state.ts",
+      "sha256": "2639d4ce5037e4a7d2ac36beb037a9c129f601eb29691837ab70e36a6feb5f0d"
+    },
+    {
+      "path": "10_caro/src/game/types.ts",
+      "sha256": "cf75e29f5c1898f33c02ba3c0ba01db81f0deb5c0d0d018717b323fedc46a10e"
+    },
+    {
+      "path": "10_caro/src/game/wasm/GomokuWasmEngine.ts",
+      "sha256": "58d2c9e8e49f21447c5689795a572d8bf135c84a9124561589382d8726283fa7"
+    },
+    {
+      "path": "10_caro/src/game/wasm/contracts.ts",
+      "sha256": "e4b5388c3f65fcbf10469502f138bfdd2c442dbfa2f4bd1f5bb083ad73c8445c"
+    },
+    {
+      "path": "10_caro/src/game/wasm/engine/gomoku_engine.d.ts",
+      "sha256": "9bd55e1d59ba388626e9fc99b88135a16e7edc6b095b1d9792dbcef8eaeb07c7"
+    },
+    {
+      "path": "10_caro/src/game/wasm/engine/gomoku_engine_bg.wasm",
+      "sha256": "1ff854e6493b39727d07cfcf69b0af06e349a748249d85d688741a4f85017989"
+    },
+    {
+      "path": "10_caro/src/game/wasm/engine/gomoku_engine_bg.wasm.d.ts",
+      "sha256": "5dd7713afc121bf1be48fb4a1f28dfa5511fb160ec27fb4b4f30f3c0c6ca32f4"
+    },
+    {
+      "path": "10_caro/src/game/wasm/executeSearch.ts",
+      "sha256": "0d747f78597af665512db77938ed607291d55cf15ebfe76a3437d10cbb08daf5"
+    },
+    {
+      "path": "10_caro/src/game/wasm/worker.ts",
+      "sha256": "0474dbc83a93a8c0113504a75c904f39e3a4f66b0340e70a6b9c4e65bf8dee69"
+    },
+    {
+      "path": "10_caro/src/i18n.ts",
+      "sha256": "0ae73dba62f9f7a25ef5a6529515347ddbd1527e873d7504288ebf6752fc498a"
+    },
+    {
+      "path": "10_caro/src/integrations/wink/__tests__/winkIntegration.test.ts",
+      "sha256": "44e65e8448b66b5994046ba8d674624c3e36d3e1af318669e7caf1d5e1415d8a"
+    },
+    {
+      "path": "10_caro/src/integrations/wink/types.ts",
+      "sha256": "3871fb97a0e168fcc6d9e7b7e75d7fb6088fd74d61624e9c5160188eb71833a5"
+    },
+    {
+      "path": "10_caro/src/integrations/wink/useWinkIntegration.ts",
+      "sha256": "f29a64787b7464d1b5b9b0a3c90a1cc801cf57e9e8c559ef6759a7bdbfd1ccf8"
+    },
+    {
+      "path": "10_caro/src/main.tsx",
+      "sha256": "374ecbc17a2a3e5875838f0eb6912f90ccedda7687aadd07b3a852372b287dfd"
+    },
+    {
+      "path": "10_caro/src/pixi/CaroGameCanvas.tsx",
+      "sha256": "b8af87c20809b49aaf937b8b451df41637600da41e23ad143820c2f79c28b192"
+    },
+    {
+      "path": "10_caro/src/pixi/CaroScene.ts",
+      "sha256": "eb0af9e5adb25052574c9b99c82d6decb67c018c3b62284f468259ef7a5d916d"
+    },
+    {
+      "path": "10_caro/src/pixi/devtools.ts",
+      "sha256": "b7c981576dc673a7c8db2d45d3ae9866b25f3d75d3dfdb063bc29961bc6bbdfd"
+    },
+    {
+      "path": "10_caro/src/utils/buttonClick.ts",
+      "sha256": "2eea739e105604f3b4fa2088b4e221675b508645faa0310616f01a1c5257f9d8"
+    },
+    {
+      "path": "10_caro/src/utils/game-loader.ts",
+      "sha256": "77aba8b4bbae1303a395eb321ff103ca308103f48ceca581c43d085c9f49b320"
+    },
+    {
+      "path": "10_caro/src/utils/loading-controller.ts",
+      "sha256": "892a80ca7e0ea7b783d66720bcd3cdeaa770d016a6277b2ee373153d11b60a17"
+    },
+    {
+      "path": "10_caro/src/vite-env.d.ts",
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "10_caro/tests/game/app-controls.test.tsx",
+      "sha256": "d18733d09fa3fdbb58a9db82082420982bfa0e5ab46ea8ceb1cec090857e5fb4"
+    },
+    {
+      "path": "10_caro/tests/game/controller-lifecycle.test.ts",
+      "sha256": "aa2c50aeac2c3ef311bf997474f9b00968168e44f79cfff90133dea1f45c48c7"
+    },
+    {
+      "path": "10_caro/tests/game/core.test.ts",
+      "sha256": "ea9f52a708a724d015299c888618945c9333be1dea33b5b926c0b4ee9b7a73af"
+    },
+    {
+      "path": "10_caro/tests/game/match.test.ts",
+      "sha256": "567a45836786017411d3a039409d1fd02a46f2f8c0d77c4cc33c518965276823"
+    },
+    {
+      "path": "10_caro/tests/game/wasm-contract.test.ts",
+      "sha256": "730e94835b813f2f48d405c38b456fdff128d26a05e98b7c3222dfa2aa4a89ba"
+    },
+    {
+      "path": "10_caro/tests/game/wasm-runtime.test.ts",
+      "sha256": "fe024a2c54720978fb7ea43c9fd53fde31f1e16062e6728ce6d3414c28fe0fe2"
+    },
+    {
+      "path": "10_caro/tests/game/worker-lifecycle.test.ts",
+      "sha256": "6ec323eb1a57bf91e412df735a777f6dd24bf68b6f74a43a26c0a9906bb73c73"
+    },
+    {
+      "path": "10_caro/tests/pixi/scene.test.ts",
+      "sha256": "86d085d3a0dab866b1fb71ee15e8178fe5ba4cda3a76cca803b3df8b39419d26"
+    },
+    {
+      "path": "gomoku-main/engine/Cargo.lock",
+      "sha256": "39caf80c50a68fd40c08feec3fe4218ecf72a9597ddba11ff2ae087a75cc4e6b"
+    },
+    {
+      "path": "gomoku-main/engine/Cargo.toml",
+      "sha256": "427514ef32eeeeba4c9572b7783436c2e943a2ae30a61720b5c0fdb92ee6cdaa"
+    },
+    {
+      "path": "gomoku-main/engine/examples/current_evidence.rs",
+      "sha256": "2b40d36c3e0e9a55a28129e40c564c93ae29adaf01c4a20670571d565cc93c01"
+    },
+    {
+      "path": "gomoku-main/engine/src/ai.rs",
+      "sha256": "4e118d28036c321c9dd9835b92428a11340aa0220a8a9fcf34b1072d1433ba62"
+    },
+    {
+      "path": "gomoku-main/engine/src/board.rs",
+      "sha256": "35d64b2e80041342a673da2f9cf8b4e5457c331f873e4230cdec7efd439a13fe"
+    },
+    {
+      "path": "gomoku-main/engine/src/candidates.rs",
+      "sha256": "9a83974ad61d8bcae016561f1db35ebb45a8b826c3ee8ec524cd12277ff776ea"
+    },
+    {
+      "path": "gomoku-main/engine/src/eval.rs",
+      "sha256": "eec5757ca15216c782820588c2e7fc250fa7fe5e34a4737dee740063534f0d15"
+    },
+    {
+      "path": "gomoku-main/engine/src/lib.rs",
+      "sha256": "916d8e8d61587c24cbd3ba06d95577a10d07c31c18f77aa2c691a4301685d539"
+    },
+    {
+      "path": "gomoku-main/engine/src/search.rs",
+      "sha256": "3bea1e8366054a78b7ce4165319b3beb6fbd24144d6504201e26d25a1fbba1dd"
+    },
+    {
+      "path": "gomoku-main/engine/tests/wasm.rs",
+      "sha256": "91919db518e347bd43026ef78b42f6724a4928143b4e304d529de77748519ed5"
+    }
+  ]
+}

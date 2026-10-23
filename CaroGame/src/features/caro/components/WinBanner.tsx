@@ -1,9 +1,11 @@
-import { RotateCcw, SquarePlus } from "lucide-react"
+import { useEffect } from "react"
+import { Crown, RotateCcw, Sparkles, SquarePlus } from "lucide-react"
 import type { WinResult } from "../domain"
 
 export interface WinBannerProps {
   winner: WinResult | null
   isDraw: boolean
+  totalMoves?: number
   onReplay: () => void
   onNewGame: () => void
 }
@@ -11,53 +13,84 @@ export interface WinBannerProps {
 export function WinBanner({
   winner,
   isDraw,
+  totalMoves = 0,
   onReplay,
   onNewGame,
 }: WinBannerProps) {
+  useEffect(() => {
+    if (!winner && !isDraw) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onReplay()
+      } else if (e.key === "Enter") {
+        onNewGame()
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [winner, isDraw, onReplay, onNewGame])
+
   if (!winner && !isDraw) return null
 
-  let title = "Hòa!"
-  let sub = "Bàn cờ đã kín"
-  let color = "var(--ink-muted)"
+  const isWin = Boolean(winner)
+  const isX = winner?.winner === "X"
+  const themeClass = isDraw ? "draw" : isX ? "x-win" : "o-win"
 
-  if (winner) {
-    title =
-      winner.winner === "X" ? "Người chơi 1 thắng!" : "Người chơi 2 thắng!"
-    sub = "5 quân liên tiếp"
-    color = winner.winner === "X" ? "var(--x-color)" : "var(--o-color)"
-  }
+  const title = isDraw
+    ? "Ván cờ Bất phân Thắng bại!"
+    : isX
+      ? "Người chơi 1 (Quân X) Chiến thắng!"
+      : "Người chơi 2 (Quân O) Chiến thắng!"
+
+  const subtitle = isDraw
+    ? "Toàn bộ 225 ô cờ đã được lấp đầy mà không bên nào tạo được chuỗi 5 quân liên tiếp."
+    : `Đạt được chuỗi 5 quân liên tiếp sau tổng cộng ${totalMoves} nước đi nghẹt thở.`
 
   return (
     <div
-      className="win-banner paper-card"
-      style={{
-        borderTop: `3px solid ${color}`,
-      }}
+      className={`win-banner-modal-overlay ${themeClass}`}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="win-dialog-title"
+      aria-describedby="win-dialog-desc"
     >
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div
-          className="font-display"
-          style={{ fontWeight: 700, fontSize: 18, lineHeight: 1.2, color }}
-        >
-          {title}
+      <div className="win-banner-card">
+        {/* Decorative Badge Icon */}
+        <div className={`win-badge-icon ${themeClass}`} aria-hidden="true">
+          {isWin ? <Crown size={28} /> : <Sparkles size={28} />}
         </div>
-        <div style={{ fontSize: 11, color: "var(--ink-muted)", marginTop: 2 }}>
-          {sub}
+
+        {/* Text Announce */}
+        <div className="win-text-block">
+          <h2 id="win-dialog-title" className="font-display win-title">{title}</h2>
+          <p id="win-dialog-desc" className="win-subtitle">{subtitle}</p>
         </div>
-      </div>
-      <div style={{ display: "flex", gap: 8 }}>
-        <button className="paper-btn" onClick={onReplay} aria-label="Chơi lại">
-          <RotateCcw size={13} />
-          <span>Chơi lại</span>
-        </button>
-        <button
-          className="paper-btn primary"
-          onClick={onNewGame}
-          aria-label="Ván mới"
-        >
-          <SquarePlus size={13} />
-          <span>Ván mới</span>
-        </button>
+
+        {/* CTA Actions */}
+        <div className="win-actions-group">
+          <button
+            type="button"
+            className="win-btn-secondary"
+            onClick={onReplay}
+            aria-label="Chơi lại ván này (Phím Escape)"
+          >
+            <RotateCcw size={15} className="btn-icon" />
+            <span>Chơi lại ván này</span>
+          </button>
+
+          <button
+            type="button"
+            className="win-btn-primary"
+            onClick={onNewGame}
+            aria-label="Khởi tạo ván mới (Phím Enter)"
+            autoFocus
+          >
+            <span>Ván mới</span>
+            <div className="btn-trailing-icon">
+              <SquarePlus size={15} />
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   )

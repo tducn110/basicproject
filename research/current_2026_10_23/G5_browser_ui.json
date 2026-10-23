@@ -1,0 +1,31 @@
+{
+  "environment": "HeadlessChrome155 Linux x86_64,1280x800",
+  "scope": "actual React UI + Pixi input via DOM PointerEvent + actual Rust Worker",
+  "before": {
+    "levels": [
+      "Easy",
+      "Normal",
+      "Hard",
+      "Very Hard",
+      "Expert",
+      "Master"
+    ],
+    "depth": 2,
+    "nodes": 61,
+    "cutoffs": 13,
+    "score": -214,
+    "leaves": 45,
+    "rank_evaluations": 507,
+    "candidates": 507,
+    "worker_elapsed_ms": 2.6,
+    "undo_disabled": false,
+    "alerts": []
+  },
+  "after_undo": {
+    "undo_disabled": true,
+    "details_removed": true,
+    "alerts": []
+  },
+  "passed": true,
+  "limitation": "Synthetic DOM-dispatched pointer events, not physical touchscreen/Wink host."
+}

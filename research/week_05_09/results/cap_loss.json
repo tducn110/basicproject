@@ -1,0 +1,10 @@
+{
+  "fixture": "win",
+  "radius": 1,
+  "cap": 6,
+  "uncapped_candidates": 20,
+  "capped_candidates": 6,
+  "uncapped_score_depth_1": 9999999,
+  "capped_score_depth_1": 99990,
+  "omitted_winning_moves_zero_based": [[7,2],[7,7]]
+}

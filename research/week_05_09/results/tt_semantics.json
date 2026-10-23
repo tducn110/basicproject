@@ -1,0 +1,14 @@
+{
+  "bound_roundtrip_variants": 3,
+  "replacement_cases_per_variant": 3,
+  "observed_bound_counts": {"exact": 48, "lower": 34, "upper": 170},
+  "inspected_unique_hashes": 559,
+  "stored_entries": 252,
+  "tt_hits": 4,
+  "tt_lookups": 255,
+  "ttentry_size_of_bytes_native": 12,
+  "hashmap_is_fixed_8mb": false,
+  "rules_in_key": false,
+  "root_perspective_in_key": false,
+  "mate_ply_normalization_present": false
+}
