@@ -1,0 +1,15 @@
+{
+  "fixture": "clustered",
+  "radius": 1,
+  "cap": 8,
+  "initial_depth": 4,
+  "same_root_score": 0,
+  "same_root_warm_score": 0,
+  "same_root_warm_nodes": 9,
+  "same_root_warm_hits": 8,
+  "after_move_depth": 3,
+  "after_move_cold_score": 0,
+  "after_move_warm_score": 19800,
+  "after_move_scores_equal": false,
+  "interpretation": "Probe only. Reusing root-relative entries across a root-player change is unsupported; start with a fresh table or tag the evaluation namespace."
+}

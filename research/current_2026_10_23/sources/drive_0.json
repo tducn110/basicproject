@@ -1,0 +1,2321 @@
+{
+  "documentId": "1exG7loK98vhgjK1cqiCxXUR8y2-plKyYlhLrMddz3Ec",
+  "title": "Basic Project — Deep Research Weeks 01–10 (Corrected v1.0)",
+  "revisionId": "AHj4eMTjAGrGu3tE5Wx8kJHRZauLAmNHJcVPQ3H5UFy_I9pziNJPxxAe7idC2t6w2tN5cjDXSYCw3R47LzITBWOzOJ28U3--7VFAKPZHiFg",
+  "tabId": null,
+  "paragraphs": [
+    {
+      "text": "BASIC PROJECT — DEEP RESEARCH ROADMAP & EVIDENCE PLAN (CORRECTED v1.0)",
+      "startIndex": 1,
+      "endIndex": 71,
+      "tabId": "t.0",
+      "namedStyleType": "TITLE",
+      "isListItem": false
+    },
+    {
+      "text": "Caro AI: Website Cờ Caro ứng dụng thuật toán tìm kiếm cho bot nhiều mức độ khó",
+      "startIndex": 72,
+      "endIndex": 150,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "0. DOCUMENT CONTROL",
+      "startIndex": 152,
+      "endIndex": 171,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Mục đích: biến đề cương 10 tuần thành một research execution plan có thể kiểm chứng, đồng thời không giả lập lịch sử hay kết quả chưa chạy.",
+      "startIndex": 172,
+      "endIndex": 311,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Trạng thái: PLAN / RESEARCH BACKBONE. Tài liệu này không tự chứng minh rằng code, test hay benchmark đã hoàn thành.",
+      "startIndex": 312,
+      "endIndex": 427,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Phạm vi: Week 01–10, bao phủ toàn bộ đề cương gốc và các điều chỉnh kiến trúc đã thống nhất trong project context.",
+      "startIndex": 428,
+      "endIndex": 542,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Authority order:",
+      "startIndex": 544,
+      "endIndex": 560,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Đề cương gốc = coverage contract: mọi chức năng, thuật toán, kỹ thuật tối ưu, metric, thực nghiệm, báo cáo và demo đã nêu phải được bao phủ.",
+      "startIndex": 561,
+      "endIndex": 703,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Basic Project Reporting & Evidence Standard v1.0 = reporting contract.",
+      "startIndex": 704,
+      "endIndex": 776,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Repository + commit/tag + test/log/raw benchmark = implementation evidence [A].",
+      "startIndex": 777,
+      "endIndex": 858,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Official/academic sources = theoretical evidence [B].",
+      "startIndex": 859,
+      "endIndex": 914,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Suy luận kỹ thuật = [C].",
+      "startIndex": 915,
+      "endIndex": 941,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Quyết định thiết kế chưa được kiểm chứng = [D].",
+      "startIndex": 942,
+      "endIndex": 991,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Quy tắc cấm:",
+      "startIndex": 993,
+      "endIndex": 1005,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Không viết “đã tối ưu”, “nhanh hơn”, “tốt hơn”, “đạt X%” nếu chưa có raw data + protocol + commit tương ứng.",
+      "startIndex": 1006,
+      "endIndex": 1116,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Không dùng code/reference implementation của người khác để chứng minh performance của project.",
+      "startIndex": 1117,
+      "endIndex": 1213,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Không biến kế hoạch tuần thành lịch sử giả.",
+      "startIndex": 1214,
+      "endIndex": 1259,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Không dùng UI làm source of truth cho luật game hoặc trạng thái thuật toán.",
+      "startIndex": 1260,
+      "endIndex": 1337,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "1. CORRECTION TO THE ORIGINAL EXECUTION MODEL",
+      "startIndex": 1339,
+      "endIndex": 1384,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "1.1. Coverage được giữ nguyên",
+      "startIndex": 1386,
+      "endIndex": 1415,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Đề cương yêu cầu: Board Matrix, Game State, move validation, win/draw, PvP, PvBot, Random, Rule-Based, Pattern Detection, Heuristic Evaluation, Minimax, Alpha-Beta, Candidate Move Generation, Move Ordering, Iterative Deepening, Transposition Table, Zobrist Hashing, difficulty tiers, algorithm metrics, bot-vs-bot experiments, comparison charts, final test/report/demo. Không mục nào bị bỏ.",
+      "startIndex": 1416,
+      "endIndex": 1806,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "1.2. Architecture amendment",
+      "startIndex": 1808,
+      "endIndex": 1835,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Chronology được sửa để phản ánh quyết định kỹ thuật:",
+      "startIndex": 1836,
+      "endIndex": 1888,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Week 01–03: TypeScript là baseline cho domain contracts, browser lifecycle và UI integration.",
+      "startIndex": 1889,
+      "endIndex": 1984,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Week 04: tạo migration/equivalence gate cho computational AI core. Rust/WASM chỉ được chấp nhận nếu cùng fixture cho kết quả tương đương với baseline trước khi dùng cho search.",
+      "startIndex": 1985,
+      "endIndex": 2163,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Week 05–08: search-heavy algorithms có thể chạy trong Rust/WASM core; TypeScript tiếp tục sở hữu browser contracts, orchestration và UI boundary.",
+      "startIndex": 2164,
+      "endIndex": 2311,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Web Worker là concurrency boundary đề xuất cho search dài để tránh block main UI thread. Đây là [D] cho tới khi integration test xác nhận.",
+      "startIndex": 2312,
+      "endIndex": 2452,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- “Rust nhanh hơn TypeScript” không phải fact. Chỉ benchmark cùng workload mới được phép kết luận.",
+      "startIndex": 2453,
+      "endIndex": 2551,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Official integration references:",
+      "startIndex": 2553,
+      "endIndex": 2585,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://wasm-bindgen.github.io/wasm-bindgen/",
+      "startIndex": 2586,
+      "endIndex": 2630,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API",
+      "startIndex": 2631,
+      "endIndex": 2695,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "1.3. Research chain",
+      "startIndex": 2697,
+      "endIndex": 2716,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Research Question",
+      "startIndex": 2717,
+      "endIndex": 2734,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Literature / official evidence",
+      "startIndex": 2735,
+      "endIndex": 2767,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Method / design",
+      "startIndex": 2768,
+      "endIndex": 2785,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Implementation",
+      "startIndex": 2786,
+      "endIndex": 2802,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Test / experiment protocol",
+      "startIndex": 2803,
+      "endIndex": 2831,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Raw evidence",
+      "startIndex": 2832,
+      "endIndex": 2846,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Result",
+      "startIndex": 2847,
+      "endIndex": 2855,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Discussion",
+      "startIndex": 2856,
+      "endIndex": 2868,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Limitation",
+      "startIndex": 2869,
+      "endIndex": 2881,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "→ Claim",
+      "startIndex": 2882,
+      "endIndex": 2889,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2. WEEK-BY-WEEK RESEARCH MAP",
+      "startIndex": 2891,
+      "endIndex": 2919,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "2.1. Week 01 — Rule Contract, Board Representation, State Space, Game Tree, Scope",
+      "startIndex": 2921,
+      "endIndex": 3002,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 3003,
+      "endIndex": 3024,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nghiên cứu luật Cờ Caro.",
+      "startIndex": 3025,
+      "endIndex": 3051,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nghiên cứu cách biểu diễn bàn cờ.",
+      "startIndex": 3052,
+      "endIndex": 3087,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nghiên cứu State Space và Game Tree.",
+      "startIndex": 3088,
+      "endIndex": 3126,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Xác định phạm vi đề tài.",
+      "startIndex": 3127,
+      "endIndex": 3153,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện đề cương.",
+      "startIndex": 3154,
+      "endIndex": 3176,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 3178,
+      "endIndex": 3197,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W1-01: Project đang dùng rule profile nào: freestyle, standard, hay Caro-specific?",
+      "startIndex": 3198,
+      "endIndex": 3285,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W1-02: Board state tối thiểu cần những dữ liệu nào để mọi thuật toán dùng cùng một source of truth?",
+      "startIndex": 3286,
+      "endIndex": 3390,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W1-03: Những fixture nào phải khóa trước để test rule và search ở các tuần sau?",
+      "startIndex": 3391,
+      "endIndex": 3475,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 3477,
+      "endIndex": 3491,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RuleConfig versioned.",
+      "startIndex": 3492,
+      "endIndex": 3515,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Rule decision table.",
+      "startIndex": 3516,
+      "endIndex": 3538,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Canonical fixtures cho horizontal/vertical/diagonal/anti-diagonal, occupied, out-of-bounds, draw, overline và blocked-end behavior.",
+      "startIndex": 3539,
+      "endIndex": 3672,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Scope statement: in-scope / out-of-scope.",
+      "startIndex": 3673,
+      "endIndex": 3716,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research anchors:",
+      "startIndex": 3718,
+      "endIndex": 3735,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://gomocup.org/results/gomocup-result-2020/",
+      "startIndex": 3736,
+      "endIndex": 3784,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://cris.maastrichtuniversity.nl/files/588468/guid-36b5cf0a-cf06-4602-afdb-1af04d65c23b-ASSET3.0.pdf",
+      "startIndex": 3785,
+      "endIndex": 3889,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://research.tilburguniversity.edu/en/publications/go-moku-and-threat-space-search/",
+      "startIndex": 3890,
+      "endIndex": 3977,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.2. Week 02 — Board Matrix, Game State, Move/Win/Draw Engine",
+      "startIndex": 3979,
+      "endIndex": 4040,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 4041,
+      "endIndex": 4062,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Xây dựng Board Matrix.",
+      "startIndex": 4063,
+      "endIndex": 4087,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Xây dựng Game State.",
+      "startIndex": 4088,
+      "endIndex": 4110,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Xử lý nước đi.",
+      "startIndex": 4111,
+      "endIndex": 4127,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Kiểm tra nước đi hợp lệ.",
+      "startIndex": 4128,
+      "endIndex": 4154,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Kiểm tra thắng/hòa.",
+      "startIndex": 4155,
+      "endIndex": 4176,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện Game Engine cơ bản.",
+      "startIndex": 4177,
+      "endIndex": 4209,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 4211,
+      "endIndex": 4230,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W2-01: State transition nào là hợp lệ và invariant nào không được phá?",
+      "startIndex": 4231,
+      "endIndex": 4306,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W2-02: Winner detection có thể chỉ kiểm tra quanh last move thay vì scan toàn board mà vẫn đúng theo RuleConfig không?",
+      "startIndex": 4307,
+      "endIndex": 4430,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W2-03: apply/undo cần contract gì để search tuần 5+ không làm bẩn state?",
+      "startIndex": 4431,
+      "endIndex": 4508,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 4510,
+      "endIndex": 4524,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Unit tests cho move validity, turn alternation, 4 hướng thắng, edge/corner, draw, reset, apply→undo restoration.",
+      "startIndex": 4525,
+      "endIndex": 4639,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Game engine state snapshot không phụ thuộc UI.",
+      "startIndex": 4640,
+      "endIndex": 4688,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Foundation:",
+      "startIndex": 4690,
+      "endIndex": 4701,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://www.computerhistory.org/chess/doc-431614f453dde/",
+      "startIndex": 4702,
+      "endIndex": 4758,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.3. Week 03 — Web UI, PvP, New Game, Reset",
+      "startIndex": 4760,
+      "endIndex": 4803,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 4804,
+      "endIndex": 4825,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Xây dựng giao diện website.",
+      "startIndex": 4826,
+      "endIndex": 4855,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hiển thị bàn cờ.",
+      "startIndex": 4856,
+      "endIndex": 4874,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Player vs Player.",
+      "startIndex": 4875,
+      "endIndex": 4894,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- New Game / Reset.",
+      "startIndex": 4895,
+      "endIndex": 4914,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 4916,
+      "endIndex": 4935,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W3-01: UI chỉ render snapshot hay đang duplicate business rule?",
+      "startIndex": 4936,
+      "endIndex": 5004,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W3-02: Event flow pointer/tap → controller → engine → snapshot → render có deterministic không?",
+      "startIndex": 5005,
+      "endIndex": 5105,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W3-03: Responsive board giữ mapping screen-to-grid đúng trên desktop/mobile không?",
+      "startIndex": 5106,
+      "endIndex": 5193,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 5195,
+      "endIndex": 5209,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Integration test: click/tap hợp lệ tạo đúng một move.",
+      "startIndex": 5210,
+      "endIndex": 5265,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Reset/New Game khôi phục state chuẩn.",
+      "startIndex": 5266,
+      "endIndex": 5305,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- UI không tự tính winner.",
+      "startIndex": 5306,
+      "endIndex": 5332,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Responsive screenshots chỉ là visual evidence; rule correctness vẫn phải đến từ engine tests.",
+      "startIndex": 5333,
+      "endIndex": 5428,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.4. Week 04 — Random, Rule-Based, Pattern Detection, Heuristic + Rust Migration Gate",
+      "startIndex": 5430,
+      "endIndex": 5515,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 5516,
+      "endIndex": 5537,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Random Bot.",
+      "startIndex": 5538,
+      "endIndex": 5551,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Rule-Based Bot.",
+      "startIndex": 5552,
+      "endIndex": 5569,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Pattern Detection.",
+      "startIndex": 5570,
+      "endIndex": 5590,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Heuristic Evaluation.",
+      "startIndex": 5591,
+      "endIndex": 5614,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 5616,
+      "endIndex": 5635,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W4-01: Pattern taxonomy nào đủ để mô tả immediate win, immediate block, open/closed sequences?",
+      "startIndex": 5636,
+      "endIndex": 5735,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W4-02: Heuristic score phải tách attack/defense thế nào để giải thích được?",
+      "startIndex": 5736,
+      "endIndex": 5816,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W4-03: Rust/WASM core có semantic equivalence với TypeScript baseline trên cùng fixture không?",
+      "startIndex": 5817,
+      "endIndex": 5916,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evaluation model:",
+      "startIndex": 5918,
+      "endIndex": 5935,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Eval(s) = w_a × Attack(s) − w_d × Defense(s)",
+      "startIndex": 5936,
+      "endIndex": 5980,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Trong đó w_a, w_d là config, không phải hằng số “đúng” về mặt học thuật. Mọi weight phải versioned và được kiểm thử/calibrate.",
+      "startIndex": 5981,
+      "endIndex": 6107,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 6109,
+      "endIndex": 6123,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Pattern fixtures có expected classification.",
+      "startIndex": 6124,
+      "endIndex": 6170,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RandomBot: chỉ chọn legal move.",
+      "startIndex": 6171,
+      "endIndex": 6204,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RuleBasedBot: ưu tiên immediate win/block theo rule.",
+      "startIndex": 6205,
+      "endIndex": 6259,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Heuristic: deterministic trên cùng state/config.",
+      "startIndex": 6260,
+      "endIndex": 6310,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nếu migrate Rust: TS ↔ Rust fixture equivalence phải pass trước benchmark.",
+      "startIndex": 6311,
+      "endIndex": 6387,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research anchor:",
+      "startIndex": 6389,
+      "endIndex": 6405,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://research.tilburguniversity.edu/en/publications/go-moku-and-threat-space-search/",
+      "startIndex": 6406,
+      "endIndex": 6493,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.5. Week 05 — Minimax and Depth-Limited Search",
+      "startIndex": 6495,
+      "endIndex": 6542,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 6543,
+      "endIndex": 6564,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nghiên cứu/triển khai Minimax.",
+      "startIndex": 6565,
+      "endIndex": 6597,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Xây dựng Game Tree.",
+      "startIndex": 6598,
+      "endIndex": 6619,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Giới hạn độ sâu.",
+      "startIndex": 6620,
+      "endIndex": 6638,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Test Minimax.",
+      "startIndex": 6639,
+      "endIndex": 6654,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 6656,
+      "endIndex": 6675,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W5-01: Minimax trả cùng root value/best move trên tactical fixtures đã biết không?",
+      "startIndex": 6676,
+      "endIndex": 6763,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W5-02: Branching factor tăng như thế nào theo board occupancy?",
+      "startIndex": 6764,
+      "endIndex": 6831,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W5-03: Depth limit làm phát sinh horizon effect ở đâu?",
+      "startIndex": 6832,
+      "endIndex": 6891,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 6893,
+      "endIndex": 6907,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Terminal utility tests.",
+      "startIndex": 6908,
+      "endIndex": 6933,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Deterministic tie-break.",
+      "startIndex": 6934,
+      "endIndex": 6960,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- apply/undo invariant trong recursive search.",
+      "startIndex": 6961,
+      "endIndex": 7007,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Raw metrics: depth, nodesVisited, elapsed time.",
+      "startIndex": 7008,
+      "endIndex": 7057,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Không được dùng candidate restriction để “làm đẹp” baseline Minimax nếu đang đo full legal Minimax.",
+      "startIndex": 7058,
+      "endIndex": 7159,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research anchors:",
+      "startIndex": 7161,
+      "endIndex": 7178,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://www.computerhistory.org/chess/doc-431614f453dde/",
+      "startIndex": 7179,
+      "endIndex": 7235,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://cris.maastrichtuniversity.nl/files/588468/guid-36b5cf0a-cf06-4602-afdb-1af04d65c23b-ASSET3.0.pdf",
+      "startIndex": 7236,
+      "endIndex": 7340,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.6. Week 06 — Alpha-Beta Pruning and Fair Comparison",
+      "startIndex": 7342,
+      "endIndex": 7395,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 7396,
+      "endIndex": 7417,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Alpha-Beta Pruning.",
+      "startIndex": 7418,
+      "endIndex": 7439,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nodes Visited.",
+      "startIndex": 7440,
+      "endIndex": 7456,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Nodes Pruned.",
+      "startIndex": 7457,
+      "endIndex": 7472,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Search Time.",
+      "startIndex": 7473,
+      "endIndex": 7487,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- So sánh với Minimax.",
+      "startIndex": 7488,
+      "endIndex": 7510,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 7512,
+      "endIndex": 7531,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W6-01: Alpha-Beta có trả cùng root value/best move với Minimax khi cùng evaluator, depth và legal move set không?",
+      "startIndex": 7532,
+      "endIndex": 7650,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W6-02: Pruning giảm node count bao nhiêu trên từng fixture và depth?",
+      "startIndex": 7651,
+      "endIndex": 7724,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W6-03: Move ordering phải được tắt/khóa thế nào để comparison không bị confounded?",
+      "startIndex": 7725,
+      "endIndex": 7812,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Fair comparison contract:",
+      "startIndex": 7814,
+      "endIndex": 7839,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Same board state + same side-to-move + same evaluator + same depth + same legal move generator + same tie-break + same runtime build.",
+      "startIndex": 7840,
+      "endIndex": 7973,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 7975,
+      "endIndex": 7989,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Search equivalence tests.",
+      "startIndex": 7990,
+      "endIndex": 8017,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- nodesVisited, cutoffCount/nodesPruned, elapsed time.",
+      "startIndex": 8018,
+      "endIndex": 8072,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Raw CSV/JSON với nhiều lần chạy; không chỉ screenshot.",
+      "startIndex": 8073,
+      "endIndex": 8129,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Primary paper:",
+      "startIndex": 8131,
+      "endIndex": 8145,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://doi.org/10.1016/0004-3702(75)90019-3",
+      "startIndex": 8146,
+      "endIndex": 8190,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.7. Week 07 — Candidate Move Generation, Move Ordering, Difficulty Integration",
+      "startIndex": 8192,
+      "endIndex": 8271,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 8272,
+      "endIndex": 8293,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Candidate Move Generation.",
+      "startIndex": 8294,
+      "endIndex": 8322,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Move Ordering.",
+      "startIndex": 8323,
+      "endIndex": 8339,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Tích hợp vào difficulty tiers.",
+      "startIndex": 8340,
+      "endIndex": 8372,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện bot levels cơ bản.",
+      "startIndex": 8373,
+      "endIndex": 8404,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 8406,
+      "endIndex": 8425,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W7-01: Candidate restriction giảm effective branching factor nhưng có giữ tactical critical moves không?",
+      "startIndex": 8426,
+      "endIndex": 8535,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W7-02: Ordering heuristic ảnh hưởng cutoff count và time như thế nào?",
+      "startIndex": 8536,
+      "endIndex": 8610,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W7-03: Difficulty nên khác nhau bởi algorithm, depth/time budget hay intentional noise?",
+      "startIndex": 8611,
+      "endIndex": 8703,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Metrics:",
+      "startIndex": 8705,
+      "endIndex": 8713,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "candidateCount, legalMoveCount, reductionRatio, tacticalRecall, nodesVisited, cutoffCount, searchTimeMs.",
+      "startIndex": 8714,
+      "endIndex": 8818,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 8820,
+      "endIndex": 8834,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Tactical recall fixture suite.",
+      "startIndex": 8835,
+      "endIndex": 8867,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Candidate generator never returns illegal moves.",
+      "startIndex": 8868,
+      "endIndex": 8918,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Ordering comparison dùng cùng candidate set.",
+      "startIndex": 8919,
+      "endIndex": 8965,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Difficulty config được version hóa, không hard-code rải rác.",
+      "startIndex": 8966,
+      "endIndex": 9028,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research anchor:",
+      "startIndex": 9030,
+      "endIndex": 9046,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://research.tilburguniversity.edu/en/publications/go-moku-and-threat-space-search/",
+      "startIndex": 9047,
+      "endIndex": 9134,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.8. Week 08 — Iterative Deepening, Transposition Table, Zobrist Hashing, Statistics",
+      "startIndex": 9136,
+      "endIndex": 9220,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 9221,
+      "endIndex": 9242,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Iterative Deepening.",
+      "startIndex": 9243,
+      "endIndex": 9265,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Transposition Table.",
+      "startIndex": 9266,
+      "endIndex": 9288,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Zobrist Hashing.",
+      "startIndex": 9289,
+      "endIndex": 9307,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện thống kê thuật toán.",
+      "startIndex": 9308,
+      "endIndex": 9341,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 9343,
+      "endIndex": 9362,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W8-01: Iterative deepening có luôn trả kết quả từ iteration hoàn tất sâu nhất trong time budget không?",
+      "startIndex": 9363,
+      "endIndex": 9470,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W8-02: Incremental Zobrist hash có bằng full recomputation sau apply/undo không?",
+      "startIndex": 9471,
+      "endIndex": 9556,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W8-03: TT entry cần key/depth/bound/score/bestMove nào để không reuse sai?",
+      "startIndex": 9557,
+      "endIndex": 9636,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W8-04: TT hit thực sự giảm work trong project workload hay chỉ tăng memory/lookup overhead?",
+      "startIndex": 9637,
+      "endIndex": 9733,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 9735,
+      "endIndex": 9749,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hash equality tests.",
+      "startIndex": 9750,
+      "endIndex": 9772,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Collision handling policy documented.",
+      "startIndex": 9773,
+      "endIndex": 9812,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- TT bound semantics tests: EXACT / LOWER / UPPER.",
+      "startIndex": 9813,
+      "endIndex": 9863,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Iterative deepening deadline tests.",
+      "startIndex": 9864,
+      "endIndex": 9901,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- TT on/off benchmark trên cùng workload.",
+      "startIndex": 9902,
+      "endIndex": 9943,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Primary sources:",
+      "startIndex": 9945,
+      "endIndex": 9961,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://doi.org/10.1016/0004-3702(85)90084-0",
+      "startIndex": 9962,
+      "endIndex": 10006,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://research.cs.wisc.edu/techreports/viewreport.php?report=88",
+      "startIndex": 10007,
+      "endIndex": 10072,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://doi.org/10.3233/ICG-1994-17402",
+      "startIndex": 10073,
+      "endIndex": 10111,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.9. Week 09 — Controlled Experiments, Bot-vs-Bot, Raw Data, Comparison",
+      "startIndex": 10113,
+      "endIndex": 10184,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 10185,
+      "endIndex": 10206,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Tiến hành thực nghiệm.",
+      "startIndex": 10207,
+      "endIndex": 10231,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Bot-vs-bot.",
+      "startIndex": 10232,
+      "endIndex": 10245,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Thu thập số liệu.",
+      "startIndex": 10246,
+      "endIndex": 10265,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- So sánh hiệu năng.",
+      "startIndex": 10266,
+      "endIndex": 10286,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Phân tích kết quả.",
+      "startIndex": 10287,
+      "endIndex": 10307,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Biểu đồ/bảng.",
+      "startIndex": 10308,
+      "endIndex": 10323,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 10325,
+      "endIndex": 10344,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W9-01: Mỗi optimization đóng góp gì khi bật/tắt có kiểm soát?",
+      "startIndex": 10345,
+      "endIndex": 10411,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W9-02: Difficulty tiers khác nhau bao nhiêu về search budget, node count và game outcome?",
+      "startIndex": 10412,
+      "endIndex": 10506,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W9-03: Kết quả có ổn định khi đổi màu/first-player và seed không?",
+      "startIndex": 10507,
+      "endIndex": 10577,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Experiment design:",
+      "startIndex": 10579,
+      "endIndex": 10597,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Lock RuleConfig, EvaluatorConfig, board fixtures, hardware/runtime, build commit.",
+      "startIndex": 10598,
+      "endIndex": 10681,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- A/B một biến mỗi lần.",
+      "startIndex": 10682,
+      "endIndex": 10705,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Bot-vs-bot phải color swap.",
+      "startIndex": 10706,
+      "endIndex": 10735,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Randomized component phải log seed.",
+      "startIndex": 10736,
+      "endIndex": 10773,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Raw data giữ nguyên; graph/table chỉ là derived artifact.",
+      "startIndex": 10774,
+      "endIndex": 10833,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 10835,
+      "endIndex": 10849,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- CSV/JSON raw dataset.",
+      "startIndex": 10850,
+      "endIndex": 10873,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Experiment script/config.",
+      "startIndex": 10874,
+      "endIndex": 10901,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Summary table.",
+      "startIndex": 10902,
+      "endIndex": 10918,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Charts traceable về raw file.",
+      "startIndex": 10919,
+      "endIndex": 10950,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Discussion ghi effect, confounder và limitation.",
+      "startIndex": 10951,
+      "endIndex": 11001,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Tournament context reference:",
+      "startIndex": 11003,
+      "endIndex": 11032,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://gomocup.org/results/gomocup-result-2020/",
+      "startIndex": 11033,
+      "endIndex": 11081,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2.10. Week 10 — Full-System Verification, Optimization, UI Completion, Thesis, Demo",
+      "startIndex": 11083,
+      "endIndex": 11166,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_2",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 11167,
+      "endIndex": 11188,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Test toàn hệ thống.",
+      "startIndex": 11189,
+      "endIndex": 11210,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Sửa lỗi.",
+      "startIndex": 11211,
+      "endIndex": 11221,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Tối ưu hiệu năng.",
+      "startIndex": 11222,
+      "endIndex": 11241,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện UI.",
+      "startIndex": 11242,
+      "endIndex": 11258,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện báo cáo.",
+      "startIndex": 11259,
+      "endIndex": 11280,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Quay demo.",
+      "startIndex": 11281,
+      "endIndex": 11293,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Chuẩn bị slide.",
+      "startIndex": 11294,
+      "endIndex": 11311,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Questions:",
+      "startIndex": 11313,
+      "endIndex": 11332,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W10-01: Mọi requirement trong đề cương có artifact/evidence tương ứng chưa?",
+      "startIndex": 11333,
+      "endIndex": 11413,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W10-02: Performance claim nào đủ evidence, claim nào phải downgrade thành limitation/recommendation?",
+      "startIndex": 11414,
+      "endIndex": 11519,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RQ-W10-03: Demo có tái hiện đúng các kết quả đã report không?",
+      "startIndex": 11520,
+      "endIndex": 11583,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Evidence gate:",
+      "startIndex": 11585,
+      "endIndex": 11599,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Requirement → implementation → test → result traceability matrix.",
+      "startIndex": 11600,
+      "endIndex": 11667,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Full regression suite.",
+      "startIndex": 11668,
+      "endIndex": 11692,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Final benchmark protocol + raw data.",
+      "startIndex": 11693,
+      "endIndex": 11731,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Final thesis figures generated from versioned data.",
+      "startIndex": 11732,
+      "endIndex": 11785,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Demo 5–10 phút bao phủ UI, PvP, PvBot, difficulties, Minimax, Alpha-Beta, metrics và comparison.",
+      "startIndex": 11786,
+      "endIndex": 11884,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Slide chỉ dùng claims đã pass evidence gate.",
+      "startIndex": 11885,
+      "endIndex": 11931,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "3. CANONICAL METRIC DICTIONARY",
+      "startIndex": 11933,
+      "endIndex": 11963,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "- searchTimeMs: thời gian wall-clock của một search invocation; phải ghi API clock và environment.",
+      "startIndex": 11964,
+      "endIndex": 12062,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- nodesVisited: số node search thực sự được evaluator/search routine mở rộng theo định nghĩa đã khóa.",
+      "startIndex": 12063,
+      "endIndex": 12164,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- cutoffCount: số lần Alpha-Beta dừng duyệt siblings vì alpha ≥ beta.",
+      "startIndex": 12165,
+      "endIndex": 12234,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- nodesPruned: chỉ dùng nếu định nghĩa đếm được chính xác; nếu không, ưu tiên cutoffCount để tránh metric mơ hồ.",
+      "startIndex": 12235,
+      "endIndex": 12347,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- searchDepthRequested: depth limit cấu hình.",
+      "startIndex": 12348,
+      "endIndex": 12393,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- searchDepthCompleted: depth iteration sâu nhất hoàn tất.",
+      "startIndex": 12394,
+      "endIndex": 12452,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- legalMoveCount: số legal moves trước restriction.",
+      "startIndex": 12453,
+      "endIndex": 12504,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- candidateCount: số moves sau candidate generation.",
+      "startIndex": 12505,
+      "endIndex": 12557,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- evaluationScore: score theo EvaluatorConfig cụ thể.",
+      "startIndex": 12558,
+      "endIndex": 12611,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- bestMove: move được chọn cùng tie-break policy.",
+      "startIndex": 12612,
+      "endIndex": 12661,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- ttProbe / ttHit / ttUsableHit: phải tách “found key” khỏi “entry đủ depth/bound để dùng”.",
+      "startIndex": 12662,
+      "endIndex": 12753,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- result: win/draw/loss dưới RuleConfig cụ thể.",
+      "startIndex": 12754,
+      "endIndex": 12801,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "4. SHARED FIXTURE STRATEGY",
+      "startIndex": 12803,
+      "endIndex": 12829,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Một fixture phải có:",
+      "startIndex": 12830,
+      "endIndex": 12850,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "fixtureId, boardSize, cells/board encoding, sideToMove, RuleConfig version, expected legal moves, expected terminal result, expected tactical move nếu có, notes/source.",
+      "startIndex": 12851,
+      "endIndex": 13019,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Fixture groups:",
+      "startIndex": 13021,
+      "endIndex": 13036,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- RULE: win/draw/invalid/edge/overline/blocked ends.",
+      "startIndex": 13037,
+      "endIndex": 13089,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- PATTERN: open/closed sequence patterns.",
+      "startIndex": 13090,
+      "endIndex": 13131,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- TACTICAL: win-now, block-now, fork/threat.",
+      "startIndex": 13132,
+      "endIndex": 13176,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- SEARCH: known small states cho Minimax/Alpha-Beta equivalence.",
+      "startIndex": 13177,
+      "endIndex": 13241,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- HASH: apply/undo/recompute consistency.",
+      "startIndex": 13242,
+      "endIndex": 13283,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- DEADLINE: iterative deepening time-budget behavior.",
+      "startIndex": 13284,
+      "endIndex": 13337,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "5. REPOSITORY AND EVIDENCE TRACEABILITY",
+      "startIndex": 13339,
+      "endIndex": 13378,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Canonical project repository reference hiện có trong Drive:",
+      "startIndex": 13379,
+      "endIndex": 13438,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://github.com/tducn110/basicprojects/",
+      "startIndex": 13439,
+      "endIndex": 13481,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Mỗi weekly report phải ghi:",
+      "startIndex": 13483,
+      "endIndex": 13510,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- commit/tag",
+      "startIndex": 13511,
+      "endIndex": 13523,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- file/module/function",
+      "startIndex": 13524,
+      "endIndex": 13546,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- test command + result",
+      "startIndex": 13547,
+      "endIndex": 13570,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- fixture IDs",
+      "startIndex": 13571,
+      "endIndex": 13584,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- raw data path",
+      "startIndex": 13585,
+      "endIndex": 13600,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- derived chart/table path",
+      "startIndex": 13601,
+      "endIndex": 13627,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- claim/evidence class [A]/[B]/[C]/[D]",
+      "startIndex": 13628,
+      "endIndex": 13666,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "6. RESEARCH SOURCE INDEX",
+      "startIndex": 13668,
+      "endIndex": 13692,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "[1] Gomocup tournament rules context — https://gomocup.org/results/gomocup-result-2020/",
+      "startIndex": 13693,
+      "endIndex": 13780,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[2] Allis, L.V. (1994), Searching for Solutions in Games and Artificial Intelligence — https://cris.maastrichtuniversity.nl/files/588468/guid-36b5cf0a-cf06-4602-afdb-1af04d65c23b-ASSET3.0.pdf",
+      "startIndex": 13781,
+      "endIndex": 13972,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[3] Allis, van den Herik, Huntjens (1993), Go-Moku and Threat-Space Search — https://research.tilburguniversity.edu/en/publications/go-moku-and-threat-space-search/",
+      "startIndex": 13973,
+      "endIndex": 14137,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[4] Shannon (1950), Programming a Computer for Playing Chess — https://www.computerhistory.org/chess/doc-431614f453dde/",
+      "startIndex": 14138,
+      "endIndex": 14257,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[5] Knuth & Moore (1975), An Analysis of Alpha-Beta Pruning — https://doi.org/10.1016/0004-3702(75)90019-3",
+      "startIndex": 14258,
+      "endIndex": 14364,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[6] Korf (1985), Depth-First Iterative-Deepening — https://doi.org/10.1016/0004-3702(85)90084-0",
+      "startIndex": 14365,
+      "endIndex": 14460,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[7] Zobrist (1970), A New Hashing Method With Application for Game Playing — https://research.cs.wisc.edu/techreports/viewreport.php?report=88",
+      "startIndex": 14461,
+      "endIndex": 14603,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[8] Breuker, Uiterwijk, van den Herik (1994), Replacement Schemes for Transposition Tables — https://doi.org/10.3233/ICG-1994-17402",
+      "startIndex": 14604,
+      "endIndex": 14735,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[9] wasm-bindgen Guide — https://wasm-bindgen.github.io/wasm-bindgen/",
+      "startIndex": 14736,
+      "endIndex": 14805,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "[10] MDN Web Workers API — https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API",
+      "startIndex": 14806,
+      "endIndex": 14897,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "7. COMPLETION RULE",
+      "startIndex": 14899,
+      "endIndex": 14917,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Một tuần chỉ được đánh dấu COMPLETE khi:",
+      "startIndex": 14918,
+      "endIndex": 14958,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Research Question + cited Background + Method + implementation evidence (nếu tuần có implementation) + test/experiment evidence + Results + Discussion + Limitations + linked Deliverables + References đều tồn tại.",
+      "startIndex": 14959,
+      "endIndex": 15171,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Nếu chưa có evidence, ghi PLAN/TBD. Con người rất thích đổi “chưa chạy” thành “đã verify” bằng phép thuật văn phòng, nhưng project này thì không.",
+      "startIndex": 15172,
+      "endIndex": 15317,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    }
+  ],
+  "document_url": "https://docs.google.com/document/d/1exG7loK98vhgjK1cqiCxXUR8y2-plKyYlhLrMddz3Ec"
+}

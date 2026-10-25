@@ -1,0 +1,641 @@
+{
+  "documentId": "14xUYdR9NK2c8vqElLT_iT_Bzv_DL_eXlJjYhdOv_a4Q",
+  "title": "Week 07 — Candidate Generation, Move Ordering & Difficulty",
+  "revisionId": "AHj4eMQo-Re-dFbGId-xJlwAeCCfr5pvAMjwWKXAOLuIo7GFOg3wA6epw_z6KISfg2wQGJp5BKR_8s294HQtsbWbPdiDqIdRR-_s5_iiPN4",
+  "tabId": null,
+  "paragraphs": [
+    {
+      "text": "WEEK 07 — CANDIDATE MOVE GENERATION, MOVE ORDERING & DIFFICULTY INTEGRATION",
+      "startIndex": 1,
+      "endIndex": 76,
+      "tabId": "t.0",
+      "namedStyleType": "TITLE",
+      "isListItem": false
+    },
+    {
+      "text": "Status: PLAN / RESEARCH EXECUTION. Week 07 giảm effective search space nhưng phải đo tactical recall để tránh tối ưu bằng cách vứt luôn nước đi đúng.",
+      "startIndex": 77,
+      "endIndex": 226,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "1. Plan / Research Questions",
+      "startIndex": 228,
+      "endIndex": 256,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Coverage từ đề cương:",
+      "startIndex": 257,
+      "endIndex": 278,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Triển khai Candidate Move Generation.",
+      "startIndex": 279,
+      "endIndex": 318,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Triển khai Move Ordering.",
+      "startIndex": 319,
+      "endIndex": 346,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Tích hợp thuật toán vào hệ thống mức độ khó.",
+      "startIndex": 347,
+      "endIndex": 393,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hoàn thiện các mức độ bot cơ bản.",
+      "startIndex": 394,
+      "endIndex": 429,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "RQ-W7-01: Candidate generator giảm legal move count bao nhiêu?",
+      "startIndex": 431,
+      "endIndex": 493,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "RQ-W7-02: Candidate restriction có giữ mọi immediate win/block và tactical critical move trong fixture corpus không?",
+      "startIndex": 494,
+      "endIndex": 610,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "RQ-W7-03: Move ordering thay đổi cutoffCount/nodesVisited/time thế nào khi candidate set giữ nguyên?",
+      "startIndex": 611,
+      "endIndex": 711,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "RQ-W7-04: Difficulty tiers nên khác nhau bởi algorithm, depth/time budget hay intentional randomness?",
+      "startIndex": 712,
+      "endIndex": 813,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "2. Background / Literature",
+      "startIndex": 815,
+      "endIndex": 841,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Threat-space work của Allis et al. cho thấy tactical threats trong Go-Moku có cấu trúc domain-specific; project dùng điều này làm background cho việc ưu tiên local/tactical candidates, không copy một generator cụ thể như fact.",
+      "startIndex": 842,
+      "endIndex": 1068,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://research.tilburguniversity.edu/en/publications/go-moku-and-threat-space-search/",
+      "startIndex": 1069,
+      "endIndex": 1156,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "3. Methods / Design",
+      "startIndex": 1158,
+      "endIndex": 1177,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Candidate Generation:",
+      "startIndex": 1178,
+      "endIndex": 1199,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "LegalMoves(s) → CandidateMoves(s)",
+      "startIndex": 1200,
+      "endIndex": 1233,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Metrics:",
+      "startIndex": 1235,
+      "endIndex": 1243,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "reductionRatio = 1 − candidateCount / legalMoveCount",
+      "startIndex": 1244,
+      "endIndex": 1296,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Tactical Recall:",
+      "startIndex": 1298,
+      "endIndex": 1314,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "tacticalRecall = criticalMovesRetained / criticalMovesExpected",
+      "startIndex": 1315,
+      "endIndex": 1377,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Mục tiêu không phải maximize reductionRatio bằng mọi giá. Nếu recall tụt, search có thể nhanh hơn nhưng sai về decision quality.",
+      "startIndex": 1379,
+      "endIndex": 1507,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Move Ordering:",
+      "startIndex": 1509,
+      "endIndex": 1523,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Candidate set phải giữ cố định giữa A/B:",
+      "startIndex": 1524,
+      "endIndex": 1564,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- unordered/control.",
+      "startIndex": 1565,
+      "endIndex": 1585,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- ordered/treatment.",
+      "startIndex": 1586,
+      "endIndex": 1606,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Chỉ thay ordering heuristic.",
+      "startIndex": 1607,
+      "endIndex": 1635,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Ordering priority có thể dùng:",
+      "startIndex": 1637,
+      "endIndex": 1667,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- immediate win.",
+      "startIndex": 1668,
+      "endIndex": 1684,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- immediate block.",
+      "startIndex": 1685,
+      "endIndex": 1703,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- high heuristic score.",
+      "startIndex": 1704,
+      "endIndex": 1727,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- proximity/history signal.",
+      "startIndex": 1728,
+      "endIndex": 1755,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Chi tiết phải versioned trong OrderingConfig.",
+      "startIndex": 1756,
+      "endIndex": 1801,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "4. Difficulty Model",
+      "startIndex": 1803,
+      "endIndex": 1822,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Đề cương có Easy, Normal, Hard, Very Hard, Expert, Master.",
+      "startIndex": 1823,
+      "endIndex": 1881,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Một mapping dự kiến:",
+      "startIndex": 1882,
+      "endIndex": 1902,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Easy: Random.",
+      "startIndex": 1903,
+      "endIndex": 1918,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Normal: Rule-Based/Heuristic.",
+      "startIndex": 1919,
+      "endIndex": 1950,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Hard: Minimax depth-limited.",
+      "startIndex": 1951,
+      "endIndex": 1981,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Very Hard: Alpha-Beta.",
+      "startIndex": 1982,
+      "endIndex": 2006,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Expert: Alpha-Beta + Candidate + Ordering.",
+      "startIndex": 2007,
+      "endIndex": 2051,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Master: thêm Iterative Deepening + TT từ Week 08.",
+      "startIndex": 2052,
+      "endIndex": 2103,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Đây là configuration plan [D], chưa phải bằng chứng strength ordering cho tới Week 09 tournament.",
+      "startIndex": 2105,
+      "endIndex": 2202,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "5. Experimental Setup",
+      "startIndex": 2204,
+      "endIndex": 2225,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Candidate experiment:",
+      "startIndex": 2226,
+      "endIndex": 2247,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- fixed fixture corpus.",
+      "startIndex": 2248,
+      "endIndex": 2271,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- record legalMoveCount, candidateCount.",
+      "startIndex": 2272,
+      "endIndex": 2312,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- assert immediate wins/blocks retained.",
+      "startIndex": 2313,
+      "endIndex": 2353,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- compute tacticalRecall.",
+      "startIndex": 2354,
+      "endIndex": 2379,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Ordering experiment:",
+      "startIndex": 2381,
+      "endIndex": 2401,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- fixed state/depth/evaluator/candidate set.",
+      "startIndex": 2402,
+      "endIndex": 2446,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- compare unordered vs ordered.",
+      "startIndex": 2447,
+      "endIndex": 2478,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- log nodesVisited/cutoffCount/time.",
+      "startIndex": 2479,
+      "endIndex": 2515,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "6. Results / Evidence",
+      "startIndex": 2517,
+      "endIndex": 2538,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "TBD.",
+      "startIndex": 2539,
+      "endIndex": 2543,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "Required:",
+      "startIndex": 2544,
+      "endIndex": 2553,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- candidate raw results.",
+      "startIndex": 2554,
+      "endIndex": 2578,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- tactical recall matrix.",
+      "startIndex": 2579,
+      "endIndex": 2604,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- ordering A/B raw data.",
+      "startIndex": 2605,
+      "endIndex": 2629,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- difficulty config file.",
+      "startIndex": 2630,
+      "endIndex": 2655,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- commit/tag.",
+      "startIndex": 2656,
+      "endIndex": 2669,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "7. Discussion",
+      "startIndex": 2671,
+      "endIndex": 2684,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Candidate generation thay đổi search space nên phải được tách khỏi Alpha-Beta khi phân tích causal effect. Nếu bật Candidate + Ordering + TT cùng lúc rồi báo “Alpha-Beta nhanh hơn”, đó là benchmark salad, không phải experiment.",
+      "startIndex": 2685,
+      "endIndex": 2912,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "8. Limitations",
+      "startIndex": 2914,
+      "endIndex": 2928,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "- Tactical fixture corpus quyết định phạm vi của recall claim.",
+      "startIndex": 2929,
+      "endIndex": 2991,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Proximity-only candidate rules có thể bỏ tactical move xa.",
+      "startIndex": 2992,
+      "endIndex": 3052,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Difficulty “khó hơn” phải được xác nhận bằng tournament/user outcomes, không suy từ tên config.",
+      "startIndex": 3053,
+      "endIndex": 3150,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "9. Deliverables",
+      "startIndex": 3152,
+      "endIndex": 3167,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "- CandidateMoveGenerator.",
+      "startIndex": 3168,
+      "endIndex": 3193,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- OrderingConfig.",
+      "startIndex": 3194,
+      "endIndex": 3211,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- tactical fixture suite.",
+      "startIndex": 3212,
+      "endIndex": 3237,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- reduction/recall benchmark.",
+      "startIndex": 3238,
+      "endIndex": 3267,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- ordering A/B benchmark.",
+      "startIndex": 3268,
+      "endIndex": 3293,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- DifficultyConfig v1.",
+      "startIndex": 3294,
+      "endIndex": 3316,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "- Week 07 report.",
+      "startIndex": 3317,
+      "endIndex": 3334,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "10. References",
+      "startIndex": 3336,
+      "endIndex": 3350,
+      "tabId": "t.0",
+      "namedStyleType": "HEADING_1",
+      "isListItem": false
+    },
+    {
+      "text": "Allis, van den Herik, Huntjens (1993), Go-Moku and Threat-Space Search:",
+      "startIndex": 3351,
+      "endIndex": 3422,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    },
+    {
+      "text": "https://research.tilburguniversity.edu/en/publications/go-moku-and-threat-space-search/",
+      "startIndex": 3423,
+      "endIndex": 3510,
+      "tabId": "t.0",
+      "namedStyleType": "NORMAL_TEXT",
+      "isListItem": false
+    }
+  ],
+  "document_url": "https://docs.google.com/document/d/14xUYdR9NK2c8vqElLT_iT_Bzv_DL_eXlJjYhdOv_a4Q"
+}

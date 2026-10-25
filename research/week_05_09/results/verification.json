@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "hash_seed": 20261017,
+  "random_seed": 5006070809,
+  "search_runs": 546,
+  "root_restorations": 551,
+  "minimax_alpha_beta_pairs": 112,
+  "ordering_score_pairs": 112,
+  "cold_tt_score_pairs": 208,
+  "random_hash_forward_checks": 3998,
+  "random_hash_undo_checks": 3998,
+  "terminal_hash_axis_checks": 4,
+  "candidate_sets": 48,
+  "search_fixture_positions": 20,
+  "timing_repeats_controlled_fixtures": 3,
+  "browser_or_wasm_exercised": false
+}

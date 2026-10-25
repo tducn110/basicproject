@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Script ran on page and returned:\n```json\n{\"before\":{\"x\":74,\"y\":24,\"zoom\":0.41904761904761906},\"after\":{\"x\":74,\"y\":24,\"zoom\":0.41904761904761906},\"expected\":{\"zoom\":0.6571428571428571,\"x\":324,\"y\":24},\"matches\":false}\n```"
+    }
+  ]
+}

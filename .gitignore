@@ -20,3 +20,11 @@ logs/
 /.opencode-skills/
 .vercel
 repomix-output.xml
+.DS_Store
+.obsidian/workspace*.json
+__pycache__/
+*.pyc
+target/
+**/target/
+.vercel/
+**/.vercel/

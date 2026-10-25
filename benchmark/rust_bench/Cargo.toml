@@ -1,0 +1,8 @@
+[package]
+name = "rust_bench"
+version = "0.1.0"
+edition = "2021"
+default-run = "rust_bench"
+
+[dependencies]
+caro-core-reference = { path = "../../../../vnuk/basicProject/caro-core-reference" }

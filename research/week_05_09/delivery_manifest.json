@@ -1,0 +1,172 @@
+{
+  "release_date": "2026-10-17",
+  "report_language": "English",
+  "canonical_reports": [
+    {
+      "week": 5,
+      "pdf_pages": 5,
+      "native_equations": 37,
+      "display_equations": 5,
+      "visual_review": "all final rendered pages inspected and passed",
+      "files": {
+        "md": {
+          "path": "Week_05/Week_05_Rust_Minimax_Search_Tree_Analysis.md",
+          "bytes": 15044,
+          "sha256": "29744d84369160dbc54dc4ac173d705e7516329201f3e0b4c6491ffc1af44d81"
+        },
+        "docx": {
+          "path": "Week_05/Week_05_Rust_Minimax_Search_Tree_Analysis.docx",
+          "bytes": 47280,
+          "sha256": "f8be89c3caa0b7659b4faae8b2b66759fd94b09c6128acc4157ece7d07164fc3"
+        },
+        "pdf": {
+          "path": "Week_05/Week_05_Rust_Minimax_Search_Tree_Analysis.pdf",
+          "bytes": 179409,
+          "sha256": "55a728882d99fc837e20537366962d947ee7ff9687bec39ca7913219099fbaa1"
+        }
+      }
+    },
+    {
+      "week": 6,
+      "pdf_pages": 5,
+      "native_equations": 12,
+      "display_equations": 4,
+      "visual_review": "all final rendered pages inspected and passed",
+      "files": {
+        "md": {
+          "path": "Week_06/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.md",
+          "bytes": 15808,
+          "sha256": "8899722e861c84a07b67e38cec5cb362a317fd21d5e157b1e73097b9f9f734f8"
+        },
+        "docx": {
+          "path": "Week_06/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.docx",
+          "bytes": 47159,
+          "sha256": "13cf35d9be2c4a96283631325d171033e34c0e9bfe910c2fa35625e5bfc9c789"
+        },
+        "pdf": {
+          "path": "Week_06/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.pdf",
+          "bytes": 173793,
+          "sha256": "1e42471653f3b621dd79b3e7523d9b6f4115bb9d18bad77b2ab1bca22a280afa"
+        }
+      }
+    },
+    {
+      "week": 7,
+      "pdf_pages": 6,
+      "native_equations": 42,
+      "display_equations": 4,
+      "visual_review": "all final rendered pages inspected and passed",
+      "files": {
+        "md": {
+          "path": "Week_07/Week_07_Candidate_Move_Generation.md",
+          "bytes": 16410,
+          "sha256": "f0486b3f8a318c9befd7739c4404bea311f1db526c4e56785f8c00517a4aeaa8"
+        },
+        "docx": {
+          "path": "Week_07/Week_07_Candidate_Move_Generation.docx",
+          "bytes": 47885,
+          "sha256": "37aebb2a9169f67034272c805f109eb067b6f8b584eb33d6b34b307a34554239"
+        },
+        "pdf": {
+          "path": "Week_07/Week_07_Candidate_Move_Generation.pdf",
+          "bytes": 189104,
+          "sha256": "edcff5971f4804b659de4d460012235e111de97717df88d7d5d5c467911bb4cd"
+        }
+      }
+    },
+    {
+      "week": 8,
+      "pdf_pages": 6,
+      "native_equations": 16,
+      "display_equations": 4,
+      "visual_review": "all final rendered pages inspected and passed",
+      "files": {
+        "md": {
+          "path": "Week_08/Week_08_Move_Ordering_Optimization.md",
+          "bytes": 16330,
+          "sha256": "1bf835c1e168228f4b3569c3026a6a4f29f3feaec40830ea1142fa2b46c5684c"
+        },
+        "docx": {
+          "path": "Week_08/Week_08_Move_Ordering_Optimization.docx",
+          "bytes": 47637,
+          "sha256": "8cb787a7fe7ce1b8a2f217edfcea9a08160b0356f7019d4940cedc793c6bddea"
+        },
+        "pdf": {
+          "path": "Week_08/Week_08_Move_Ordering_Optimization.pdf",
+          "bytes": 174514,
+          "sha256": "6a6260743853bb27338f8eac65b0938517daea7f0ffee62d551a3dcb39bda3b7"
+        }
+      }
+    },
+    {
+      "week": 9,
+      "pdf_pages": 6,
+      "native_equations": 24,
+      "display_equations": 6,
+      "visual_review": "all final rendered pages inspected and passed",
+      "files": {
+        "md": {
+          "path": "Week_09/Week_09_Zobrist_Hashing_and_Transposition_Table.md",
+          "bytes": 16782,
+          "sha256": "bd5c84e3f6582b4120c982b5c4136bd6ef3d8041c7d4f0fc765a7832d6a51b47"
+        },
+        "docx": {
+          "path": "Week_09/Week_09_Zobrist_Hashing_and_Transposition_Table.docx",
+          "bytes": 48066,
+          "sha256": "58e6f35e6a544a8bab6aa7fa8f8ca6de4c4598d9776af58dded492ad92639492"
+        },
+        "pdf": {
+          "path": "Week_09/Week_09_Zobrist_Hashing_and_Transposition_Table.pdf",
+          "bytes": 195596,
+          "sha256": "a7f29831b6c9e94e5ade79d7139ed64bdb7eb7f8e8f18414f951862078d34ee4"
+        }
+      }
+    }
+  ],
+  "total_reports": 5,
+  "total_report_files": 15,
+  "total_pdf_pages": 28,
+  "total_native_equations": 131,
+  "total_display_equations": 23,
+  "source_tree_sha256": "4625f3ba6b47e6d30723b0eb89ec8e28672198be095cee50db5ecd3fbc58a415",
+  "all_recorded_source_hashes_verified": true,
+  "research_verification": {
+    "status": "passed",
+    "hash_seed": 20261017,
+    "random_seed": 5006070809,
+    "search_runs": 546,
+    "root_restorations": 551,
+    "minimax_alpha_beta_pairs": 112,
+    "ordering_score_pairs": 112,
+    "cold_tt_score_pairs": 208,
+    "random_hash_forward_checks": 3998,
+    "random_hash_undo_checks": 3998,
+    "terminal_hash_axis_checks": 4,
+    "candidate_sets": 48,
+    "search_fixture_positions": 20,
+    "timing_repeats_controlled_fixtures": 3,
+    "browser_or_wasm_exercised": false
+  },
+  "document_build": {
+    "python": "3.12.14",
+    "python-docx": "1.2.0",
+    "lxml": "6.1.1",
+    "latex2mathml": "3.78.1",
+    "mathml2omml": "0.0.2",
+    "math_representation": "native OMML",
+    "renderer": "Codex documents render_docx.py and bundled LibreOffice"
+  },
+  "remaining_source_issues": [
+    "row-major candidate cap can omit immediate winning moves",
+    "root-relative descending ordering at MIN can cost extra work",
+    "reused transposition table across changed root yields reproduced value mismatch"
+  ],
+  "scope": "report reconstruction and isolated native experiments; existing game and reference library source unchanged",
+  "not_verified": [
+    "browser",
+    "Worker/WASM runtime",
+    "real devices",
+    "game strength",
+    "repairs for diagnosed source issues"
+  ]
+}

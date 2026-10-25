@@ -1,0 +1,32 @@
+{
+  "target": "web",
+  "rust_release_profile": "opt-level=z,lto=true",
+  "wasm_opt": "disabled explicitly with --no-opt; no wasm-opt speed claim",
+  "files": [
+    {
+      "source": "research/current_2026_10_23/wasm_web/gomoku_engine.js",
+      "target": "10_caro/src/game/wasm/engine/gomoku_engine.js",
+      "sha256": "9c0ace9191774fba1d6119ecf4c1a0f6d9cb6237196e640f78528387be7caae3"
+    },
+    {
+      "source": "research/current_2026_10_23/wasm_web/gomoku_engine.d.ts",
+      "target": "10_caro/src/game/wasm/engine/gomoku_engine.d.ts",
+      "sha256": "9bd55e1d59ba388626e9fc99b88135a16e7edc6b095b1d9792dbcef8eaeb07c7"
+    },
+    {
+      "source": "research/current_2026_10_23/wasm_web/gomoku_engine_bg.wasm.d.ts",
+      "target": "10_caro/src/game/wasm/engine/gomoku_engine_bg.wasm.d.ts",
+      "sha256": "5dd7713afc121bf1be48fb4a1f28dfa5511fb160ec27fb4b4f30f3c0c6ca32f4"
+    },
+    {
+      "source": "research/current_2026_10_23/wasm_web/gomoku_engine_bg.wasm",
+      "target": "10_caro/src/game/wasm/engine/gomoku_engine_bg.wasm",
+      "sha256": "1ff854e6493b39727d07cfcf69b0af06e349a748249d85d688741a4f85017989"
+    },
+    {
+      "source": "research/current_2026_10_23/wasm_web/package.json",
+      "target": "10_caro/src/game/wasm/engine/package.json",
+      "sha256": "f968ef37849a2ee702474b697aa9de731f8ec065c8de5e34d3e2bc5e1b478d09"
+    }
+  ]
+}

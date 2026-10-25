@@ -1,0 +1,16 @@
+{
+  "gate": "G2",
+  "skill": "/home/pro/.gemini/config/plugins/ponytail/skills/ponytail-review/SKILL.md",
+  "reviewed_at": "2026-10-23T04:43:31.511151+00:00",
+  "result": "Lean already. Ship. Net removable lines: 0. Candidate policy and terminal utility have distinct owners; no speculative trait/pointer layer.",
+  "files": [
+    {
+      "path": "gomoku-main/engine/src/candidates.rs",
+      "sha256": "c9dbfc3a096459a558365b85283db89756df821fcec47659092ec954ff653e71"
+    },
+    {
+      "path": "gomoku-main/engine/src/eval.rs",
+      "sha256": "eec5757ca15216c782820588c2e7fc250fa7fe5e34a4737dee740063534f0d15"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "experiment": "Week 4 Rule-Based vs Random Bot & Pattern Detection",
+    "engine": "Rust (Native)",
+    "compiler": "rustc 1.98.1",
+    "board_size": 15,
+    "total_games": 100
+  },
+  "pattern_fixtures": [
+    {"pattern": "five_in_a_row", "status": "PASS"},
+    {"pattern": "open_four", "status": "PASS"},
+    {"pattern": "closed_four", "status": "PASS"},
+    {"pattern": "open_three", "status": "PASS"},
+    {"pattern": "closed_three", "status": "PASS"},
+    {"pattern": "open_two", "status": "PASS"},
+    {"pattern": "closed_two", "status": "PASS"}
+  ],
+  "match_results": {
+    "rule_based_wins": 100,
+    "random_wins": 0,
+    "draws": 0,
+    "win_rate_percent": 100.00,
+    "avg_plies_per_game": 9.90,
+    "total_time_ms": 135.5440,
+    "avg_time_per_move_us": 251.26,
+    "avg_time_per_move_ms": 0.2513
+  },
+  "candidate_generation": {
+    "avg_empty_cells": 220.21,
+    "avg_candidate_count": 60.80,
+    "search_space_reduction_percent": 72.39,
+    "opening_avg_candidates": 45.19,
+    "midgame_avg_candidates": 92.95,
+    "endgame_avg_candidates": 0.00
+  }
+}

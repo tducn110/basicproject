@@ -1,0 +1,10 @@
+flowchart TD
+    UI["Web UI Shell (React 19 / DOM)"] --> Engine["Core Game Engine (TypeScript)"]
+    Engine --> Bounds["BoardBounds (15x15)"]
+    Engine --> Win["WinDetector (4-Axes Line Traversal)"]
+    Engine --> Bot["Bot AI Search Engine"]
+    Bot --> Candidates["Candidate Move Generator (r=2)"]
+    Bot --> Eval["Heuristic Evaluator (Pattern Table)"]
+    Bot --> AlphaBeta["Minimax with Alpha-Beta Pruning"]
+    AlphaBeta --> TT["Transposition Table (Zobrist Hash)"]
+    Bot --> Engine

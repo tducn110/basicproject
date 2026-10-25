@@ -1,0 +1,38 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Script ran on page and returned:\n```json\n{\"viewport\":{\"width\":1280,\"height\":800},\"scroll\":{\"width\":1280,\"height\":800},\"horizontalOverflow\":false,\"levels\":[{\"text\":\"Easy\",\"rect\":{\"x\":580.484375,\"y\":50,\"width\":41.625,\"height\":30,\"top\":50,\"right\":622.109375,\"bottom\":80,\"left\":580.484375}},{\"text\":\"Normal\",\"rect\":{\"x\":625.109375,\"y\":50,\"width\":56.390625,\"height\":30,\"top\":50,\"right\":681.5,\"bottom\":80,\"left\":625.109375}},{\"text\":\"Hard\",\"rect\":{\"x\":684.5,\"y\":50,\"width\":43.71875,\"height\":30,\"top\":50,\"right\":728.21875,\"bottom\":80,\"left\":684.5}},{\"text\":\"Very Hard\",\"rect\":{\"x\":731.21875,\"y\":50,\"width\":70.328125,\"height\":30,\"top\":50,\"right\":801.546875,\"bottom\":80,\"left\":731.21875}},{\"text\":\"Expert\",\"rect\":{\"x\":804.546875,\"y\":50,\"width\":52.421875,\"height\":30,\"top\":50,\"right\":856.96875,\"bottom\":80,\"left\":804.546875}},{\"text\":\"Master\",\"rect\":{\"x\":859.96875,\"y\":50,\"width\":54.75,\"height\":30,\"top\":50,\"right\":914.71875,\"bottom\":80,\"left\":859.96875}}],\"canvas\":{\"x\":8,\"y\":314.5,\"width\":1264,\"height\":384,\"top\":314.5,\"right\":1272,\"bottom\":698.5,\"left\":8},\"details\":{\"x\":290,\"y\":171.5,\"width\":700,\"height\":143,\"top\":171.5,\"right\":990,\"bottom\":314.5,\"left\":290},\"footer\":{\"x\":0,\"y\":748.5,\"width\":1280,\"height\":51.5,\"top\":748.5,\"right\":1280,\"bottom\":800,\"left\":0},\"alerts\":[]}\n```"
+        }
+      ]
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Script ran on page and returned:\n```json\n{\"viewport\":{\"width\":390,\"height\":844},\"scroll\":{\"width\":390,\"height\":844},\"horizontalOverflow\":false,\"levels\":[{\"text\":\"Easy\",\"rect\":{\"x\":55.484375,\"y\":86.5,\"width\":33.46875,\"height\":26,\"top\":86.5,\"right\":88.953125,\"bottom\":112.5,\"left\":55.484375}},{\"text\":\"Normal\",\"rect\":{\"x\":91.953125,\"y\":86.5,\"width\":46.90625,\"height\":26,\"top\":86.5,\"right\":138.859375,\"bottom\":112.5,\"left\":91.953125}},{\"text\":\"Hard\",\"rect\":{\"x\":141.859375,\"y\":86.5,\"width\":35.390625,\"height\":26,\"top\":86.5,\"right\":177.25,\"bottom\":112.5,\"left\":141.859375}},{\"text\":\"Very Hard\",\"rect\":{\"x\":180.25,\"y\":86.5,\"width\":59.5625,\"height\":26,\"top\":86.5,\"right\":239.8125,\"bottom\":112.5,\"left\":180.25}},{\"text\":\"Expert\",\"rect\":{\"x\":242.8125,\"y\":86.5,\"width\":43.28125,\"height\":26,\"top\":86.5,\"right\":286.09375,\"bottom\":112.5,\"left\":242.8125}},{\"text\":\"Master\",\"rect\":{\"x\":289.09375,\"y\":86.5,\"width\":45.40625,\"height\":26,\"top\":86.5,\"right\":334.5,\"bottom\":112.5,\"left\":289.09375}}],\"canvas\":{\"x\":8,\"y\":363.5,\"width\":374,\"height\":430,\"top\":363.5,\"right\":382,\"bottom\":793.5,\"left\":8},\"details\":{\"x\":8,\"y\":204,\"width\":374,\"height\":159.5,\"top\":204,\"right\":382,\"bottom\":363.5,\"left\":8},\"footer\":{\"x\":0,\"y\":801.5,\"width\":390,\"height\":42.5,\"top\":801.5,\"right\":390,\"bottom\":844,\"left\":0},\"alerts\":[]}\n```"
+        }
+      ]
+    }
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Script ran on page and returned:\n```json\n{\"viewport\":{\"width\":320,\"height\":568},\"scroll\":{\"width\":320,\"height\":568},\"horizontalOverflow\":false,\"levels\":[{\"text\":\"Easy\",\"rect\":{\"x\":20.484375,\"y\":86.5,\"width\":33.46875,\"height\":26,\"top\":86.5,\"right\":53.953125,\"bottom\":112.5,\"left\":20.484375}},{\"text\":\"Normal\",\"rect\":{\"x\":56.953125,\"y\":86.5,\"width\":46.90625,\"height\":26,\"top\":86.5,\"right\":103.859375,\"bottom\":112.5,\"left\":56.953125}},{\"text\":\"Hard\",\"rect\":{\"x\":106.859375,\"y\":86.5,\"width\":35.390625,\"height\":26,\"top\":86.5,\"right\":142.25,\"bottom\":112.5,\"left\":106.859375}},{\"text\":\"Very Hard\",\"rect\":{\"x\":145.25,\"y\":86.5,\"width\":59.5625,\"height\":26,\"top\":86.5,\"right\":204.8125,\"bottom\":112.5,\"left\":145.25}},{\"text\":\"Expert\",\"rect\":{\"x\":207.8125,\"y\":86.5,\"width\":43.28125,\"height\":26,\"top\":86.5,\"right\":251.09375,\"bottom\":112.5,\"left\":207.8125}},{\"text\":\"Master\",\"rect\":{\"x\":254.09375,\"y\":86.5,\"width\":45.40625,\"height\":26,\"top\":86.5,\"right\":299.5,\"bottom\":112.5,\"left\":254.09375}}],\"canvas\":{\"x\":8,\"y\":380,\"width\":304,\"height\":121,\"top\":380,\"right\":312,\"bottom\":501,\"left\":8},\"details\":{\"x\":8,\"y\":204,\"width\":304,\"height\":176,\"top\":204,\"right\":312,\"bottom\":380,\"left\":8},\"footer\":{\"x\":0,\"y\":509,\"width\":320,\"height\":59,\"top\":509,\"right\":320,\"bottom\":568,\"left\":0},\"alerts\":[]}\n```"
+        }
+      ]
+    }
+  }
+]

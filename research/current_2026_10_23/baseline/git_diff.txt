@@ -1,0 +1,177 @@
+diff --git a/src/App.tsx b/src/App.tsx
+index 93db24f..f4f379c 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -11,6 +11,7 @@ import {
+ } from "lucide-react"
+ import { LeaderboardModal } from "./components/LeaderboardModal"
+ import { useTranslation } from "react-i18next"
++import { selectLanguage } from "./i18n"
+ import type { GameMode } from "./game/behaviors/match/MatchState"
+ import { GameController } from "./app/GameController"
+ import { CaroGameCanvas } from "./pixi/CaroGameCanvas"
+@@ -282,7 +283,7 @@ export default function App() {
+             className="paper-btn"
+             style={{ padding: "6px 10px", fontSize: 12 }}
+             aria-label={t("settings.language")}
+-            onClick={() => { playButtonClick(); void i18n.changeLanguage(nextLanguage); }}
++            onClick={() => { playButtonClick(); selectLanguage(nextLanguage); }}
+           >
+             <Globe size={14} />
+             <span>{nextLanguage.toUpperCase()}</span>
+diff --git a/src/i18n.ts b/src/i18n.ts
+index 5fdf416..b558087 100644
+--- a/src/i18n.ts
++++ b/src/i18n.ts
+@@ -42,6 +42,23 @@ const persistLanguage = (language: string): void => {
+   }
+ };
+ 
++export const applyHostLocale = (value?: string | null): void => {
++  const normalized = (value || "").split("-")[0].toLowerCase();
++  if (isSupportedLanguage(normalized)) {
++    void i18n.changeLanguage(normalized);
++    syncDocumentLang(normalized);
++  }
++};
++
++export const selectLanguage = (locale: SupportedLanguage): void => {
++  if (typeof window !== "undefined" && typeof (window as any).Wink?.setLocale === "function") {
++    (window as any).Wink.setLocale(locale);
++  } else {
++    applyHostLocale(locale);
++    persistLanguage(locale);
++  }
++};
++
+ const resources = {
+   vi: {
+     translation: {
+diff --git a/src/integrations/wink/__tests__/winkIntegration.test.ts b/src/integrations/wink/__tests__/winkIntegration.test.ts
+index 4cd05de..39c397d 100644
+--- a/src/integrations/wink/__tests__/winkIntegration.test.ts
++++ b/src/integrations/wink/__tests__/winkIntegration.test.ts
+@@ -144,4 +144,27 @@ describe("Wink SDK v1 Integration (10_caro)", () => {
+     expect(mockSdk.init).toHaveBeenCalledTimes(1)
+     expect(sdk).toBeNull()
+   })
++
++  it("supports setLocale and onLocale contract", async () => {
++    let localeListener: ((loc: string) => void) | null = null
++    const mockSdk: Partial<WinkSDK> = {
++      init: vi.fn(async () => mockSdk as WinkSDK),
++      locale: "vi",
++      setLocale: vi.fn(),
++      on: vi.fn((event: string, cb: Function) => {
++        if (event === "locale") localeListener = cb as any
++        return () => {}
++      }),
++      status: "online",
++    }
++
++    ;(globalThis as any).window = globalThis
++    ;(globalThis as any).Wink = mockSdk
++
++    const sdk = await resolveGlobalWink()
++    expect(sdk).toBe(mockSdk)
++
++    sdk?.setLocale?.("vi")
++    expect(mockSdk.setLocale).toHaveBeenCalledWith("vi")
++  })
+ })
+diff --git a/src/integrations/wink/types.ts b/src/integrations/wink/types.ts
+index e97a491..5cd8c3e 100644
+--- a/src/integrations/wink/types.ts
++++ b/src/integrations/wink/types.ts
+@@ -65,6 +65,7 @@ export interface WinkSDK {
+   can(capability: WinkCapability): boolean
+   readonly player: WinkPlayer | null
+   readonly locale: string
++  setLocale?(locale: string): void
+   readonly muted: boolean
+   readonly status: WinkStatus
+   destroy(): void
+@@ -86,6 +87,7 @@ export interface WinkIntegration {
+   hostPaused: boolean
+   hostMuted: boolean
+   locale: WinkLocale
++  setLocale(locale: WinkLocale): void
+   error: WinkIntegrationError | null
+   leaderboard: readonly WinkLeaderboardEntry[]
+   personalBest: WinkLeaderboardEntry | null
+@@ -93,7 +95,7 @@ export interface WinkIntegration {
+   canSubmitScore: boolean
+   gameplayStart(): void
+   gameplayStop(): void
+-  refreshLeaderboard(): Promise<void>
++  refreshLeaderboard(options?: { limit?: number; offset?: number; force?: boolean }): Promise<void>
+   refreshPersonalBest(): Promise<void>
+   submitFinalScore(input: { score: number; playTimeSec?: number }): Promise<WinkSubmitScoreResult | null>
+ }
+diff --git a/src/integrations/wink/useWinkIntegration.ts b/src/integrations/wink/useWinkIntegration.ts
+index 16fdaed..9d3113d 100644
+--- a/src/integrations/wink/useWinkIntegration.ts
++++ b/src/integrations/wink/useWinkIntegration.ts
+@@ -1,5 +1,5 @@
+ import { useCallback, useEffect, useRef, useState } from "react"
+-import i18n from "../../i18n"
++import i18n, { applyHostLocale as syncI18nLocale, selectLanguage } from "../../i18n"
+ import type {
+   WinkIntegration,
+   WinkIntegrationError,
+@@ -161,6 +161,7 @@ export function useWinkIntegration(): WinkIntegration {
+     (nextLocale: string | null | undefined) => {
+       const normalized = normalizeWinkLocale(nextLocale)
+       setLocale(normalized)
++      syncI18nLocale(normalized)
+     },
+     [],
+   )
+@@ -235,7 +236,10 @@ export function useWinkIntegration(): WinkIntegration {
+     }
+   }, [])
+ 
+-  const refreshLeaderboard = useCallback(async () => {
++  const leaderboardInFlightRef = useRef(false)
++  const lastLeaderboardFetchAtMsRef = useRef(0)
++
++  const refreshLeaderboard = useCallback(async (options?: { limit?: number; offset?: number; force?: boolean }) => {
+     const sdk = sdkRef.current
+     if (!sdk || !sdk.can("getLeaderboard")) {
+       setLeaderboard([])
+@@ -243,14 +247,24 @@ export function useWinkIntegration(): WinkIntegration {
+       return
+     }
+ 
++    const now = Date.now()
++    if (!options?.force && (leaderboardInFlightRef.current || now - lastLeaderboardFetchAtMsRef.current < 1500)) {
++      return
++    }
++
++    leaderboardInFlightRef.current = true
+     try {
+-      const board = await sdk.getLeaderboard({ limit: 30 })
++      const limit = options?.limit ?? 30
++      const board = await sdk.getLeaderboard({ limit, offset: options?.offset })
+       setLeaderboard(board.entries ?? [])
+       setPersonalBest(board.me ?? null)
+       setError(null)
+-    } catch {
++    } catch (err) {
++      console.warn("[WinkIntegration] getLeaderboard error", err)
+       setError(safeError("API_NETWORK_ERROR", true))
+-      setLeaderboard([])
++    } finally {
++      leaderboardInFlightRef.current = false
++      lastLeaderboardFetchAtMsRef.current = Date.now()
+     }
+   }, [])
+ 
+@@ -321,6 +335,7 @@ export function useWinkIntegration(): WinkIntegration {
+     hostPaused,
+     hostMuted,
+     locale,
++    setLocale: selectLanguage,
+     error,
+     leaderboard,
+     personalBest,
