@@ -47,6 +47,22 @@ describe("GameState & Rules Core", () => {
     expect(state.getHistory().length).toBe(1);
   });
 
+  it("undo restores occupancy, history indexes and occupied bounds without underflow", () => {
+    expect(state.undoLast()).toBeNull();
+    playMove(state, winRule, { player: "X", cell: { row: 7, col: 7 } });
+    playMove(state, winRule, { player: "O", cell: { row: 14, col: 0 } });
+    expect(state.undoLast()).toMatchObject({ player: "O", index: 2 });
+    expect(state.get({ row: 14, col: 0 })).toBeNull();
+    expect(state.occupiedBounds).toEqual({ minRow: 7, maxRow: 7, minCol: 7, maxCol: 7 });
+    playMove(state, winRule, { player: "O", cell: { row: 8, col: 8 } });
+    expect(state.lastMove?.index).toBe(2);
+    state.undoLast();
+    state.undoLast();
+    expect(state.moveCount).toBe(0);
+    expect(state.occupiedBounds).toEqual({ minRow: Infinity, maxRow: -Infinity, minCol: Infinity, maxCol: -Infinity });
+    expect(state.undoLast()).toBeNull();
+  });
+
   it("win detection: correctly identifies 5 in a row horizontally", () => {
     playMove(state, winRule, { player: "X", cell: { row: 0, col: 0 } });
     playMove(state, winRule, { player: "O", cell: { row: 1, col: 0 } });

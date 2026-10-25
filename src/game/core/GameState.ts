@@ -57,6 +57,23 @@ export class GameState {
     this.#history.length = 0
     this.#occupiedBounds = emptyBounds()
   }
+
+  undoLast(): Move | null {
+    const move = this.#history.pop()
+    if (!move) return null
+    this.#board.delete(GameState.key(move.cell))
+    this.#occupiedBounds = emptyBounds()
+    for (const remaining of this.#history) {
+      const { row, col } = remaining.cell
+      this.#occupiedBounds = {
+        minRow: Math.min(this.#occupiedBounds.minRow, row),
+        maxRow: Math.max(this.#occupiedBounds.maxRow, row),
+        minCol: Math.min(this.#occupiedBounds.minCol, col),
+        maxCol: Math.max(this.#occupiedBounds.maxCol, col),
+      }
+    }
+    return move
+  }
 }
 
 function emptyBounds(): OccupiedBounds {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
-import i18n from "../../i18n"
+import i18n, { applyHostLocale as syncI18nLocale, selectLanguage } from "../../i18n"
 import type {
   WinkIntegration,
   WinkIntegrationError,
@@ -161,6 +161,7 @@ export function useWinkIntegration(): WinkIntegration {
     (nextLocale: string | null | undefined) => {
       const normalized = normalizeWinkLocale(nextLocale)
       setLocale(normalized)
+      syncI18nLocale(normalized)
     },
     [],
   )
@@ -235,7 +236,10 @@ export function useWinkIntegration(): WinkIntegration {
     }
   }, [])
 
-  const refreshLeaderboard = useCallback(async () => {
+  const leaderboardInFlightRef = useRef(false)
+  const lastLeaderboardFetchAtMsRef = useRef(0)
+
+  const refreshLeaderboard = useCallback(async (options?: { limit?: number; offset?: number; force?: boolean }) => {
     const sdk = sdkRef.current
     if (!sdk || !sdk.can("getLeaderboard")) {
       setLeaderboard([])
@@ -243,14 +247,24 @@ export function useWinkIntegration(): WinkIntegration {
       return
     }
 
+    const now = Date.now()
+    if (!options?.force && (leaderboardInFlightRef.current || now - lastLeaderboardFetchAtMsRef.current < 1500)) {
+      return
+    }
+
+    leaderboardInFlightRef.current = true
     try {
-      const board = await sdk.getLeaderboard({ limit: 30 })
+      const limit = options?.limit ?? 30
+      const board = await sdk.getLeaderboard({ limit, offset: options?.offset })
       setLeaderboard(board.entries ?? [])
       setPersonalBest(board.me ?? null)
       setError(null)
-    } catch {
+    } catch (err) {
+      console.warn("[WinkIntegration] getLeaderboard error", err)
       setError(safeError("API_NETWORK_ERROR", true))
-      setLeaderboard([])
+    } finally {
+      leaderboardInFlightRef.current = false
+      lastLeaderboardFetchAtMsRef.current = Date.now()
     }
   }, [])
 
@@ -321,6 +335,7 @@ export function useWinkIntegration(): WinkIntegration {
     hostPaused,
     hostMuted,
     locale,
+    setLocale: selectLanguage,
     error,
     leaderboard,
     personalBest,

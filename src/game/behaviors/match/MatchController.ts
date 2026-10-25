@@ -60,4 +60,11 @@ export class MatchController {
     this.state.isDraw = false
     return true
   }
+
+  resumeAfterUndo(hasMoves: boolean): void {
+    this.state.roundId++
+    this.state.phase = hasMoves ? "playing" : "ready"
+    this.state.winner = null
+    this.state.isDraw = false
+  }
 }

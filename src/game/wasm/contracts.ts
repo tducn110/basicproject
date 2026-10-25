@@ -12,16 +12,35 @@ export const WASM_DIFFICULTIES: Record<BotDifficulty, number> = {
   easy: 0,
   normal: 1,
   hard: 2,
+  veryhard: 5,
   expert: 3,
   master: 4,
 }
 
-export const WASM_SEARCH_DEPTHS: Record<BotDifficulty, number> = {
-  easy: 1,
-  normal: 2,
-  hard: 4,
-  expert: 6,
-  master: 8,
+/** Intended fixed search configuration, not a measurement of completed work. */
+export const WASM_CONFIGURED_DEPTHS: Record<BotDifficulty, number> = {
+  easy: 0,
+  normal: 1,
+  hard: 2,
+  veryhard: 3,
+  expert: 4,
+  master: 5,
+}
+
+export interface RustMoveResult {
+  x: number
+  y: number
+  score: number
+  strategy: "random" | "rule_based" | "alpha_beta"
+  difficulty: BotDifficulty
+  stats: {
+    nodes_visited: number
+    leaf_evaluations: number
+    cutoffs: number
+    ordering_evaluations: number
+    candidate_moves_generated: number
+    completed_depth: number
+  }
 }
 
 export type WasmAIResult = AIResult

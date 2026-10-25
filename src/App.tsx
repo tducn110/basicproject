@@ -7,17 +7,20 @@ import {
   RotateCcw,
   SquarePlus,
   Trophy,
+  Undo2,
   UsersRound,
 } from "lucide-react"
 import { LeaderboardModal } from "./components/LeaderboardModal"
 import { useTranslation } from "react-i18next"
+import { selectLanguage } from "./i18n"
 import type { GameMode } from "./game/behaviors/match/MatchState"
 import { GameController } from "./app/GameController"
 import { CaroGameCanvas } from "./pixi/CaroGameCanvas"
 import { MobilePlayerBar } from "./components/Player"
 import { WinBanner } from "./components/WinBanner"
 import { InfoCard } from "./components/Info"
-import type { BotDifficulty } from "./game/ai/contracts"
+import { BOT_DIFFICULTIES } from "./game/ai/contracts"
+import { SearchFeedback } from "./components/SearchFeedback"
 import { useWinkIntegration } from "./integrations/wink/useWinkIntegration"
 import { preloadCriticalResources, preloadNonCriticalResources } from "./utils/game-loader";
 import { completeGameLoading, onGameLoadingDismiss, setGameLoadingProgress } from "./utils/loading-controller";
@@ -26,11 +29,10 @@ import { playButtonClick } from "./utils/buttonClick";
 
 // ── Main App ─────────────────────────────────────────────────────────────────
 
-const AI_DIFFICULTIES: readonly BotDifficulty[] = ["easy", "normal", "hard", "expert"]
-
 export default function App() {
   const { t, i18n } = useTranslation()
   const [showLeaderboard, setShowLeaderboard] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
   const wink = useWinkIntegration()
 
   // Unified PapaStudio loading screen lifecycle barrier
@@ -94,7 +96,7 @@ export default function App() {
   const gameStarted = history.length > 0
   const isDraw = snapshot.match.isDraw
 
-  const isGameOver = !!winner
+  const isGameOver = snapshot.match.phase === "game-over"
   const lastMove = history.length > 0 ? history[history.length - 1].cell : null
 
   // Start round on first stone placed
@@ -155,6 +157,25 @@ export default function App() {
     }
     if (newMode) controller.setMode(newMode)
     else controller.newGame()
+    setShowMenu(false)
+  }, [controller, wink])
+
+  const handleUndo = useCallback(() => {
+    playButtonClick()
+    if (controller.undo() && controller.snapshot().history.length === 0 && roundStartedRef.current) {
+      wink.gameplayStop()
+      roundStartedRef.current = false
+    }
+  }, [controller, wink])
+
+  const returnToMenu = useCallback(() => {
+    playButtonClick()
+    if (roundStartedRef.current) {
+      wink.gameplayStop()
+      roundStartedRef.current = false
+    }
+    controller.newGame()
+    setShowMenu(true)
   }, [controller, wink])
 
   const currentLanguage = i18n.resolvedLanguage?.startsWith("en") ? "en" : "vi"
@@ -245,6 +266,8 @@ export default function App() {
           className="paper-btn"
           style={{ padding: "6px 12px", fontSize: 12 }}
           aria-label={t("common.back")}
+          onClick={returnToMenu}
+          disabled={showMenu}
         >
           <ArrowLeft size={14} />
           <span style={{ display: "none" }} className="sm-inline">
@@ -282,7 +305,7 @@ export default function App() {
             className="paper-btn"
             style={{ padding: "6px 10px", fontSize: 12 }}
             aria-label={t("settings.language")}
-            onClick={() => { playButtonClick(); void i18n.changeLanguage(nextLanguage); }}
+            onClick={() => { playButtonClick(); selectLanguage(nextLanguage); }}
           >
             <Globe size={14} />
             <span>{nextLanguage.toUpperCase()}</span>
@@ -291,6 +314,7 @@ export default function App() {
       </header>
 
       {/* ── Mode Tabs ── */}
+      {!showMenu && <>
       <div
         style={{
           display: "flex",
@@ -320,7 +344,7 @@ export default function App() {
         </div>
         {mode === "ai" && (
           <div className="difficulty-picker" role="group" aria-label={t("game.difficulty")}>
-            {AI_DIFFICULTIES.map((level) => (
+            {BOT_DIFFICULTIES.map((level) => (
               <button
                 key={level}
                 type="button"
@@ -335,8 +359,10 @@ export default function App() {
         )}
       </div>
 
+      </>}
+
       {/* ── Mobile player bar ── */}
-      <div
+      {!showMenu && <div
         style={{
           display: "block",
           marginTop: 4,
@@ -352,7 +378,7 @@ export default function App() {
           isGameOver={isGameOver}
           elapsed={displayElapsed}
         />
-      </div>
+      </div>}
 
       {/* ── Main content ── */}
       <main
@@ -368,6 +394,16 @@ export default function App() {
         }}
         className="main-layout"
       >
+        {showMenu ? (
+          <div className="paper-card" style={{ margin: "auto", padding: 24, textAlign: "center" }}>
+            <h2 className="font-display">{t("game.chooseMode")}</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
+              <button className="paper-btn" onClick={() => handleNewGame("1v1")}><UsersRound size={16} />{t("game.modePvp")}</button>
+              <button className="paper-btn primary" onClick={() => handleNewGame("ai")}><Bot size={16} />{t("game.modeAi")}</button>
+            </div>
+          </div>
+        ) : <>
+        {mode === "ai" && <SearchFeedback thinking={aiThinking} result={snapshot.lastAiResult} error={snapshot.aiError} paused={wink.hostPaused} onRetry={() => controller.retryAiTurn()} />}
         <div
           style={{
             flex: 1,
@@ -394,6 +430,7 @@ export default function App() {
         >
           <InfoCard mode={mode} elapsed={displayElapsed} compact />
         </div>
+        </>}
       </main>
 
       {/* ── Win Banner ── */}
@@ -408,6 +445,7 @@ export default function App() {
       </div>
 
       {/* ── Footer actions ── */}
+      {!showMenu &&
       <footer
         style={{
           display: "flex",
@@ -419,6 +457,9 @@ export default function App() {
           flexShrink: 0,
         }}
       >
+        <button className="paper-btn" onClick={handleUndo} disabled={history.length === 0 || wink.hostPaused} aria-label={t("common.undo")}>
+          <Undo2 size={13} /><span>{t("common.undo")}</span>
+        </button>
         {!isGameOver && (
           <>
             <button
@@ -439,11 +480,12 @@ export default function App() {
             </button>
           </>
         )}
-        <button className="paper-btn danger" aria-label={t("common.close")}>
+        <button className="paper-btn danger" onClick={returnToMenu} aria-label={t("common.close")}>
           <LogOut size={13} />
           <span>{t("common.close")}</span>
         </button>
       </footer>
+      }
 
       {showLeaderboard && (
         <LeaderboardModal wink={wink} onClose={() => setShowLeaderboard(false)} />

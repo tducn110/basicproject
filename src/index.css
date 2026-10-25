@@ -146,6 +146,8 @@ body {
 /* Difficulty is always visible; a select hid the available AI levels. */
 .difficulty-picker {
   display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 3px;
   padding: 3px;

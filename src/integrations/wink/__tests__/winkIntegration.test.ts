@@ -144,4 +144,27 @@ describe("Wink SDK v1 Integration (10_caro)", () => {
     expect(mockSdk.init).toHaveBeenCalledTimes(1)
     expect(sdk).toBeNull()
   })
+
+  it("supports setLocale and onLocale contract", async () => {
+    let localeListener: ((loc: string) => void) | null = null
+    const mockSdk: Partial<WinkSDK> = {
+      init: vi.fn(async () => mockSdk as WinkSDK),
+      locale: "vi",
+      setLocale: vi.fn(),
+      on: vi.fn((event: string, cb: Function) => {
+        if (event === "locale") localeListener = cb as any
+        return () => {}
+      }),
+      status: "online",
+    }
+
+    ;(globalThis as any).window = globalThis
+    ;(globalThis as any).Wink = mockSdk
+
+    const sdk = await resolveGlobalWink()
+    expect(sdk).toBe(mockSdk)
+
+    sdk?.setLocale?.("vi")
+    expect(mockSdk.setLocale).toHaveBeenCalledWith("vi")
+  })
 })

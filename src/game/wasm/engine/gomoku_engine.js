@@ -12,12 +12,22 @@ export class Game {
         wasm.__wbg_game_free(ptr, 0);
     }
     /**
-     * difficulty: 0=easy, 1=medium, 2=hard, 3=expert, 4=master
+     * difficulty: 0=easy, 1=normal, 2=hard, 3=expert, 4=master, 5=veryhard.
      * @param {number} difficulty
      * @returns {any}
      */
     ai_move(difficulty) {
         const ret = wasm.game_ai_move(this.__wbg_ptr, difficulty);
+        return ret;
+    }
+    /**
+     * Additive deterministic boundary for native/JS/WASM fixture parity.
+     * @param {number} difficulty
+     * @param {number} seed
+     * @returns {any}
+     */
+    ai_move_seeded(difficulty, seed) {
+        const ret = wasm.game_ai_move_seeded(this.__wbg_ptr, difficulty, seed);
         return ret;
     }
     /**

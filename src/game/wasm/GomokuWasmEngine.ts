@@ -18,20 +18,13 @@ export class GomokuWasmEngine {
   private nextWorkerRequestId = 0
   private readonly pending = new Map<number, PendingRequest>()
 
-  constructor() {
-    this.createWorker()
-  }
-
   search(request: WasmAIRequest): Promise<WasmAIResult> {
     const id = ++this.nextWorkerRequestId
     return new Promise((resolve, reject) => {
-      if (!this.worker) {
-        reject(new Error("Gomoku WASM engine is destroyed"))
-        return
-      }
-      this.pending.set(id, { resolve, reject })
       try {
-        this.worker.postMessage({ type: "search", id, request })
+        if (!this.worker) this.createWorker()
+        this.pending.set(id, { resolve, reject })
+        this.worker!.postMessage({ type: "search", id, request })
       } catch (error) {
         this.pending.delete(id)
         reject(error)
@@ -42,9 +35,10 @@ export class GomokuWasmEngine {
   cancelPending(): void {
     this.rejectPending(new Error("Gomoku WASM search cancelled"))
     this.worker?.terminate()
-    this.createWorker()
+    this.worker = null
   }
 
+  /** Releases current resources. A later request can reopen after React effect replay. */
   destroy(): void {
     this.rejectPending(new Error("Gomoku WASM engine destroyed"))
     this.worker?.terminate()
@@ -52,8 +46,10 @@ export class GomokuWasmEngine {
   }
 
   private createWorker(): void {
-    this.worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module" })
-    this.worker.onmessage = (event: MessageEvent<WorkerMessage>) => {
+    const worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module" })
+    this.worker = worker
+    worker.onmessage = (event: MessageEvent<WorkerMessage>) => {
+      if (this.worker !== worker) return
       const message = event.data
       const pending = this.pending.get(message.id)
       if (!pending) return
@@ -61,7 +57,10 @@ export class GomokuWasmEngine {
       if (message.type === "result") pending.resolve(message.result)
       else pending.reject(new Error(message.message))
     }
-    this.worker.onerror = (event) => {
+    worker.onerror = (event) => {
+      if (this.worker !== worker) return
+      this.worker = null
+      worker.terminate()
       this.rejectPending(event.error ?? new Error(event.message))
     }
   }

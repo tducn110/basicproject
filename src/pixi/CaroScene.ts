@@ -31,7 +31,7 @@ export class CaroScene {
   private board: readonly BoardRenderStone[] = []
   private lastMove: CellCoord | null = null
   private winCellSet: ReadonlySet<string> = new Set()
-  private lastViewport: ViewportSize = { width: 0, height: 0 }
+  private lastFittedViewport: ViewportSize = { width: 0, height: 0 }
   private paused = false
   private readonly unsubscribeCamera: () => void
 
@@ -116,7 +116,7 @@ export class CaroScene {
 
   private refreshViewportIfChanged(): void {
     const viewport = { width: this.app.screen.width, height: this.app.screen.height }
-    if (viewport.width === this.lastViewport.width && viewport.height === this.lastViewport.height) return
+    if (viewport.width === this.lastFittedViewport.width && viewport.height === this.lastFittedViewport.height) return
     this.fitBoardToViewport(viewport)
   }
 
@@ -132,12 +132,12 @@ export class CaroScene {
       (viewport.width - boardPixels * zoom) / 2,
       (viewport.height - boardPixels * zoom) / 2,
     )
+    this.lastFittedViewport = { ...viewport }
   }
 
   /** CAMERA_CHANGED, VIEWPORT_CHANGED and GAME_STATE_CHANGED converge here. */
   refreshVisibleBoard(): void {
     const viewport = { width: this.app.screen.width, height: this.app.screen.height }
-    this.lastViewport = viewport
     const bounds = resolveVisibleBounds(this.camera.snapshot(), viewport)
     this.gridRenderer.draw()
     this.stoneRenderer.sync({

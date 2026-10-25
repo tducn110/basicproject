@@ -5,9 +5,13 @@ export class Game {
     free(): void;
     [Symbol.dispose](): void;
     /**
-     * difficulty: 0=easy, 1=medium, 2=hard, 3=expert, 4=master
+     * difficulty: 0=easy, 1=normal, 2=hard, 3=expert, 4=master, 5=veryhard.
      */
     ai_move(difficulty: number): any;
+    /**
+     * Additive deterministic boundary for native/JS/WASM fixture parity.
+     */
+    ai_move_seeded(difficulty: number, seed: number): any;
     current_player(): string;
     get_board(): any;
     get_winner(): any;
@@ -25,6 +29,7 @@ export interface InitOutput {
     readonly memory: WebAssembly.Memory;
     readonly __wbg_game_free: (a: number, b: number) => void;
     readonly game_ai_move: (a: number, b: number) => any;
+    readonly game_ai_move_seeded: (a: number, b: number, c: number) => any;
     readonly game_current_player: (a: number) => [number, number];
     readonly game_get_board: (a: number) => any;
     readonly game_get_winner: (a: number) => any;

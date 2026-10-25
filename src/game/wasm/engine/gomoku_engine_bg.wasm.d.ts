@@ -3,6 +3,7 @@
 export const memory: WebAssembly.Memory;
 export const __wbg_game_free: (a: number, b: number) => void;
 export const game_ai_move: (a: number, b: number) => any;
+export const game_ai_move_seeded: (a: number, b: number, c: number) => any;
 export const game_current_player: (a: number) => [number, number];
 export const game_get_board: (a: number) => any;
 export const game_get_winner: (a: number) => any;

@@ -9,13 +9,23 @@ export class AIController implements AIService {
 
   requestMove(state: GameState, roundId: number, difficulty: BotDifficulty): Promise<AIResult> {
     const requestId = ++this.nextRequestId
-    const tacticalMove = findForcedTacticalMove(state, "O")
+    const startedAt = performance.now()
+    // Baseline tiers must execute their Rust Random / RuleBased policies.
+    const tacticalMove = difficulty === "easy" || difficulty === "normal"
+      ? null : findForcedTacticalMove(state, "O")
     if (tacticalMove) {
       return Promise.resolve({
         requestId,
         roundId,
+        difficulty,
         move: tacticalMove,
-        stats: { depth: 0, nodes: 0, elapsedMs: 0, reason: "completed" },
+        stats: {
+          depth: 0, nodes: 0, cutoffs: 0, leafEvaluations: 0,
+          orderingEvaluations: 0, candidateMovesGenerated: 0, score: null,
+          strategy: "tactical", source: "tactical",
+          elapsedMs: performance.now() - startedAt,
+          elapsedScope: "typescript-tactical", reason: "tactical",
+        },
       })
     }
 

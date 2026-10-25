@@ -65,6 +65,7 @@ export interface WinkSDK {
   can(capability: WinkCapability): boolean
   readonly player: WinkPlayer | null
   readonly locale: string
+  setLocale?(locale: string): void
   readonly muted: boolean
   readonly status: WinkStatus
   destroy(): void
@@ -86,6 +87,7 @@ export interface WinkIntegration {
   hostPaused: boolean
   hostMuted: boolean
   locale: WinkLocale
+  setLocale(locale: WinkLocale): void
   error: WinkIntegrationError | null
   leaderboard: readonly WinkLeaderboardEntry[]
   personalBest: WinkLeaderboardEntry | null
@@ -93,7 +95,7 @@ export interface WinkIntegration {
   canSubmitScore: boolean
   gameplayStart(): void
   gameplayStop(): void
-  refreshLeaderboard(): Promise<void>
+  refreshLeaderboard(options?: { limit?: number; offset?: number; force?: boolean }): Promise<void>
   refreshPersonalBest(): Promise<void>
   submitFinalScore(input: { score: number; playTimeSec?: number }): Promise<WinkSubmitScoreResult | null>
 }

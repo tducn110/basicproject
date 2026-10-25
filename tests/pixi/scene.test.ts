@@ -101,4 +101,34 @@ describe("CaroScene: Coordinate and Input Layer", () => {
 
     expect(onCellClick).not.toHaveBeenCalled();
   });
+
+  it("fits a resized viewport even when a state sync draws before the ticker", () => {
+    const tick = vi.mocked(scene.app.ticker.add).mock.calls[0][0] as () => void;
+    scene.app.screen.width = 500;
+    scene.app.screen.height = 400;
+    tick();
+    expect(scene.camera.snapshot()).toMatchObject({ x: 74, y: 24 });
+    expect(scene.camera.snapshot().zoom).toBeCloseTo(352 / 840);
+
+    scene.app.screen.width = 1200;
+    scene.app.screen.height = 600;
+    // React can publish a snapshot between renderer resize and the next tick.
+    scene.syncState([], null, new Set());
+    tick();
+
+    const camera = scene.camera.snapshot();
+    expect(camera.zoom).toBeCloseTo(552 / 840);
+    expect(camera.x).toBe(324);
+    expect(camera.y).toBe(24);
+  });
+
+  it("preserves a player pan across state sync and ticks when viewport size is unchanged", () => {
+    const before = scene.camera.snapshot();
+    scene.camera.panBy(35, -12);
+    scene.syncState([], null, new Set());
+    const tick = vi.mocked(scene.app.ticker.add).mock.calls[0][0] as () => void;
+    tick();
+
+    expect(scene.camera.snapshot()).toEqual({ ...before, x: before.x + 35, y: before.y - 12 });
+  });
 });
