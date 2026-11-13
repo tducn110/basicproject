@@ -12,6 +12,11 @@
 > **Bản chạy trực tuyến Web Game:** [https://carogame-five.vercel.app](https://carogame-five.vercel.app)  
 > **Bàn cờ Live Engine Rust WASM:** [https://10-caro.vercel.app](https://10-caro.vercel.app)  
 
+> **Tài liệu nghiên cứu mở rộng:**  
+> - 📄 [Báo cáo Nghiên cứu Chuyên sâu 10 Tuần Tiếng Anh (English Research Backbone)](README_RESEARCH_10_WEEKS_EN.md)  
+> - 🎓 [Bản Báo cáo Thuật toán Hoàn chỉnh Mới nhất 13/11/2026 (PDF)](final_review_2026_11_13/English_Report_Caro_Algorithm_Final_2026_11_13.pdf)  
+
+
 ---
 
 ## 1. TỔNG QUAN HỆ THỐNG & KIẾN TRÚC

@@ -1,3 +1,4 @@
+import { CARO_GAME_URL, CARO_GAME_LABEL } from "../utils/gameUrl"
 import React, { useState } from "react"
 import { 
   GitBranch, 
@@ -461,12 +462,12 @@ export const Week8To10AdvancedAI: React.FC<Props> = ({ onOpenFigure }) => {
 
               <div className="flex items-center gap-2">
                 <a
-                  href="https://carogame-five.vercel.app"
+                  href={CARO_GAME_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="px-4 py-2 rounded-full bg-[#202020] text-white hover:bg-[#090c1d] text-xs font-bold flex items-center gap-1.5 transition-all"
                 >
-                  <span>Chơi Thử Web Live</span>
+                  <span>Chơi thử Caro ({CARO_GAME_LABEL})</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
                 <a

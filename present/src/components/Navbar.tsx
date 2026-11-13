@@ -1,3 +1,4 @@
+import { CARO_GAME_URL, CARO_GAME_LABEL } from "../utils/gameUrl"
 import React, { useEffect, useState, useRef } from "react"
 import { 
   Volume2, 
@@ -31,7 +32,7 @@ export const Navbar: React.FC = () => {
       const sections = [
         "hero", 
         "overview", 
-        "week3", 
+        "board-representation", 
         "pve-transition", 
         "week4", 
         "week5", 
@@ -254,12 +255,12 @@ export const Navbar: React.FC = () => {
 
             {/* Live Production Vercel Button */}
             <a
-              href="https://carogame-five.vercel.app"
+              href={CARO_GAME_URL}
               target="_blank"
               rel="noreferrer"
               onClick={() => soundManager.playClick()}
               className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-[#00c07a] hover:bg-[#009e65] text-white font-bold text-xs shadow-xs transition-all hover:scale-105 active:scale-95 shrink-0"
-              title="Mở Bàn Cờ Thực Tế Đang Chạy Trên Vercel"
+              title={`Mở bàn cờ: ${CARO_GAME_LABEL}`}
             >
               <span className="w-2 h-2 rounded-full bg-white animate-ping" />
               <span>Bàn Cờ Live</span>

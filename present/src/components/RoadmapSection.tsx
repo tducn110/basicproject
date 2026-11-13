@@ -34,7 +34,7 @@ export const RoadmapSection: React.FC = () => {
         "Phân rã file nguyên khối 1079 dòng thành kiến trúc 3 lớp (Implement, Hooks, Presentation)",
         "State Decoupling: Tách riêng TimerState, triệt tiêu 225 re-render thừa",
         "Single Authoritative DOM Tree & Web Audio API Master Limiter",
-        "Triển khai Production lên Vercel: carogame-five.vercel.app",
+        "Triển khai Production lên Vercel: 10-caro.vercel.app",
       ],
     },
     {

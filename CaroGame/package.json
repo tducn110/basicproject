@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "format": "oxfmt",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "build:wasm": "node scripts/build-wasm.mjs"
   },
   "dependencies": {
     "i18next": "25.6.0",

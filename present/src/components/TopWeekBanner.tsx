@@ -1,3 +1,4 @@
+import { CARO_GAME_URL, CARO_GAME_LABEL } from "../utils/gameUrl"
 import React, { useState } from "react"
 import { 
   Calendar, 
@@ -39,14 +40,14 @@ export const MILESTONES: WeekMilestone[] = [
     metric: "19/19 Vitest Tests Pass"
   },
   {
-    id: "week3",
-    weekNumber: "Tuần 3",
-    title: "Phân Rã Kiến Trúc UI & State Decoupling",
-    phase: "Player vs Player Baseline & React 19",
+    id: "board-representation",
+    weekNumber: "Nền Tảng AI",
+    title: "Biểu Diễn Bàn Cờ & Quét Thắng O(1)",
+    phase: "In-Place Apply/Undo & 4-Axis Raycasting",
     status: "completed",
-    anchor: "#week3",
-    description: "Tách hook useCaroGame và useGameTimer, tối ưu CSS Grid một DOM, ngăn 100% re-render thừa của bàn cờ.",
-    metric: "0 Re-render thừa (16.6ms 60 FPS)"
+    anchor: "#board-representation",
+    description: "Bộ nhớ 240 bytes phẳng [[Cell; 15]; 15], Apply & Undo in-place triệt tiêu GC, quét thắng 4 trục tối đa 32 phép đọc.",
+    metric: "O(1) in-place place/undo, 0 heap leak"
   },
   {
     id: "pve-transition",
@@ -240,7 +241,7 @@ export const TopWeekBanner: React.FC = () => {
           {/* Quick jump pills */}
           <div className="hidden lg:flex items-center gap-1.5">
             <a
-              href="#week3"
+              href="#board-representation"
               onClick={() => soundManager.playClick()}
               className="px-2.5 py-1 rounded-full text-[11px] font-medium text-[#646464] hover:text-[#202020] hover:bg-white border border-transparent hover:border-[#e8e8e8] transition-all"
             >
@@ -297,15 +298,15 @@ export const TopWeekBanner: React.FC = () => {
         <div className="flex items-center gap-2">
           {/* Vercel Live Board Button */}
           <a
-            href="https://carogame-five.vercel.app"
+            href={CARO_GAME_URL}
             target="_blank"
             rel="noreferrer"
             onClick={() => soundManager.playClick()}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#00c07a] hover:bg-[#009e65] text-white font-bold text-xs transition-all hover:scale-105 active:scale-95"
-            title="Mở Bàn Cờ Thực Tế Đang Chạy Trên Vercel"
+            title={`Mở bàn cờ: ${CARO_GAME_LABEL}`}
           >
             <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-            <span>Bàn Cờ Live Vercel</span>
+            <span>Bàn Cờ Live</span>
             <ExternalLink className="w-3 h-3 ml-0.5" />
           </a>
 

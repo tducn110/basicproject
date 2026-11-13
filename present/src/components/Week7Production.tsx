@@ -1,3 +1,4 @@
+import { CARO_GAME_URL, CARO_GAME_LABEL } from "../utils/gameUrl"
 import React, { useState } from "react"
 import { 
   Rocket, 
@@ -113,7 +114,7 @@ export const Week7Production: React.FC<Props> = ({ onOpenFigure }) => {
               </div>
               <h3 className="font-extrabold text-sm text-[#202020]">Vercel Deployment</h3>
               <p className="text-xs text-[#646464] leading-relaxed">
-                Thiết lập pipeline CI/CD tự động build từ GitHub repo. Triển khai CDN toàn cầu tại <code>carogame-five.vercel.app</code> với bảo mật HTTPS.
+                Thiết lập pipeline CI/CD tự động build từ GitHub repo. Triển khai CDN toàn cầu tại <code>10-caro.vercel.app</code> với bảo mật HTTPS.
               </p>
             </div>
             <div className="pt-2 border-t border-[#e8e8e8] text-[11px] font-mono font-bold text-[#00c07a] flex items-center gap-1">
@@ -190,13 +191,13 @@ export const Week7Production: React.FC<Props> = ({ onOpenFigure }) => {
 
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://carogame-five.vercel.app"
+              href={CARO_GAME_URL}
               target="_blank"
               rel="noreferrer"
               onClick={() => soundManager.playClick()}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#00c07a] hover:bg-[#009e65] text-white font-bold text-xs shadow-sm transition-all hover:scale-105 active:scale-95"
             >
-              <span>Trải Nghiệm Bàn Cờ Vercel</span>
+              <span>Bàn cờ {CARO_GAME_LABEL}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 

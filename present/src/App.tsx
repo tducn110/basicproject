@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Navbar } from "./components/Navbar"
-import { HeroSection } from "./components/HeroSection"
+import { TopHeroBoardWithTOC } from "./components/TopHeroBoardWithTOC"
+import { BenchmarkSection } from "./components/BenchmarkSection"
 import { ProjectOverview } from "./components/ProjectOverview"
-import { Week3Decoupling } from "./components/Week3Decoupling"
+import { BoardRepresentationAndWinCheck } from "./components/BoardRepresentationAndWinCheck"
 import { TransitionPvE } from "./components/TransitionPvE"
 import { Week4RustEngine } from "./components/Week4RustEngine"
 import { Week5Minimax } from "./components/Week5Minimax"
@@ -12,8 +13,6 @@ import { Week6AlphaBeta } from "./components/Week6AlphaBeta"
 import { Week7CandidatesAndTiers } from "./components/Week7CandidatesAndTiers"
 import { Week8To10AdvancedAI } from "./components/Week8To10AdvancedAI"
 import { PythonVisualizer } from "./components/PythonVisualizer"
-import { InteractiveCaroBoard } from "./components/InteractiveCaroBoard"
-import { BenchmarkSection } from "./components/BenchmarkSection"
 import { RoadmapSection } from "./components/RoadmapSection"
 import { Footer } from "./components/Footer"
 import { FigureInspectorModal } from "./components/FigureInspectorModal"
@@ -62,44 +61,42 @@ export function App() {
       {/* Unified Sticky Header with Milestone Dropdown, Reading Progress & Chapter Spy */}
       <Navbar />
 
-      {/* Hero Section with ClickUp Style, Conic CTA, Benefits */}
-      <HeroSection onOpenFigure={handleOpenFigure} />
+      {/* Top Hero Section: MỞ LÊN THẤY LUÔN BÀN CỜ + TABLE OF CONTENTS BÊN CẠNH */}
+      <TopHeroBoardWithTOC onOpenFigure={handleOpenFigure} />
 
       <main className="relative z-10">
-        {/* Foundation & Rules Spec (Phase 1 & 2) */}
-        <ProjectOverview />
-
-        {/* Week 3: UI Architecture Decoupling & State Invariants */}
-        <Week3Decoupling onOpenFigure={handleOpenFigure} />
-
-        {/* The Transition: From PvP to PvE (WebAssembly & Web Worker) */}
-        <TransitionPvE onOpenFigure={handleOpenFigure} />
-
-        {/* Week 4: Pattern Detection, Heuristics & Rust Engine */}
-        <Week4RustEngine onOpenFigure={handleOpenFigure} />
-
-        {/* Week 5: Minimax Algorithm & Game Tree Search */}
-        <Week5Minimax onOpenFigure={handleOpenFigure} />
-
-        {/* Week 6: Alpha-Beta Pruning, Move Ordering & Zobrist Hashing */}
-        <Week6AlphaBeta onOpenFigure={handleOpenFigure} />
-
-        {/* Week 7: Candidate Move Generation, Tactical Recall & Six Bot Tiers */}
-        <Week7CandidatesAndTiers onOpenFigure={handleOpenFigure} />
-
-        {/* Week 8-10: Move Ordering, Zobrist Hashing, Iterative Deepening & 18-Slide Blueprint */}
-        <Week8To10AdvancedAI onOpenFigure={handleOpenFigure} />
-
-        {/* Python Sandbox (Pyodide In-Browser) & Visual Evidence Gallery */}
-        <PythonVisualizer onOpenFigure={handleOpenFigure} />
-
-        {/* Live Playable Interactive 15x15 Caro Board */}
-        <InteractiveCaroBoard onOpenFigure={handleOpenFigure} />
-
-        {/* Rust vs TypeScript Empirical Benchmarks */}
+        {/* KÉO XUỐNG THẤY NGAY KẾT QUẢ THỰC NGHIỆM ĐỐI ĐẦU RUST VS TS */}
         <BenchmarkSection onOpenFigure={handleOpenFigure} />
 
-        {/* Roadmap, 6 Phases & Git Provenance Cards */}
+        {/* BẮT ĐẦU NỀN TẢNG THUẬT TOÁN HỌC THUẬT */}
+        {/* 1. Foundation & Rules Spec (Phase 1 & 2) */}
+        <ProjectOverview />
+
+        {/* 2. Core Algorithm: Board Representation, In-Place Apply/Undo & 4-Axis O(1) Raycasting */}
+        <BoardRepresentationAndWinCheck onOpenFigure={handleOpenFigure} />
+
+        {/* 3. The Transition: From PvP to PvE (WebAssembly & Web Worker) */}
+        <TransitionPvE onOpenFigure={handleOpenFigure} />
+
+        {/* 4. Week 4: Pattern Detection, Heuristics & 7 Mẫu Hình Thế */}
+        <Week4RustEngine onOpenFigure={handleOpenFigure} />
+
+        {/* 5. Week 5: Minimax Algorithm & Game Tree Search */}
+        <Week5Minimax onOpenFigure={handleOpenFigure} />
+
+        {/* 6. Week 6: Alpha-Beta Pruning, Move Ordering & Zobrist Hashing */}
+        <Week6AlphaBeta onOpenFigure={handleOpenFigure} />
+
+        {/* 7. Week 7: Candidate Move Generation, Tactical Recall & Six Bot Tiers */}
+        <Week7CandidatesAndTiers onOpenFigure={handleOpenFigure} />
+
+        {/* 8. Week 8-10: Move Ordering, Zobrist Hashing, Iterative Deepening & 18-Slide Blueprint */}
+        <Week8To10AdvancedAI onOpenFigure={handleOpenFigure} />
+
+        {/* 9. Python Sandbox (Pyodide In-Browser) & Visual Evidence Gallery */}
+        <PythonVisualizer onOpenFigure={handleOpenFigure} />
+
+        {/* 10. Roadmap, 6 Phases & Git Provenance Cards */}
         <RoadmapSection />
       </main>
 
