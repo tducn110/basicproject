@@ -149,16 +149,16 @@ All reports are authored under **Standard 00 (IMRaD & Evidence Specification)** 
 FINAL/
 ├── 00A_Master_Research_and_Evidence_Registry/     # Master Control Layer & Metric Dictionary
 ├── 00_De_Cuong_PDF/                                # Official University Syllabus
-├── Week_01/                                        # Mathematical Foundations & Rule Profiling
-├── Week_02/                                        # TypeScript Core Engine & Invariant Matrix
-├── Week_03/                                        # Web UI, PixiJS Canvas & Coordinate Contract
-├── Week_04/                                        # Four-Block Experimentation & Rust WASM
-├── Week_05/                                        # Minimax Search & SearchSpaceMode Isolation
-├── Week_06/                                        # Alpha-Beta Pruning & Synthetic Tree Tests
-├── Week_07/                                        # Candidate Move Generation & Tactical Recall
-├── Week_08/                                        # Dynamic Move Ordering & Cutoff Acceleration
-├── Week_09/                                        # Zobrist Hashing & Transposition Tables
-├── Week_10/                                        # Iterative Deepening & Bot Tournaments
+├── Week1/                                          # Mathematical Foundations & Rule Profiling
+├── Week2/                                          # TypeScript Core Engine & Invariant Matrix
+├── Week3/                                          # Web UI, PixiJS Canvas & Coordinate Contract
+├── Week4/                                          # Four-Block Experimentation & Rust WASM
+├── Week5/                                          # Minimax Search & SearchSpaceMode Isolation
+├── Week6/                                          # Alpha-Beta Pruning & Synthetic Tree Tests
+├── Week7/                                          # Candidate Move Generation & Tactical Recall
+├── Week8/                                          # Dynamic Move Ordering & Cutoff Acceleration
+├── Week9/                                          # Zobrist Hashing & Transposition Tables
+├── Week10/                                         # Iterative Deepening & Bot Tournaments
 ├── 98_Thesis_Synthesis_Matrix/                    # Chapter Mapping & Final Claim Gate
 ├── 99_Reading_Index_and_References/                # Canonical Bibliography & Verification URLs
 ├── Google_Drive_Sync/                              # Consolidated Delivery Artifacts for GDrive

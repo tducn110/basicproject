@@ -4,7 +4,7 @@
 > **Hiện trạng 23/10/2026:** [Bản sửa Rust/UI và mô hình toán hiện tại](BasicProject_Current_Math_and_Design.md) là điểm đọc cho source local và gate/evidence mới. Các đoạn cũ bên dưới là snapshot/lịch nghiên cứu trước đó: không dùng các nhãn COMPLETE/PASS, số FPS/speedup/tournament, TS↔Rust parity, TT/ID hay zero-copy cũ như kết quả đã xác nhận lại. App hiện dùng React19/PixiJS7; source game, reference core và WASM là các tầng evidence riêng. Chỉ Markdown tuần1–7 được cập nhật trong lượt này; Word/PDF/Drive/mirror cũ chưa đồng bộ.
 
 
-Cập nhật ngày 17 tháng 10 năm 2026. Bộ báo cáo tiếng Anh này thay nội dung và bản xuất tại năm thư mục `Week_05` đến `Week_09`. Nội dung tập trung vào cơ sở toán học, giải thích thuật toán, nguồn hiện thực, thực nghiệm có thể tái chạy và giới hạn của kết luận.
+Cập nhật ngày 17 tháng 10 năm 2026. Bộ báo cáo tiếng Anh này thay nội dung và bản xuất tại năm thư mục `Week5` đến `Week9`. Nội dung tập trung vào cơ sở toán học, giải thích thuật toán, nguồn hiện thực, thực nghiệm có thể tái chạy và giới hạn của kết luận.
 
 Phần thực hiện mới gồm bộ thực nghiệm Rust riêng, dữ liệu gốc, kiểm tra đối chiếu thuật toán và năm báo cáo được viết lại. Minimax, Alpha-Beta, candidate generation, ordering, Zobrist và transposition table đã có trong `caro-core-reference` trước lần cập nhật này. Mã nguồn game và reference core không được sửa trong lần làm báo cáo; không mô tả việc kiểm tra thuật toán có sẵn như một lần tích hợp mới vào game.
 
@@ -12,11 +12,11 @@ Phần thực hiện mới gồm bộ thực nghiệm Rust riêng, dữ liệu g
 
 | Tuần | Nội dung | Markdown | Word | PDF |
 | --- | --- | --- | --- | --- |
-| 5 | Minimax, terminal utility, giới hạn độ sâu, chứng minh và hoàn tác state | [Đọc](Week_05/Week_05_Rust_Minimax_Search_Tree_Analysis.md) | [Tải](Week_05/Week_05_Rust_Minimax_Search_Tree_Analysis.docx) | [Đọc](Week_05/Week_05_Rust_Minimax_Search_Tree_Analysis.pdf) |
-| 6 | Alpha-Beta, bất biến cận, chứng minh tương đương và loại bound của cache | [Đọc](Week_06/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.md) | [Tải](Week_06/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.docx) | [Đọc](Week_06/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.pdf) |
-| 7 | Candidate theo khoảng cách Chebyshev, tính chất tập nước đi và tác động của cap | [Đọc](Week_07/Week_07_Candidate_Move_Generation.md) | [Tải](Week_07/Week_07_Candidate_Move_Generation.docx) | [Đọc](Week_07/Week_07_Candidate_Move_Generation.pdf) |
-| 8 | Move ordering, giá trị cây không đổi, chi phí chấm điểm và ảnh hưởng của thứ tự | [Đọc](Week_08/Week_08_Move_Ordering_Optimization.md) | [Tải](Week_08/Week_08_Move_Ordering_Optimization.docx) | [Đọc](Week_08/Week_08_Move_Ordering_Optimization.pdf) |
-| 9 | Zobrist XOR, cập nhật và hoàn tác hash, transposition table và phạm vi tái sử dụng | [Đọc](Week_09/Week_09_Zobrist_Hashing_and_Transposition_Table.md) | [Tải](Week_09/Week_09_Zobrist_Hashing_and_Transposition_Table.docx) | [Đọc](Week_09/Week_09_Zobrist_Hashing_and_Transposition_Table.pdf) |
+| 5 | Minimax, terminal utility, giới hạn độ sâu, chứng minh và hoàn tác state | [Đọc](Week5/Week_05_Rust_Minimax_Search_Tree_Analysis.md) | [Tải](Week5/Week_05_Rust_Minimax_Search_Tree_Analysis.docx) | [Đọc](Week5/Week_05_Rust_Minimax_Search_Tree_Analysis.pdf) |
+| 6 | Alpha-Beta, bất biến cận, chứng minh tương đương và loại bound của cache | [Đọc](Week6/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.md) | [Tải](Week6/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.docx) | [Đọc](Week6/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.pdf) |
+| 7 | Candidate theo khoảng cách Chebyshev, tính chất tập nước đi và tác động của cap | [Đọc](Week7/Week_07_Candidate_Move_Generation.md) | [Tải](Week7/Week_07_Candidate_Move_Generation.docx) | [Đọc](Week7/Week_07_Candidate_Move_Generation.pdf) |
+| 8 | Move ordering, giá trị cây không đổi, chi phí chấm điểm và ảnh hưởng của thứ tự | [Đọc](Week8/Week_08_Move_Ordering_Optimization.md) | [Tải](Week8/Week_08_Move_Ordering_Optimization.docx) | [Đọc](Week8/Week_08_Move_Ordering_Optimization.pdf) |
+| 9 | Zobrist XOR, cập nhật và hoàn tác hash, transposition table và phạm vi tái sử dụng | [Đọc](Week9/Week_09_Zobrist_Hashing_and_Transposition_Table.md) | [Tải](Week9/Week_09_Zobrist_Hashing_and_Transposition_Table.docx) | [Đọc](Week9/Week_09_Zobrist_Hashing_and_Transposition_Table.pdf) |
 
 Các công thức trong Word được lưu bằng phương trình native OMML. PDF được xuất từ chính Word và kiểm tra trang sau khi render. Quy ước bằng chứng trong báo cáo là **[A] source hoặc kết quả thực thi**, **[B] nguồn học thuật hoặc tài liệu chính thức**, **[C] suy luận có giả thiết**, **[D] đề xuất chưa hiện thực**.
 

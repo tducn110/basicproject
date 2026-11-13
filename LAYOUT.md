@@ -76,7 +76,7 @@ Cập nhật 23/10/2026. Workspace báo cáo không có Git repo riêng; `10_car
 | `gomoku-main/engine/src/lib.rs` | `Game` và wasm-bindgen boundary; sở hữu state của bản replay trong Worker. |
 | `gomoku-main/web/` | UI tham khảo SVG độc lập; không phải app Pixi đang sửa. |
 | `caro-core-reference/` | Reference study riêng; không dùng test của nó để chứng minh binary của game. |
-| `Week_01/` … `Week_10/` | Báo cáo nghiên cứu theo lịch local; bản `.md` hiện tại và export cũ phải được phân biệt. |
+| `Week1/` … `Week10/` | Bộ báo cáo nghiên cứu canonical; mỗi tuần giữ Markdown, DOCX, PDF và artifact bổ sung khi có. |
 | `research/week_05_09/` | Evidence reference đã đóng băng ngày 17/10; không overwrite trong lượt sửa này. |
 | `research/current_2026_10_23/` | Baseline, command logs, raw results, provenance và gate reviews của lượt sửa hiện tại. |
 | `basic/`, `Tuan_01/` … `Tuan_04/`, `obsidian/` | Các reconstruction/notes và lịch đề cương khác; không tự đồng nhất ID tuần. |
