@@ -57,9 +57,9 @@ export const Week5Minimax: React.FC<Props> = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
                 <div className="p-3 rounded-xl bg-white border border-[#e8e8e8]">
-                  <div className="font-bold text-[#202020] mb-1">Bất Biến Điểm Tận Cùng (Terminal):</div>
+                  <div className="font-bold text-[#202020] mb-1">Bất Biến Điểm Tận Cùng (Terminal Hierarchy):</div>
                   <p className="text-[#646464] text-[11px] leading-relaxed">
-                    <MathText text="Nếu phát hiện nước thắng ngay qua kiểm tra tia $O(1)$, hàm trả về giá trị chiến thắng tuyệt đối $10^7$ mà không cần duyệt sâu thêm." />
+                    <MathText text="Nếu phát hiện nước thắng ngay qua kiểm tra tia $O(1)$, hàm trả về giá trị chiến thắng chiết khấu độ sâu $U = M - q = 99\\,999\\,999$ ($M = 10^8, q=1$) mà không cần duyệt sâu thêm." />
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white border border-[#e8e8e8]">

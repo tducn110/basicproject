@@ -161,6 +161,26 @@ describe("copied WASM binary and TypeScript rule corpus", () => {
     } finally { for (const game of games) game.free() }
   })
 
+  it.each(profiles)("BINARY-TACTICS-%s: preserves each strategy on a single forced completion", (difficulty) => {
+    const cases = [
+      { id: "block-gap", cells: interleave([3, 4, 6, 7].map((x) => xy(x, 7)), whiteFillers.slice(0, 3)), expected: xy(5, 7) },
+      { id: "win-gap", cells: interleave([0, 2, 4, 6, 8].map((x) => xy(x, 0)), [3, 4, 6, 7].map((x) => xy(x, 9))), expected: xy(5, 9) },
+    ]
+    for (const fixture of cases) {
+      const moves = history(fixture.cells)
+      const result = executeWasmSearch({ requestId: 11, roundId: 12, difficulty, history: moves }, Game)
+      expect(result.stats.source).toBe("rust")
+      expect(result.stats.depth).toBe(WASM_CONFIGURED_DEPTHS[difficulty])
+      expect(result.stats.strategy).toBe(difficulty === "easy" ? "random" : difficulty === "normal" ? "rule_based" : "alpha_beta")
+      expect(result.move).not.toBeNull()
+      expect(moves.some((move) => move.cell.row === result.move!.row && move.cell.col === result.move!.col)).toBe(false)
+      // Random is intentionally not required to win/block; the five other
+      // profiles must retain the unique immediate completion in the real WASM.
+      if (difficulty !== "easy") expect(result.move).toEqual(fixture.expected)
+      results.push({ id: `BINARY-TACTICS-${difficulty}-${fixture.id}`, status: "PASS", input: moves, result })
+    }
+  }, 15_000)
+
   it.each([fixtures[0], fixtures[7]])("BINARY-TERMINAL-$id: all six levels return no move", (fixture) => {
     const moves = history(fixture.cells)
     const replies: AIResult[] = []

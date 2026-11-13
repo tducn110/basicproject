@@ -96,11 +96,11 @@ export const HeroSection: React.FC<Props> = ({ onOpenFigure }) => {
               <div className="rainbow-conic-wrapper hover:scale-105 transition-transform">
                 <div className="rainbow-conic-border" />
                 <a
-                  href="#week3"
+                  href="#board-representation"
                   onClick={() => soundManager.playClick()}
                   className="rainbow-conic-inner flex items-center gap-2 px-6 py-3 font-bold text-sm tracking-tight"
                 >
-                  <span>Khám Phá Chi Tiết Báo Cáo</span>
+                  <span>Khám Phá Toàn Bộ Thuật Toán AI</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
@@ -126,35 +126,35 @@ export const HeroSection: React.FC<Props> = ({ onOpenFigure }) => {
             </div>
           </div>
 
-          {/* Right Column: ClickUp Product UI Screenshot / Interactive Anchor */}
+          {/* Right Column: AI Engine Pipeline Architecture Screenshot / Interactive Anchor */}
           <div className="lg:col-span-5">
             <div 
-              onClick={() => onOpenFigure("ui_architecture_flow")}
+              onClick={() => onOpenFigure("ai_pipeline")}
               className="clickable-figure clickup-card p-3 bg-[#f8f9fa] border border-[#e8e8e8] relative group"
-              title="Chạm để mở bảng phân tích chi tiết sơ đồ kiến trúc"
+              title="Chạm để mở bảng phân tích chi tiết sơ đồ kiến trúc động cơ AI"
             >
               <div className="flex items-center justify-between pb-3 px-2 border-b border-[#e8e8e8] text-xs font-mono text-[#838383]">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#f43f5e]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#eab308]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#00c07a]" />
-                  <span className="ml-2 font-bold text-[#202020]">ui_architecture_flow.png</span>
+                  <span className="ml-2 font-bold text-[#202020]">ai-pipeline.png</span>
                 </div>
                 <span className="px-2 py-0.5 rounded-full bg-[#6647f0]/10 text-[#6647f0] text-[10px] font-bold">
                   Touch to Inspect ↗
                 </span>
               </div>
 
-              <div className="rounded-xl overflow-hidden mt-3 border border-[#e8e8e8] bg-[#f8f9fa] p-1.5">
+              <div className="rounded-xl overflow-hidden mt-3 border border-[#e8e8e8] bg-white p-2">
                 <img
-                  src="/assets/ui_architecture_flow.png"
-                  alt="Sơ đồ Pipeline Dữ liệu và Phân rã State"
-                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                  src="/assets/ai-pipeline.png"
+                  alt="Sơ đồ Kiến Trúc Động Cơ AI Đối Kháng"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
               <div className="p-3 text-xs text-[#646464] flex items-center justify-between">
-                <span>Minh chứng: Sơ đồ 7 bước xử lý nước đi</span>
+                <span>Kiến trúc: Phễu lọc Chebyshev & Alpha-Beta Search</span>
                 <span className="font-mono text-[#0091ff] font-bold">Inspect Deep Math & Goods/Bads →</span>
               </div>
             </div>

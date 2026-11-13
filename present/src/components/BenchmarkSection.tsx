@@ -46,15 +46,15 @@ export const BenchmarkSection: React.FC<Props> = ({ onOpenFigure }) => {
   ]
 
   return (
-    <section id="benchmark" className="py-24 px-4 bg-white max-w-6xl mx-auto">
+    <section id="results" className="py-24 px-4 bg-white max-w-6xl mx-auto border-b border-[#e8e8e8]">
       {/* Header */}
       <div className="mb-14 text-center max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#0091ff]/10 border border-[#0091ff]/20 text-[#0091ff] text-xs font-bold uppercase tracking-wider mb-3">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#00c07a]/10 border border-[#00c07a]/30 text-[#00c07a] text-xs font-bold uppercase tracking-wider mb-3">
           <Gauge className="w-3.5 h-3.5" />
-          <span>Thực Nghiệm Đo Đạc Hiệu Năng Chuẩn</span>
+          <span>Phần 1: Bảng Kết Quả & Đo Đạc Thực Nghiệm Đối Đầu</span>
         </div>
         <h2 className="text-3xl sm:text-5xl font-extrabold text-[#090c1d] tracking-[-0.035em] mb-4">
-          So Sánh Định Lượng: Rust Native vs TypeScript
+          Kết Quả Thực Nghiệm: Rust WASM vs TypeScript V8 JIT
         </h2>
         <p className="text-[#646464] text-sm sm:text-base leading-relaxed">
           Đo đạc thực nghiệm trên cùng 10 thế cờ chuẩn (Test Fixtures) từ độ sâu 1 đến độ sâu 4. Minh chứng lý do kiến trúc quyết định sử dụng Rust WebAssembly làm lõi tính toán đối kháng.

@@ -1,3 +1,4 @@
+import { CARO_GAME_URL, CARO_GAME_LABEL } from "../utils/gameUrl"
 import React from "react"
 import { ArrowUpRight, Globe, GitBranch } from "lucide-react"
 import { soundManager } from "../utils/audio"
@@ -18,14 +19,14 @@ export const Footer: React.FC = () => {
 
         <div className="flex flex-wrap items-center gap-4">
           <a
-            href="https://carogame-five.vercel.app"
+            href={CARO_GAME_URL}
             target="_blank"
             rel="noreferrer"
             onClick={() => soundManager.playClick()}
             className="flex items-center gap-1.5 hover:text-[#202020] transition-colors"
           >
             <Globe className="w-3.5 h-3.5 text-[#0091ff]" />
-            <span>Vercel Production Demo</span>
+            <span>Bàn cờ {CARO_GAME_LABEL}</span>
             <ArrowUpRight className="w-3 h-3 text-[#838383]" />
           </a>
 

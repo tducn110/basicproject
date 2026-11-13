@@ -1,3 +1,4 @@
+import { CARO_GAME_URL, CARO_GAME_LABEL } from "../utils/gameUrl"
 import React, { useState, useCallback, useEffect } from "react"
 import confetti from "canvas-confetti"
 import { Gamepad2, RotateCcw, User, Bot, Eye, EyeOff, Trophy, Sparkles, ExternalLink, GitBranch, Globe, RefreshCw, Maximize2 } from "lucide-react"
@@ -17,8 +18,10 @@ interface Props {
 }
 
 export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
-  const [boardSource, setBoardSource] = useState<"presentation" | "vercel">("presentation")
+  const [boardSource, setBoardSource] = useState<"presentation" | "vercel">("vercel")
   const [iframeKey, setIframeKey] = useState<number>(0)
+  const activeVercelUrl = CARO_GAME_URL
+  const activeVercelLabel = CARO_GAME_LABEL
   const [board, setBoard] = useState<CellValue[][]>(() =>
     Array(BOARD_SIZE)
       .fill(null)
@@ -161,24 +164,24 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
                   Bản Build Production Thực Tế:
                 </span>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#f8f9fa] border border-[#e8e8e8] text-[#202020] font-bold">
-                  carogame-five.vercel.app
+                  10-caro.vercel.app
                 </span>
               </div>
               <p className="text-xs text-[#646464] mt-0.5">
-                Được build từ mã nguồn Rust Wasm Web Worker, tự động đồng bộ qua CI/CD GitHub.
+                Được build từ mã nguồn Rust WASM Web Worker, tích hợp Papa Studio & Gomoku Engine.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
             <a
-              href="https://carogame-five.vercel.app"
+              href={CARO_GAME_URL}
               target="_blank"
               rel="noreferrer"
               onClick={() => soundManager.playClick()}
               className="flex-1 md:flex-none flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-[#00c07a] hover:bg-[#009e65] text-white font-bold text-xs shadow-xs transition-all hover:scale-105 active:scale-95"
             >
-              <span>Mở Bàn Cờ Vercel</span>
+              <span>Bàn cờ {CARO_GAME_LABEL}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
@@ -197,7 +200,7 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
         </div>
 
         {/* View Switcher: In-Presentation Board vs Embedded Vercel Production */}
-        <div className="flex justify-center mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
           <div className="inline-flex p-1 rounded-full bg-white border border-[#d4d4d4] shadow-xs">
             <button
               onClick={() => {
@@ -228,6 +231,12 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
               <span>Nhúng Trực Tiếp Bản Build Vercel</span>
             </button>
           </div>
+
+          {boardSource === "vercel" && (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#bbf7d0] text-xs font-mono font-bold text-[#166534]">
+              <span>Bàn cờ {CARO_GAME_LABEL}</span>
+            </div>
+          )}
         </div>
 
         {boardSource === "vercel" ? (
@@ -240,7 +249,8 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
                   <span className="w-2.5 h-2.5 rounded-full bg-[#eab308]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#00c07a]" />
                 </div>
-                <span className="font-mono text-[#838383] font-bold ml-2">https://carogame-five.vercel.app</span>
+                <span className="font-mono text-[#00c07a] font-bold ml-2">{activeVercelUrl}</span>
+                <span className="text-[10px] text-[#838383] font-mono">({activeVercelLabel})</span>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -255,7 +265,7 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
                   <span>Reload Frame</span>
                 </button>
                 <a
-                  href="https://carogame-five.vercel.app"
+                  href={activeVercelUrl}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => soundManager.playClick()}
@@ -269,8 +279,8 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
 
             <div className="rounded-xl overflow-hidden border border-[#e8e8e8] aspect-[4/3] sm:aspect-[16/10] w-full max-h-[700px] bg-[#f8f9fa]">
               <iframe
-                key={iframeKey}
-                src="https://carogame-five.vercel.app"
+                key={`${iframeKey}-${activeVercelUrl}`}
+                src={activeVercelUrl}
                 title="Bàn Cờ Caro Vercel Production"
                 className="w-full h-full border-0"
                 allow="fullscreen"
@@ -278,7 +288,7 @@ export const InteractiveCaroBoard: React.FC<Props> = ({ onOpenFigure }) => {
             </div>
             
             <div className="text-center text-xs text-[#838383] pt-1">
-              Bản build WebAssembly chính thức đang chạy tại máy chủ Vercel. Bạn có thể chơi trực tiếp hoặc click <a href="https://carogame-five.vercel.app" target="_blank" rel="noreferrer" className="text-[#0091ff] font-bold hover:underline">vào đây để mở tab mới</a>.
+              Bàn cờ Rust/WebAssembly tại {CARO_GAME_LABEL}. Bạn có thể chơi trực tiếp hoặc click <a href={activeVercelUrl} target="_blank" rel="noreferrer" className="text-[#0091ff] font-bold hover:underline">vào đây để mở tab mới ({activeVercelUrl})</a>.
             </div>
           </div>
         ) : (
