@@ -1,6 +1,6 @@
 # ĐỒ ÁN CƠ SỞ: NGHIÊN CỨU THUẬT TOÁN AI CHO GAME CỜ CARO & TÍCH HỢP WEB UI
 
-[![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=flat&logo=vercel)](https://carogame-five.vercel.app)
+[![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=flat&logo=vercel)](https://10-caro.vercel.app)
 [![React 19](https://img.shields.io/badge/React-19.0-61dafb?style=flat&logo=react)](https://react.dev)
 [![TypeScript 5.7](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![Rust Engine](https://img.shields.io/badge/Rust-1.98-orange?style=flat&logo=rust)](https://www.rust-lang.org/)
@@ -9,8 +9,8 @@
 
 > **Kho lưu trữ nghiên cứu học thuật & mã nguồn trò chơi cờ Caro (Gomoku 15×15)**  
 > **Chương trình đào tạo:** Đồ Án Cơ Sở (Basic Project) — Chuẩn mực học thuật VNUK (IMRaD Standard)  
-> **Bản chạy trực tuyến Web Game:** [https://carogame-five.vercel.app](https://carogame-five.vercel.app)  
-> **Bàn cờ Live Engine Rust WASM:** [https://10-caro.vercel.app](https://10-caro.vercel.app)  
+> **Bản chạy trực tuyến Web Game:** [https://10-caro.vercel.app](https://10-caro.vercel.app)
+> **Bàn cờ Live Engine Rust WASM:** [https://10-caro.vercel.app](https://10-caro.vercel.app)
 
 > **Tài liệu nghiên cứu mở rộng:**  
 > - 📄 [Báo cáo Nghiên cứu Chuyên sâu 10 Tuần Tiếng Anh (English Research Backbone)](README_RESEARCH_10_WEEKS_EN.md)  

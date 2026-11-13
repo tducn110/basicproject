@@ -77,10 +77,13 @@ print("-> Phát hiện 'open_four': 1 (Thế cờ thắng tất định ở lư�
     {
       title: "2. Lượng Giá Heuristic & Mate Dominance",
       filename: "heuristic_evaluator.py",
-      description: "Mô phỏng hàm lượng giá thế cờ f(s) với ma trận trọng số lũy thừa và bảo đảm Mate Dominance.",
+      description: "Mô phỏng hàm lượng giá thế cờ f(s) với ma trận trọng số lũy thừa và bảo đảm Mate Dominance (M = 10^8, H = 99,999,774).",
       figureId: "pattern_weights_distribution",
-      code: `WEIGHTS = {
-    "five": 10_000_000,
+      code: `M = 100_000_000          # Base Terminal Score (M = 10^8, Chuẩn hóa 13/11)
+H = M - 225 - 1          # 99,999,774 (Ngưỡng kẹp tĩnh tối đa)
+
+WEIGHTS = {
+    "five": M,
     "open_four": 100_000,
     "closed_four": 10_000,
     "open_three": 5_000,
@@ -91,16 +94,19 @@ print("-> Phát hiện 'open_four': 1 (Thế cờ thắng tất định ở lư�
 
 DEFENSIVE_MULTIPLIER = 1.2  # Ưu tiên phòng thủ 120%
 
-def evaluate_position(bot_patterns, human_patterns):
+def evaluate_position(bot_patterns, human_patterns, q=1):
     if bot_patterns.get("five", 0) > 0:
-        return 10_000_000, "BOT_WIN (Thắng ngay)"
+        win_score = M - q  # Chiết khấu cự ly root q: 99,999,999 tại q=1
+        return win_score, f"BOT_WIN (U = M - {q} = {win_score:,})"
     if human_patterns.get("five", 0) > 0:
-        return -9_999_999, "HUMAN_WIN (Thua ngay nếu không chặn)"
+        loss_score = -M + q
+        return loss_score, f"HUMAN_WIN (Thua nếu không chặn: {loss_score:,})"
 
     atk_score = sum(WEIGHTS.get(k, 0) * v for k, v in bot_patterns.items())
     def_score = sum(int(WEIGHTS.get(k, 0) * DEFENSIVE_MULTIPLIER) * v for k, v in human_patterns.items())
     
-    total = max(-9_999_999, min(9_999_999, atk_score - def_score))
+    # Kẹp tĩnh trong khoảng [-H, +H] = [-99,999,774, +99,999,774]
+    total = max(-H, min(H, atk_score - def_score))
     return total, f"Atk: +{atk_score:,} | Def Threat: -{def_score:,}"
 
 s1, reason1 = evaluate_position({"open_four": 1}, {"open_three": 1})
@@ -111,7 +117,12 @@ print("-> Bot ưu tiên hoàn thành thế tấn công không thể cản phá.\
 s2, reason2 = evaluate_position({"open_three": 1}, {"closed_four": 1})
 print("=== KỊCH BẢN 2: Đối thủ có Closed Four nguy hiểm ===")
 print(f"Tổng điểm Heuristic f(s) = {s2:,} ({reason2})")
-print("-> Điểm âm nặng do hệ số phòng thủ 1.2x buộc Bot phải chặn nước này trước.")
+print("-> Điểm âm nặng do hệ số phòng thủ 1.2x buộc Bot phải chặn nước này trước.\\n")
+
+s3, reason3 = evaluate_position({"five": 1}, {}, q=1)
+print("=== KỊCH BẢN 3: Thắng Cuộc Tận Cùng Tại Root (Mục 2.5.2 Báo Cáo 13/11) ===")
+print(f"Điểm thắng tuyệt đối U = {s3:,} ({reason3}) > H ({H:,})")
+print("-> Điểm thắng luôn áp đảo hoàn toàn mọi điểm tĩnh bất kể ở độ sâu nào!")
 `,
     },
     {
@@ -173,6 +184,49 @@ print(f"- Thời gian tính toán trung bình: {avg_time_per_move_us:.2f} µs/n�
 print(f"- Ngân sách khung hình 60 FPS: 16.67 ms ({frame_budget_60fps_us:.0f} µs)")
 print(f"-> TỶ LỆ CHIẾM DỤNG FRAME BUDGET: {latency_ratio:.3f}% (Chỉ 0.25%!)")
 print(f"-> Kết luận: Động cơ Rust chạy cực nhanh, sẵn sàng tích hợp WebAssembly không drop frame!")
+`,
+    },
+    {
+      title: "5. Ví Dụ Tích Hợp (8-Ply Worked Example)",
+      filename: "applied_worked_example.py",
+      description: "Mô phỏng ví dụ tích hợp ván cờ 8 nước từ báo cáo 13/11: Hàng 7 tạo thế X X _ X X, ô (6,7) được Soft Cap bảo vệ và đạt điểm U = 99,999,999.",
+      figureId: "apply_undo",
+      code: `M = 100_000_000  # Mate Base Score chuẩn hóa (Báo cáo 13/11)
+
+# Ván đấu 8 nước xuất phát từ bàn trống (Tọa độ x=col, y=row):
+moves = [
+    ("X", (4, 7)), ("O", (0, 0)),
+    ("X", (5, 7)), ("O", (1, 0)),
+    ("X", (7, 7)), ("O", (0, 1)),
+    ("X", (8, 7)), ("O", (1, 1))
+]
+
+print("=== VÍ DỤ TÍCH HỢP TỪ BÁO CÁO 13/11 (8-PLY WORKED EXAMPLE) ===")
+print(f"Tổng số nước đã đánh: {len(moves)} plies. Lượt tiếp theo: X")
+print("Cấu hình Hàng 7: X tại cols [4, 5] và cols [7, 8] -> Ô trống giữa: (col=6, row=7)")
+
+winning_gap = (6, 7)
+# 1. Bán kính Chebyshev r <= 2
+# (6, 7) cách (5, 7) đúng 1 đơn vị, cách (7, 7) đúng 1 đơn vị <= 2 => Thuộc tập ứng viên!
+print("\\n1. CHEBYSHEV MEMBERSHIP: Ô (6, 7) thuộc tập ứng viên bán kính r <= 2.")
+
+# 2. Quét tia 4 trục tại ô (6, 7)
+# Bên trái có 2 quân X (cols 4, 5), bên phải có 2 quân X (cols 7, 8)
+horizontal_count = 1 + 2 + 2  # 1 (đặt thử) + 2 (trái) + 2 (phải) = 5
+print(f"2. RAYCASTING WIN CHECK: Đạt {horizontal_count} quân liên tiếp -> X Thắng ngay lập tức!")
+
+# 3. Bảo vệ nước chiến thuật (Tactical Retention) trước Soft Cap
+tactical_set = {winning_gap}
+nominal_cap = 1
+retained_candidates = max(nominal_cap, len(tactical_set))
+print(f"3. SOFT CAP RETENTION: Tập chiến thuật T = {(6, 7)}. Soft Cap giữ lại {retained_candidates} ứng viên.")
+
+# 4. Giá trị lượng giá tận cùng (Root distance q = 1)
+q = 1
+U = M - q
+print(f"4. TERMINAL VALUE: U = M - q = {M} - {q} = {U:,} điểm (Thắng ngay tại root)")
+print("5. STATE RESTORATION: Sau khi đánh giá, gọi undo(6, 7), hoàn tác move_count từ 9 về 8.")
+print("-> Kết luận: Cả Minimax và Alpha-Beta cùng trả về nước đi tối ưu (6, 7) với điểm 99,999,999.")
 `,
     },
   ]
@@ -387,12 +441,12 @@ print(f"-> Kết luận: Động cơ Rust chạy cực nhanh, sẵn sàng tích 
                 <img src="/assets/pattern_weights_distribution.png" alt="Pattern Weights" className="w-full h-auto group-hover:scale-105 transition-transform duration-300" />
               </div>
               <p className="text-xs text-[#646464] leading-relaxed">
-                <MathText text="Ma trận trọng số lũy thừa: Five ($10^7$) áp đảo toàn bộ điểm tĩnh; hệ số phòng thủ $1.2\\times$ chống bot tấn công tham lam." />
+                <MathText text="Ma trận trọng số: Five ($M = 10^8$) áp đảo toàn bộ điểm tĩnh kẹp $[-H, +H]$ với $H = 99\\,999\\,774$; hệ số phòng thủ $1.2\\times$ chống bot tấn công tham lam." />
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-[#e8e8e8] text-[11px] font-mono text-[#838383] flex justify-between">
               <span>Mate Dominance</span>
-              <span className="text-[#6647f0] font-bold">10^7 Score</span>
+              <span className="text-[#6647f0] font-bold">M = 10^8 Base</span>
             </div>
           </div>
 

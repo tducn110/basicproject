@@ -11,7 +11,7 @@ export const Week4RustEngine: React.FC<Props> = ({ onOpenFigure }) => {
   const [activeSubTab, setActiveSubTab] = useState<"patterns" | "heuristic" | "chebyshev" | "battle">("patterns")
 
   const patternData = [
-    { name: "Five-in-a-row", shape: ".XXXXX.", atk: "10,000,000", def: "9,999,999", desc: "5 quân liên tiếp, thắng cuộc tuyệt đối (Mate)" },
+    { name: "Five-in-a-row", shape: ".XXXXX.", atk: "100,000,000 (M)", def: "99,999,999 (M-1)", desc: "5 quân liên tiếp, thắng cuộc tuyệt đối (Mate Base: M = 10^8)" },
     { name: "Open Four", shape: ".XXXX.", atk: "100,000", def: "120,000", desc: "4 quân mở 2 đầu, đối thủ không thể chặn cả 2" },
     { name: "Closed Four", shape: "OXXXX.", atk: "10,000", def: "12,000", desc: "4 quân bị chặn 1 đầu, đe dọa trực tiếp (Sente)" },
     { name: "Open Three", shape: ".XXX.", atk: "5,000", def: "6,000", desc: "3 quân mở 2 đầu, bước đệm tạo thành Open Four" },
@@ -151,12 +151,13 @@ export const Week4RustEngine: React.FC<Props> = ({ onOpenFigure }) => {
                   <Latex display>{"f(s) = \\sum_{p \\in \\mathcal{P}} \\left( W_{\\text{atk}}(p) \\cdot N_{\\text{bot}}(p) - W_{\\text{def}}(p) \\cdot N_{\\text{human}}(p) \\right)"}</Latex>
                 </div>
                 <div className="text-[#6647f0] font-bold text-center">
-                  <Latex display>{"\\text{Mate Score} = 10^7, \\quad \\text{clamp}(-9\\,999\\,999, +9\\,999\\,999)"}</Latex>
+                  <Latex display>{"M = 10^8 = 100\\,000\\,000, \\quad U = M - q, \\quad \\text{clamp}(-H, +H) \\text{ với } H = 99\\,999\\,774"}</Latex>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white border border-[#e8e8e8] text-xs text-[#646464]">
-                <strong className="text-[#202020]">Quy trình quyết định 1-ply:</strong> (1) Thắng ngay → (2) Chặn thua ngay → (3) Heuristic 1-ply ArgMax: <Latex>{"a^* = \\arg\\max_{a \\in \\mathcal{C}(s)} \\text{Eval}(s \\oplus a)"}</Latex>.
+              <div className="p-3.5 rounded-xl bg-white border border-[#e8e8e8] text-xs text-[#646464] space-y-1.5">
+                <div><strong className="text-[#202020]">Chuẩn hóa báo cáo 13/11 (Mục 2.5.2):</strong> Cơ số thắng <Latex>{"M = 10^8"}</Latex>, chiết khấu cự ly root <Latex>{"U = M - q"}</Latex> (thắng tại root <Latex>{"q=1 \\implies 99\\,999\\,999"}</Latex>). Kẹp tĩnh <Latex>{"[-H, H]"}</Latex> với <Latex>{"H = M - 225 - 1 = 99\\,999\\,774"}</Latex> đảm bảo mọi nước thắng sâu tối đa 225 plies (<Latex>{"99\\,999\\,775 > H"}</Latex>) luôn áp đảo toàn bộ điểm tĩnh.</div>
+                <div><strong className="text-[#202020]">Quy trình quyết định 1-ply:</strong> (1) Thắng ngay → (2) Chặn thua ngay → (3) Heuristic 1-ply ArgMax: <Latex>{"a^* = \\arg\\max_{a \\in \\mathcal{C}(s)} \\text{Eval}(s \\oplus a)"}</Latex>.</div>
               </div>
             </div>
 
