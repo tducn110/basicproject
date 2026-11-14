@@ -1,0 +1,47 @@
+[
+  {
+    "iteration": 1,
+    "champion_generation": 0,
+    "self_play_games": 30,
+    "new_samples": 886,
+    "buffer_total_samples": 886,
+    "train_loss": 1.471010647024581,
+    "candidate_wins": 0,
+    "champion_wins": 8,
+    "draws": 0,
+    "win_rate_pct": 0.0,
+    "is_accepted": false,
+    "estimated_elo": 1500,
+    "time_sec": 31.427187204360962
+  },
+  {
+    "iteration": 2,
+    "champion_generation": 0,
+    "self_play_games": 30,
+    "new_samples": 1077,
+    "buffer_total_samples": 1963,
+    "train_loss": 1.4116719496596304,
+    "candidate_wins": 4,
+    "champion_wins": 4,
+    "draws": 0,
+    "win_rate_pct": 50.0,
+    "is_accepted": false,
+    "estimated_elo": 1500,
+    "time_sec": 36.66660118103027
+  },
+  {
+    "iteration": 3,
+    "champion_generation": 0,
+    "self_play_games": 30,
+    "new_samples": 880,
+    "buffer_total_samples": 2843,
+    "train_loss": 1.4427390248684073,
+    "candidate_wins": 4,
+    "champion_wins": 4,
+    "draws": 0,
+    "win_rate_pct": 50.0,
+    "is_accepted": false,
+    "estimated_elo": 1500,
+    "time_sec": 35.78423452377319
+  }
+]
