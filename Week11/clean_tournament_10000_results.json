@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "total_games": 10000,
+    "elapsed_seconds": 572.63,
+    "games_per_second": 17.46,
+    "workers": 10,
+    "pairings": 10,
+    "openings": 500
+  },
+  "color_statistics": {
+    "black_wins": 6190,
+    "white_wins": 3748,
+    "draws": 62,
+    "black_win_rate": 61.9,
+    "white_win_rate": 37.48,
+    "draw_rate": 0.62,
+    "ci_95_black": [
+      60.94,
+      62.85
+    ],
+    "ci_95_white": [
+      36.54,
+      38.43
+    ],
+    "ci_95_draw": [
+      0.48,
+      0.79
+    ]
+  },
+  "profile_summaries": [
+    {
+      "profile": "NAIVE",
+      "matches": 4000,
+      "wins": 2014,
+      "losses": 1964,
+      "draws": 22,
+      "win_rate_percent": 50.62,
+      "ci_95": [
+        49.08,
+        52.17
+      ],
+      "p_value": 0.4384864724733189,
+      "avg_plies": 38.5,
+      "std_plies": 13.8
+    },
+    {
+      "profile": "OFFENSE",
+      "matches": 4000,
+      "wins": 1928,
+      "losses": 2068,
+      "draws": 4,
+      "win_rate_percent": 48.25,
+      "ci_95": [
+        46.7,
+        49.8
+      ],
+      "p_value": 0.027952069389718906,
+      "avg_plies": 35.8,
+      "std_plies": 12.6
+    },
+    {
+      "profile": "SYMMETRIC",
+      "matches": 4000,
+      "wins": 2033,
+      "losses": 1946,
+      "draws": 21,
+      "win_rate_percent": 51.09,
+      "ci_95": [
+        49.54,
+        52.63
+      ],
+      "p_value": 0.17895143458685134,
+      "avg_plies": 38.8,
+      "std_plies": 14.0
+    },
+    {
+      "profile": "DEFENSE",
+      "matches": 4000,
+      "wins": 1859,
+      "losses": 2098,
+      "draws": 43,
+      "win_rate_percent": 47.01,
+      "ci_95": [
+        45.47,
+        48.56
+      ],
+      "p_value": 0.00015684809242475132,
+      "avg_plies": 41.9,
+      "std_plies": 15.0
+    },
+    {
+      "profile": "OPTIMAL",
+      "matches": 4000,
+      "wins": 2104,
+      "losses": 1862,
+      "draws": 34,
+      "win_rate_percent": 53.02,
+      "ci_95": [
+        51.48,
+        54.57
+      ],
+      "p_value": 0.0001380593895233374,
+      "avg_plies": 40.2,
+      "std_plies": 14.7
+    }
+  ],
+  "head_to_head_matrix": {
+    "NAIVE": {
+      "NAIVE": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "OFFENSE": {
+        "wins": 522,
+        "losses": 477,
+        "draws": 0
+      },
+      "SYMMETRIC": {
+        "wins": 488,
+        "losses": 509,
+        "draws": 4
+      },
+      "DEFENSE": {
+        "wins": 530,
+        "losses": 459,
+        "draws": 10
+      },
+      "OPTIMAL": {
+        "wins": 474,
+        "losses": 519,
+        "draws": 4
+      }
+    },
+    "OFFENSE": {
+      "NAIVE": {
+        "wins": 477,
+        "losses": 522,
+        "draws": 2
+      },
+      "OFFENSE": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "SYMMETRIC": {
+        "wins": 485,
+        "losses": 515,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 501,
+        "losses": 496,
+        "draws": 2
+      },
+      "OPTIMAL": {
+        "wins": 465,
+        "losses": 535,
+        "draws": 0
+      }
+    },
+    "SYMMETRIC": {
+      "NAIVE": {
+        "wins": 509,
+        "losses": 488,
+        "draws": 2
+      },
+      "OFFENSE": {
+        "wins": 515,
+        "losses": 485,
+        "draws": 0
+      },
+      "SYMMETRIC": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 534,
+        "losses": 456,
+        "draws": 4
+      },
+      "OPTIMAL": {
+        "wins": 475,
+        "losses": 517,
+        "draws": 12
+      }
+    },
+    "DEFENSE": {
+      "NAIVE": {
+        "wins": 459,
+        "losses": 530,
+        "draws": 12
+      },
+      "OFFENSE": {
+        "wins": 496,
+        "losses": 501,
+        "draws": 4
+      },
+      "SYMMETRIC": {
+        "wins": 456,
+        "losses": 534,
+        "draws": 16
+      },
+      "DEFENSE": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "OPTIMAL": {
+        "wins": 448,
+        "losses": 533,
+        "draws": 24
+      }
+    },
+    "OPTIMAL": {
+      "NAIVE": {
+        "wins": 519,
+        "losses": 474,
+        "draws": 10
+      },
+      "OFFENSE": {
+        "wins": 535,
+        "losses": 465,
+        "draws": 0
+      },
+      "SYMMETRIC": {
+        "wins": 517,
+        "losses": 475,
+        "draws": 4
+      },
+      "DEFENSE": {
+        "wins": 533,
+        "losses": 448,
+        "draws": 14
+      },
+      "OPTIMAL": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      }
+    }
+  },
+  "plies_distribution": {
+    "mean": 39.03,
+    "std": 14.18,
+    "median": 37.0,
+    "min": 11,
+    "max": 90,
+    "p25": 29.0,
+    "p75": 47.0
+  }
+}

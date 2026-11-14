@@ -1,0 +1,1317 @@
+[
+  {
+    "step": 1,
+    "w_open_three": 1000,
+    "wins": 6,
+    "losses": 6,
+    "win_rate_percent": 50.0,
+    "status": "Improving (+8.3%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 43
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 39
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 44
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 33
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 37
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 62
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 44
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 50
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "w_open_three": 2000,
+    "wins": 6,
+    "losses": 5,
+    "win_rate_percent": 50.0,
+    "status": "Improving (+8.3%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 30
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 38
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 55
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 55
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 63
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 37
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 33
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 33
+      }
+    ]
+  },
+  {
+    "step": 3,
+    "w_open_three": 3000,
+    "wins": 6,
+    "losses": 6,
+    "win_rate_percent": 50.0,
+    "status": "Baseline Match (50.0%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 38
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 38
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 55
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 55
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 53
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 53
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 33
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 33
+      }
+    ]
+  },
+  {
+    "step": 4,
+    "w_open_three": 4500,
+    "wins": 8,
+    "losses": 4,
+    "win_rate_percent": 66.67,
+    "status": "Initiative Jump (+16.7%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 39
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 30
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 55
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 22
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 42
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 33
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 37
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 60
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "w_open_three": 6000,
+    "wins": 7,
+    "losses": 5,
+    "win_rate_percent": 58.33,
+    "status": "Improving (+8.3%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 48
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 30
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 22
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 48
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 33
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 30
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 27
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 35
+      }
+    ]
+  },
+  {
+    "step": 6,
+    "w_open_three": 8000,
+    "wins": 8,
+    "losses": 4,
+    "win_rate_percent": 66.67,
+    "status": "Improving (+8.3%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 39
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 30
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 22
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 48
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 33
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 41
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 27
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 36
+      }
+    ]
+  },
+  {
+    "step": 7,
+    "w_open_three": 10000,
+    "wins": 9,
+    "losses": 3,
+    "win_rate_percent": 75.0,
+    "status": "PEAK OPTIMUM (+25.0%)",
+    "games": [
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 39
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 30
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 22
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 17
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 37
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Base",
+        "plies": 65
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Cand",
+        "plies": 35
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 32
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "BLACK",
+        "winner": "Base",
+        "plies": 42
+      },
+      {
+        "opening": [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cand_color": "WHITE",
+        "winner": "Cand",
+        "plies": 36
+      }
+    ]
+  }
+]

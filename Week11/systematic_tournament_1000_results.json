@@ -1,0 +1,535 @@
+{
+  "tournament_metadata": {
+    "total_games": 1000,
+    "elapsed_seconds": 74.32,
+    "games_per_second": 13.46,
+    "workers": 10,
+    "pairings_count": 10,
+    "openings_count": 50
+  },
+  "color_statistics": {
+    "black_wins": 579,
+    "white_wins": 410,
+    "draws": 11,
+    "black_win_rate": 57.9,
+    "white_win_rate": 41.0,
+    "draw_rate": 1.1,
+    "ci_95_black": [
+      54.82,
+      60.92
+    ],
+    "ci_95_white": [
+      37.99,
+      44.08
+    ],
+    "ci_95_draw": [
+      0.62,
+      1.96
+    ]
+  },
+  "profile_summaries": [
+    {
+      "profile": "NAIVE",
+      "matches": 400,
+      "wins": 178,
+      "losses": 218,
+      "draws": 4,
+      "win_rate_percent": 45.0,
+      "ci_95": [
+        40.2,
+        49.9
+      ],
+      "p_value": 0.05104022312914814,
+      "avg_plies": 39.0,
+      "std_plies": 13.8
+    },
+    {
+      "profile": "OFFENSE",
+      "matches": 400,
+      "wins": 193,
+      "losses": 203,
+      "draws": 4,
+      "win_rate_percent": 48.75,
+      "ci_95": [
+        43.89,
+        53.64
+      ],
+      "p_value": 0.6527645977066685,
+      "avg_plies": 37.7,
+      "std_plies": 15.9
+    },
+    {
+      "profile": "SYMMETRIC",
+      "matches": 400,
+      "wins": 226,
+      "losses": 174,
+      "draws": 0,
+      "win_rate_percent": 56.5,
+      "ci_95": [
+        51.6,
+        61.27
+      ],
+      "p_value": 0.010681803662619586,
+      "avg_plies": 40.2,
+      "std_plies": 14.5
+    },
+    {
+      "profile": "DEFENSE",
+      "matches": 400,
+      "wins": 186,
+      "losses": 206,
+      "draws": 8,
+      "win_rate_percent": 47.5,
+      "ci_95": [
+        42.65,
+        52.39
+      ],
+      "p_value": 0.34212239608405126,
+      "avg_plies": 44.6,
+      "std_plies": 17.1
+    },
+    {
+      "profile": "OPTIMAL",
+      "matches": 400,
+      "wins": 206,
+      "losses": 188,
+      "draws": 6,
+      "win_rate_percent": 52.25,
+      "ci_95": [
+        47.36,
+        57.1
+      ],
+      "p_value": 0.3953527540090581,
+      "avg_plies": 41.0,
+      "std_plies": 16.1
+    }
+  ],
+  "head_to_head_matrix": {
+    "NAIVE": {
+      "NAIVE": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "OFFENSE": {
+        "wins": 50,
+        "losses": 49,
+        "draws": 1
+      },
+      "SYMMETRIC": {
+        "wins": 41,
+        "losses": 59,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 45,
+        "losses": 52,
+        "draws": 3
+      },
+      "OPTIMAL": {
+        "wins": 42,
+        "losses": 58,
+        "draws": 0
+      }
+    },
+    "OFFENSE": {
+      "NAIVE": {
+        "wins": 49,
+        "losses": 50,
+        "draws": 1
+      },
+      "OFFENSE": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "SYMMETRIC": {
+        "wins": 42,
+        "losses": 58,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 53,
+        "losses": 46,
+        "draws": 1
+      },
+      "OPTIMAL": {
+        "wins": 49,
+        "losses": 49,
+        "draws": 2
+      }
+    },
+    "SYMMETRIC": {
+      "NAIVE": {
+        "wins": 59,
+        "losses": 41,
+        "draws": 0
+      },
+      "OFFENSE": {
+        "wins": 58,
+        "losses": 42,
+        "draws": 0
+      },
+      "SYMMETRIC": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 56,
+        "losses": 44,
+        "draws": 0
+      },
+      "OPTIMAL": {
+        "wins": 53,
+        "losses": 47,
+        "draws": 0
+      }
+    },
+    "DEFENSE": {
+      "NAIVE": {
+        "wins": 52,
+        "losses": 45,
+        "draws": 3
+      },
+      "OFFENSE": {
+        "wins": 46,
+        "losses": 53,
+        "draws": 1
+      },
+      "SYMMETRIC": {
+        "wins": 44,
+        "losses": 56,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      },
+      "OPTIMAL": {
+        "wins": 44,
+        "losses": 52,
+        "draws": 4
+      }
+    },
+    "OPTIMAL": {
+      "NAIVE": {
+        "wins": 58,
+        "losses": 42,
+        "draws": 0
+      },
+      "OFFENSE": {
+        "wins": 49,
+        "losses": 49,
+        "draws": 2
+      },
+      "SYMMETRIC": {
+        "wins": 47,
+        "losses": 53,
+        "draws": 0
+      },
+      "DEFENSE": {
+        "wins": 52,
+        "losses": 44,
+        "draws": 4
+      },
+      "OPTIMAL": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0
+      }
+    }
+  },
+  "plies_statistics": {
+    "mean": 40.5,
+    "std": 15.69,
+    "median": 36.0,
+    "min": 13,
+    "max": 90,
+    "percentile_25": 30.0,
+    "percentile_75": 49.0
+  },
+  "sample_games": [
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 24
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 29
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 38
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 37
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 36
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 29
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 32
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 35
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 35
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 40
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 43
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 25
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 48
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 46
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 24
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 49
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 38
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 35
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 71
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 26
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 35
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 38
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 43
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 30
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 37
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 40
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 29
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 36
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 41
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 27
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 24
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "WHITE",
+      "winner_cfg": "NAIVE",
+      "plies": 30
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 32
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 55
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 30
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 57
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "WHITE",
+      "winner_cfg": "OFFENSE",
+      "plies": 14
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 29
+    },
+    {
+      "cfg_black": "NAIVE",
+      "cfg_white": "OFFENSE",
+      "winner_color": "BLACK",
+      "winner_cfg": "NAIVE",
+      "plies": 55
+    },
+    {
+      "cfg_black": "OFFENSE",
+      "cfg_white": "NAIVE",
+      "winner_color": "BLACK",
+      "winner_cfg": "OFFENSE",
+      "plies": 49
+    }
+  ]
+}

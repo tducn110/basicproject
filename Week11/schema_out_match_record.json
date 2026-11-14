@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GomokuMatchRecordOutputSchema",
+  "description": "Chuẩn đặc tả Schema Out: Định dạng bản ghi kết quả của từng ván đấu và tập dữ liệu giải đấu",
+  "type": "object",
+  "required": [
+    "match_id",
+    "pairing_code",
+    "opening_seed_idx",
+    "cfg_black",
+    "cfg_white",
+    "winner_color",
+    "winner_cfg",
+    "is_draw",
+    "plies",
+    "first_player_won",
+    "black_win_flag",
+    "white_win_flag"
+  ],
+  "properties": {
+    "match_id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000,
+      "description": "Mã số thứ tự của ván đấu từ 1 đến 10000"
+    },
+    "pairing_code": {
+      "type": "string",
+      "description": "Mã cặp đấu chuẩn hóa (ví dụ: NAIVE_vs_SYMMETRIC)"
+    },
+    "opening_seed_idx": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 499,
+      "description": "Chỉ số của thế cờ khai cuộc đối xứng 3 nước ban đầu"
+    },
+    "cfg_black": {
+      "type": "string",
+      "enum": ["NAIVE", "OFFENSE", "SYMMETRIC", "DEFENSE", "OPTIMAL"],
+      "description": "Tên cấu hình Heuristic cầm quân Đen (đi trước)"
+    },
+    "cfg_white": {
+      "type": "string",
+      "enum": ["NAIVE", "OFFENSE", "SYMMETRIC", "DEFENSE", "OPTIMAL"],
+      "description": "Tên cấu hình Heuristic cầm quân Trắng (đi sau)"
+    },
+    "winner_color": {
+      "type": "string",
+      "enum": ["BLACK", "WHITE", "DRAW"],
+      "description": "Màu quân giành chiến thắng hoặc DRAW nếu hòa"
+    },
+    "winner_cfg": {
+      "type": "string",
+      "enum": ["NAIVE", "OFFENSE", "SYMMETRIC", "DEFENSE", "OPTIMAL", "DRAW"],
+      "description": "Tên cấu hình Heuristic giành chiến thắng"
+    },
+    "is_draw": {
+      "type": "boolean",
+      "description": "Cờ hiệu xác định ván đấu kết thúc hòa"
+    },
+    "plies": {
+      "type": "integer",
+      "minimum": 9,
+      "maximum": 90,
+      "description": "Tổng số nước đi (plies) cho đến khi ván cờ kết thúc"
+    },
+    "first_player_won": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "1 nếu quân đi trước (Đen) thắng, 0 nếu ngược lại"
+    },
+    "black_win_flag": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "1 nếu Đen thắng, 0 nếu không"
+    },
+    "white_win_flag": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "1 nếu Trắng thắng, 0 nếu không"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+\contentsline {section}{\numberline {1}Tóm Tắt Nghiên Cứu \& Đặt Vấn Đề (Problem Statement)}{1}{section.1}%
+\contentsline {section}{\numberline {2}Phương Pháp Luận Chọn Lựa Từng Cấu Hình Heuristic}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Lý giải khoa học cho việc lựa chọn từng tham số}{2}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Cơ Sở Lý Thuyết Xác Suất \& Năng Lực Thống Kê (Power Analysis)}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Tại sao phân bố không đủ lớn sẽ không tạo ra giá trị chứng minh?}{2}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Thiết Kế Mô Phỏng \& Giao Thức Khai Cuộc Đối Xứng 1:1}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Cấu trúc động cơ giải đấu đa luồng (Multi-core Harness)}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Giao thức 50 thế trận khai cuộc chuẩn đối xứng (Opening Seeds)}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Quy tắc hoán đổi màu quân đối xứng bắt buộc (Strict Color Alternation)}{4}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Kết Quả Thực Nghiệm \& Phân Tích Dữ Liệu 1.000 Ván}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Bằng chứng thực nghiệm về Lợi thế quân đi trước (Black Bias)}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Bảng tổng sắp 5 cấu hình Heuristic sau khi chuẩn hóa màu quân}{6}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Ma trận đối đầu trực tiếp giữa các cặp cấu hình (Head-to-Head Matrix)}{6}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Thảo Luận Văn Phong Thuật Toán \& Logic Hoàn Chỉnh}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Tại sao \texttt {CFG-NAIVE} ($45.00\%$) thất bại trước các cấu hình khác?}{8}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Căn bệnh "Liệt thế công do quá thiên thủ" được xác nhận qua độ dài ván cờ}{8}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Giải pháp triệt tiêu hoàn toàn lợi thế quân Đen: Áp dụng Luật Khai Cuộc Swap2}{8}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Khuyến Nghị Kỹ Thuật Dành Cho Triển Khai Thực Tế}{8}{section.7}%
+\contentsline {section}{\numberline {8}Kết Luận}{9}{section.8}%

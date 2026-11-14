@@ -1,0 +1,265 @@
+{
+  "total_games": 600,
+  "elapsed_seconds": 41.97,
+  "black_win_rate": 62.5,
+  "white_win_rate": 34.17,
+  "draw_rate": 3.33,
+  "profiles": [
+    {
+      "profile": "BASE",
+      "total_games": 300,
+      "wins": 155,
+      "win_rate_percent": 51.67,
+      "ci_95": [
+        46.03,
+        57.26
+      ],
+      "p_value": 0.5637028616507731
+    },
+    {
+      "profile": "AGG",
+      "total_games": 300,
+      "wins": 140,
+      "win_rate_percent": 46.67,
+      "ci_95": [
+        41.1,
+        52.32
+      ],
+      "p_value": 0.24821307898992373
+    },
+    {
+      "profile": "DEF",
+      "total_games": 300,
+      "wins": 145,
+      "win_rate_percent": 48.33,
+      "ci_95": [
+        42.74,
+        53.97
+      ],
+      "p_value": 0.5637028616507731
+    },
+    {
+      "profile": "OPT",
+      "total_games": 300,
+      "wins": 140,
+      "win_rate_percent": 46.67,
+      "ci_95": [
+        41.1,
+        52.32
+      ],
+      "p_value": 0.24821307898992373
+    }
+  ],
+  "games_sample": [
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 27
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "WHITE",
+      "winner_cfg": "BASE",
+      "plies": 26
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 45
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 37
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "WHITE",
+      "winner_cfg": "AGG",
+      "plies": 14
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "WHITE",
+      "winner_cfg": "BASE",
+      "plies": 14
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 39
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 43
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 53
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 53
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 33
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 37
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 51
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 47
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "DRAW",
+      "winner_cfg": "DRAW",
+      "plies": 74
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 49
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 45
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 43
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 43
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "WHITE",
+      "winner_cfg": "BASE",
+      "plies": 32
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 27
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "WHITE",
+      "winner_cfg": "BASE",
+      "plies": 26
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 45
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 37
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "WHITE",
+      "winner_cfg": "AGG",
+      "plies": 14
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "WHITE",
+      "winner_cfg": "BASE",
+      "plies": 14
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 39
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 43
+    },
+    {
+      "cfg_black": "BASE",
+      "cfg_white": "AGG",
+      "winner_color": "BLACK",
+      "winner_cfg": "BASE",
+      "plies": 53
+    },
+    {
+      "cfg_black": "AGG",
+      "cfg_white": "BASE",
+      "winner_color": "BLACK",
+      "winner_cfg": "AGG",
+      "plies": 53
+    }
+  ]
+}

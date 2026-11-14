@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GomokuTournamentInputSchema",
+  "description": "Chuẩn đặc tả Schema In: Tham số cấu hình giải đấu và cấu hình các Heuristic Bot",
+  "type": "object",
+  "required": [
+    "tournament_id",
+    "board_size",
+    "search_engine",
+    "heuristic_profiles",
+    "opening_protocol",
+    "execution_harness"
+  ],
+  "properties": {
+    "tournament_id": {
+      "type": "string",
+      "description": "Mã định danh duy nhất của giải đấu",
+      "examples": ["TOURNAMENT-10K-HEURISTIC-SWEEP"]
+    },
+    "board_size": {
+      "type": "integer",
+      "const": 15,
+      "description": "Kích thước bàn cờ cố định 15x15"
+    },
+    "search_engine": {
+      "type": "object",
+      "required": ["algorithm", "depth", "candidate_radius", "candidate_soft_cap"],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["MINIMAX_ALPHA_BETA"]
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6,
+          "default": 2
+        },
+        "candidate_radius": {
+          "type": "integer",
+          "const": 2,
+          "description": "Bán kính Chebyshev lân cận các quân cờ đã đánh"
+        },
+        "candidate_soft_cap": {
+          "type": "integer",
+          "const": 16,
+          "description": "Số lượng ứng viên tối đa được giữ lại sau khi xếp hạng ưu tiên"
+        }
+      }
+    },
+    "heuristic_profiles": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "beta",
+          "w_five",
+          "w_open_four",
+          "w_half_four",
+          "w_open_three",
+          "w_half_three",
+          "w_open_two",
+          "w_broken_three",
+          "w_broken_four",
+          "center_gamma",
+          "detect_gapped",
+          "verify_span"
+        ],
+        "properties": {
+          "name": { "type": "string" },
+          "beta": { "type": "number", "minimum": 0.1, "maximum": 3.0 },
+          "w_five": { "type": "integer", "const": 10000000 },
+          "w_open_four": { "type": "integer", "const": 100000 },
+          "w_half_four": { "type": "integer", "const": 10000 },
+          "w_open_three": { "type": "integer", "minimum": 1000, "maximum": 20000 },
+          "w_half_three": { "type": "integer", "const": 1000 },
+          "w_open_two": { "type": "integer", "const": 500 },
+          "w_broken_three": { "type": "integer", "const": 4500 },
+          "w_broken_four": { "type": "integer", "const": 8000 },
+          "center_gamma": { "type": "integer", "minimum": 0, "maximum": 50 },
+          "detect_gapped": { "type": "boolean" },
+          "verify_span": { "type": "boolean" }
+        }
+      }
+    },
+    "opening_protocol": {
+      "type": "object",
+      "required": ["protocol_type", "distinct_seeds_count", "color_alternation"],
+      "properties": {
+        "protocol_type": {
+          "type": "string",
+          "enum": ["SYMMETRIC_TRIPLES", "SWAP2", "FIXED_CENTER"]
+        },
+        "distinct_seeds_count": { "type": "integer", "minimum": 1 },
+        "color_alternation": {
+          "type": "boolean",
+          "const": true,
+          "description": "Bắt buộc hoán đổi màu quân 1:1 cho từng thế khai cuộc"
+        }
+      }
+    },
+    "execution_harness": {
+      "type": "object",
+      "required": ["target_total_matches", "concurrency_cores", "max_plies_per_match"],
+      "properties": {
+        "target_total_matches": { "type": "integer", "const": 10000 },
+        "concurrency_cores": { "type": "integer", "minimum": 1, "maximum": 32 },
+        "max_plies_per_match": { "type": "integer", "default": 90 }
+      }
+    }
+  }
+}

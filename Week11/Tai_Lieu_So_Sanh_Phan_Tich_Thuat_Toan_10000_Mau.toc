@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Tổng Quan Chiến Dịch Thực Nghiệm 10.000 Ván Cờ}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Động cơ khoa học \& Nguyên tắc không suy diễn}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Cấu trúc phân bổ giải đấu}{1}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Đặc Tả Chuẩn Schema In \& Schema Out}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Chuẩn đặc tả Schema In (\texttt {schema\_in\_tournament\_config.json})}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Chuẩn đặc tả Schema Out (\texttt {schema\_out\_match\_record.json})}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Chuẩn Hóa Dữ Liệu \& Xuất Bản Clean Data}{3}{section.3}%
+\contentsline {section}{\numberline {4}Đối Chiếu Mã Nguồn Thực Tế: Thuật Toán Nào Đã Được Tác Động?}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Thuật toán 1: Kiểm tra không gian khả dụng (\texttt {verify\_span})}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Thuật toán 2: Quét thế cờ tách lẻ (\texttt {detect\_gapped})}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Thuật toán 3: Hệ số phòng thủ $\beta $ trong hàm lượng giá}{4}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Thuật toán 4: Nhân khoảng cách Chebyshev kiểm soát trung tâm ($\gamma $)}{5}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Phân Tích Hội Tụ Xác Suất \& Năng Lực Thống Kê Trên 10.000 Mẫu}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Luật số lớn và sự hội tụ của sai số biên (Margin of Error)}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Minh chứng thực nghiệm: Bàn cờ $15 \times 15$ không triệt tiêu lợi thế Đen}{5}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Bảng tổng sắp 5 Heuristic Profile trên 10.000 ván cờ (4.000 trận/bot)}{6}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Ma trận tỉ lệ thắng đối đầu trực tiếp 1.000 ván/cặp}{6}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Khuyến Nghị Kỹ Thuật \& Kết Luận}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Khuyến nghị kỹ thuật dành cho động cơ cờ Production}{8}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Kết luận}{8}{subsection.6.2}%
