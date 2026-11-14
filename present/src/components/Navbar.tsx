@@ -39,7 +39,9 @@ export const Navbar: React.FC = () => {
         "week6", 
         "week7", 
         "advanced-ai", 
+        "pitfalls",
         "python-viz", 
+        "verification",
         "interactive-board", 
         "benchmark", 
         "roadmap"
@@ -154,7 +156,7 @@ export const Navbar: React.FC = () => {
                 <div className="absolute left-0 top-full mt-2 w-80 sm:w-96 rounded-2xl bg-white border border-[#e8e8e8] shadow-2xl z-50 p-2 space-y-1 animate-fadeIn">
                   <div className="px-3 py-2 border-b border-[#e8e8e8] flex items-center justify-between text-[11px] font-mono text-[#838383]">
                     <span className="font-bold text-[#202020]">LỘ TRÌNH BÁO CÁO (TUẦN 1 → 10)</span>
-                    <span className="text-[#00c07a] font-semibold">8 Giai Đoạn</span>
+                    <span className="text-[#00c07a] font-semibold">10 Giai Đoạn</span>
                   </div>
 
                   <div className="max-h-80 overflow-y-auto space-y-1 py-1 scrollbar-thin">

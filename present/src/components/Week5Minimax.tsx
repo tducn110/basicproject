@@ -29,7 +29,7 @@ export const Week5Minimax: React.FC<Props> = () => {
             Thuật Toán Minimax & Cây Trò Chơi (Game Tree Search)
           </h2>
           <p className="text-[#646464] text-sm sm:text-base leading-relaxed">
-            <MathText text="Hiện thực hóa mô hình đối kháng hoàn hảo (Zero-Sum, Perfect Information) trên bàn cờ Caro. Phân tích toán học cây trò chơi, bùng nổ không gian trạng thái $N \\approx b^d$, và giải pháp giới hạn độ sâu (Depth-Limited Search)." />
+            <MathText text="Hiện thực hóa mô hình đối kháng hoàn hảo (Zero-Sum, Perfect Information) trên bàn cờ Caro. Phân tích toán học cây trò chơi, bùng nổ không gian trạng thái $N \approx b^d$, và giải pháp giới hạn độ sâu (Depth-Limited Search)." />
           </p>
         </div>
 
@@ -236,7 +236,7 @@ export const Week5Minimax: React.FC<Props> = () => {
             </div>
             <h4 className="font-extrabold text-[#202020] text-sm">Kiểm Thử & Đánh Giá Giới Hạn</h4>
             <p className="text-xs text-[#646464] leading-relaxed">
-              <MathText text="Chứng minh Minimax thuần túy chạy trên TypeScript Main Thread bị đơ màn hình ở $d \\ge 3$ (>150ms), đặt cơ sở khoa học chuyển đổi sang Alpha-Beta và Rust Wasm." />
+              <MathText text="Chứng minh Minimax thuần túy chạy trên TypeScript Main Thread bị đơ màn hình ở $d \ge 3$ (>150ms), đặt cơ sở khoa học chuyển đổi sang Alpha-Beta và Rust Wasm." />
             </p>
           </div>
         </div>

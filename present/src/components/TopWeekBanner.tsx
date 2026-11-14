@@ -108,6 +108,26 @@ export const MILESTONES: WeekMilestone[] = [
     anchor: "#advanced-ai",
     description: "Gia tốc Move Ordering 7.15x, bảng chuyển vị 64-bit Zobrist, ngân sách 500ms Iterative Deepening, đấu trường 500 ván và 18 slide bảo vệ của SV Nguyễn Tâm Đức (24CSE).",
     metric: "7.15x Speedup, 18 Slides Standard 00"
+  },
+  {
+    id: "pitfalls",
+    weekNumber: "Phản Biện",
+    title: "Bẫy Giải Thuật & Nghiên Cứu Phản Biện (Negative Findings)",
+    phase: "Negative Probes & Threats to Validity",
+    status: "completed",
+    anchor: "#pitfalls",
+    description: "3 thực nghiệm phản biện (Hard Cap, Key XOR bảng băm Zobrist, Rollback timeout IDS) và phân tích rủi ro giá trị học thuật (Mục 5.4.2 & 5.7).",
+    metric: "3 Probes Solved, Threats Analyzed"
+  },
+  {
+    id: "verification",
+    weekNumber: "Nghiệm Thu",
+    title: "10 Kịch Bản Kiểm Định (S01–S10) & 6 Cổng Nghiệm Thu (G1–G6)",
+    phase: "Table 3.2 Scenarios & Appendix B Gates",
+    status: "completed",
+    anchor: "#verification",
+    description: "10 kịch bản công nghiệp S01–S10 (hủy token, zero heap 240B, responsive) và 6 cổng nghiệm thu G1–G6 kiểm định 816 dòng dữ liệu đối chứng.",
+    metric: "10/10 Scenarios, 6/6 Gates PASS"
   }
 ]
 

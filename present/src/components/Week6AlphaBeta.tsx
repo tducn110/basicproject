@@ -34,7 +34,7 @@ export const Week6AlphaBeta: React.FC<Props> = ({ onOpenFigure }) => {
             Tối Ưu Hóa Cắt Tỉa Alpha-Beta, Move Ordering & Zobrist
           </h2>
           <p className="text-[#646464] text-sm sm:text-base leading-relaxed">
-            <MathText text="Áp dụng thuật toán Alpha-Beta Pruning triệt tiêu các nhánh vô nghĩa ($\\beta \\le \\alpha$). Kết hợp sắp xếp nước đi $O(1)$ (Move Ordering) và bảng chuyển vị Zobrist Hashing 64-bit, đạt 16,350 lần cắt nhánh ở độ sâu $d=4$." />
+            <MathText text="Áp dụng thuật toán Alpha-Beta Pruning triệt tiêu các nhánh vô nghĩa ($\beta \le \alpha$). Kết hợp sắp xếp nước đi $O(1)$ (Move Ordering) và bảng chuyển vị Zobrist Hashing 64-bit, đạt 16,350 lần cắt nhánh ở độ sâu $d=4$." />
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export const Week6AlphaBeta: React.FC<Props> = ({ onOpenFigure }) => {
             <div className="clickup-card p-6 bg-white border border-[#e8e8e8] space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#e8e8e8]">
                 <span className="text-xs font-mono font-bold text-[#00c07a] uppercase tracking-wider">
-                  <MathText text="Nguyên Lý Bất Đẳng Thức Cắt Nhánh ($\\alpha$-$\\beta$ Cutoffs)" />
+                  <MathText text="Nguyên Lý Bất Đẳng Thức Cắt Nhánh ($\alpha$-$\beta$ Cutoffs)" />
                 </span>
                 <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#f8f9fa] border border-[#e8e8e8] text-[#202020] font-bold">
                   <MathText text="Asymptotic: $O(b^{d/2})$" />
@@ -53,7 +53,7 @@ export const Week6AlphaBeta: React.FC<Props> = ({ onOpenFigure }) => {
               </div>
 
               <p className="text-xs text-[#646464] leading-relaxed">
-                <MathText text="Biên dưới $\\alpha$ đại diện cho điểm số tối thiểu MAX được đảm bảo; biên trên $\\beta$ đại diện cho điểm số tối đa MIN có thể ép xuống. Ngay khi một nhánh con có giá trị làm $\\beta \\le \\alpha$, nhánh đó lập tức bị cắt tỉa mà không làm thay đổi giá trị tối ưu:" />
+                <MathText text="Biên dưới $\alpha$ đại diện cho điểm số tối thiểu MAX được đảm bảo; biên trên $\beta$ đại diện cho điểm số tối đa MIN có thể ép xuống. Ngay khi một nhánh con có giá trị làm $\beta \le \alpha$, nhánh đó lập tức bị cắt tỉa mà không làm thay đổi giá trị tối ưu:" />
               </p>
 
               <div className="p-4 rounded-xl bg-[#f8f9fa] border border-[#e8e8e8] text-center my-3 text-[#202020] overflow-x-auto">
@@ -67,7 +67,7 @@ export const Week6AlphaBeta: React.FC<Props> = ({ onOpenFigure }) => {
                   <span><MathText text="Sắp Xếp Nước Đi (Move Ordering via $O(1)$ quick_score):" /></span>
                 </div>
                 <p className="text-[#646464] leading-relaxed">
-                  <MathText text="Hiệu quả của Alpha-Beta phụ thuộc hoàn toàn vào thứ tự duyệt các nước đi con. Trước khi đệ quy, hàm `quick_score` quét 4 trục bàn cờ trong $O(1)$ để xếp các nước đi tạo thế mạnh lên đầu mảng. Nước đi tốt nhất được duyệt trước giúp $\\alpha$ tăng vọt và $\\beta$ giảm mạnh, kích hoạt cắt tỉa hàng chục nghìn nhánh thừa." />
+                  <MathText text="Hiệu quả của Alpha-Beta phụ thuộc hoàn toàn vào thứ tự duyệt các nước đi con. Trước khi đệ quy, hàm `quick_score` quét 4 trục bàn cờ trong $O(1)$ để xếp các nước đi tạo thế mạnh lên đầu mảng. Nước đi tốt nhất được duyệt trước giúp $\alpha$ tăng vọt và $\beta$ giảm mạnh, kích hoạt cắt tỉa hàng chục nghìn nhánh thừa." />
                 </p>
               </div>
 
@@ -78,7 +78,7 @@ export const Week6AlphaBeta: React.FC<Props> = ({ onOpenFigure }) => {
                   <span>Bảng Chuyển Vị Zobrist Hashing 64-bit (Transposition Table):</span>
                 </div>
                 <p className="leading-relaxed">
-                  <MathText text="Bàn cờ $15 \\times 15$ khởi tạo mảng ngẫu nhiên `ZOBRIST_TABLE[225][2]: u64`. Khi một quân cờ được đặt hoặc rút lại, mã băm cập nhật qua phép toán bit XOR cực nhanh $O(1)$:" />
+                  <MathText text="Bàn cờ $15 \times 15$ khởi tạo mảng ngẫu nhiên `ZOBRIST_TABLE[225][2]: u64`. Khi một quân cờ được đặt hoặc rút lại, mã băm cập nhật qua phép toán bit XOR cực nhanh $O(1)$:" />
                 </p>
                 <div className="py-1 px-2.5 rounded bg-white/80 border border-[#bbf7d0] font-mono text-[11px] text-center font-bold">
                   hash = hash ^ ZOBRIST_TABLE[cell_idx][player_idx]

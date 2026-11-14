@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Bot, User, ArrowRight, Zap, Check, AlertCircle, Workflow, Terminal, Play } from "lucide-react"
+import { MathText } from "./Latex"
 import { soundManager } from "../utils/audio"
 
 interface Props {
@@ -166,6 +167,91 @@ export const TransitionPvE: React.FC<Props> = ({ onOpenFigure }) => {
               <span>WebAssembly Worker đang giải thuật toán đối kháng ngầm...</span>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Chapter 3 Architectural Blueprints: Figures 3.1, 3.2, 3.3 */}
+      <div className="mt-12 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e8e8e8]">
+          <div>
+            <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0091ff] mb-1">
+              Chương 3 (Phân Tích & Thiết Kế Hệ Thống)
+            </div>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[#090c1d] tracking-tight">
+              3 Trụ Cột Kiến Trúc: Phân Lớp, Vòng Đời Trạng Thái & Biến Đổi Tọa Độ
+            </h3>
+          </div>
+          <span className="text-xs font-mono px-3 py-1 rounded-full bg-[#f8f9fa] border border-[#e8e8e8] text-[#202020] font-bold shrink-0 self-start sm:self-auto">
+            Figures 3.1 – 3.3 Specs
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+          {/* Figure 3.1 Card */}
+          <div 
+            onClick={() => onOpenFigure("ui_architecture_flow")}
+            className="clickable-figure clickup-card p-5 bg-white border border-[#e8e8e8] hover:border-[#6647f0] transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="flex items-center justify-between pb-2 border-b border-[#e8e8e8] font-mono text-[#838383]">
+                <span className="font-bold text-[#6647f0]">HÌNH 3.1</span>
+                <span className="text-[#0091ff] font-bold">Inspect ↗</span>
+              </div>
+              <h4 className="font-bold text-[#202020] text-sm mt-3 mb-1.5 group-hover:text-[#6647f0] transition-colors">
+                Kiến Trúc Phân Lớp Ứng Dụng (Layered Architecture)
+              </h4>
+              <p className="text-[#646464] leading-relaxed">
+                Tách biệt 4 tầng trách nhiệm: Giao diện người dùng (React/PixiJS) ↔ Điều phối trận đấu (GameController) ↔ Cầu nối đa luồng (AIController/Web Worker) ↔ Lõi tính toán Rust WASM.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#e8e8e8] text-[11px] font-mono text-[#838383]">
+              Bảo đảm 0ms block UI, độc lập hoàn toàn giữa logic và render
+            </div>
+          </div>
+
+          {/* Figure 3.2 Card */}
+          <div 
+            onClick={() => onOpenFigure("component_hierarchy")}
+            className="clickable-figure clickup-card p-5 bg-white border border-[#e8e8e8] hover:border-[#0091ff] transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="flex items-center justify-between pb-2 border-b border-[#e8e8e8] font-mono text-[#838383]">
+                <span className="font-bold text-[#0091ff]">HÌNH 3.2</span>
+                <span className="text-[#0091ff] font-bold">Inspect ↗</span>
+              </div>
+              <h4 className="font-bold text-[#202020] text-sm mt-3 mb-1.5 group-hover:text-[#0091ff] transition-colors">
+                Mô Hình Trạng Thái Trận Đấu (Match State Lifecycle)
+              </h4>
+              <p className="text-[#646464] leading-relaxed">
+                Chu trình 3 pha: <code>Waiting</code> → <code>Active</code> ↔ <code>AI Thinking (isAiThinking = true)</code> → <code>Ended</code>. Cờ AI Thinking độc lập khóa toàn bộ tương tác người chơi khi Bot đang giải thuật toán.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#e8e8e8] text-[11px] font-mono text-[#838383]">
+              Ngăn chặn tuyệt đối xung đột tranh chấp lượt (Race Condition)
+            </div>
+          </div>
+
+          {/* Figure 3.3 Card */}
+          <div 
+            onClick={() => onOpenFigure("ai_pipeline")}
+            className="clickable-figure clickup-card p-5 bg-white border border-[#e8e8e8] hover:border-[#00c07a] transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="flex items-center justify-between pb-2 border-b border-[#e8e8e8] font-mono text-[#838383]">
+                <span className="font-bold text-[#00c07a]">HÌNH 3.3</span>
+                <span className="text-[#0091ff] font-bold">Inspect ↗</span>
+              </div>
+              <h4 className="font-bold text-[#202020] text-sm mt-3 mb-1.5 group-hover:text-[#00c07a] transition-colors">
+                Biến Đổi Ma Trận Nghịch Đảo Camera (M⁻¹)
+              </h4>
+              <p className="text-[#646464] leading-relaxed">
+                <MathText text="Ánh xạ điểm chạm màn hình sang tọa độ thế giới và ô cờ: $(X_s, Y_s) \to (X_w, Y_w) \to (\lfloor X_w/\text{cell}\rfloor, \lfloor Y_w/\text{cell}\rfloor)$ qua ma trận nghịch đảo $M^{-1}$ trước khi kiểm tra cận $[0..14]$." />
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#e8e8e8] text-[11px] font-mono text-[#838383]">
+              Bảo đảm độ chính xác 100% khi zoom, pan, xoay màn hình di động
+            </div>
+          </div>
         </div>
       </div>
     </section>

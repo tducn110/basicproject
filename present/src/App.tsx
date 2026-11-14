@@ -13,6 +13,8 @@ import { Week6AlphaBeta } from "./components/Week6AlphaBeta"
 import { Week7CandidatesAndTiers } from "./components/Week7CandidatesAndTiers"
 import { Week8To10AdvancedAI } from "./components/Week8To10AdvancedAI"
 import { PythonVisualizer } from "./components/PythonVisualizer"
+import { NegativeFindingsAndThreats } from "./components/NegativeFindingsAndThreats"
+import { VerificationMatrixAndGates } from "./components/VerificationMatrixAndGates"
 import { RoadmapSection } from "./components/RoadmapSection"
 import { Footer } from "./components/Footer"
 import { FigureInspectorModal } from "./components/FigureInspectorModal"
@@ -93,8 +95,14 @@ export function App() {
         {/* 8. Week 8-10: Move Ordering, Zobrist Hashing, Iterative Deepening & 18-Slide Blueprint */}
         <Week8To10AdvancedAI onOpenFigure={handleOpenFigure} />
 
+        {/* 8b. Chương 5 (Mục 5.4.2 & 5.7): Bẫy Giải Thuật (Negative Findings) & Giới Hạn Nghiên Cứu */}
+        <NegativeFindingsAndThreats />
+
         {/* 9. Python Sandbox (Pyodide In-Browser) & Visual Evidence Gallery */}
         <PythonVisualizer onOpenFigure={handleOpenFigure} />
+
+        {/* 9b. Bảng 3.2 & Phụ Lục B: 10 Kịch Bản Kiểm Định (S01–S10) & 6 Cổng Nghiệm Thu (G1–G6) */}
+        <VerificationMatrixAndGates />
 
         {/* 10. Roadmap, 6 Phases & Git Provenance Cards */}
         <RoadmapSection />

@@ -254,6 +254,22 @@ export const TopHeroBoardWithTOC: React.FC<Props> = ({ onOpenFigure }) => {
     },
     {
       num: "12",
+      title: "Bẫy Giải Thuật & Nghiên Cứu Phản Biện",
+      sub: "3 thực nghiệm phủ định (Hard Cap, Key XOR, Rollback) & Threats to Validity",
+      anchor: "#pitfalls",
+      badge: "PHẢN BIỆN",
+      color: "text-[#f43f5e] bg-[#f43f5e]/10 border-[#f43f5e]/30",
+    },
+    {
+      num: "13",
+      title: "10 Kịch Bản (S01–S10) & 6 Cổng Nghiệm Thu (G1–G6)",
+      sub: "Bảo đảm bất biến stack, hủy token bất đồng bộ, nghiệm thu 816 hàng dữ liệu",
+      anchor: "#verification",
+      badge: "NGHIỆM THU",
+      color: "text-[#0091ff] bg-[#0091ff]/10 border-[#0091ff]/30",
+    },
+    {
+      num: "14",
       title: "Lộ Trình Đồ Án & Git Provenance",
       sub: "10 tuần nghiên cứu, commit SHA & minh chứng học thuật",
       anchor: "#roadmap",
@@ -276,7 +292,7 @@ export const TopHeroBoardWithTOC: React.FC<Props> = ({ onOpenFigure }) => {
               Động Cơ Đối Kháng Caro AI & Kiểm Chứng Học Thuật
             </h1>
             <p className="text-xs sm:text-sm text-[#646464] max-w-3xl">
-              Mở lên thấy luôn bàn cờ game đối kháng bên phải, mục lục 12 phân hệ thuật toán bên trái. Kéo xuống dưới là Bảng kết quả thực nghiệm và Nền tảng học thuật chi tiết.
+              Mở lên thấy luôn bàn cờ game đối kháng bên phải, mục lục 14 phân hệ thuật toán bên trái. Kéo xuống dưới là Bảng kết quả thực nghiệm và Nền tảng học thuật chi tiết.
             </p>
           </div>
 
@@ -352,7 +368,7 @@ export const TopHeroBoardWithTOC: React.FC<Props> = ({ onOpenFigure }) => {
                   </span>
                 </div>
                 <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white border border-[#d4d4d4] text-[#646464]">
-                  12 Phân Hệ
+                  14 Phân Hệ
                 </span>
               </div>
 

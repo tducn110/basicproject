@@ -102,7 +102,7 @@ export const Week7CandidatesAndTiers: React.FC<Props> = ({ onOpenFigure }) => {
           </h2>
           <MathText 
             className="text-[#646464] text-sm sm:text-base leading-relaxed block"
-            text="Quy hoạch không gian tìm kiếm hình học theo khoảng cách Chebyshev $d_\\infty \\le R$, cơ chế bảo vệ bắt buộc nước đi chiến thuật (Tactical Retention) trước Soft Cap, và ánh xạ cấu hình 6 cấp độ AI từ Easy đến Master."
+            text="Quy hoạch không gian tìm kiếm hình học theo khoảng cách Chebyshev $d_\infty \le R$, cơ chế bảo vệ bắt buộc nước đi chiến thuật (Tactical Retention) trước Soft Cap, và ánh xạ cấu hình 6 cấp độ AI từ Easy đến Master."
           />
         </div>
 
@@ -252,12 +252,135 @@ export const Week7CandidatesAndTiers: React.FC<Props> = ({ onOpenFigure }) => {
           </div>
         </div>
 
+        {/* Table 2.1: Recorded Rust Difficulty Configurations & Frontend Request Path */}
+        <div className="clickup-card p-6 sm:p-8 bg-[#f8f9fa] border border-[#e8e8e8] space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#e8e8e8]">
+            <div>
+              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6647f0] mb-1">
+                Bảng 2.1 (Mục 2.15 Báo Cáo Tốt Nghiệp)
+              </div>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-[#090c1d] tracking-tight">
+                Cấu Hình 6 Cấp Độ AI & Đường Dẫn Điều Phối Quyết Định (Dual-Engine Path)
+              </h3>
+            </div>
+            <span className="text-xs font-mono px-3 py-1 rounded-full bg-white border border-[#d4d4d4] text-[#202020] font-bold shrink-0 self-start sm:self-auto">
+              Table 2.1 Canonical Spec
+            </span>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs font-mono border-collapse">
+              <thead>
+                <tr className="border-b border-[#d4d4d4] bg-white text-[#202020]">
+                  <th className="py-3 px-3 font-bold">Cấp Độ (Difficulty)</th>
+                  <th className="py-3 px-3 font-bold">Chính Sách Rust</th>
+                  <th className="py-3 px-3 font-bold">Độ Sâu (Plies)</th>
+                  <th className="py-3 px-3 font-bold">Bán Kính / Soft Cap</th>
+                  <th className="py-3 px-3 font-bold">Quy Trình & Diễn Giải Đường Dẫn Yêu Cầu</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#e8e8e8]">
+                <tr className="hover:bg-white/80 transition-colors">
+                  <td className="py-3 px-3 font-bold text-[#202020]">Easy</td>
+                  <td className="py-3 px-3 text-[#646464]">Random (SplitMix64)</td>
+                  <td className="py-3 px-3 font-bold text-[#6647f0]">0</td>
+                  <td className="py-3 px-3 text-[#646464]">Toàn bộ ô trống hợp lệ</td>
+                  <td className="py-3 px-3 text-[#646464] font-sans">
+                    Bỏ qua bộ lọc chiến thuật frontend; chọn ngẫu nhiên đều 1 ô hợp lệ không look-ahead.
+                  </td>
+                </tr>
+                <tr className="hover:bg-white/80 transition-colors">
+                  <td className="py-3 px-3 font-bold text-[#202020]">Normal</td>
+                  <td className="py-3 px-3 text-[#646464]">Rule-based Greedy</td>
+                  <td className="py-3 px-3 font-bold text-[#6647f0]">1</td>
+                  <td className="py-3 px-3 text-[#646464]">Bán kính 2 / Không cap</td>
+                  <td className="py-3 px-3 text-[#646464] font-sans">
+                    Bỏ qua frontend; Rust tự kiểm tra thắng ngay, chặn đối thủ rồi so sánh điểm lượng giá 1 ply.
+                  </td>
+                </tr>
+                <tr className="hover:bg-white/80 transition-colors">
+                  <td className="py-3 px-3 font-bold text-[#0091ff]">Hard</td>
+                  <td className="py-3 px-3 text-[#0091ff]">Alpha-Beta Pruning</td>
+                  <td className="py-3 px-3 font-bold text-[#6647f0]">2</td>
+                  <td className="py-3 px-3 text-[#202020]">r = 2 / Soft Cap 15</td>
+                  <td className="py-3 px-3 text-[#646464] font-sans">
+                    Kiểm tra chiến thuật TypeScript trước; nếu không có, gọi Worker chạy Alpha-Beta d=2 (cap danh định 15).
+                  </td>
+                </tr>
+                <tr className="hover:bg-white/80 transition-colors">
+                  <td className="py-3 px-3 font-bold text-[#0091ff]">Very Hard</td>
+                  <td className="py-3 px-3 text-[#0091ff]">Alpha-Beta Pruning</td>
+                  <td className="py-3 px-3 font-bold text-[#6647f0]">3</td>
+                  <td className="py-3 px-3 text-[#202020]">r = 2 / Soft Cap 12</td>
+                  <td className="py-3 px-3 text-[#646464] font-sans">
+                    Kiểm tra chiến thuật TypeScript trước; nếu không có, gọi Alpha-Beta d=3 (cap danh định 12, API ID 5).
+                  </td>
+                </tr>
+                <tr className="hover:bg-white/80 transition-colors">
+                  <td className="py-3 px-3 font-bold text-[#9333ea]">Expert</td>
+                  <td className="py-3 px-3 text-[#9333ea]">Alpha-Beta Pruning</td>
+                  <td className="py-3 px-3 font-bold text-[#6647f0]">4</td>
+                  <td className="py-3 px-3 text-[#202020]">r = 2 / Soft Cap 10</td>
+                  <td className="py-3 px-3 text-[#646464] font-sans">
+                    Kiểm tra chiến thuật TypeScript trước; nếu không có, gọi Alpha-Beta d=4 (cap 10, thời gian &lt; 300ms).
+                  </td>
+                </tr>
+                <tr className="hover:bg-white/80 transition-colors">
+                  <td className="py-3 px-3 font-bold text-[#e11d48]">Master</td>
+                  <td className="py-3 px-3 text-[#e11d48]">Alpha-Beta Pruning</td>
+                  <td className="py-3 px-3 font-bold text-[#6647f0]">5</td>
+                  <td className="py-3 px-3 text-[#202020]">r = 2 / Soft Cap 8</td>
+                  <td className="py-3 px-3 text-[#646464] font-sans">
+                    Kiểm tra chiến thuật TypeScript trước; nếu không có, gọi Alpha-Beta d=5 (cap 8 nghiêm ngặt).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Figure 4.1: Dual-Engine Decision Flow Diagram */}
+          <div className="p-5 rounded-2xl bg-white border border-[#e8e8e8] space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-[#e8e8e8]">
+              <span className="text-xs font-mono font-bold text-[#202020] uppercase tracking-wider flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-[#6647f0]" />
+                Hình 4.1: Sơ Đồ Điều Phối Hai Luồng Quyết Định (Tactical & Rust Search Routes)
+              </span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#f0fdf4] text-[#166534] border border-[#bbf7d0] font-bold">
+                Guarded Commit Invariant
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
+              <div className="p-3.5 rounded-xl bg-[#f8f9fa] border border-[#e8e8e8] space-y-1.5">
+                <div className="font-bold text-[#6647f0] font-mono text-[11px]">1. AIController Dispatch</div>
+                <p className="text-[#646464] text-[11px] leading-relaxed">
+                  Nhận yêu cầu với trạng thái bàn cờ, cấp độ bot, và cấp phát một mã phiên mới (Request ID / Round Token) để cô lập từng lượt tính toán.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] space-y-1.5">
+                <div className="font-bold text-[#1d4ed8] font-mono text-[11px]">2. Tactical vs Worker Route</div>
+                <p className="text-[#1e40af] text-[11px] leading-relaxed">
+                  Cấp Hard..Master chạy bộ lọc nhanh TypeScript (0.1ms). Nếu phát hiện nước thắng ngay hoặc ô chặn khẩn cấp, trả kết quả tức thì mà không cần bật cây tìm kiếm WASM.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#f0fdf4] border border-[#bbf7d0] space-y-1.5">
+                <div className="font-bold text-[#15803d] font-mono text-[11px]">3. Guarded Commit in Main</div>
+                <p className="text-[#166534] text-[11px] leading-relaxed">
+                  Trước khi đặt quân cờ, GameController kiểm tra 5 điều kiện an toàn: Token hợp lệ, ván cờ chưa kết thúc, đang bật AI thinking, đang lượt O, và ô cờ còn trống.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 4 Pillars of Week 7 */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
           <div className="p-4 rounded-2xl bg-[#f8f9fa] border border-[#e8e8e8] space-y-1.5">
             <div className="text-xs font-mono font-bold text-[#6647f0]">01. Chebyshev Radius</div>
             <p className="text-xs text-[#646464] leading-relaxed">
-              <MathText text="Cắt giảm không gian trạng thái theo chuẩn $L_\\infty \\le 2$, triệt tiêu $89.28\\%$ diện tích ô trống thừa khi mới có 1 quân cờ." />
+              <MathText text="Cắt giảm không gian trạng thái theo chuẩn $L_\infty \le 2$, triệt tiêu $89.28\%$ diện tích ô trống thừa khi mới có 1 quân cờ." />
             </p>
           </div>
 

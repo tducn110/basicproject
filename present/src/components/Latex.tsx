@@ -20,6 +20,8 @@ function cleanMathString(raw: string): string {
   } else if (s.startsWith("\\(") && s.endsWith("\\)")) {
     s = s.slice(2, -2).trim()
   }
+  // Normalize unintended double backslashes before LaTeX control words or symbol escapes
+  s = s.replace(/\\\\([a-zA-Z%{},_])/g, "\\$1")
   return s
 }
 

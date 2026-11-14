@@ -93,6 +93,59 @@ export const ProjectOverview: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Table 3.1: Algorithmic Requirements A01-A09 (Báo cáo 13/11) */}
+      <div className="mt-12 clickup-card p-6 sm:p-8 bg-white border border-[#e8e8e8] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#e8e8e8]">
+          <div>
+            <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6647f0] mb-1">
+              Bảng 3.1 (Mục 3.1 Báo Cáo 13/11)
+            </div>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[#090c1d] tracking-tight">
+              9 Yêu Cầu Thuật Toán Đối Kháng (Algorithmic Requirements A01–A09)
+            </h3>
+          </div>
+          <span className="text-xs font-mono px-3 py-1 rounded-full bg-[#f8f9fa] border border-[#e8e8e8] text-[#202020] font-bold shrink-0 self-start sm:self-auto">
+            Algorithm-First Standard
+          </span>
+        </div>
+
+        <p className="text-xs sm:text-sm text-[#646464] leading-relaxed">
+          Bản báo cáo hoàn thiện ngày 13/11 chuyển hóa toàn bộ hệ thống từ các chức năng người dùng (F01–F09) sang 9 ràng buộc toán học và kiểm định nghiêm ngặt của bài toán đối kháng:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+          <div className="p-4 rounded-xl bg-[#f8f9fa] border border-[#e8e8e8] space-y-2">
+            <div className="font-bold text-[#6647f0] text-sm">A01–A03: Không Gian Quyết Định</div>
+            <div className="text-[#202020] font-bold">• A01: Position & Legal Contract</div>
+            <div className="text-[#646464] text-[11px]">Tọa độ nguyên 0..14, mảng phẳng 225 ô, lịch sử nước đi nhất quán.</div>
+            <div className="text-[#202020] font-bold">• A02: Move Space Definition</div>
+            <div className="text-[#646464] text-[11px]">Lọc Chebyshev r ≤ 2 quanh các quân đã đánh, bảo đảm không rỗng.</div>
+            <div className="text-[#202020] font-bold">• A03: Terminal Outcomes</div>
+            <div className="text-[#646464] text-[11px]">Luật Freestyle Gomoku, kiểm thắng 4 trục trước khi kiểm hòa hết bàn.</div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#f8f9fa] border border-[#e8e8e8] space-y-2">
+            <div className="font-bold text-[#0091ff] text-sm">A04–A06: Tính Đúng Lượng Giá</div>
+            <div className="text-[#202020] font-bold">• A04: Score Semantics</div>
+            <div className="text-[#646464] text-[11px]">Mate Base M = 10^8, chiết khấu độ sâu M - q, kẹp tĩnh [-H, +H] với H = 99,999,774.</div>
+            <div className="text-[#202020] font-bold">• A05: Minimax & Alpha-Beta Parity</div>
+            <div className="text-[#646464] text-[11px]">Đảm bảo giá trị trả về và nước đi tối ưu giống hệt nhau trên cùng cây.</div>
+            <div className="text-[#202020] font-bold">• A06: Tactical Preservation</div>
+            <div className="text-[#646464] text-[11px]">Bảo vệ toàn vẹn các nước thắng/chặn tức thì trước khi áp dụng Soft Cap.</div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#f8f9fa] border border-[#e8e8e8] space-y-2">
+            <div className="font-bold text-[#00c07a] text-sm">A07–A09: Kiểm Soát & Cam Kết</div>
+            <div className="text-[#202020] font-bold">• A07: Ordering vs Selection</div>
+            <div className="text-[#646464] text-[11px]">Tách biệt số lượt lượng giá sắp xếp khỏi số nút duyệt đệ quy thực tế.</div>
+            <div className="text-[#202020] font-bold">• A08: Bounded Search & Telemetry</div>
+            <div className="text-[#646464] text-[11px]">Ngân sách thời gian Iterative Deepening, thống kê nodes/time minh bạch.</div>
+            <div className="text-[#202020] font-bold">• A09: State Restore & Guarded Commit</div>
+            <div className="text-[#646464] text-[11px]">Hoàn tác undo() O(1), hủy bỏ yêu cầu AI lỗi thời qua round/epoch token.</div>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

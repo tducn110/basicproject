@@ -24,7 +24,7 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
             <span>Thuật Toán Nền Tảng: Biểu Diễn Trạng Thái & Bất Biến</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#090c1d] tracking-[-0.035em] mb-4">
-            Biểu Diễn Bàn Cờ, Apply/Undo in-place & Quét Thắng $O(1)$
+            Biểu Diễn Bàn Cờ, Apply/Undo in-place & Quét Thắng <Latex>{"O(1)"}</Latex>
           </h2>
           <p className="text-[#646464] text-sm sm:text-base leading-relaxed">
             <MathText text="Để tìm kiếm hàng triệu nút mỗi giây, động cơ không thể sao chép mảng $O(N^2)$. Phân tích cấu trúc bộ nhớ phẳng 240-byte, cơ chế $O(1)$ in-place Apply/Undo và thuật toán quét thắng 4 trục hướng tối đa 32 phép đọc ô." />
@@ -39,7 +39,7 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
               <div className="flex items-center justify-between pb-3 border-b border-[#e8e8e8]">
                 <span className="text-xs font-mono font-bold text-[#6647f0] uppercase tracking-wider flex items-center gap-1.5">
                   <Zap className="w-3.5 h-3.5" />
-                  Bất Biến Apply & Undo $O(1)$
+                  <span>Bất Biến Apply & Undo</span> <Latex className="normal-case">{"O(1)"}</Latex>
                 </span>
                 <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#f8f9fa] border border-[#e8e8e8] text-[#202020] font-bold">
                   Zero Heap Allocation
@@ -58,8 +58,8 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
                 <div className="p-3 rounded-xl bg-[#fff1f2] border border-[#fecdd3]">
                   <div className="font-bold text-[#9f1239] mb-1">Cách Làm Ngây Thơ (Clone):</div>
                   <div className="text-[11px] text-[#881337] space-y-1">
-                    <div>• Sao chép toàn bộ mảng $15 \\times 15$</div>
-                    <div>• Tốn thời gian $O(N^2) = 225$ bước</div>
+                    <div>• Sao chép toàn bộ mảng <Latex>{"15 \\times 15"}</Latex></div>
+                    <div>• Tốn thời gian <Latex>{"O(N^2) = 225"}</Latex> bước</div>
                     <div>• Gây tràn Garbage Collector (GC)</div>
                   </div>
                 </div>
@@ -67,9 +67,9 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
                 <div className="p-3 rounded-xl bg-[#f0fdf4] border border-[#bbf7d0]">
                   <div className="font-bold text-[#166534] mb-1">Động Cơ Rust (In-place):</div>
                   <div className="text-[11px] text-[#14532d] space-y-1">
-                    <div>• Đổi 1 byte duy nhất tại $(x, y)$</div>
-                    <div>• Độ phức tạp đúng $O(1)$ thời gian</div>
-                    <div>• $0$ byte bộ nhớ phụ cấp phát</div>
+                    <div>• Đổi 1 byte duy nhất tại <Latex>{"(x, y)"}</Latex></div>
+                    <div>• Độ phức tạp đúng <Latex>{"O(1)"}</Latex> thời gian</div>
+                    <div>• <Latex>{"0"}</Latex> byte bộ nhớ phụ cấp phát</div>
                   </div>
                 </div>
               </div>
@@ -97,12 +97,18 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
             {/* Interactive Index Calculator */}
             <div className="clickup-card p-5 bg-white border border-[#e8e8e8] space-y-3">
               <div className="text-xs font-mono font-bold text-[#202020] uppercase tracking-wider flex items-center justify-between">
-                <span>Chuyển Đổi Tọa Độ Hai Chiều $\\leftrightarrow$ Chỉ Số Phẳng</span>
-                <span className="text-[#6647f0] font-bold">$i = 15y + x$</span>
+                <span className="flex items-center gap-1.5">
+                  <span>Chuyển Đổi Tọa Độ Hai Chiều</span>
+                  <span className="normal-case font-serif text-sm">↔</span>
+                  <span>Chỉ Số Phẳng</span>
+                </span>
+                <span className="text-[#6647f0] font-bold normal-case font-mono"><Latex>{"i = 15y + x"}</Latex></span>
               </div>
               <div className="grid grid-cols-2 gap-4 items-center pt-1">
                 <div>
-                  <label className="text-[11px] font-mono text-[#838383] block mb-1">Cột $x$ [0..14]: {testCol}</label>
+                  <label className="text-[11px] font-mono text-[#838383] block mb-1">
+                    Cột <span className="italic font-serif text-[#202020]">x</span> [0..14]: {testCol}
+                  </label>
                   <input
                     type="range"
                     min="0"
@@ -113,7 +119,9 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
                   />
                 </div>
                 <div>
-                  <label className="text-[11px] font-mono text-[#838383] block mb-1">Hàng $y$ [0..14]: {testRow}</label>
+                  <label className="text-[11px] font-mono text-[#838383] block mb-1">
+                    Hàng <span className="italic font-serif text-[#202020]">y</span> [0..14]: {testRow}
+                  </label>
                   <input
                     type="range"
                     min="0"
@@ -137,7 +145,7 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
               <div className="flex items-center justify-between pb-3 border-b border-[#e8e8e8]">
                 <span className="text-xs font-mono font-bold text-[#00c07a] uppercase tracking-wider flex items-center gap-1.5">
                   <Crosshair className="w-3.5 h-3.5" />
-                  Thuật Toán Quét Thắng 4 Trục Hướng $O(1)$
+                  <span>Thuật Toán Quét Thắng 4 Trục Hướng</span> <Latex className="normal-case">{"O(1)"}</Latex>
                 </span>
                 <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#f8f9fa] border border-[#e8e8e8] text-[#202020] font-bold">
                   Tối Đa 32 Phép Đọc
@@ -145,7 +153,7 @@ export const BoardRepresentationAndWinCheck: React.FC<Props> = ({ onOpenFigure }
               </div>
 
               <p className="text-xs text-[#646464] leading-relaxed">
-                <MathText text="Trong luật Freestyle Gomoku, thắng khi đạt $\\ge 5$ quân liên tiếp. Thay vì quét toàn bộ bàn cờ $O(N^2)$, thuật toán raycast tối đa 4 bước về 2 phía quanh nước cờ vừa đặt $m$ trên 4 trục:" />
+                <MathText text="Trong luật Freestyle Gomoku, thắng khi đạt $\ge 5$ quân liên tiếp. Thay vì quét toàn bộ bàn cờ $O(N^2)$, thuật toán raycast tối đa 4 bước về 2 phía quanh nước cờ vừa đặt $m$ trên 4 trục:" />
               </p>
 
               <div className="p-4 rounded-xl bg-[#f8f9fa] border border-[#e8e8e8] text-center my-3 text-[#202020] overflow-x-auto">

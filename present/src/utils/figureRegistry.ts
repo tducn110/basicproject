@@ -446,7 +446,7 @@ pub fn count_patterns(board: &Board, player: Player) -> PatternCounts {
     sourceFile: "caro-core-reference/src/bot/rule_based.rs",
     language: "Rust",
     mathLatex: "a^* = \\begin{cases} a_{\\text{mate}}, & \\text{nếu } \\exists a: \\text{Win}(s, a) \\\\ a_{\\text{block}}, & \\text{nếu } \\exists a: \\text{OppWin}(s, a) \\\\ \\arg\\max_{a \\in \\mathcal{C}(s)} f(s \\oplus a), & \\text{ngược lại} \\end{cases}",
-    mathExplanation: "Phân cấp quyết định 1-ply: Đầu tiên kiểm tra nước thắng ngay lập tức (Score = +10,000,000). Nếu không có, lập tức kiểm tra xem đối thủ có nước thắng ở lượt tiếp theo hay không để chặn ngay. Nếu cả hai không xảy ra, duyệt toàn bộ ô ứng viên để tìm nước đi có điểm Heuristic cao nhất.",
+    mathExplanation: "Phân cấp quyết định 1-ply: Đầu tiên kiểm tra nước thắng ngay lập tức (Score U = M - 1 = +99,999,999 với M = 10^8). Nếu không có, lập tức kiểm tra xem đối thủ có nước thắng ở lượt tiếp theo hay không để chặn ngay. Nếu cả hai không xảy ra, duyệt toàn bộ ô ứng viên để tìm nước đi có điểm Heuristic cao nhất.",
     algorithmSteps: [
       "1. BỘ SINH Ô ỨNG VIÊN: Lấy tập candidate trong bán kính Chebyshev r <= 2 quanh quân đã đánh.",
       "2. KIỂM TRA SÁT CUỘC 1-PLY (Bot Win): Giả lập đi từng ô, nếu thắng ngay -> chốt nước đi tức thì.",
@@ -614,16 +614,16 @@ pub fn generate_candidates(state: &GameState, radius: i32) -> Vec<Move> {
     sourceFile: "caro-core-reference/src/evaluator.rs",
     language: "Rust / Python",
     mathLatex: "f(s) = \\sum_{p} \\left( W_{\\text{atk}}(p) \\cdot N_{\\text{bot}}(p) - W_{\\text{def}}(p) \\cdot N_{\\text{human}}(p) \\right)",
-    mathExplanation: "Hàm lượng giá tĩnh ma trận lũy thừa: Five (10,000,000) > Open Four (100,000) > Closed Four (10,000) > Open Three (5,000) > Closed Three (1,000) > Open Two (500) > Closed Two (100). Trọng số phòng thủ nhân hệ số 1.2x để ngăn chặn bot tấn công tham lam mà bỏ quên nguy cơ bị đối thủ kết liễu.",
+    mathExplanation: "Hàm lượng giá tĩnh ma trận lũy thừa (Mục 2.5.2 Báo cáo 13/11): Five (M = 100,000,000) > Open Four (100,000) > Closed Four (10,000) > Open Three (5,000) > Closed Three (1,000) > Open Two (500) > Closed Two (100). Trọng số phòng thủ nhân hệ số 1.2x để ngăn chặn bot tấn công tham lam mà bỏ quên nguy cơ bị đối thủ kết liễu.",
     algorithmSteps: [
       "1. Quét toàn bộ hình thế của Bot -> Tính tổng điểm Atk_score.",
       "2. Quét toàn bộ hình thế của đối thủ -> Tính tổng điểm Def_score (nhân 1.2x).",
       "3. Hiệu số: Score = Atk_score - Def_score.",
-      "4. Kẹp giới hạn an toàn: clamp(-9,999,999, +9,999,999) để nước thắng thực tế (10,000,000) luôn áp đảo.",
+      "4. Kẹp giới hạn an toàn: clamp(-H, +H) với H = M - 225 - 1 = 99,999,774 để nước thắng thực tế (U >= 99,999,775) luôn luôn áp đảo.",
     ],
-    scriptCode: `// caro-core-reference/src/evaluator.rs (Hàm lượng giá Heuristic tĩnh)
-pub const MATE_SCORE: i64 = 10_000_000;
-pub const CLAMP_LIMIT: i64 = 9_999_999;
+    scriptCode: `// CaroGame/engine/src/eval.rs (Hàm lượng giá Heuristic tĩnh - Chuẩn hóa 13/11)
+pub const MATE_BASE: i64 = 100_000_000;
+pub const CLAMP_LIMIT: i64 = 99_999_774; // M - 225 - 1
 
 pub struct EvalWeights {
     pub five: i64,
@@ -663,9 +663,9 @@ pub const DEFENSE_WEIGHTS: EvalWeights = EvalWeights {
     },
     goods: [
       {
-        title: "Bảo Đảm Nguyên Lý Mate Dominance",
-        detail: "Nước tạo chuỗi 5 luôn có điểm 10^7, bảo đảm bot không bao giờ bị phân tâm bởi việc tích lũy các thế cờ tĩnh mà bỏ qua nước thắng cuộc trực tiếp.",
-        metric: "10,000,000 Absolute Mate Score",
+        title: "Bảo Đảm Nguyên Lý Mate Dominance (Mục 2.5.2 Báo cáo 13/11)",
+        detail: "Nước tạo chuỗi 5 có điểm cơ số M = 10^8, chiết khấu theo cự ly q (U = M - q = 99,999,999 tại root). Điểm luôn vượt ngưỡng clamp 99,999,774 bảo đảm bot không bao giờ bị phân tâm bởi việc tích lũy các thế cờ tĩnh mà bỏ qua nước thắng trực tiếp.",
+        metric: "M = 100,000,000 Mate Base",
       },
       {
         title: "Hệ Số Ưu Tiên Phòng Thủ 1.2x",

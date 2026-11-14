@@ -441,7 +441,7 @@ print("-> Kết luận: Cả Minimax và Alpha-Beta cùng trả về nước đi
                 <img src="/assets/pattern_weights_distribution.png" alt="Pattern Weights" className="w-full h-auto group-hover:scale-105 transition-transform duration-300" />
               </div>
               <p className="text-xs text-[#646464] leading-relaxed">
-                <MathText text="Ma trận trọng số: Five ($M = 10^8$) áp đảo toàn bộ điểm tĩnh kẹp $[-H, +H]$ với $H = 99\\,999\\,774$; hệ số phòng thủ $1.2\\times$ chống bot tấn công tham lam." />
+                <MathText text="Ma trận trọng số: Five ($M = 10^8$) áp đảo toàn bộ điểm tĩnh kẹp $[-H, +H]$ với $H = 99\,999\,774$; hệ số phòng thủ $1.2\times$ chống bot tấn công tham lam." />
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-[#e8e8e8] text-[11px] font-mono text-[#838383] flex justify-between">
