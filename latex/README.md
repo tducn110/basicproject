@@ -78,6 +78,25 @@ Thư mục này chứa toàn bộ mã nguồn LaTeX, đồ thị, sơ đồ cơ 
 
 ---
 
+### 1.6. Chuyên khảo 6: Giáo Trình Vòng Lặp Học Tăng Cường Tự Chơi & Tiến Hóa Mô Hình (Phase 4)
+* **File nguồn TeX:** [`Giao_Trinh_Vong_Lap_Hoc_Tang_Cuong_Tu_Choi_Phase_4.tex`](file:///home/pro/Downloads/basicproject/latex/Giao_Trinh_Vong_Lap_Hoc_Tang_Cuong_Tu_Choi_Phase_4.tex)
+* **File PDF đã biên dịch (12 trang):** [`Giao_Trinh_Vong_Lap_Hoc_Tang_Cuong_Tu_Choi_Phase_4.pdf`](file:///home/pro/Downloads/basicproject/latex/Giao_Trinh_Vong_Lap_Hoc_Tang_Cuong_Tu_Choi_Phase_4.pdf)
+* **Thư mục mã nguồn:** [`../RL_Pipeline/iteration_pipeline.py`](file:///home/pro/Downloads/basicproject/RL_Pipeline/iteration_pipeline.py), [`../RL_Pipeline/champion_ultimate.onnx`](file:///home/pro/Downloads/basicproject/RL_Pipeline/champion_ultimate.onnx)
+* **Nội dung 5 chương:** Triết lý tự chơi tiến hóa AlphaZero; Cơ chế Sliding Replay Buffer ($8,000$ mẫu) chống hiện tượng Catastrophic Forgetting; Cổng thẩm định vô địch Champion Gate ($\ge 55\%$ win rate); Công thức giải tích biến thiên điểm số Elo; Đo đạc thực nghiệm telemetry 3 thế hệ tiến hóa trên GPU NVIDIA T1200.
+
+---
+
+### 1.7. Chuyên khảo 7: Báo Cáo Tổng Kết Toàn Diện Đồ Án & Bộ Cẩm Nang 15 Câu Hỏi Phản Biện Bảo Vệ 10/10 (Master Thesis Synthesis)
+* **File nguồn TeX:** [`Bao_Cao_Tong_Ket_Toan_Dien_Do_An_Gomoku_AI_Full_Thesis.tex`](file:///home/pro/Downloads/basicproject/latex/Bao_Cao_Tong_Ket_Toan_Dien_Do_An_Gomoku_AI_Full_Thesis.tex)
+* **File PDF đã biên dịch (12 trang):** [`Bao_Cao_Tong_Ket_Toan_Dien_Do_An_Gomoku_AI_Full_Thesis.pdf`](file:///home/pro/Downloads/basicproject/latex/Bao_Cao_Tong_Ket_Toan_Dien_Do_An_Gomoku_AI_Full_Thesis.pdf)
+* **Nội dung 4 phần hợp nhất:**
+  1. **Phần I: Tổng quan không gian trạng thái $15 \times 15$ ($10^{107}$ thế cờ) và lộ trình 5 chặng đường.**
+  2. **Phần II: Ma trận so sánh năng lực kỹ thuật giữa 4 thế hệ bot trong đồ án.**
+  3. **Phần III: Cẩm nang 15 câu hỏi phản biện hóc búa nhất của Hội đồng đánh giá và lời giải đạt điểm 10/10.**
+  4. **Phần IV: Kết luận học thuật, bàn giao toàn diện hệ thống.**
+
+---
+
 ## 2. Lệnh Biên Dịch Lại Toàn Bộ Các Tài Liệu
 
 ```bash
@@ -97,4 +116,10 @@ xelatex -interaction=nonstopmode Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_Res
 
 # 5. Giáo trình Thuật toán AlphaZero MCTS & Tự chơi Học tăng cường Phase 3 (19 trang)
 xelatex -interaction=nonstopmode Giao_Trinh_AlphaZero_MCTS_Va_Hoc_Tang_Cuong_Phase_3.tex
+
+# 6. Giáo trình Vòng lặp Học tăng cường Tự chơi & Tiến hóa Mô hình Phase 4 (12 trang)
+xelatex -interaction=nonstopmode Giao_Trinh_Vong_Lap_Hoc_Tang_Cuong_Tu_Choi_Phase_4.tex
+
+# 7. Báo cáo Tổng kết Toàn diện Đồ án & Cẩm nang 15 Câu hỏi Phản biện Hội đồng (12 trang)
+xelatex -interaction=nonstopmode Bao_Cao_Tong_Ket_Toan_Dien_Do_An_Gomoku_AI_Full_Thesis.tex
 ```
