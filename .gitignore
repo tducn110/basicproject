@@ -28,3 +28,16 @@ target/
 **/target/
 .vercel/
 **/.vercel/
+
+# Cargo & App temporary builds
+**/cargo-target-*/
+cargo-target-*/
+**/app-build/
+**/present-build/
+
+# Nested build and node_modules
+**/node_modules/
+**/cargo-target-*/
+**/app-build/
+**/present-build/
+**/present-validation/
