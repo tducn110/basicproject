@@ -1,0 +1,207 @@
+{
+  "main": {
+    "id": "49f1c6f285c4106f",
+    "type": "split",
+    "children": [
+      {
+        "id": "9b9ee687c00e12b5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "229f04c49a932ce2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "file:/home/pro/Documents/ai/VNUK_AI_Obsidian_Vault (2)/02_Workbooks/W01_Supervised_Original/01_0_Overview.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_0_Overview"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5fa9a4717e2669ae",
+    "type": "split",
+    "children": [
+      {
+        "id": "07f92b18a39c5a00",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4ea1c57c350c86ab",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "2544c65840742757",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "51a8ee822836c34e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "271ff90dd6ef019b",
+    "type": "split",
+    "children": [
+      {
+        "id": "5b4b2786aacce854",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d6e2d667a1044016",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Tuan_01/04_State_Space_Va_Game_Tree.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "3200d05a531748f4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Tuan_01/04_State_Space_Va_Game_Tree.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "8c83f75f29605985",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ed698b40e09dc846",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "229f04c49a932ce2",
+  "lastOpenFiles": [
+    "file:/home/pro/Documents/ai/VNUK_AI_Obsidian_Vault (2)/01_Bai_giai/01_Supervised_Unsupervised.md",
+    "README.md",
+    "Tuan_01/04_State_Space_Va_Game_Tree.md",
+    "00_De_Cuong_PDF/ĐỀ CƯƠNG ĐỒ ÁN CƠ SỞ .pdf",
+    "file:/home/pro/Documents/ai/01-supervised.md",
+    "Untitled 1.md",
+    "file:/home/pro/Documents/ai/GIAI_TOAN_BO_12_FILE_AI.md",
+    "Untitled 2.md",
+    "Untitled",
+    "Untitled.md",
+    "Tuan_01/03_Cach_Bieu_Dien_Ban_Co.md",
+    "Tuan_01/00_Tong_Quan_Tuan_1.md",
+    "Bao_Cao_De_Cuong.md",
+    "().md",
+    "Tuan_10/00_Tong_Quan_Tuan_10.md",
+    "Tuan_06/01_Nguyen_Ly_Alpha_Beta_Pruning.md",
+    "Tuan_06/00_Tong_Quan_Tuan_6.md",
+    "Tuan_04/03_Xay_Dung_Pattern_Detection.md",
+    "Tuan_04/02_Xay_Dung_Rule_Based_Bot.md",
+    "Tuan_04/01_Xay_Dung_Random_Bot.md",
+    "Tuan_04/00_Tong_Quan_Tuan_4.md",
+    "Tuan_02/01_Xay_Dung_Board_Matrix.md",
+    "Tuan_02/04_Kiem_Tra_Nuoc_Di_Hop_Le.md",
+    "Tuan_02/03_Xu_Ly_Nuoc_Di.md",
+    "Tuan_02/06_Hoan_Thien_Game_Engine_Co_Ban.md",
+    "Tuan_02/05_Kiem_Tra_Dieu_Kien_Thang_Va_Hoa.md",
+    "Tuan_02/02_Xay_Dung_Game_State.md",
+    "Tuan_02/00_Tong_Quan_Tuan_2.md"
+  ]
+}

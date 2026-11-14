@@ -1,0 +1,157 @@
+[
+  {
+    "title": "Caro AI — Weeks 03–07",
+    "text": "Progress Report · Data Structures, Algorithms and Recursive Search\nFrom a playable 15 × 15 board to verified native search experiments.\nSource review: 21 October 2026 · Experiment snapshot: 17 October 2026.",
+    "visual": "Large editable Gomoku board crop with black and white stones. Highlight one new stone and four scan axes. Academic cover, no fictional names."
+  },
+  {
+    "title": "Weeks 03–07 | Scope and evidence",
+    "text": "03 Interface and lifecycle · 04 Patterns and heuristics · 05 Minimax · 06 Alpha-Beta and cache · 07 Spatial candidates.\nCurrent app: React/PixiJS → tactical guard → Worker → existing Gomoku Wasm.\nResearch: separate native caro-core-reference library.\nNative results do not prove shipped-Wasm equivalence. Week labels organize reports; they are not commit dates.",
+    "visual": "Five-week timeline above two clearly separate architecture lanes.",
+    "source": "Week reports · reviewed app c1e7447 · native reference"
+  },
+  {
+    "title": "Week 03 | What happens after one tap?",
+    "text": "1 Convert screen pixels to a board cell.\n2 Check pause, round, turn and AI-thinking gates.\n3 Reject occupied or out-of-bounds cells.\n4 Commit the stone and append history.\n5 Check win first, then draw, otherwise switch player.\n6 Publish a snapshot to React and PixiJS.\nThis move transaction is iterative.",
+    "visual": "Six-step flow around a small Gomoku board; separate state update from UI feedback.",
+    "source": "GameController.ts · PlayMove.ts · MoveRules.ts"
+  },
+  {
+    "title": "Which data structures own the move?",
+    "text": "Live TypeScript board — Map<string, Player>, keyed by row,col.\nMove history — Move[], preserving turn order.\nChange subscribers — Set of listeners.\nInput and round phases — finite state machines.\nNative reference board — [i8; 225], indexed by row × 15 + column.\nThese are different representations. They require an explicit adapter contract before integration.",
+    "visual": "Clean comparison table, live application versus native reference. Show row 7, col 8 maps to index 113.",
+    "source": "GameState.ts · state.rs · model.rs"
+  },
+  {
+    "title": "Pixels become coordinates before rules run",
+    "text": "column = floor((screenX − cameraX) / zoom / 56)\nrow = floor((screenY − cameraY) / zoom / 56)\nInput states distinguish a tap from a camera drag.\nBoardBounds then enforces rows and columns 0–14.\nCoordinate conventions must be normalized: UI (row, column), Rust API (x, y).",
+    "visual": "Editable camera-to-grid diagram. Highlight one square and labelled coordinates; no screenshot presented as runtime evidence.",
+    "source": "CoordinateTransform.ts · BoardInputController.ts · BoardBounds.ts"
+  },
+  {
+    "title": "The win scan uses four axes",
+    "text": "Directions: (0,1), (1,0), (1,1), (1,−1).\nFor each axis: L = 1 + forward matches + backward matches.\nCurrent Freestyle rule: win when any L ≥ 5.\nThe live scanner checks at most four neighbors per ray: 4 × 2 × 4 = 32 neighbor probes.\nLoops perform the scan; recursion is unnecessary here.",
+    "visual": "A clear Gomoku grid with horizontal, vertical and two diagonal arrows through the last stone.",
+    "source": "WinRules.ts::evaluate / collect"
+  },
+  {
+    "title": "Worked scan | Why the last move is enough",
+    "text": "Place X at (7,5).\nMatching X stones: (7,3), (7,4), (7,6), (7,7).\nHorizontal count: 1 + 2 left + 2 right = 5 → WIN.\nOnly lines crossing the new stone can become newly winning after a legal nonterminal state.\nBlocked endpoints do not invalidate this Freestyle win.",
+    "visual": "Exact board row with X at columns 3,4,5,6,7, new stone at 5 in orange ring; label the 2+1+2 counts. Constructed explanation, not a recorded match.",
+    "source": "WinRules.ts · analytical example"
+  },
+  {
+    "title": "An AI turn starts with a tactical guard",
+    "text": "Scan empty cells for an immediate own win; otherwise find an immediate opponent win to block.\nIf neither exists, send move history to the Worker.\nThe Worker replays history into Rust Game and calls ai_move(difficulty).\nMap (x,y) to (row=y,column=x), reject stale results, revalidate, then commit.\nOne selected block cannot resolve every double threat.",
+    "visual": "Decision flow: WIN? → BLOCK? → WORKER SEARCH → VALIDATE → COMMIT.",
+    "source": "AIController.ts · TacticalMoveResolver.ts · worker.ts"
+  },
+  {
+    "title": "Week 03 progress | Playable structure is present",
+    "text": "Source reviewed: 15 × 15 board; React/PixiJS responsibilities; tap/drag handling; move gates; round transitions; Worker request IDs and stale-result protection.\nCancellation terminates and recreates the Worker.\nPending runtime evidence: browser interaction, device latency and frame rate.\nFrontend test rerun was blocked by missing Vitest dependencies; older FPS claims are not reused.",
+    "visual": "Two-column progress table: SOURCE REVIEWED and STILL TO VERIFY. Include small lifecycle diagram.",
+    "source": "CaroGameCanvas.tsx · CaroScene.ts · GomokuWasmEngine.ts"
+  },
+  {
+    "title": "Week 04 | A heuristic scan counts patterns",
+    "text": "The reference scans board cells for one player across four axes.\nStart only where the preceding cell is not the same player.\nWalk the maximal contiguous run; count empty endpoints.\nFor runs of at least two stones, emit one Pattern record, then increment PatternCounts.\nFirst-stone ownership prevents recounting the same run along one axis.",
+    "visual": "Show .XXX. with one accepted start and two crossed-out duplicate starts; show Pattern fields length=3, open_ends=2.",
+    "source": "pattern.rs::detect_runs / count_patterns"
+  },
+  {
+    "title": "Week 04 | Pattern weights and position score",
+    "text": "Native reference weights: five+ 1,000,000; open four 100,000; closed four 20,000; open three 5,000; closed three 500; open two 100; closed two 10.\nE(s)=Attack−Defense; default β=1. One own open three against one opponent closed three: 5,000−500=4,500, assuming no other patterns.\nRules determine terminal wins. Game-engine weights differ. XX.XX needs gap-aware detection; β=1.15 remains proposed.",
+    "visual": "Editable seven-row weight table on the left, 4500 worked calculation on the right; .XXXX. and OXXXX. shape examples. No enormous uneditable bitmap.",
+    "source": "pattern.rs · evaluator.rs"
+  },
+  {
+    "title": "Three baselines isolate algorithm behavior",
+    "text": "Random: enumerate all legal moves; choose using seeded SplitMix64.\nRule-based: try own win → block opponent win → heuristic fallback.\nHeuristic: for each generated candidate, play → evaluate → undo; keep the first maximum.\nThe heuristic baseline is greedy one-ply evaluation. It does not recursively inspect opponent replies.",
+    "visual": "Three parallel algorithm strips with a small stone-position example, no invented win-rate chart.",
+    "source": "bot/random.rs · bot/rule_based.rs · bot/heuristic.rs"
+  },
+  {
+    "title": "Week 04 progress | Evaluation exists; migration needs proof",
+    "text": "Present in the native reference: contiguous patterns, default weights, terminal handling and reproducible baselines.\nThe reference crate is rlib-only and has no wasm-bindgen exports.\nExisting game Wasm and the native reference are separate artifacts.\nPending: shared TS/Rust fixtures, adapter verification, broken-threat tests and controlled browser benchmarks.\nNo TS-to-Wasm speedup is claimed.",
+    "visual": "Build boundary: native reference → proposed adapter → generated Wasm → Worker verification. Mark the last three gates pending.",
+    "source": "Cargo.toml · lib.rs · Week 04 report"
+  },
+  {
+    "title": "Week 05 | Recursive Minimax",
+    "text": "Scores stay in root-player perspective: MAX on our turn, MIN on the opponent's.\nSEARCH(s,d):\n  if terminal: return utility\n  if d=0: return heuristic\n  generate moves; if empty: return heuristic\n  for each move:\n    token=play(move)\n    child=SEARCH(s,d−1)\n    undo(token)\n  return MAX or MIN of children\nOne ply is one move; depth 2 includes an opponent reply.",
+    "visual": "Readable editable monospace pseudocode plus a small MAX→MIN tree. Clearly separate base cases, recursive call and undo.",
+    "source": "search/minimax.rs::value · explanatory pseudocode"
+  },
+  {
+    "title": "Worked recursion | Protect against the best reply",
+    "text": "Illustrative tree, not an engine measurement.\nMove A allows replies scored 8 and 2: A = min(8,2) = 2.\nMove B allows replies scored 5 and 4: B = min(5,4) = 4.\nRoot chooses max(2,4) = 4, therefore B.\nChoosing the largest leaf alone would ignore the opponent's choice.",
+    "visual": "Exact tree MAX root; MIN A children 8,2; MIN B children 5,4. Highlight B→4, show 2 and 4 propagated upward.",
+    "source": "minimax.rs · analytical example"
+  },
+  {
+    "title": "Week 05 progress | Reversible search and terminal scores",
+    "text": "UndoToken restores cell, player, status, last move and move count, so every sibling starts from the same parent.\nUtility: win M−ply; loss −M+ply; draw 0; M=10,000,000.\nDepth limit uses the heuristic. Uniform branching b and depth d gives O(b^d) traversal; call stack O(d) plus retained move vectors.\nRecorded: 551 root restorations and 112 Minimax/Alpha-Beta matching score-and-move pairs.",
+    "visual": "Three small editable boards: parent → child → restored parent. A compact progress/evidence strip, no fake percentage.",
+    "source": "state.rs::play / undo · minimax.rs · verification.json"
+  },
+  {
+    "title": "Week 06 | Alpha-Beta cutoff example",
+    "text": "At MAX update alpha; at MIN update beta. Undo each move before skipping siblings when alpha≥beta.\nIllustrative tree: left MIN sees 9,6 → 6, so alpha=6. Right MIN sees 5, so beta=5; skip its final leaf 3.\nMAX remains 6. Full traversal: 7 nodes; pruned: 6.\nThe same finite tree retains its Minimax value; omitted candidates are a separate issue.",
+    "visual": "Exact editable tree with leaves 9,6 and 5,3. Cross out only 3. Label ALPHA 6 ≥ BETA 5 and constructed example.",
+    "source": "search/alpha_beta.rs::value · analytical example"
+  },
+  {
+    "title": "Measured pruning | Same answer, fewer nodes",
+    "text": "Clustered fixture · all legal moves · depth 2 · natural order.\nMinimax: 48,842 nodes.\nAlpha-Beta: 10,939 nodes.\nNode reduction: 77.60%.\nBoth: score 0; move (6,7).\nNative Rust release results, 17 October 2026. This is one controlled configuration, not browser performance.",
+    "visual": "Editable two-bar chart with exact values, baseline axis starting at zero. Small same-score/same-move annotation.",
+    "source": "search_summary.csv rows 52–53 · provenance.json"
+  },
+  {
+    "title": "Week 06 progress | Cache bounds and an open hazard",
+    "text": "Present: bound updates, cutoffs and TTEntry {depth,score,Exact/Lower/Upper,best_move} in HashMap<u64,TTEntry>.\nZobrist key covers pieces and side to move.\nRecorded after changed root: reused table score 19,800; fresh table 0. Keep a fresh compatible table until context is repaired.\n208 cold-table score comparisons passed in the wider native package. Fewer nodes do not guarantee lower elapsed time.",
+    "visual": "TT record and reused/fresh score comparison, clearly labelled open hazard. No 8 MB capacity or deployed integration claim.",
+    "source": "transposition.rs · zobrist.rs · cache_scope_probe.json · verification.json"
+  },
+  {
+    "title": "Week 07 | Nearby empty cells become candidates",
+    "text": "Chebyshev distance: d∞ = max(|Δrow|, |Δcolumn|).\nKeep empty cells within radius R of at least one stone.\nReference defaults: R = 2; no cap.\nWith one center stone: 224 legal cells, 24 radius-2 candidates.\nEmpty board special case: center (7,7).\nSpatial filtering reduces branching without proving every excluded move irrelevant.",
+    "visual": "Editable 7×7 crop around center stone; tint the 5×5 radius-2 square except occupied center, label 24.",
+    "source": "movegen.rs::generate_candidates · candidates.csv"
+  },
+  {
+    "title": "The candidate scan uses marking and a vector",
+    "text": "1 Scan the flat board for occupied cells.\n2 Visit each square neighborhood.\n3 Reject occupied and out-of-board cells.\n4 Mark [bool;225] to deduplicate overlaps.\n5 Scan marks row-major into Vec<Move>.\n6 Apply optional truncation, then optional move ordering.\nGeneration changes membership; ordering changes sequence.",
+    "visual": "Two nearby stones with overlapping neighborhoods, one Boolean mark per cell, then arrow to a sorted-by-index move vector.",
+    "source": "movegen.rs:21–64 · search/mod.rs"
+  },
+  {
+    "title": "A candidate cap can delete a winning move",
+    "text": "Recorded win fixture: radius 1 produces 20 candidates.\nCap 6 retains the first six in row-major order.\nBoth winning endpoints (7,2) and (7,7) disappear.\nDepth-1 score changes: 9,999,999 → 99,990.\nSorting the surviving moves cannot recover a deleted move.\nTactical preservation must be tested before adding a cap.",
+    "visual": "Exact board with X at (7,3),(7,4),(7,5),(7,6) and O at (5,5),(5,6), using zero-based (row,column). Highlight omitted winning endpoints (7,2),(7,7) and the six first row-major candidates near the O stones. Include all six existing stones so the cap-loss mechanism is faithful.",
+    "source": "cap_loss.json · win fixture; native reference"
+  },
+  {
+    "title": "Week 07 progress | Geometry verified, coverage remains open",
+    "text": "Recorded: 48 geometry configurations passed uniqueness, emptiness and radius checks.\nSource review confirms deterministic row-major output; edge and cap examples are recorded.\nOne center stone: R1=8, R2=24, R3=48.\nOne corner stone: R1=3, R2=8, R3=15.\nCandidate time: O(N² + kR²); O(N²) marking/output space.\nN=board width; k=occupied cells. Cap applies after generation.",
+    "visual": "Readable center-versus-corner table plus two small grid diagrams.",
+    "source": "candidates.csv · movegen.rs · Week 07"
+  },
+  {
+    "title": "Every scan has a different purpose",
+    "text": "Win check — last move, four bounded axes; iterative.\nTactical guard — empty-cell enumeration plus hypothetical win checks; iterative.\nPattern evaluation — whole-board maximal-run scan; iterative, O(N²) per player.\nCandidate generation — neighborhood marking; iterative, O(N²+kR²).\nMinimax/Alpha-Beta — depth-first recursion over generated moves, with make/undo.\nThe call stack is O(d); retained move vectors also consume memory.",
+    "visual": "Five-row mapping table: purpose, DSA, algorithm, trigger. Do not describe all scans as recursive.",
+    "source": "WinRules.ts · TacticalMoveResolver.ts · pattern.rs · movegen.rs · search"
+  },
+  {
+    "title": "Progress is supported by bounded evidence",
+    "text": "Today: 6 unit + 3 integration reference tests passed.\nStored 17 October package: 20 fixture positions; 112 Minimax/Alpha-Beta pairs; 551 root restorations; 48 candidate sets.\nCurrent 26-file source hashes match that package.\nNext: preserve tactical moves, repair TT context, add broken-threat fixtures, verify the adapter/Worker in browsers, then measure latency and playing strength.\nFrontend runtime remains unverified.",
+    "visual": "Compact five-week completion matrix labelled SOURCE / NATIVE VERIFIED / PENDING, plus 3 ordered next priorities. No fake percentages.",
+    "source": "verification.json · provenance.json · current cargo test"
+  },
+  {
+    "title": "Sources and interpretation",
+    "text": "Implementation: tducn110/caro, reviewed checkout c1e7447; core GameState, WinRules, GameController, AIController and Worker.\nResearch: Week3–Week7 reports; caro-core-reference; research/week_05_09/results.\nTheory: UC Berkeley CS188, Minimax and Alpha-Beta.\nData structures: official Rust collections documentation.\nResults are native reference evidence, not device, browser, tournament or production acceptance.",
+    "visual": "Clean source appendix with readable hyperlinks and the two snapshot dates. End with small Gomoku board motif.",
+    "source": "https://github.com/tducn110/caro · https://inst.eecs.berkeley.edu/~cs188/textbook/games/minimax.html · https://doc.rust-lang.org/std/collections/index.html"
+  }
+]

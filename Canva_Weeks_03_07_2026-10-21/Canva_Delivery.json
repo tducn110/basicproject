@@ -1,0 +1,15 @@
+{
+  "design_id": "DAHYob_y_LQ",
+  "edit_url": "https://www.canva.com/d/e2I4gKL0ZEQEXEg",
+  "view_url": "https://www.canva.com/d/ejt-ZGl6v75vKaI",
+  "page_count": 26,
+  "expected_pages": 26,
+  "title": "Caro AI — Weeks 03–07 | Complete English Progress Report",
+  "missingTitles": [],
+  "missingLines": [],
+  "chartLabelsPresent": true,
+  "nativeTests": "6 unit + 3 integration passed on 2026-10-21",
+  "localVisualReview": "All 26 page renders inspected. Final changed chart rendered and inspected locally and in native Canva; native labels Minimax and Alpha-Beta and values 48,842 and 10,939 verified on 2026-10-21.",
+  "nativeCanvaReadback": "All 26 titles and every nonempty source-content line were found in the final Canva rich-text readback; no missing titles or lines.",
+  "artifacts": ["Caro_AI_Weeks_03_07_Complete.pptx", "Caro_AI_Weeks_03_07_Complete.pdf", "Caro_AI_Weeks_03_07_Final_26_Slides.md"]
+}
