@@ -1,0 +1,86 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\HyPL@Entry{1<</S/r>>}
+\@writefile{toc}{\contentsline {chapter}{Lời Mở Đầu \& Tôn Chỉ Kỹ Thuật}{i}{chapter*.1}\protected@file@percent }
+\HyPL@Entry{5<</S/D>>}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Đặt Vấn Đề Và Cơ Sở Lý Thuyết Học Tăng Cường Cho Gomoku}{1}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Mô hình hóa Gomoku dưới dạng Quá trình Quyết định Markov (MDP)}{1}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Bản chất Vấn đề Khởi động Lạnh (The Cold-Start Problem)}{2}{section.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces So sánh giữa quy trình khởi động từ số 0 (Tabula Rasa) và quy trình Khởi động ấm (Warm-Start) dựa trên tập dữ liệu thực nghiệm trong đề tài.}}{2}{figure.caption.3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:cold_start_comparison}{{1.1}{2}{So sánh giữa quy trình khởi động từ số 0 (Tabula Rasa) và quy trình Khởi động ấm (Warm-Start) dựa trên tập dữ liệu thực nghiệm trong đề tài}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}So sánh Ba Trường Phái Học Máy Cho Tập Dữ Liệu 10,000 Ván Đấu}{3}{section.1.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.1}{\ignorespaces So sánh ba trường phái học máy áp dụng cho tập dữ liệu Gomoku 10,000 ván đấu.}}{3}{table.caption.4}\protected@file@percent }
+\newlabel{tab:three_paradigms}{{1.1}{3}{So sánh ba trường phái học máy áp dụng cho tập dữ liệu Gomoku 10,000 ván đấu}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Mục Tiêu Và Giới Hạn Nghiên Cứu Của Bước 1}{3}{section.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Cơ Chế Trích Xuất Dữ Liệu Thực Nghiệm Từ 10,000 Ván Đấu}{4}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Nguồn Dữ Liệu Giải Đấu Heuristic Tuần 11}{4}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Cơ Chế Tái Hiện Bàn Cờ (Board Replay Engine) Và Bóc Tách Transition}{4}{section.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Sơ đồ khối cơ chế Replay bàn cờ và bóc tách Transition từng lượt đi.}}{5}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:replay_transition_flow}{{2.1}{5}{Sơ đồ khối cơ chế Replay bàn cờ và bóc tách Transition từng lượt đi}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Kiến Trúc Trích Xuất Song Song Đa Tiến Trình (Multiprocessing Architecture)}{5}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Thống Kê Định Lượng Toàn Diện Tập Dữ Liệu Đã Trích Xuất}{6}{section.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Thống kê định lượng toàn diện tập dữ liệu Gomoku RL Base trích xuất từ 10,000 ván đấu.}}{6}{table.caption.6}\protected@file@percent }
+\newlabel{tab:dataset_statistics}{{2.1}{6}{Thống kê định lượng toàn diện tập dữ liệu Gomoku RL Base trích xuất từ 10,000 ván đấu}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Mã Hóa Trạng Thái Bất Biến Phối Cảnh (Perspective-Invariant State Encoding)}{8}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Hạn Chế Của Cách Mã Hóa Màu Tuyệt Đối (Absolute Color Encoding)}{8}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Thiết Kế Tensor 3 Mặt Phẳng Chuẩn Hóa ($3 \times 15 \times 15$)}{8}{section.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Cấu trúc Tensor 3 mặt phẳng bất biến phối cảnh cho trạng thái bàn cờ Gomoku $15 \times 15$.}}{9}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:tensor_encoding}{{3.1}{9}{Cấu trúc Tensor 3 mặt phẳng bất biến phối cảnh cho trạng thái bàn cờ Gomoku $15 \times 15$}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Định Lý Toán Học Về Tính Bất Biến Phối Cảnh}{9}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Đại Số Nhóm Nhị Diện $D_4$ Và Tăng Cường Dữ Liệu $8\times $}{11}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Cấu Trúc Nhóm Nhị Diện $D_4$ Trên Lưới Vuông $15 \times 15$}{11}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Hệ Thống Công Thức Biến Đổi Tọa Độ Tường Minh}{11}{section.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Công thức biến đổi toán học và hàm NumPy tương ứng của 8 phần tử nhóm $D_4$.}}{12}{table.caption.8}\protected@file@percent }
+\newlabel{tab:d4_transformation_formulas}{{4.1}{12}{Công thức biến đổi toán học và hàm NumPy tương ứng của 8 phần tử nhóm $D_4$}{table.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Bài Học Kỹ Thuật: Bản Chất Sai Lệch Đường Chéo Phụ ($k=7$) Và Cách Khắc Phục}{12}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Bất Biến Giá Trị Và Tính Tương Biến Chính Sách}{13}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Giao Thức Phân Chia Tập Dữ Liệu Không Rò Rỉ (Match-Level Zero-Leakage Split)}{14}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Bệnh Lý Rò Rỉ Quỹ Đạo (Trajectory Data Leakage)}{14}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Thuật Toán Phân Chia Ở Cấp Độ Ván Đấu (Match-Level Split Algorithm)}{14}{section.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Quy trình phân chia tập dữ liệu ở cấp độ ván đấu (Match-Level Split) đảm bảo 0\% rò rỉ quỹ đạo.}}{15}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:match_level_split}{{5.1}{15}{Quy trình phân chia tập dữ liệu ở cấp độ ván đấu (Match-Level Split) đảm bảo 0\% rò rỉ quỹ đạo}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Thiết Kế Kiến Trúc Mạng Nơ-ron Hai Đầu (Dual-Head ResNet)}{16}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Nguyên Lý Mạng Nơ-ron Hai Đầu Trong Cờ Chiến Thuật}{16}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Cấu Trúc Chi Tiết Các Tầng Mạng (Layer-by-Layer Architecture)}{16}{section.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Sơ đồ cấu trúc mạng nơ-ron hai đầu Dual-Head ResNet-6 cho hệ thống Gomoku AI.}}{17}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:dual_head_resnet_architecture}{{6.1}{17}{Sơ đồ cấu trúc mạng nơ-ron hai đầu Dual-Head ResNet-6 cho hệ thống Gomoku AI}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Kiểm Kê Chi Tiết Số Lượng Tham Số (Parameter Audit)}{18}{section.6.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Kiểm kê chi tiết số lượng tham số các tầng trong mạng DualHeadResNet (ResNet-6, 64 kênh).}}{18}{table.caption.11}\protected@file@percent }
+\newlabel{tab:parameter_audit}{{6.1}{18}{Kiểm kê chi tiết số lượng tham số các tầng trong mạng DualHeadResNet (ResNet-6, 64 kênh)}{table.caption.11}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Đặc Tả Schema JSON, Manifest Và Kế Hoạch Triển Khai Bước 2}{19}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Định Dạng Đóng Gói Nhị Phân Nén \texttt  {.npz}}{19}{section.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Đặc Tả JSON Schema Chuẩn Hóa (\texttt  {schema\_rl\_dataset.json})}{19}{section.7.2}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7.1}{\ignorespaces Trích đoạn lược đồ JSON Schema của tập dữ liệu Gomoku RL Transition.}}{19}{lstlisting.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Thiết Kế Hàm Mất Mát Đa Nhiệm (Multi-Task Loss Function) Cho Bước 2}{20}{section.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Lộ Trình Thực Thi Huấn Luyện Và Đánh Giá Trong Bước 2}{20}{section.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Kết Luận Và Hướng Phát Triển}{22}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Tổng Kết Các Kết QuẢ Đạt Được Tại Bước 1}{22}{section.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Hướng Phát Triển Tiếp Theo (Các Bước 2, 3 và 4)}{22}{section.8.2}\protected@file@percent }
+\bibcite{silver2017mastering}{1}
+\bibcite{silver2018general}{2}
+\bibcite{wu2019accelerating}{3}
+\bibcite{he2016deep}{4}
+\bibcite{kumar2020conservative}{5}
+\bibcite{allis1994searching}{6}
+\bibcite{gomocup2024}{7}
+\@writefile{toc}{\contentsline {chapter}{Tài Liệu Tham Khảo}{24}{chapter*.12}\protected@file@percent }
+\gdef \@abspage@last{29}

@@ -1,0 +1,934 @@
+\documentclass[11pt,a4paper]{report}
+
+% ==============================================================================
+% GÓI VĂN BẢN VÀ ĐỊNH DẠNG NGÔN NGỮ TIẾNG VIỆT (XeLaTeX Engine)
+% ==============================================================================
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{DejaVu Sans Mono}
+
+% Canh lề chuẩn luận văn học thuật
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.8cm, right=2.2cm]{geometry}
+
+% Giãn dòng chuẩn
+\usepackage{setspace}
+\setstretch{1.2}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% Toán học và ký hiệu
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+
+% Vẽ sơ đồ kỹ thuật TikZ
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, matrix, fit, backgrounds}
+
+% Màu sắc học thuật
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{0F2942}       % Xanh Navy đậm
+\definecolor{secondary}{HTML}{1E40AF}     % Xanh lam học thuật
+\definecolor{accent}{HTML}{2563EB}        % Xanh nhấn
+\definecolor{darkgray}{HTML}{1F2937}      % Xám đậm
+\definecolor{lightbg}{HTML}{F8FAFC}       % Nền bảng / code
+\definecolor{bordercolor}{HTML}{CBD5E1}   % Viền khung
+\definecolor{alertred}{HTML}{B91C1C}      % Đỏ cảnh báo
+\definecolor{successgreen}{HTML}{047857}  % Xanh lục tối ưu
+\definecolor{codeblue}{HTML}{1D4ED8}
+\definecolor{codegreen}{HTML}{15803D}
+\definecolor{codepurple}{HTML}{7E22CE}
+
+\usepackage[colorlinks=true,
+            linkcolor=secondary,
+            citecolor=secondary,
+            urlcolor=accent]{hyperref}
+
+% Bảng biểu chuyên nghiệp
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\renewcommand{\arraystretch}{1.25}
+
+% Quản lý Float và hình ảnh
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Khung định lý, thuật toán
+\usepackage[most]{tcolorbox}
+\tcbset{
+    enhanced,
+    colback=lightbg,
+    colframe=primary,
+    arc=2pt,
+    boxrule=1pt,
+    fonttitle=\bfseries\small,
+    coltitle=white
+}
+
+% Định dạng mã nguồn code listings
+\usepackage{listings}
+\lstset{
+    backgroundcolor=\color{lightbg},
+    basicstyle=\ttfamily\footnotesize\color{darkgray},
+    keywordstyle=\bfseries\color{codeblue},
+    commentstyle=\itshape\color{codegreen},
+    stringstyle=\color{codepurple},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{bordercolor},
+    tabsize=4,
+    captionpos=b
+}
+
+% Định nghĩa môi trường toán
+\newtheorem{theorem}{Định lý}[chapter]
+\newtheorem{definition}{Định nghĩa}[chapter]
+\newtheorem{lemma}{Bổ đề}[chapter]
+\newtheorem{corollary}{Hệ quả}[chapter]
+\newtheorem{remark}{Nhận xét}[chapter]
+
+% ==============================================================================
+\begin{document}
+
+% --- TRANG BÌA ---
+\begin{titlepage}
+\begin{center}
+    {\large \textbf{VIỆN NGHIÊN CỨU VÀ ĐÀO TẠO VIỆT - ANH (VNUK)}}\\[4pt]
+    {\large \textbf{ĐẠI HỌC ĐÀ NẴNG}}\\[8pt]
+    \rule{0.6\textwidth}{1.2pt}\\[2.2cm]
+
+    {\large \textbf{BÁO CÁO KHOA HỌC CHUYÊN SÂU}}\\[10pt]
+    {\LARGE \bfseries \color{primary} TIỀN XỬ LÝ DỮ LIỆU, CẤU TRÚC TẬP TRANSITION\\VÀ THIẾT KẾ MẠNG NƠ-RON DUAL-HEAD RESNET\\TRONG HỆ THỐNG HỌC TĂNG CƯỜNG GOMOKU AI}\\[14pt]
+    {\large \textit{Thuyết minh chi tiết quy trình trích xuất quỹ đạo 10,000 ván đấu,\\mã hóa tensor bất biến phối cảnh, đại số đối xứng nhóm $D_4$\\và cấu trúc mô hình ResNet-6 phục vụ huấn luyện khởi động (Bước 1)}}\\[2.2cm]
+
+    \begin{minipage}{0.85\textwidth}
+        \large
+        \textbf{Sinh viên thực hiện:} Nguyễn Tâm Đức\\
+        \textbf{Lớp:} 24CSE\\
+        \textbf{Học phần:} Đồ Án Cơ Sở (Basic Project) --- Ngành Khoa học \& Kỹ thuật Máy tính\\
+        \textbf{Đơn vị đào tạo:} Viện Nghiên cứu \& Đào tạo Việt - Anh (VNUK)\\
+        \textbf{Thời gian hoàn thành:} Tháng 11 / 2026
+    \end{minipage}
+
+    \vfill
+    {\large \textbf{ĐÀ NẴNG -- 2026}}
+\end{center}
+\end{titlepage}
+
+% --- LỜI NÓI ĐẦU & TÔN CHỈ HỌC THUẬT ---
+\pagenumbering{roman}
+\chapter*{Lời Mở Đầu \& Tôn Chỉ Kỹ Thuật}
+\addcontentsline{toc}{chapter}{Lời Mở Đầu \& Tôn Chỉ Kỹ Thuật}
+
+Trong quá trình phát triển các hệ thống trí tuệ nhân tạo chơi cờ chiến thuật đối kháng như Caro (Gomoku), phương pháp tìm kiếm heuristic truyền thống (như Minimax, Alpha-Beta kết hợp bảng chuyển vị và sắp xếp nước đi) đóng vai trò nền tảng vững chắc trong giai đoạn đầu. Tuy nhiên, khi đối mặt với không gian phân nhánh bùng nổ của bàn cờ $15 \times 15$ ($\|\mathcal{S}\| \approx 10^{107}$), các hàm đánh giá heuristic tĩnh viết bằng tay bắt đầu bộc lộ giới hạn: chúng phụ thuộc nặng nề vào kinh nghiệm định kiến của con người, khó bao quát các hình thế phối hợp phi tuyến tính phức tạp ở độ sâu lớn, và chi phí tính toán tăng theo cấp số mũ theo độ sâu tìm kiếm.
+
+Để vượt qua giới hạn này, việc ứng dụng học sâu (Deep Learning) và học tăng cường (Reinforcement Learning - RL) theo kiến trúc AlphaGo Zero và KataGo là hướng đi tất yếu. Mặc dù vậy, một rào cản kỹ thuật khổng lồ trong thực tế là \textbf{Vấn đề Khởi động Lạnh (Cold-Start Problem)}: nếu huấn luyện hoàn toàn từ số 0 (\textit{Tabula Rasa Self-Play}), mạng nơ-ron phải mất hàng triệu ván đấu ngẫu nhiên với chi phí hàng ngàn giờ GPU chỉ để tự học được những quy tắc căn bản nhất (như tạo chuỗi 5 để thắng, chặn nước 4 của đối phương, hoặc tránh đi vào góc chết vô nghĩa). 
+
+Trong khuôn khổ đồ án này, ta giải quyết bài toán trên bằng cách tận dụng kho dữ liệu thực nghiệm gồm \textbf{10,000 ván đấu tự động hóa đa phong cách} (từ giải đấu cân chỉnh Heuristic Week 11) để làm tập dữ liệu khởi động (\textbf{Warm-Start Dataset}) cho mạng nơ-ron trước khi bước vào vòng lặp tự chơi. Báo cáo này trình bày toàn diện, chi tiết và có hệ thống toàn bộ các cơ sở lý thuyết, công thức toán học, cấu trúc dữ liệu và giải pháp lập trình đã thực hiện trong \textbf{Bước 1} của quy trình Học tăng cường:
+\begin{enumerate}
+    \item \textbf{Cơ chế trích xuất quỹ đạo ván cờ (Empirical Trajectory Extraction):} Bóc tách 10,000 ván đấu đa profile với kiến trúc đa tiến trình (10 CPU workers), thu được chính xác \textbf{368,401 bước chuyển trạng thái (transitions)} cùng nhãn kết quả phân phối cân bằng.
+    \item \textbf{Chuẩn hóa trạng thái bất biến phối cảnh (Perspective-Invariant Tensor Encoding):} Xây dựng không gian biểu diễn tensor 3 mặt phẳng ($3 \times 15 \times 15$) tách biệt quân của "ta" và "đối thủ", loại bỏ sự phụ thuộc vào màu quân Đen/Trắng, tăng gấp đôi hiệu quả sử dụng mẫu (sample efficiency).
+    \item \textbf{Đại số đối xứng nhóm nhị diện $D_4$ (Dihedral Symmetry Algebra):} Khai thác trọn vẹn 8 phép đẳng cự hình học trên bàn cờ vuông, nhân quy mô dữ liệu hiệu dụng lên \textbf{2,947,208 mẫu} mà không làm tăng dung lượng lưu trữ đĩa nhờ cơ chế tăng cường động (on-the-fly augmentation).
+    \item \textbf{Giao thức phân chia không rò rỉ dữ liệu (Match-Level Zero-Leakage Split):} Chứng minh và loại bỏ triệt để hiện tượng rò rỉ quỹ đạo (trajectory leakage), chia tập dữ liệu ở cấp độ định danh ván đấu (9,000 ván Train / 1,000 ván Validation).
+    \item \textbf{Kiến trúc mạng nơ-ron hai đầu ResNet-6 (Dual-Head ResNet Architecture):} Thiết kế và kiểm chứng mạng nơ-ron 6 khối Residual (2,530,210 tham số), cân đối tối ưu giữa năng lực biểu diễn chiến thuật và giới hạn bộ nhớ VRAM của GPU máy trạm cục bộ (NVIDIA T1200 Laptop 4GB).
+\end{enumerate}
+
+Mọi số liệu, công thức toán học và cấu trúc trong tài liệu này đều được kiểm chứng thực nghiệm bằng mã nguồn thực tế và lưu trữ toàn vẹn trong hệ thống mã nguồn dự án.
+
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+% ==============================================================================
+% CHƯƠNG 1
+% ==============================================================================
+\chapter{Đặt Vấn Đề Và Cơ Sở Lý Thuyết Học Tăng Cường Cho Gomoku}
+
+\section{Mô hình hóa Gomoku dưới dạng Quá trình Quyết định Markov (MDP)}
+
+Trò chơi Caro/Gomoku $15 \times 15$ là một trò chơi đối kháng tổng bằng 0 với thông tin hoàn hảo (Two-player Zero-sum Game with Perfect Information). Dưới góc độ lý thuyết điều khiển và học tăng cường, trò chơi được biểu diễn chính xác dưới dạng một \textbf{Quá trình Quyết định Markov (Markov Decision Process - MDP)} hữu hạn rời rạc:
+\begin{equation}
+    \mathcal{M} = \langle \mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma \rangle
+\end{equation}
+
+Trong đó:
+\begin{itemize}
+    \item $\mathcal{S}$ là không gian trạng thái biểu diễn toàn bộ các cấu hình bàn cờ hợp lệ. Với bàn cờ $15 \times 15$, mỗi ô $i \in [0, 224]$ nhận một trong ba giá trị $c_i \in \{\text{Empty}, \text{Black}, \text{White}\}$. Kích thước lý thuyết tối đa của không gian trạng thái là:
+    \begin{equation}
+        \|\mathcal{S}\| = 3^{225} \approx 8.43 \times 10^{107}
+    \end{equation}
+    \item $\mathcal{A}$ là không gian hành động. Tại mỗi trạng thái $s \in \mathcal{S}$, không gian hành động hợp lệ $\mathcal{A}(s) \subseteq \mathcal{A}$ là tập hợp tất cả các ô còn trống:
+    \begin{equation}
+        \mathcal{A}(s) = \{ a \in [0, 224] \mid \text{Cell}(a) = \text{Empty} \}
+    \end{equation}
+    Kích thước không gian hành động toàn cục là $\|\mathcal{A}\| = 225$.
+    \item $\mathcal{P}(s' \mid s, a)$ là xác suất chuyển trạng thái. Do Gomoku là trò chơi tất định (deterministic), xác suất chuyển trạng thái là hàm chỉ thị:
+    \begin{equation}
+        \mathcal{P}(s' \mid s, a) = \begin{cases} 
+            1, & \text{nếu } s' = \text{ApplyMove}(s, a) \\ 
+            0, & \text{ngược lại} 
+        \end{cases}
+    \end{equation}
+    \item $\mathcal{R}(s, a, s')$ là hàm phần thưởng (Reward Function). Trong thể thức đối kháng cờ bàn, không có phần thưởng tức thời tại các bước đi trung gian nhằm tránh định kiến cục bộ. Phần thưởng chỉ được gán tại trạng thái kết thúc (Terminal State $s_T$):
+    \begin{equation}
+        R(s_t) = \begin{cases} 
+            +1, & \text{nếu người chơi hiện tại thắng ván đấu} \\
+            -1, & \text{nếu người chơi hiện tại thua ván đấu} \\
+            0, & \text{nếu ván đấu kết thúc hòa hoặc chưa kết thúc}
+        \end{cases}
+    \end{equation}
+    \item $\gamma \in (0, 1]$ là hệ số chiết khấu phần thưởng. Trong trò chơi hữu hạn nước đi như Gomoku, ta đặt $\gamma = 1$ để giá trị chiến thắng cuối cùng phản ánh nguyên vẹn về mọi quyết định chiến thuật trong suốt ván cờ.
+\end{itemize}
+
+\section{Bản chất Vấn đề Khởi động Lạnh (The Cold-Start Problem)}
+
+Trong các công trình tiên phong như AlphaGo Zero (Silver et al., 2017) và KataGo (Wu, 2019), quy trình tự chơi từ con số 0 (\textit{Tabula Rasa Self-Play}) hoạt động bằng cách khởi tạo mạng nơ-ron với trọng số ngẫu nhiên. Khi đó, cả hàm chính sách $\pi_\theta(a|s)$ và hàm giá trị $V_\theta(s)$ đều đưa ra các dự đoán phân tán vô hướng:
+\begin{equation}
+    \pi_\theta(a \mid s) \approx \frac{1}{\|\mathcal{A}(s)\|}, \quad V_\theta(s) \approx 0
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        scale=0.9, transform shape,
+        node distance=1.3cm,
+        box/.style={draw=primary, fill=lightbg, rounded corners=3pt, thick, align=center, inner sep=8pt},
+        arrow/.style={-{Stealth[length=6pt]}, thick, color=secondary}
+    ]
+        \node[box, fill=alertred!10, draw=alertred] (tabula) {\textbf{Tabula Rasa (Số 0)}\\Khởi tạo trọng số ngẫu nhiên\\Rollout ngẫu nhiên không mục đích};
+        \node[box, below=of tabula, fill=orange!10, draw=orange] (cold) {\textbf{Bẫy Khởi Động Lạnh}\\Hàng ngàn giờ GPU bị lãng phí\\Tỷ lệ thắng ngẫu nhiên, tín hiệu gradient nhiễu};
+        \node[box, right=2.5cm of tabula, fill=successgreen!10, draw=successgreen] (warm) {\textbf{Khởi Động Ấm (Bước 1)}\\Khai thác 10,000 ván đấu Heuristic\\368,401 transitions thực nghiệm};
+        \node[box, below=of warm, fill=accent!10, draw=accent] (resnet) {\textbf{Mạng ResNet Tinh Tuyển}\\Nhận biết ngay chuỗi 3, 4, nước đôi\\Sẵn sàng làm Policy/Value Prior};
+
+        \draw[arrow, alertred] (tabula) -- node[right, font=\footnotesize\color{alertred}] {Hội tụ chậm} (cold);
+        \draw[arrow, successgreen] (warm) -- node[right, font=\footnotesize\color{successgreen}] {Học có giám sát} (resnet);
+        \draw[arrow, dashed, primary] (cold) -- node[above, font=\footnotesize\color{primary}] {Thay thế bằng} (warm);
+    \end{tikzpicture}
+    \caption{So sánh giữa quy trình khởi động từ số 0 (Tabula Rasa) và quy trình Khởi động ấm (Warm-Start) dựa trên tập dữ liệu thực nghiệm trong đề tài.}
+    \label{fig:cold_start_comparison}
+\end{figure}
+
+Hậu quả tất yếu của phương pháp Tabula Rasa trong môi trường máy tính đơn lẻ (như máy trạm cá nhân hoặc phòng thí nghiệm trường đại học) là:
+\begin{itemize}
+    \item \textbf{Lãng phí tài nguyên tính toán (Computational Waste):} Trong 100,000 ván đầu tiên, hai bên đi cờ hỗn loạn. Tín hiệu phần thưởng duy nhất nhận được là khi một bên tình cờ xếp được 5 quân liên tiếp. Mạng mất hàng triệu bước cập nhật gradient chỉ để loại bỏ các nước đi ở rìa bàn cờ xa vị trí giao tranh.
+    \item \textbf{Độ trôi chính sách (Policy Drift):} Do chưa có hàm giá trị chuẩn, thuật toán MCTS (Monte Carlo Tree Search) có thể đánh giá sai các hình thế cơ bản (ví dụ không chặn nước 4 mở hai đầu), dẫn đến việc mạng nơ-ron học các định kiến sai lệch trong giai đoạn đầu.
+\end{itemize}
+
+\section{So sánh Ba Trường Phái Học Máy Cho Tập Dữ Liệu 10,000 Ván Đấu}
+
+Khi đã sở hữu tập dữ liệu 10,000 ván đấu đối kháng giữa các bộ trọng số Heuristic tinh tuyển (Tuần 11), câu hỏi học thuật then chốt là: \textit{Nên sử dụng tập dữ liệu này theo phương thức nào?} Bảng~\ref{tab:three_paradigms} so sánh ba trường phái kỹ thuật chính.
+
+\begin{table}[htbp]
+\centering
+\caption{So sánh ba trường phái học máy áp dụng cho tập dữ liệu Gomoku 10,000 ván đấu.}
+\label{tab:three_paradigms}
+\small
+\begin{tabularx}{\textwidth}{p{2.8cm} p{3.8cm} p{3.8cm} X}
+\toprule
+\textbf{Tiêu chí} & \textbf{Behavioral Cloning (BC)} & \textbf{Offline RL (CQL / IQL)} & \textbf{AlphaZero Warm-Start} \\
+\midrule
+\textbf{Bản chất toán học} & Học có giám sát (Supervised Learning) trên cặp $(s, a)$. & Tối ưu hóa hàm $Q(s, a)$ có phạt giá trị ngoài phân phối (OOD penalty). & Học đồng thời Policy $\pi(a|s)$ và Value $V(s)$ làm mầm mống cho MCTS. \\
+\addlinespace
+\textbf{Mục tiêu tối ưu} & $\min_\theta -\log \pi_\theta(a^* \mid s)$ & $\max_\theta \mathbb{E}[Q_\theta(s, a) - \alpha \text{OOD}]$ & $\min_\theta \mathcal{L}_{\text{policy}} + c_v \mathcal{L}_{\text{value}} + c \|\theta\|^2$ \\
+\addlinespace
+\textbf{Ưu điểm} & Huấn luyện cực nhanh, ổn định 100\%, không bị phân kỳ Q-value. & Có thể tìm ra chính sách tốt hơn cả dữ liệu chuyên gia ban đầu. & Tích hợp hoàn hảo vào cây tìm kiếm MCTS; loại bỏ triệt để Cold-Start. \\
+\addlinespace
+\textbf{Nhược điểm} & Bị giới hạn bởi trình độ của dữ liệu mẫu; không tự sửa sai lầm. & Rất nhạy cảm với siêu tham số; dễ nổ giá trị $Q$ trong không gian lớn. & Cần quy trình tự chơi (Self-play) tiếp nối ở các bước sau. \\
+\addlinespace
+\textbf{Quyết định đề tài} & \textbf{Thực hiện ở Bước 2} (Khởi tạo mạng nền tảng). & \textit{Để mở cho nghiên cứu mở rộng.} & \textbf{Mục tiêu chiến lược tổng thể} của toàn bộ pipeline RL. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Mục Tiêu Và Giới Hạn Nghiên Cứu Của Bước 1}
+
+Bước 1 trong lộ trình tổng thể không thực hiện việc cập nhật trọng số nơ-ron ngay lập tức, mà tập trung giải quyết toàn bộ bài toán nền móng kỹ thuật và toán học:
+\begin{enumerate}
+    \item \textbf{Chuẩn hóa dữ liệu thô:} Chuyển đổi 10,000 ván đấu JSON sang mảng nhị phân nén phẳng, giảm thiểu dung lượng từ hàng trăm Megabytes xuống mức tối ưu ($1.61\text{ MB}$).
+    \item \textbf{Thiết lập cấu trúc Tensor chuẩn:} Định hình tensor $3 \times 15 \times 15$ bảo toàn tính bất biến phối cảnh người chơi.
+    \item \textbf{Chứng minh và kiểm thử đối xứng nhóm $D_4$:} Đảm bảo 100\% các phép biến đổi hình học bảo toàn tính nhất quán giữa trạng thái bàn cờ và chỉ số hành động 1D.
+    \item \textbf{Phân chia tập dữ liệu không rò rỉ quỹ đạo:} Ngăn chặn tình trạng mạng học vẹt chuỗi nước đi cùng ván.
+    \item \textbf{Hiện thực hóa kiến trúc Dual-Head ResNet:} Xây dựng mô hình PyTorch sẵn sàng tích hợp CUDA Mixed Precision trên phần cứng máy trạm cục bộ.
+\end{enumerate}
+
+% ==============================================================================
+% CHƯƠNG 2
+% ==============================================================================
+\chapter{Cơ Chế Trích Xuất Dữ Liệu Thực Nghiệm Từ 10,000 Ván Đấu}
+
+\section{Nguồn Dữ Liệu Giải Đấu Heuristic Tuần 11}
+
+Tập dữ liệu nguồn được trích xuất từ tệp nhật ký giải đấu tự động hóa quy mô lớn:
+\begin{equation}
+    \mathcal{F}_{\text{source}} = \texttt{clean\_tournament\_10000\_results.json}
+\end{equation}
+Tệp nhật ký này chứa kết quả chi tiết của 10,000 ván đấu đối kháng vòng tròn giữa 5 profile trí tuệ nhân tạo Heuristic khác nhau:
+\begin{equation}
+    \mathcal{P} = \{\text{NAIVE (0)}, \text{OFFENSE (1)}, \text{SYMMETRIC (2)}, \text{DEFENSE (3)}, \text{OPTIMAL (4)}\}
+\end{equation}
+
+Mỗi bản ghi ván đấu thứ $m \in [1, 10000]$ chứa chuỗi danh sách các nước đi có thứ tự:
+\begin{equation}
+    \text{Match}_m = \langle \text{BlackProfile}, \text{WhiteProfile}, \text{Winner}, \text{MoveSequence} \rangle
+\end{equation}
+Trong đó $\text{MoveSequence} = [a_0, a_1, a_2, \dots, a_{T-1}]$ với $a_t = (r_t, c_t)$ là tọa độ nước đi tại lượt thứ $t$.
+
+\section{Cơ Chế Tái Hiện Bàn Cờ (Board Replay Engine) Và Bóc Tách Transition}
+
+Để chuyển đổi một chuỗi nước đi $\text{MoveSequence}$ thành các cặp mẫu huấn luyện học máy, ta phải tái hiện lại trạng thái bàn cờ tại từng thời điểm $t$ trước khi nước đi $a_t$ được thực hiện.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.9, transform shape,
+    node distance=1.1cm,
+    stepbox/.style={draw=secondary, fill=lightbg, rounded corners=2pt, thick, align=center, inner sep=6pt, font=\small},
+    arr/.style={-{Stealth[length=5pt]}, thick, color=primary}
+]
+    \node[stepbox] (start) {Bàn cờ trống $B_0 \in \{0\}^{15 \times 15}$\\Lượt $t = 0$, Quân Đen ($p_0 = 1$)};
+    \node[stepbox, below=of start] (extract) {Bóc tách Transition thứ $t$:\\$s_t = B_t$, hành động $a_t$, người chơi $p_t$, profile};
+    \node[stepbox, below=of extract] (apply) {Cập nhật trạng thái bàn cờ:\\$B_{t+1}[r_t, c_t] \leftarrow p_t$\\Đổi lượt người chơi: $p_{t+1} \leftarrow 3 - p_t$};
+    \node[stepbox, right=2.2cm of extract] (label) {Gán nhãn giá trị phối cảnh:\\$z_t = \begin{cases} +1 & \text{nếu } p_t = \text{Winner} \\ -1 & \text{nếu } 3-p_t = \text{Winner} \\ 0 & \text{Hòa} \end{cases}$};
+
+    \draw[arr] (start) -- (extract);
+    \draw[arr] (extract) -- (apply);
+    \draw[arr] (extract) -- node[above, font=\footnotesize] {Gán nhãn} (label);
+    \draw[arr] (apply.west) -- ++(-0.8,0) |- node[near start, left, font=\footnotesize] {Lặp $t \leftarrow t+1$} (extract.west);
+\end{tikzpicture}
+\caption{Sơ đồ khối cơ chế Replay bàn cờ và bóc tách Transition từng lượt đi.}
+\label{fig:replay_transition_flow}
+\end{figure}
+
+Tại mỗi thời điểm $t \in [0, T-1]$:
+\begin{enumerate}
+    \item \textbf{Trạng thái hiện tại $B_t$:} Mảng 2 chiều $15 \times 15$ với các giá trị:
+    \begin{equation}
+        B_t[r, c] \in \{0: \text{Trống}, 1: \text{Quân Đen}, 2: \text{Quân Trắng}\}
+    \end{equation}
+    \item \textbf{Người thực hiện nước đi $p_t$:} Xác định bằng $p_t = 1$ nếu $t$ chẵn, và $p_t = 2$ nếu $t$ lẻ.
+    \item \textbf{Chỉ số hành động phẳng $a_t$:} Được nén thành số nguyên 1 chiều trong dải $[0, 224]$:
+    \begin{equation}
+        a_t = r_t \cdot 15 + c_t
+    \end{equation}
+    \item \textbf{Nhãn giá trị phối cảnh (Perspective Value Target $z_t$):}
+    \begin{definition}[Nhãn giá trị tương đối theo lượt]
+    Giá trị phần thưởng cuối cùng $z_t \in \{-1, 0, +1\}$ được gán độc lập cho từng transition dựa trên mối quan hệ giữa người vừa ra quyết định $p_t$ và người chiến thắng chung cuộc của ván đấu:
+    \begin{equation}
+        z_t = \begin{cases} 
+            +1, & \text{nếu } \text{Winner} = p_t \\
+            -1, & \text{nếu } \text{Winner} = 3 - p_t \\
+            0, & \text{nếu } \text{Winner} \in \{0, \text{Draw}\}
+        \end{cases}
+    \end{equation}
+    \end{definition}
+\end{enumerate}
+
+\section{Kiến Trúc Trích Xuất Song Song Đa Tiến Trình (Multiprocessing Architecture)}
+
+Do tập dữ liệu có quy mô lớn (10,000 ván cờ, tương đương hàng trăm ngàn nước đi), việc xử lý tuần tự trên 1 luồng CPU tiêu tốn nhiều thời gian. Để tối ưu hóa, mô-đun \texttt{extract\_rl\_dataset\_10000.py} được thiết kế theo mô hình \textbf{MapReduce đa tiến trình} sử dụng thư viện \texttt{multiprocessing} của Python:
+\begin{itemize}
+    \item Tập 10,000 ván đấu được phân tách thành 10 phần độc lập (chunks), mỗi phần chứa chính xác 1,000 ván đấu.
+    \item Khởi tạo 10 CPU worker độc lập, mỗi worker chịu trách nhiệm replay 1,000 ván đấu và tạo bộ nhớ đệm mảng NumPy cục bộ.
+    \item Tiến trình cha thu thập kết quả và thực hiện phép ghép mảng phẳng (\texttt{np.concatenate}), đảm bảo an toàn bộ nhớ (zero race-condition) và thời gian thực thi tối ưu.
+\end{itemize}
+
+\section{Thống Kê Định Lượng Toàn Diện Tập Dữ Liệu Đã Trích Xuất}
+
+Sau khi hoàn tất quá trình trích xuất trên 10,000 ván đấu, hệ thống đã trích xuất được tổng cộng \textbf{368,401 transitions}. Toàn bộ các thông số định lượng được tổng hợp chi tiết trong Bảng~\ref{tab:dataset_statistics}.
+
+\begin{table}[htbp]
+\centering
+\caption{Thống kê định lượng toàn diện tập dữ liệu Gomoku RL Base trích xuất từ 10,000 ván đấu.}
+\label{tab:dataset_statistics}
+\begin{tabularx}{\textwidth}{l r r X}
+\toprule
+\textbf{Đặc tính / Chỉ số} & \textbf{Giá trị số học} & \textbf{Tỷ lệ (\%)} & \textbf{Ý nghĩa học máy / Chiến thuật} \\
+\midrule
+\textbf{Tổng số ván đấu} & 10,000 & 100.00\% & Tập ván đấu hoàn chỉnh từ giải đấu Tuần 11. \\
+\textbf{Tổng số Transitions thô} & \textbf{368,401} & 100.00\% & Số cặp trạng thái - hành động cơ sở. \\
+\textbf{Số Transitions sau tăng cường $D_4$} & \textbf{2,947,208} & 800.00\% & Quy mô mẫu hiệu dụng khi nhân với 8 đối xứng. \\
+\addlinespace
+\multicolumn{4}{l}{\textit{\textbf{Phân bố nhãn giá trị (Value Distribution):}}} \\
+-- Thắng ($z = +1$) & 185,824 & 50.44\% & Người đi nước $a_t$ giành chiến thắng chung cuộc. \\
+-- Thua ($z = -1$) & 179,787 & 48.80\% & Người đi nước $a_t$ thất bại chung cuộc. \\
+-- Hòa ($z = 0$) & 2,790 & 0.76\% & Ván cờ hòa do hết ô hoặc bế tắc. \\
+\addlinespace
+\multicolumn{4}{l}{\textit{\textbf{Phân bố theo Profile thuật toán:}}} \\
+-- NAIVE (Profile 0) & 73,352 & 19.91\% & Profile cơ bản, tạo mẫu sai lầm cho mạng học tránh. \\
+-- OFFENSE (Profile 1) & 67,823 & 18.41\% & Profile tấn công chủ động, tạo mẫu công kích sắc bén. \\
+-- SYMMETRIC (Profile 2) & 73,550 & 19.96\% & Profile cân bằng công thủ. \\
+-- DEFENSE (Profile 3) & 77,559 & 21.05\% & Profile phòng thủ sâu, dạy mạng kiên nhẫn hóa giải. \\
+-- OPTIMAL (Profile 4) & 76,117 & 20.66\% & Profile trọng số tối ưu nhất đạt được từ giải đấu. \\
+\addlinespace
+\multicolumn{4}{l}{\textit{\textbf{Thống kê độ sâu ván cờ (Ply Statistics):}}} \\
+-- Độ sâu trung bình ($\mu$) & 20.43 nước & -- & Ván đấu kết thúc nhanh khi một bên mắc sai lầm. \\
+-- Độ sâu nhỏ nhất & 0 nước & -- & Trạng thái bàn cờ ban đầu. \\
+-- Độ sâu lớn nhất & 89 nước & -- & Các ván đấu tranh chấp giằng co kịch liệt. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{tcolorbox}[title={Nhận xét học thuật về phân bố dữ liệu}]
+Phân bố nhãn giá trị đạt tỷ lệ lý tưởng: Thắng (50.44\%) và Thua (48.80\%). Sự cân bằng gần như tuyệt đối này (độ lệch chỉ $1.64\%$) giúp ngăn chặn hiện tượng thiên lệch dự đoán (prediction bias) trong hàm mất mát của Value Head. Đồng thời, việc bao hàm đầy đủ 5 profile từ yếu (NAIVE) đến mạnh (OPTIMAL) cung cấp cho mạng nơ-ron cả các ví dụ tích cực lẫn các phản ví dụ tiêu cực, giúp phân biệt rõ rệt giữa nước đi tốt và nước đi mắc lỗi.
+\end{tcolorbox}
+
+% ==============================================================================
+% CHƯƠNG 3
+% ==============================================================================
+\chapter{Mã Hóa Trạng Thái Bất Biến Phối Cảnh (Perspective-Invariant State Encoding)}
+
+\section{Hạn Chế Của Cách Mã Hóa Màu Tuyệt Đối (Absolute Color Encoding)}
+
+Trong cách tiếp cận ngây thơ, bàn cờ thường được mã hóa thành các mặt phẳng tuyệt đối: Mặt phẳng 0 chứa quân Đen, Mặt phẳng 1 chứa quân Trắng. Cách mã hóa này gây ra hai khuyết tật toán học nghiêm trọng:
+\begin{enumerate}
+    \item \textbf{Phá vỡ tính bất biến hoán vị màu (Color Asymmetry):} Về bản chất chiến thuật, nếu người chơi đang cầm quân Trắng nhìn thấy thế cờ gồm 3 quân của mình thẳng hàng và 1 ô trống, thì áp lực chiến thuật và động lực đi cờ hoàn toàn tương đương với trường hợp người chơi cầm quân Đen nhìn thấy 3 quân Đen của mình thẳng hàng. Nếu dùng tọa độ màu tuyệt đối, mạng nơ-ron buộc phải học hai bộ trọng số độc lập cho cùng một chân lý chiến thuật.
+    \item \textbf{Suy giảm hiệu quả mẫu (Sample Inefficiency):} Do phải phân chia dung lượng mạng để ghi nhớ hai góc nhìn, hiệu quả sử dụng dữ liệu bị giảm sút $50\%$. Mạng có thể đánh giá sai thế cờ của quân Trắng chỉ vì trong tập dữ liệu hình thái đó xuất hiện nhiều hơn ở quân Đen.
+\end{enumerate}
+
+\section{Thiết Kế Tensor 3 Mặt Phẳng Chuẩn Hóa ($3 \times 15 \times 15$)}
+
+Để giải quyết triệt để vấn đề trên, hệ thống áp dụng cơ chế \textbf{Mã hóa Bất biến Phối cảnh (Perspective-Invariant Encoding)}. Trạng thái đầu vào của mạng nơ-ron là một tensor $X \in \mathbb{R}^{3 \times 15 \times 15}$:
+\begin{equation}
+    X = [X^{(0)}, X^{(1)}, X^{(2)}]
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.85, transform shape,
+    plane/.style={draw=primary, fill=lightbg, thick, fill opacity=0.85, text opacity=1, minimum width=4.5cm, minimum height=4.5cm, align=center},
+    arr/.style={-{Stealth[length=6pt]}, thick, color=secondary}
+]
+    % Plane 2 (Bottom/Back)
+    \node[plane, xshift=1.6cm, yshift=1.6cm, fill=blue!10] (p2) {
+        \textbf{Plane 2: Chỉ thị màu lượt đi}\\
+        $X^{(2)} \in \{0.0, 1.0\}^{15 \times 15}$\\
+        \footnotesize Toàn bộ mảng = 1 nếu là Đen,\\
+        \footnotesize Toàn bộ mảng = 0 nếu là Trắng
+    };
+    % Plane 1 (Middle)
+    \node[plane, xshift=0.8cm, yshift=0.8cm, fill=red!10] (p1) {
+        \textbf{Plane 1: Quân của Đối Thủ}\\
+        $X^{(1)} \in \{0.0, 1.0\}^{15 \times 15}$\\
+        \footnotesize $X^{(1)}[r, c] = 1 \iff B[r, c] = 3 - p$
+    };
+    % Plane 0 (Top/Front)
+    \node[plane, fill=green!10] (p0) {
+        \textbf{Plane 0: Quân của Ta}\\
+        $X^{(0)} \in \{0.0, 1.0\}^{15 \times 15}$\\
+        \footnotesize $X^{(0)}[r, c] = 1 \iff B[r, c] = p$
+    };
+
+    \node[right=3.0cm of p0, align=left, font=\small] (desc) {
+        \textbf{Đặc điểm kiến trúc:}\\
+        $\bullet$ Kích thước: $3 \times 15 \times 15 = 675$ phần tử float32.\\
+        $\bullet$ Plane 0 luôn là quân của người ra quyết định.\\
+        $\bullet$ Plane 1 luôn là quân của đối thủ cần ngăn chặn.\\
+        $\bullet$ Plane 2 lưu giữ thông tin quyền đi trước.
+    };
+\end{tikzpicture}
+\caption{Cấu trúc Tensor 3 mặt phẳng bất biến phối cảnh cho trạng thái bàn cờ Gomoku $15 \times 15$.}
+\label{fig:tensor_encoding}
+\end{figure}
+
+Chi tiết chức năng của từng mặt phẳng:
+\begin{itemize}
+    \item \textbf{Mặt phẳng 0 ($X^{(0)}$ -- Quân của người chơi hiện tại):}
+    \begin{equation}
+        X^{(0)}[r, c] = \begin{cases} 1.0, & \text{nếu } B[r, c] = p_t \\ 0.0, & \text{ngược lại} \end{cases}
+    \end{equation}
+    Bất kể người đi cờ là Đen ($p_t = 1$) hay Trắng ($p_t = 2$), các quân cờ do người đó sở hữu luôn nằm tại Mặt phẳng 0.
+    \item \textbf{Mặt phẳng 1 ($X^{(1)}$ -- Quân của đối phương):}
+    \begin{equation}
+        X^{(1)}[r, c] = \begin{cases} 1.0, & \text{nếu } B[r, c] = 3 - p_t \\ 0.0, & \text{ngược lại} \end{cases}
+    \end{equation}
+    Toàn bộ chướng ngại vật và các đe dọa của đối phương luôn được tập trung tại Mặt phẳng 1.
+    \item \textbf{Mặt phẳng 2 ($X^{(2)}$ -- Cờ hiệu chỉ định màu):}
+    \begin{equation}
+        X^{(2)}[r, c] = \begin{cases} 1.0, & \text{nếu } p_t = 1 \text{ (Quân Đen đi trước)} \\ 0.0, & \text{nếu } p_t = 2 \text{ (Quân Trắng đi sau)} \end{cases}, \quad \forall (r, c)
+    \end{equation}
+    Mặt phẳng hằng số này giúp mạng nơ-ron nhận biết được ưu thế đi trước (First-player advantage) mà không làm xáo trộn tính bất biến cục bộ của hai mặt phẳng quân cờ.
+\end{itemize}
+
+\section{Định Lý Toán Học Về Tính Bất Biến Phối Cảnh}
+
+\begin{theorem}[Bất biến phối cảnh của hàm đánh giá]
+Gọi $\mathcal{B}$ là cấu hình bàn cờ, $p \in \{1, 2\}$ là người chơi đến lượt. Phép ánh xạ phối cảnh $\Phi: (\mathcal{B}, p) \to X$ bảo toàn tính tương đương của không gian chiến thuật:
+\begin{equation}
+    \pi(a \mid \Phi(\mathcal{B}, p)) = \pi(a \mid \Phi(\mathcal{B}', 3 - p))
+\end{equation}
+với $\mathcal{B}'$ là bàn cờ thu được bằng cách hoán đổi toàn bộ quân Đen thành Trắng và ngược lại.
+\end{theorem}
+
+\begin{proof}
+Xét cấu hình $\mathcal{B}'$ thỏa mãn $B'[r, c] = 3 - B[r, c]$ với mọi ô có quân và $B'[r, c] = 0$ nếu ô trống. Khi áp dụng phép chiếu $\Phi$ cho người chơi mới $p' = 3 - p$:
+Mặt phẳng 0 của trạng thái mới là:
+\begin{equation}
+    X'^{(0)}[r, c] = \mathbb{I}(B'[r, c] = p') = \mathbb{I}(3 - B[r, c] = 3 - p) = \mathbb{I}(B[r, c] = p) = X^{(0)}[r, c]
+\end{equation}
+Tương tự, Mặt phẳng 1 của trạng thái mới là:
+\begin{equation}
+    X'^{(1)}[r, c] = \mathbb{I}(B'[r, c] = 3 - p') = \mathbb{I}(3 - B[r, c] = p) = \mathbb{I}(B[r, c] = 3 - p) = X^{(1)}[r, c]
+\end{equation}
+Như vậy, hai mặt phẳng phản ánh hình thái thế trận hoàn toàn trùng khớp ($X'^{(0)} \equiv X^{(0)}$ và $X'^{(1)} \equiv X^{(1)}$). Do đó, mạng nơ-ron đưa ra phân phối xác suất nước đi $\pi(a)$ và giá trị dự đoán $V(X)$ hoàn toàn đồng nhất.
+\end{proof}
+
+% ==============================================================================
+% CHƯƠNG 4
+% ==============================================================================
+\chapter{Đại Số Nhóm Nhị Diện $D_4$ Và Tăng Cường Dữ Liệu $8\times$}
+
+\section{Cấu Trúc Nhóm Nhị Diện $D_4$ Trên Lưới Vuông $15 \times 15$}
+
+Bàn cờ Gomoku kích thước $15 \times 15$ là một lưới hình học vuông hai chiều có tính đẳng hướng không gian hoàn hảo: luật chơi (tạo thành chuỗi 5 liên tiếp theo chiều ngang, dọc hoặc hai đường chéo) không phụ thuộc vào góc xoay của bàn cờ. 
+
+Về mặt đại số trừu tượng, nhóm đối xứng của một hình vuông là \textbf{Nhóm nhị diện bậc 4 (Dihedral Group $D_4$)}, có đúng 8 phần tử:
+\begin{equation}
+    D_4 = \{ r_0, r_1, r_2, r_3, f_h, f_v, d_1, d_2 \}
+\end{equation}
+Bao gồm:
+\begin{itemize}
+    \item 4 phép quay: $r_0$ ($0^\circ$), $r_1$ ($90^\circ$ thuận chiều kim đồng hồ), $r_2$ ($180^\circ$), $r_3$ ($270^\circ$).
+    \item 2 phép phản xạ gương qua trục tọa độ: $f_h$ (phản xạ ngang/lật trái-phải), $f_v$ (phản xạ dọc/lật trên-dưới).
+    \item 2 phép phản xạ gương qua đường chéo: $d_1$ (qua đường chéo chính/chuyển vị), $d_2$ (qua đường chéo phụ/chuyển vị ngược).
+\end{itemize}
+
+\section{Hệ Thống Công Thức Biến Đổi Tọa Độ Tường Minh}
+
+Mỗi phép biến đổi $k \in \{0, 1, 2, \dots, 7\}$ tác động đồng thời lên hai đối tượng:
+\begin{enumerate}
+    \item Mặt phẳng không gian 2 chiều: $\mathcal{T}_k: \mathbb{R}^{C \times 15 \times 15} \to \mathbb{R}^{C \times 15 \times 15}$.
+    \item Tọa độ hành động $(r, c) \in [0, 14] \times [0, 14]$ chuyển thành $(r', c')$, từ đó suy ra chỉ số hành động phẳng mới $a' = r' \cdot 15 + c'$.
+\end{enumerate}
+
+Bảng~\ref{tab:d4_transformation_formulas} trình bày tường minh công thức toán học và tương đương hàm mảng NumPy cho toàn bộ 8 phần tử của $D_4$.
+
+\begin{table}[htbp]
+\centering
+\caption{Công thức biến đổi toán học và hàm NumPy tương ứng của 8 phần tử nhóm $D_4$.}
+\label{tab:d4_transformation_formulas}
+\small
+\begin{tabularx}{\textwidth}{c l l X}
+\toprule
+\textbf{Chỉ số $k$} & \textbf{Tên phép biến đổi} & \textbf{Công thức tọa độ $(r', c')$} & \textbf{Cú pháp NumPy trên Tensor $X$} \\
+\midrule
+$k = 0$ & Đồng nhất (Identity) & $(r, c)$ & \texttt{X.copy()} \\
+$k = 1$ & Quay $90^\circ$ thuận kim & $(c, 14 - r)$ & \texttt{np.rot90(X, k=-1, axes=(1, 2))} \\
+$k = 2$ & Quay $180^\circ$ & $(14 - r, 14 - c)$ & \texttt{np.rot90(X, k=2, axes=(1, 2))} \\
+$k = 3$ & Quay $270^\circ$ thuận kim & $(14 - c, r)$ & \texttt{np.rot90(X, k=1, axes=(1, 2))} \\
+$k = 4$ & Lật ngang (Flip Left-Right) & $(r, 14 - c)$ & \texttt{np.flip(X, axis=2)} \\
+$k = 5$ & Lật dọc (Flip Up-Down) & $(14 - r, c)$ & \texttt{np.flip(X, axis=1)} \\
+$k = 6$ & Chuyển vị chính (Transpose) & $(c, r)$ & \texttt{np.transpose(X, (0, 2, 1))} \\
+$k = 7$ & Chuyển vị ngược (Anti-transpose) & $(14 - c, 14 - r)$ & \texttt{np.transpose(X[:, ::-1, ::-1], (0, 2, 1))} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Bài Học Kỹ Thuật: Bản Chất Sai Lệch Đường Chéo Phụ ($k=7$) Và Cách Khắc Phục}
+
+Trong quá trình thực nghiệm tại Bước 1, một lỗi vi tế nhưng cực kỳ nguy hiểm đã được phát hiện trong quá trình kiểm thử đơn vị (\texttt{test\_d4.py}). 
+
+\begin{tcolorbox}[title={Phân tích ca lỗi $k=7$ (Anti-diagonal Discrepancy)}, colframe=alertred]
+\textbf{Hiện tượng:} Khi kiểm tra phép biến đổi qua đường chéo phụ ($k=7$), nếu dùng công thức kết hợp ngây thơ:
+\begin{equation}
+    X_{\text{naive}}' = \text{rot90}(\text{fliplr}(X), k=1)
+\end{equation}
+thì tại tọa độ $(r=0, c=0)$, công thức tọa độ suy ra $(r'=14, c'=14)$, nhưng mảng NumPy lại đặt giá trị 1 tại $(r'=0, c'=0)$, gây sai lệch $100\%$ nhãn hành động!
+
+\textbf{Nguyên nhân đại số:} Phép quay mặc định \texttt{np.rot90} trong NumPy thực hiện quay ngược chiều kim đồng hồ từ trục 0 sang trục 1. Khi kết hợp với \texttt{fliplr}, thứ tự toán tử không giao hoán ($\mathcal{R} \circ \mathcal{F} \neq \mathcal{F} \circ \mathcal{R}$) dẫn đến việc phản xạ nhầm qua trục đối lập.
+
+\textbf{Giải pháp triệt để:} Áp dụng định nghĩa đại số trực tiếp: đảo ngược cả hai trục không gian rồi chuyển vị:
+\begin{equation}
+    X_{\text{correct}}' = (X[:, ::-1, ::-1])^T
+\end{equation}
+Khi đó, phần tử tại vị trí $(r, c)$ được chuyển chính xác sang $(14 - c, 14 - r)$, khớp $100\%$ trên toàn bộ 225 ô cờ.
+\end{tcolorbox}
+
+Mã nguồn kiểm thử \texttt{test\_d4.py} đã duyệt kiểm tra toàn bộ $8 \times 225 = 1,800$ trường hợp khả dĩ và xác nhận độ chính xác tuyệt đối:
+\begin{equation}
+    \forall k \in [0, 7], \quad \forall (r, c) \in [0, 14]^2: \quad \mathcal{T}_k(X)[(r', c')] \equiv 1 \iff (r', c') = \mathcal{A}_k(r, c)
+\end{equation}
+
+\section{Bất Biến Giá Trị Và Tính Tương Biến Chính Sách}
+
+\begin{theorem}[Tính tương biến của chính sách và bất biến của giá trị]
+Với mọi trạng thái bàn cờ $s$, hành động $a$, và phép biến đổi đối xứng $T_k \in D_4$:
+\begin{align}
+    V^*(T_k(s)) &= V^*(s) \quad \text{(Bất biến giá trị)} \\
+    \pi^*(T_k(a) \mid T_k(s)) &= \pi^*(a \mid s) \quad \text{(Tương biến chính sách)}
+\end{align}
+\end{theorem}
+
+Hệ quả trực tiếp của định lý này là: ta có thể mở rộng tập 368,401 transitions ban đầu thành:
+\begin{equation}
+    N_{\text{augmented}} = 368{,}401 \times 8 = \mathbf{2{,}947{,}208}\text{ mẫu huấn luyện}
+\end{equation}
+Đặc biệt, hệ thống không lưu trữ tĩnh 2.95 triệu mẫu này ra đĩa (điều sẽ tiêu tốn hơn $1.2\text{ GB}$ bộ nhớ), mà áp dụng kỹ thuật \textbf{Tăng cường động thời gian thực (On-The-Fly Augmentation)} bên trong lớp \texttt{GomokuRLDataset} của PyTorch: mỗi khi nạp một batch, một phép biến đổi $k \in [0, 7]$ được chọn ngẫu nhiên đồng đều, vừa đảm bảo tính đa dạng mẫu vừa tiết kiệm triệt để không gian đĩa cứng.
+
+% ==============================================================================
+% CHƯƠNG 5
+% ==============================================================================
+\chapter{Giao Thức Phân Chia Tập Dữ Liệu Không Rò Rỉ (Match-Level Zero-Leakage Split)}
+
+\section{Bệnh Lý Rò Rỉ Quỹ Đạo (Trajectory Data Leakage)}
+
+Một sai lầm rất phổ biến trong học máy ứng dụng cho trò chơi dạng chuỗi thời gian là áp dụng hàm chia ngẫu nhiên phẳng (như \texttt{train\_test\_split} của Scikit-Learn) trực tiếp lên toàn bộ mảng transition:
+\begin{equation}
+    \text{RandomSplit}([t_0, t_1, t_2, \dots, t_N]) \longrightarrow \text{Train Set}, \text{Val Set}
+\end{equation}
+
+Hậu quả của cách làm này là \textbf{Hiện tượng Rò rỉ Dữ liệu Quỹ đạo (Trajectory Leakage)}:
+\begin{itemize}
+    \item Nếu nước đi thứ $t$ của ván đấu $m$ nằm trong tập Train, và nước đi thứ $t+1$ của chính ván đấu $m$ đó lại rơi vào tập Validation, hai trạng thái này chỉ khác nhau đúng 1 quân cờ duy nhất trên bàn 225 ô.
+    \item Mạng nơ-ron có thể dễ dàng "học vẹt" cấu hình của ván đấu đó, dẫn đến độ chính xác tập Validation cao một cách ảo tưởng (lên tới $98\text{--}99\%$), nhưng khi đưa vào thực tế thi đấu với các ván cờ hoàn toàn mới, mô hình hoàn toàn mất khả năng tổng quát hóa.
+\end{itemize}
+
+\section{Thuật Toán Phân Chia Ở Cấp Độ Ván Đấu (Match-Level Split Algorithm)}
+
+Để triệt tiêu $100\%$ rò rỉ dữ liệu, thuật toán phân chia phải được thực hiện ở \textbf{Cấp độ Định danh Ván đấu (Match Identifier)} trước khi bóc tách transition.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.85, transform shape,
+    node distance=1.2cm,
+    block/.style={draw=primary, fill=lightbg, rounded corners=3pt, thick, align=center, inner sep=6pt, font=\small},
+    arr/.style={-{Stealth[length=6pt]}, thick, color=secondary}
+]
+    \node[block] (all) {Tập 10,000 ván đấu duy nhất: $\mathcal{M} = \{1, 2, \dots, 10000\}$};
+    \node[block, below=of all] (perm) {Hoán vị giả ngẫu nhiên có hạt giống cố định:\\$\sigma = \text{Permutation}(\mathcal{M}, \text{seed}=42)$};
+    \node[block, below left=of perm, xshift=-0.5cm, fill=successgreen!10, draw=successgreen] (train) {
+        \textbf{Tập Huấn Luyện (90\% Matches)}\\
+        9,000 ván đấu đầu tiên\\
+        \textbf{332,324} transitions thô\\
+        \textbf{2,658,592} mẫu với $D_4$
+    };
+    \node[block, below right=of perm, xshift=0.5cm, fill=accent!10, draw=accent] (val) {
+        \textbf{Tập Kiểm Định (10\% Matches)}\\
+        1,000 ván đấu còn lại\\
+        \textbf{36,077} transitions thô\\
+        \textbf{288,616} mẫu với $D_4$
+    };
+
+    \draw[arr] (all) -- (perm);
+    \draw[arr] (perm) -| (train);
+    \draw[arr] (perm) -| (val);
+\end{tikzpicture}
+\caption{Quy trình phân chia tập dữ liệu ở cấp độ ván đấu (Match-Level Split) đảm bảo 0\% rò rỉ quỹ đạo.}
+\label{fig:match_level_split}
+\end{figure}
+
+Thuật toán được hiện thực hóa trong lớp \texttt{GomokuRLDataset} như sau:
+\begin{enumerate}
+    \item Trích xuất danh sách các mã ván đấu duy nhất: $\mathcal{U} = \text{unique}(\text{match\_ids})$.
+    \item Xáo trộn mảng $\mathcal{U}$ với hạt giống tái lập $\text{seed} = 42$: $\mathcal{U}_{\text{shuffled}} = \pi(\mathcal{U})$.
+    \item Cắt ngưỡng tại chỉ số $K = \lfloor 0.9 \times |\mathcal{U}| \rfloor = 9{,}000$:
+    \begin{align}
+        \mathcal{M}_{\text{train}} &= \mathcal{U}_{\text{shuffled}}[0 : 9000] \\
+        \mathcal{M}_{\text{val}} &= \mathcal{U}_{\text{shuffled}}[9000 : 10000]
+    \end{align}
+    \item Lọc toàn bộ các transition thuộc về các ván đấu tương ứng:
+    \begin{equation}
+        \mathcal{I}_{\text{train}} = \{ i \mid \text{match\_ids}[i] \in \mathcal{M}_{\text{train}} \}, \quad \mathcal{I}_{\text{val}} = \{ i \mid \text{match\_ids}[i] \in \mathcal{M}_{\text{val}} \}
+    \end{equation}
+\end{enumerate}
+
+\begin{theorem}[Bảo toàn tính độc lập quỹ đạo]
+Giao giữa tập các ván đấu huấn luyện và tập các ván đấu kiểm định là rỗng:
+\begin{equation}
+    \mathcal{M}_{\text{train}} \cap \mathcal{M}_{\text{val}} = \emptyset \implies \text{Trajectory Leakage} \equiv 0.0\%
+\end{equation}
+Do đó, bất kỳ độ chính xác nào đạt được trên tập Validation đều phản ánh năng lực tổng quát hóa thực sự trên các ván cờ chưa từng thấy.
+\end{theorem}
+
+% ==============================================================================
+% CHƯƠNG 6
+% ==============================================================================
+\chapter{Thiết Kế Kiến Trúc Mạng Nơ-ron Hai Đầu (Dual-Head ResNet)}
+
+\section{Nguyên Lý Mạng Nơ-ron Hai Đầu Trong Cờ Chiến Thuật}
+
+Theo thiết kế chuẩn mực của AlphaGo Zero và KataGo, thay vì sử dụng hai mạng nơ-ron riêng biệt cho việc chọn nước đi (Policy Network) và đánh giá thế cờ (Value Network), kiến trúc hiện đại tích hợp cả hai nhiệm vụ vào một mạng nơ-ron duy nhất có chung thân mạng tích chập (\textbf{Shared Backbone}):
+\begin{equation}
+    (\mathbf{p}, v) = f_\theta(s)
+\end{equation}
+Trong đó:
+\begin{itemize}
+    \item $\mathbf{p} = [p_0, p_1, \dots, p_{224}]$ là vector phân phối xác suất trên 225 ô cờ hợp lệ, thỏa mãn $\sum p_i = 1$ và $p_i \ge 0$.
+    \item $v \in [-1, +1]$ là giá trị vô hướng dự đoán xác suất thắng bại của người chơi hiện tại từ trạng thái $s$.
+\end{itemize}
+
+Việc chia sẻ thân mạng đem lại ba lợi ích cốt tử:
+\begin{enumerate}
+    \item \textbf{Học biểu diễn đa nhiệm (Multi-task Representation Learning):} Thân mạng buộc phải học các đặc trưng hình học trừu tượng (như chuỗi quân liên tục, khoảng trống hở, thế kẹp chéo) có ích cho cả việc tấn công (chọn nước tiếp theo) lẫn việc phòng ngự (đánh giá an toàn thế trận).
+    \item \textbf{Chống quá khớp (Regularization Effect):} Gradient phản hồi từ hai hàm mất mát khác nhau đóng vai trò tương hỗ, giảm thiểu nguy cơ mạng bị quá khớp vào một số mẫu cục bộ.
+    \item \textbf{Tiết kiệm tài nguyên tính toán (Inference Efficiency):} Khi triển khai trong động cơ cờ, chỉ cần thực hiện 1 lần lan truyền tiến (Forward Pass) để nhận được đồng thời cả nước đi gợi ý lẫn điểm số đánh giá.
+\end{enumerate}
+
+\section{Cấu Trúc Chi Tiết Các Tầng Mạng (Layer-by-Layer Architecture)}
+
+Kiến trúc \texttt{DualHeadResNet} được hiện thực hóa trong tệp \texttt{model.py} gồm 4 thành phần chính (Hình~\ref{fig:dual_head_resnet_architecture}):
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.85, transform shape,
+    node distance=0.9cm,
+    layer/.style={draw=primary, fill=lightbg, rounded corners=2pt, thick, align=center, inner sep=5pt, font=\footnotesize},
+    resblock/.style={draw=secondary, fill=blue!5, rounded corners=3pt, thick, align=center, inner sep=6pt, font=\footnotesize},
+    head/.style={draw=accent, fill=green!5, rounded corners=3pt, thick, align=center, inner sep=6pt, font=\footnotesize},
+    arr/.style={-{Stealth[length=5pt]}, thick, color=primary}
+]
+    \node[layer] (in) {Input Tensor $X$\\$(B, 3, 15, 15)$};
+    \node[layer, below=of in] (stem) {Initial Stem Conv\\Conv2d($3 \to 64$, $3 \times 3$, pad 1) + BatchNorm + ReLU};
+    \node[resblock, below=of stem] (res1) {Residual Block 1\\Conv($64 \to 64$) + BN + ReLU + Conv($64 \to 64$) + BN + Skip};
+    \node[resblock, below=of res1] (dots) {$\dots$ (Residual Blocks $2 \to 5$) $\dots$};
+    \node[resblock, below=of dots] (res6) {Residual Block 6\\Conv($64 \to 64$) + BN + ReLU + Conv($64 \to 64$) + BN + Skip};
+
+    % Heads
+    \node[head, below left=1.0cm and 0.2cm of res6] (p_conv) {
+        \textbf{Policy Head}\\
+        Conv2d($64 \to 32$, $1 \times 1$) + BN + ReLU\\
+        Flatten $\to$ Linear($7{,}200 \to 225$)\\
+        Logits $\mathbf{p} \in \mathbb{R}^{225}$
+    };
+    \node[head, below right=1.0cm and 0.2cm of res6] (v_conv) {
+        \textbf{Value Head}\\
+        Conv2d($64 \to 16$, $1 \times 1$) + BN + ReLU\\
+        Flatten $\to$ Linear($3{,}600 \to 128$) + ReLU\\
+        Linear($128 \to 1$) + $\tanh$\\
+        Scalar $v \in [-1, +1]$
+    };
+
+    \draw[arr] (in) -- (stem);
+    \draw[arr] (stem) -- (res1);
+    \draw[arr] (res1) -- (dots);
+    \draw[arr] (dots) -- (res6);
+    \draw[arr] (res6) -| (p_conv);
+    \draw[arr] (res6) -| (v_conv);
+\end{tikzpicture}
+\caption{Sơ đồ cấu trúc mạng nơ-ron hai đầu Dual-Head ResNet-6 cho hệ thống Gomoku AI.}
+\label{fig:dual_head_resnet_architecture}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Tầng khởi động (Convolutional Stem):}
+    \begin{itemize}
+        \item Đầu vào: Tensor 3 chiều $(3, 15, 15)$.
+        \item Lớp tích chập 2D: Kernel $3 \times 3$, stride 1, padding 1, chuyển từ 3 kênh lên 64 kênh đặc trưng.
+        \item Chuẩn hóa theo lô (Batch Normalization 2D) kèm hàm kích hoạt phi tuyến ReLU.
+    \end{itemize}
+    \item \textbf{Tháp phần dư (Residual Tower -- 6 Blocks):}
+    Mỗi khối Residual Block bao gồm 2 tầng tích chập $3 \times 3$ với 64 kênh, đi kèm đường nối tắt (Skip Connection / Residual Connection):
+    \begin{equation}
+        \mathbf{x}_{l+1} = \text{ReLU}\Big(\mathbf{x}_l + \text{BN}_2\big(\text{Conv}_2(\text{ReLU}(\text{BN}_1(\text{Conv}_1(\mathbf{x}_l))))\big)\Big)
+    \end{equation}
+    Cơ chế cộng phần dư $\mathbf{x}_l$ giúp luồng gradient truyền trực tiếp ngược về các tầng trước mà không bị triệt tiêu (Vanishing Gradient), cho phép mạng học sâu ổn định.
+    \item \textbf{Nhánh dự đoán chính sách (Policy Head):}
+    \begin{itemize}
+        \item Tích chập $1 \times 1$ giảm số kênh từ 64 xuống 32, kèm BatchNorm và ReLU.
+        \item Duỗi phẳng không gian: $32 \times 15 \times 15 = 7{,}200$ đặc trưng.
+        \item Tầng kết nối đầy đủ (Linear Layer): Chiếu từ $7{,}200$ nơ-ron sang 225 nơ-ron đầu ra (tương ứng với 225 vị trí trên bàn cờ).
+    \end{itemize}
+    \item \textbf{Nhánh dự đoán giá trị (Value Head):}
+    \begin{itemize}
+        \item Tích chập $1 \times 1$ giảm số kênh từ 64 xuống 16, kèm BatchNorm và ReLU.
+        \item Duỗi phẳng không gian: $16 \times 15 \times 15 = 3{,}600$ đặc trưng.
+        \item Tầng ẩn kết nối đầy đủ: Linear($3{,}600 \to 128$) kích hoạt bởi ReLU.
+        \item Tầng đầu ra: Linear($128 \to 1$) kích hoạt bởi hàm tang hyperbol ($\tanh$) để ép giá trị dự đoán về khoảng đối xứng $[-1, +1]$.
+    \end{itemize}
+\end{enumerate}
+
+\section{Kiểm Kê Chi Tiết Số Lượng Tham Số (Parameter Audit)}
+
+Bảng~\ref{tab:parameter_audit} trình bày kết quả kiểm kê số lượng tham số có thể huấn luyện (Trainable Parameters) của mô hình \texttt{DualHeadResNet} được trích xuất trực tiếp từ mã nguồn thực thi.
+
+\begin{table}[htbp]
+\centering
+\caption{Kiểm kê chi tiết số lượng tham số các tầng trong mạng DualHeadResNet (ResNet-6, 64 kênh).}
+\label{tab:parameter_audit}
+\begin{tabularx}{\textwidth}{p{3.5cm} p{6.5cm} r r}
+\toprule
+\textbf{Khối thành phần} & \textbf{Chi tiết các tầng con} & \textbf{Số tham số} & \textbf{Tỷ lệ (\%)} \\
+\midrule
+\textbf{Convolutional Stem} & Conv2d($3 \to 64$, $3\times 3$) + BatchNorm2d(64) & 1,856 & 0.07\% \\
+\addlinespace
+\textbf{Residual Tower} & 6 Khối Residual Blocks: & & \\
+-- Block 1 & 2 $\times$ [Conv2d($64\to 64$, $3\times 3$) + BN(64)] & 74,112 & 2.93\% \\
+-- Block 2 & 2 $\times$ [Conv2d($64\to 64$, $3\times 3$) + BN(64)] & 74,112 & 2.93\% \\
+-- Block 3 & 2 $\times$ [Conv2d($64\to 64$, $3\times 3$) + BN(64)] & 74,112 & 2.93\% \\
+-- Block 4 & 2 $\times$ [Conv2d($64\to 64$, $3\times 3$) + BN(64)] & 74,112 & 2.93\% \\
+-- Block 5 & 2 $\times$ [Conv2d($64\to 64$, $3\times 3$) + BN(64)] & 74,112 & 2.93\% \\
+-- Block 6 & 2 $\times$ [Conv2d($64\to 64$, $3\times 3$) + BN(64)] & 74,112 & 2.93\% \\
+\textit{Tổng Residual Tower} & 12 tầng Conv $3\times 3$ + 12 tầng BatchNorm & \textit{444,672} & \textit{17.57\%} \\
+\addlinespace
+\textbf{Policy Head} & Conv $1\times 1$ ($64\to 32$) + BN(32) + Linear($7200 \to 225$) & \textbf{1,622,337} & \textbf{64.12\%} \\
+\addlinespace
+\textbf{Value Head} & Conv $1\times 1$ ($64\to 16$) + BN(16) + FC1($3600\to 128$) + FC2($128\to 1$) & \textbf{461,345} & \textbf{18.23\%} \\
+\midrule
+\textbf{TỔNG CỘNG} & \textbf{Toàn bộ mạng DualHeadResNet} & \textbf{2,530,210} & \textbf{100.00\%} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{tcolorbox}[title={Đánh giá khả thi phần cứng trên GPU NVIDIA T1200 Laptop (4GB VRAM)}]
+Với tổng cộng \textbf{2,530,210 tham số}, nếu biểu diễn dưới dạng số thực dấu phẩy động 32-bit (FP32), kích thước tệp trọng số chỉ chiếm vỏn vẹn:
+\begin{equation}
+    M_{\text{weights}} = 2{,}530{,}210 \times 4\text{ bytes} \approx 9.65\text{ MB}
+\end{equation}
+Khi huấn luyện với kích thước batch $B = 256$, bộ nhớ đệm tensor kích hoạt và gradient tiêu tốn xấp xỉ $\approx 512\text{ MB}$ VRAM. Mức tiêu thụ này hoàn toàn nằm an toàn bên trong dung lượng $4{,}096\text{ MB}$ của card đồ họa rời \textbf{NVIDIA T1200 Laptop GPU}, cho phép bật chế độ huấn luyện hỗn hợp (Automatic Mixed Precision - FP16) đạt thông lượng trên 4,000 mẫu/giây mà không bao giờ gặp lỗi tràn bộ nhớ (Out-Of-Memory).
+\end{tcolorbox}
+
+% ==============================================================================
+% CHƯƠNG 7
+% ==============================================================================
+\chapter{Đặc Tả Schema JSON, Manifest Và Kế Hoạch Triển Khai Bước 2}
+
+\section{Định Dạng Đóng Gói Nhị Phân Nén \texttt{.npz}}
+
+Tập dữ liệu 368,401 transitions được đóng gói nguyên khối vào tệp nhị phân nén chuẩn của NumPy:
+\begin{equation}
+    \mathcal{F}_{\text{binary}} = \texttt{gomoku\_rl\_base\_324k.npz}
+\end{equation}
+Nhờ việc định kiểu mảng tối ưu (\texttt{uint8} cho bàn cờ và hành động, \texttt{int8} cho nhãn giá trị và người chơi), dung lượng của toàn bộ 368,401 bước cờ chỉ chiếm đúng \textbf{1.61 MB} trên ổ đĩa. Tệp nén này cho phép nạp trực tiếp vào RAM trong vòng chưa đầy $0.15\text{ giây}$.
+
+\section{Đặc Tả JSON Schema Chuẩn Hóa (\texttt{schema\_rl\_dataset.json})}
+
+Để phục vụ tính tương thích hệ thống và chuyển giao dữ liệu giữa các thành phần phần mềm (Python, Rust, C++), cấu trúc tập dữ liệu được đặc tả chính thức bằng bản hợp đồng giao diện JSON Schema:
+
+\begin{lstlisting}[caption={Trích đoạn lược đồ JSON Schema của tập dữ liệu Gomoku RL Transition.}]
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GomokuRLTransitionDatasetSchema",
+  "type": "object",
+  "properties": {
+    "match_ids":    { "type": "array", "items": { "type": "integer" } },
+    "ply_indices":  { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 224 } },
+    "boards":       { "type": "array", "shape": [null, 15, 15] },
+    "players":      { "type": "array", "items": { "type": "integer", "enum": [1, 2] } },
+    "actions":      { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 224 } },
+    "profiles":     { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 4 } },
+    "values":       { "type": "array", "items": { "type": "integer", "enum": [-1, 0, 1] } }
+  },
+  "required": ["match_ids", "ply_indices", "boards", "players", "actions", "profiles", "values"],
+  "d4_transformation_rules": {
+    "plane_transform": "transform_plane(p, k) for k in 0..7",
+    "action_transform": "transform_action(r, c, k) -> tr * 15 + tc",
+    "value_invariance": "z_t remains identical across all k"
+  }
+}
+\end{lstlisting}
+
+\section{Thiết Kế Hàm Mất Mát Đa Nhiệm (Multi-Task Loss Function) Cho Bước 2}
+
+Trong Bước 2 tiếp nối, mô hình sẽ được huấn luyện theo phương pháp học có giám sát (Behavioral Cloning) bằng việc cực tiểu hóa hàm mất mát kết hợp:
+\begin{equation}
+    \mathcal{L}(\theta) = \mathcal{L}_{\text{policy}}(\mathbf{p}, a^*) + \lambda \mathcal{L}_{\text{value}}(v, z) + c \|\theta\|_2^2
+\end{equation}
+
+Trong đó:
+\begin{itemize}
+    \item $\mathcal{L}_{\text{policy}}$ là hàm mất mát entropy chéo (Cross-Entropy Loss) giữa phân phối xác suất dự đoán của mạng $\mathbf{p} = \text{Softmax}(\mathbf{z}_{\text{policy}})$ và hành động thực tế $a^* \in [0, 224]$:
+    \begin{equation}
+        \mathcal{L}_{\text{policy}} = -\log p_{a^*} = -\log \left( \frac{\exp(z_{a^*})}{\sum_{j=0}^{224} \exp(z_j)} \right)
+    \end{equation}
+    \item $\mathcal{L}_{\text{value}}$ là sai số toàn phương trung bình (Mean Squared Error - MSE) giữa giá trị đánh giá $v \in [-1, +1]$ và kết quả thực tế $z \in \{-1, 0, +1\}$:
+    \begin{equation}
+        \mathcal{L}_{\text{value}} = (v - z)^2
+    \end{equation}
+    \item $\lambda = 0.5$ là hệ số cân bằng độ quan trọng giữa hai nhiệm vụ.
+    \item $c = 10^{-4}$ là trọng số phạt suy giảm trọng số (L2 Weight Decay) chống quá khớp.
+\end{itemize}
+
+\section{Lộ Trình Thực Thi Huấn Luyện Và Đánh Giá Trong Bước 2}
+
+Quy trình huấn luyện trong tệp \texttt{train.py} đã sẵn sàng với các tham số tối ưu:
+\begin{itemize}
+    \item \textbf{Bộ tối ưu hóa:} AdamW với tốc độ học khởi tạo $\eta_0 = 10^{-3}$, $\beta_1 = 0.9$, $\beta_2 = 0.999$, weight decay $10^{-4}$.
+    \item \textbf{Lịch trình điều chỉnh tốc độ học (LR Scheduler):} Cosine Annealing Learning Rate giảm dần từ $10^{-3}$ về $10^{-5}$ qua từng epoch.
+    \item \textbf{Chỉ số theo dõi thời gian thực (Real-time Evaluation Metrics):}
+    \begin{itemize}
+        \item \textbf{Top-1 Policy Accuracy:} Tỷ lệ phần trăm mạng dự đoán chính xác nước đi hàng đầu của chuyên gia Heuristic.
+        \item \textbf{Top-3 Policy Accuracy:} Tỷ lệ nước đi thực tế nằm trong top 3 nước có xác suất cao nhất của mạng.
+        \item \textbf{Value Mean Squared Error:} Độ lệch bình phương trung bình trong việc dự đoán kết quả thắng/thua.
+    \end{itemize}
+    \item \textbf{Xuất khẩu mô hình sang chuẩn mở ONNX:} Sau khi hoàn tất huấn luyện, mô hình được xuất sang tệp \texttt{gomoku\_policy\_value\_resnet6.onnx}, cho phép nhúng trực tiếp vào engine cờ viết bằng C++, Rust hoặc WebAssembly chạy trực tiếp trên trình duyệt máy khách với độ trễ suy luận $< 5\text{ ms}$.
+\end{itemize}
+
+% ==============================================================================
+% CHƯƠNG 8
+% ==============================================================================
+\chapter{Kết Luận Và Hướng Phát Triển}
+
+\section{Tổng Kết Các Kết QuẢ Đạt Được Tại Bước 1}
+
+Bước 1 của quy trình Học tăng cường cho hệ thống Gomoku AI đã hoàn thành trọn vẹn và chuẩn mực 100\% các mục tiêu đề ra:
+\begin{enumerate}
+    \item \textbf{Dữ liệu thực nghiệm quy mô lớn:} Đã trích xuất thành công \textbf{368,401 transitions} từ 10,000 ván đấu giải đấu Tuần 11, tạo nền móng vững chắc cho việc giải quyết triệt để vấn đề Khởi động lạnh.
+    \item \textbf{Mô hình hóa toán học hoàn chỉnh:} Định hình tensor 3 mặt phẳng bất biến phối cảnh ($3 \times 15 \times 15$), tăng gấp đôi hiệu quả sử dụng mẫu và bảo toàn tính đối xứng của trò chơi.
+    \item \textbf{Đại số đối xứng nhóm $D_4$ chuẩn xác:} Xác lập hệ công thức biến đổi 8 chiều cho cả bàn cờ và hành động, nhân quy mô dữ liệu hiệu dụng lên \textbf{2,947,208 mẫu} với chi phí lưu trữ đĩa tối thiểu ($1.61\text{ MB}$).
+    \item \textbf{Loại bỏ rò rỉ dữ liệu:} Áp dụng giao thức chia tập dữ liệu ở cấp độ định danh ván đấu, bảo đảm 0\% rò rỉ thông tin giữa tập Train và Validation.
+    \item \textbf{Kiến trúc ResNet-6 tối ưu phần cứng:} Hiện thực hóa mạng nơ-ron hai đầu 2,530,210 tham số, tương thích hoàn hảo với GPU NVIDIA T1200 Laptop (4GB VRAM) và sẵn sàng cho quá trình huấn luyện tại Bước 2.
+\end{enumerate}
+
+\section{Hướng Phát Triển Tiếp Theo (Các Bước 2, 3 và 4)}
+
+Sau khi hoàn tất toàn bộ nền móng tại Bước 1, lộ trình phát triển tiếp theo của hệ thống bao gồm:
+\begin{itemize}
+    \item \textbf{Bước 2 (Supervised Pre-Training / Behavioral Cloning):} Thực thi vòng lặp huấn luyện trong \texttt{train.py} qua 20--30 epochs để mạng đạt Top-1 Accuracy $> 45\%$ và Top-3 Accuracy $> 75\%$.
+    \item \textbf{Bước 3 (AlphaZero MCTS Self-Play):} Tích hợp mạng ResNet đã học làm hàm phân phối tiên nghiệm (Prior Policy) và hàm đánh giá lá (Leaf Value Evaluation) cho thuật toán tìm kiếm cây Monte Carlo (MCTS).
+    \item \textbf{Bước 4 (Triển khai Engine lai Heuristic - Neural MCTS):} Tích hợp mô hình ONNX vào ứng dụng thực tế, tạo ra cấp độ Bot Grandmaster vượt qua toàn bộ các bot heuristic hiện tại.
+\end{itemize}
+
+% ==============================================================================
+% TÀI LIỆU THAM KHẢO
+% ==============================================================================
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Tài Liệu Tham Khảo}
+
+\bibitem{silver2017mastering}
+Silver, D., Schrittwieser, J., Simonyan, K., Antonoglou, I., Huang, A., Guez, A., ... \& Hassabis, D. (2017). 
+\textit{Mastering the game of Go without human knowledge}. 
+Nature, 550(7676), 354-359.
+
+\bibitem{silver2018general}
+Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M., Guez, A., ... \& Hassabis, D. (2018). 
+\textit{A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play}. 
+Science, 362(6419), 1140-1144.
+
+\bibitem{wu2019accelerating}
+Wu, D. J. (2019). 
+\textit{Accelerating Self-Play Learning in Go}. 
+arXiv preprint arXiv:1902.10565. (KataGo Technical Report).
+
+\bibitem{he2016deep}
+He, K., Zhang, X., Ren, S., \& Sun, J. (2016). 
+\textit{Deep residual learning for image recognition}. 
+In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).
+
+\bibitem{kumar2020conservative}
+Kumar, A., Zhou, A., Tucker, G., \& Levine, S. (2020). 
+\textit{Conservative Q-learning for offline reinforcement learning}. 
+Advances in Neural Information Processing Systems, 33, 1179-1191.
+
+\bibitem{allis1994searching}
+Allis, L. V. (1994). 
+\textit{Searching for solutions in games and artificial intelligence}. 
+Ph.D. thesis, University of Limburg, Maastricht, The Netherlands.
+
+\bibitem{gomocup2024}
+Gomocup Committee. (2024). 
+\textit{The International Gomoku/Renju AI Tournament Rules and Specifications}. 
+Official Gomocup Technical Documentation.
+
+\end{thebibliography}
+
+\end{document}
