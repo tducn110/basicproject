@@ -1,0 +1,38 @@
+{
+  "dataset_name": "Gomoku_Tournament_10000_RL_Base",
+  "version": "1.0.0",
+  "created_at": "2026-11-14T15:14:14+0700",
+  "total_matches": 10000,
+  "total_transitions_raw": 368401,
+  "total_transitions_with_d4_augmented": 2947208,
+  "board_dimension": [
+    15,
+    15
+  ],
+  "action_space_size": 225,
+  "value_distribution": {
+    "wins (+1)": 185824,
+    "losses (-1)": 179787,
+    "draws (0)": 2790,
+    "win_ratio": 0.5044068827174736,
+    "loss_ratio": 0.48801984793743775,
+    "draw_ratio": 0.00757326934508864
+  },
+  "profile_distribution": {
+    "NAIVE": 73352,
+    "OFFENSE": 67823,
+    "SYMMETRIC": 73550,
+    "DEFENSE": 77559,
+    "OPTIMAL": 76117
+  },
+  "ply_statistics": {
+    "mean_ply": 20.43384789943567,
+    "max_ply": 89,
+    "min_ply": 0
+  },
+  "d4_symmetry_factor": 8,
+  "storage": {
+    "compressed_npz_path": "gomoku_rl_base_324k.npz",
+    "file_size_mb": 1.61
+  }
+}

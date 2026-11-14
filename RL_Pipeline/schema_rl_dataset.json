@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GomokuRLTransitionDatasetSchema",
+  "type": "object",
+  "description": "Formal specification for state-action-value transitions extracted for Caro/Gomoku RL training.",
+  "properties": {
+    "match_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "1-based match identifier"
+    },
+    "ply_indices": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 224
+      }
+    },
+    "boards": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          }
+        }
+      },
+      "shape": [
+        null,
+        15,
+        15
+      ]
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "enum": [
+          1,
+          2
+        ]
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 224
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4
+      }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "enum": [
+          -1,
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "required": [
+    "match_ids",
+    "ply_indices",
+    "boards",
+    "players",
+    "actions",
+    "profiles",
+    "values"
+  ],
+  "d4_transformation_rules": {
+    "plane_transform": "transform_plane(p, k) for k in 0..7",
+    "action_transform": "transform_action(r, c, k) -> tr * 15 + tc",
+    "value_invariance": "z_t remains identical across all k"
+  }
+}
