@@ -1,0 +1,555 @@
+[
+  {
+    "title": "CHAPTER 1. INTRODUCTION",
+    "headingId": "h.mbkundapb6fz",
+    "level": 1,
+    "page": "000",
+    "text": "CHAPTER 1. INTRODUCTION ..................................................................... 000"
+  },
+  {
+    "title": "1.1 Background and motivation",
+    "headingId": "h.28zjm4cj92dt",
+    "level": 2,
+    "page": "000",
+    "text": "1.1 Background and motivation .................................................................... 000"
+  },
+  {
+    "title": "1.2 Objectives and research questions",
+    "headingId": "h.s3shfhiwyz3d",
+    "level": 2,
+    "page": "000",
+    "text": "1.2 Objectives and research questions .......................................................... 000"
+  },
+  {
+    "title": "1.3 Scope, versions and source identity",
+    "headingId": "h.gewf96xcpzri",
+    "level": 2,
+    "page": "000",
+    "text": "1.3 Scope, versions and source identity ........................................................ 000"
+  },
+  {
+    "title": "1.4 Method and report structure",
+    "headingId": "h.16ldjhlw7ms6",
+    "level": 2,
+    "page": "000",
+    "text": "1.4 Method and report structure .................................................................... 000"
+  },
+  {
+    "title": "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES",
+    "headingId": "h.tb4zab5ysoyn",
+    "level": 1,
+    "page": "000",
+    "text": "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES ......................... 000"
+  },
+  {
+    "title": "2.1 Scope, evidence, and notation",
+    "headingId": "h.f564q6ofb9iz",
+    "level": 2,
+    "page": "000",
+    "text": "2.1 Scope, evidence, and notation ................................................................ 000"
+  },
+  {
+    "title": "2.2 Board representation and legal updates",
+    "headingId": "h.ox3085n6q948",
+    "level": 2,
+    "page": "000",
+    "text": "2.2 Board representation and legal updates .................................................. 000"
+  },
+  {
+    "title": "2.2.1 Matrix, index conversion, and state ownership",
+    "headingId": "h.v5ssqmhnici6",
+    "level": 3,
+    "page": "000",
+    "text": "2.2.1 Matrix, index conversion, and state ownership ............................... 000"
+  },
+  {
+    "title": "2.2.2 Apply and undo",
+    "headingId": "h.ixliekovwady",
+    "level": 3,
+    "page": "000",
+    "text": "2.2.2 Apply and undo ............................................................................... 000"
+  },
+  {
+    "title": "2.3 Freestyle win detection",
+    "headingId": "h.llgaaxp2vihy",
+    "level": 2,
+    "page": "000",
+    "text": "2.3 Freestyle win detection ........................................................................... 000"
+  },
+  {
+    "title": "2.4 Baselines: random play and rule-based play",
+    "headingId": "h.t89694iwlib",
+    "level": 2,
+    "page": "000",
+    "text": "2.4 Baselines: random play and rule-based play .......................................... 000"
+  },
+  {
+    "title": "2.4.1 Random baseline",
+    "headingId": "h.gf3ld6hrgsyr",
+    "level": 3,
+    "page": "000",
+    "text": "2.4.1 Random baseline ............................................................................. 000"
+  },
+  {
+    "title": "2.4.2 Immediate tactics and one-ply heuristic",
+    "headingId": "h.e7kjz3j76vr2",
+    "level": 3,
+    "page": "000",
+    "text": "2.4.2 Immediate tactics and one-ply heuristic .......................................... 000"
+  },
+  {
+    "title": "2.5 Static evaluation and terminal utility",
+    "headingId": "h.oh14t8qso23p",
+    "level": 2,
+    "page": "000",
+    "text": "2.5 Static evaluation and terminal utility ...................................................... 000"
+  },
+  {
+    "title": "2.5.1 Evaluation of nonterminal positions",
+    "headingId": "h.odpwbopwyu4e",
+    "level": 3,
+    "page": "000",
+    "text": "2.5.1 Evaluation of nonterminal positions ................................................ 000"
+  },
+  {
+    "title": "2.5.2 Terminal states and the score hierarchy",
+    "headingId": "h.ty6bcng513tg",
+    "level": 3,
+    "page": "000",
+    "text": "2.5.2 Terminal states and the score hierarchy .......................................... 000"
+  },
+  {
+    "title": "2.6 Candidate generation and a soft tactical cap",
+    "headingId": "h.n2msphwxgbc8",
+    "level": 2,
+    "page": "000",
+    "text": "2.6 Candidate generation and a soft tactical cap ........................................... 000"
+  },
+  {
+    "title": "2.6.1 Spatial neighborhood",
+    "headingId": "h.ki6ogpu2c3b0",
+    "level": 3,
+    "page": "000",
+    "text": "2.6.1 Spatial neighborhood ....................................................................... 000"
+  },
+  {
+    "title": "2.6.2 Tactical preservation and membership",
+    "headingId": "h.uooxa7pye6zy",
+    "level": 3,
+    "page": "000",
+    "text": "2.6.2 Tactical preservation and membership ............................................ 000"
+  },
+  {
+    "title": "2.7 Move ordering versus move selection",
+    "headingId": "h.mop38wrt6f8f",
+    "level": 2,
+    "page": "000",
+    "text": "2.7 Move ordering versus move selection .................................................... 000"
+  },
+  {
+    "title": "2.8 Minimax search",
+    "headingId": "h.ka1fnecs6on7",
+    "level": 2,
+    "page": "000",
+    "text": "2.8 Minimax search ...................................................................................... 000"
+  },
+  {
+    "title": "2.8.1 Recurrence and contract",
+    "headingId": "h.qona5aytdcz9",
+    "level": 3,
+    "page": "000",
+    "text": "2.8.1 Recurrence and contract .................................................................. 000"
+  },
+  {
+    "title": "2.8.2 Proof, example and complexity",
+    "headingId": "h.mfxc5fc4ntt7",
+    "level": 3,
+    "page": "000",
+    "text": "2.8.2 Proof, example and complexity ....................................................... 000"
+  },
+  {
+    "title": "2.9 Alpha-Beta pruning",
+    "headingId": "h.m2zshj9xhidg",
+    "level": 2,
+    "page": "000",
+    "text": "2.9 Alpha-Beta pruning ................................................................................ 000"
+  },
+  {
+    "title": "2.9.1 Bounds and pseudocode",
+    "headingId": "h.fl4c0ur4c4wj",
+    "level": 3,
+    "page": "000",
+    "text": "2.9.1 Bounds and pseudocode .................................................................. 000"
+  },
+  {
+    "title": "2.9.2 Worked cutoff and correctness boundary",
+    "headingId": "h.chp989x4d9hw",
+    "level": 3,
+    "page": "000",
+    "text": "2.9.2 Worked cutoff and correctness boundary ........................................ 000"
+  },
+  {
+    "title": "2.10 Iterative deepening and budgets",
+    "headingId": "h.4nux9as0w8f4",
+    "level": 2,
+    "page": "000",
+    "text": "2.10 Iterative deepening and budgets ........................................................... 000"
+  },
+  {
+    "title": "2.11 Zobrist hashing and incremental state",
+    "headingId": "h.u6wnsrodysn",
+    "level": 2,
+    "page": "000",
+    "text": "2.11 Zobrist hashing and incremental state .................................................. 000"
+  },
+  {
+    "title": "2.11.1 Definition and update",
+    "headingId": "h.uew8hqaidmzp",
+    "level": 3,
+    "page": "000",
+    "text": "2.11.1 Definition and update .................................................................... 000"
+  },
+  {
+    "title": "2.12 Transposition table: entries, bounds and context",
+    "headingId": "h.4v52azsb4fkd",
+    "level": 2,
+    "page": "000",
+    "text": "2.12 Transposition table: entries, bounds and context .................................. 000"
+  },
+  {
+    "title": "2.12.1 Meaning of stored values",
+    "headingId": "h.kd6sx6kollmi",
+    "level": 3,
+    "page": "000",
+    "text": "2.12.1 Meaning of stored values .............................................................. 000"
+  },
+  {
+    "title": "2.12.2 Why reuse can be wrong",
+    "headingId": "h.wblsbkp7rwlb",
+    "level": 3,
+    "page": "000",
+    "text": "2.12.2 Why reuse can be wrong ............................................................... 000"
+  },
+  {
+    "title": "2.13 Quiescence search in the legacy TypeScript bot",
+    "headingId": "h.w6poqxjs9r4h",
+    "level": 2,
+    "page": "000",
+    "text": "2.13 Quiescence search in the legacy TypeScript bot .................................. 000"
+  },
+  {
+    "title": "2.14 Legacy bitmask patterns and incremental line counts",
+    "headingId": "h.u1io5ql1vutd",
+    "level": 2,
+    "page": "000",
+    "text": "2.14 Legacy bitmask patterns and incremental line counts .......................... 000"
+  },
+  {
+    "title": "2.15 Difficulty configurations and the active request path",
+    "headingId": "h.aousdh82aqys",
+    "level": 2,
+    "page": "000",
+    "text": "2.15 Difficulty configurations and the active request path ........................... 000"
+  },
+  {
+    "title": "2.16 Synthesis and limits of the algorithmic claims",
+    "headingId": "h.deo9zlys1cxk",
+    "level": 2,
+    "page": "000",
+    "text": "2.16 Synthesis and limits of the algorithmic claims ..................................... 000"
+  },
+  {
+    "title": "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN",
+    "headingId": "h.9ty3awaoyfn1",
+    "level": 1,
+    "page": "000",
+    "text": "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN ..................................... 000"
+  },
+  {
+    "title": "3.1 Actors, use cases and functional requirements",
+    "headingId": "h.cezhdukw22a5",
+    "level": 2,
+    "page": "000",
+    "text": "3.1 Actors, use cases and functional requirements ....................................... 000"
+  },
+  {
+    "title": "3.2 Non-functional requirements and acceptance boundaries",
+    "headingId": "h.l93wek48u6pv",
+    "level": 2,
+    "page": "000",
+    "text": "3.2 Non-functional requirements and acceptance boundaries ...................... 000"
+  },
+  {
+    "title": "3.3 Architecture and ownership",
+    "headingId": "h.44ilrwr6m6hi",
+    "level": 2,
+    "page": "000",
+    "text": "3.3 Architecture and ownership .................................................................... 000"
+  },
+  {
+    "title": "3.4 Board state, history and legal transition contract",
+    "headingId": "h.ykhczgk1573",
+    "level": 2,
+    "page": "000",
+    "text": "3.4 Board state, history and legal transition contract .................................... 000"
+  },
+  {
+    "title": "3.5 Match phases and state transitions",
+    "headingId": "h.o3qnfo717c4z",
+    "level": 2,
+    "page": "000",
+    "text": "3.5 Match phases and state transitions .......................................................... 000"
+  },
+  {
+    "title": "3.6 Asynchronous request protocol and cancellation",
+    "headingId": "h.rbfbaqfupooi",
+    "level": 2,
+    "page": "000",
+    "text": "3.6 Asynchronous request protocol and cancellation ................................... 000"
+  },
+  {
+    "title": "3.7 Coordinate transformation and gesture interpretation",
+    "headingId": "h.xsluc2cfh6fq",
+    "level": 2,
+    "page": "000",
+    "text": "3.7 Coordinate transformation and gesture interpretation ............................ 000"
+  },
+  {
+    "title": "3.8 Search-result contract and presentation of telemetry",
+    "headingId": "h.pj0epyw80iuc",
+    "level": 2,
+    "page": "000",
+    "text": "3.8 Search-result contract and presentation of telemetry .............................. 000"
+  },
+  {
+    "title": "3.9 Verification scenarios derived from the design",
+    "headingId": "h.uqgphbx7d2i",
+    "level": 2,
+    "page": "000",
+    "text": "3.9 Verification scenarios derived from the design ...................................... 000"
+  },
+  {
+    "title": "CHAPTER 4. IMPLEMENTATION",
+    "headingId": "h.3opfa5jx1z65",
+    "level": 1,
+    "page": "000",
+    "text": "CHAPTER 4. IMPLEMENTATION ................................................................ 000"
+  },
+  {
+    "title": "4.1 Toolchain and project organization",
+    "headingId": "h.hefb34yw4eqb",
+    "level": 2,
+    "page": "000",
+    "text": "4.1 Toolchain and project organization ........................................................ 000"
+  },
+  {
+    "title": "4.2 Accepted move processing",
+    "headingId": "h.kuw4himka0b",
+    "level": 2,
+    "page": "000",
+    "text": "4.2 Accepted move processing ..................................................................... 000"
+  },
+  {
+    "title": "4.3 AI dispatch, Worker execution and WASM hydration",
+    "headingId": "h.7yn47n5rr1d9",
+    "level": 2,
+    "page": "000",
+    "text": "4.3 AI dispatch, Worker execution and WASM hydration .......................... 000"
+  },
+  {
+    "title": "4.4 Board rendering and interface synchronization",
+    "headingId": "h.duk1kwe4t3bo",
+    "level": 2,
+    "page": "000",
+    "text": "4.4 Board rendering and interface synchronization ...................................... 000"
+  },
+  {
+    "title": "4.5 Presentation website and interactive explanation",
+    "headingId": "h.ivnxw4hj6ag2",
+    "level": 2,
+    "page": "000",
+    "text": "4.5 Presentation website and interactive explanation ................................... 000"
+  },
+  {
+    "title": "4.6 Python/Pyodide execution and four instructional programs",
+    "headingId": "h.vgxp54qbkd6t",
+    "level": 2,
+    "page": "000",
+    "text": "4.6 Python/Pyodide execution and four instructional programs ................... 000"
+  },
+  {
+    "title": "4.6.1 Pattern scanner",
+    "headingId": "h.htgwz1b54vki",
+    "level": 3,
+    "page": "000",
+    "text": "4.6.1 Pattern scanner ................................................................................ 000"
+  },
+  {
+    "title": "4.6.2 Heuristic calculator",
+    "headingId": "h.c1ks7fdjnbzp",
+    "level": 3,
+    "page": "000",
+    "text": "4.6.2 Heuristic calculator .......................................................................... 000"
+  },
+  {
+    "title": "4.6.3 Chebyshev candidate example",
+    "headingId": "h.j6j4kiyfvtac",
+    "level": 3,
+    "page": "000",
+    "text": "4.6.3 Chebyshev candidate example ........................................................ 000"
+  },
+  {
+    "title": "4.6.4 Empirical-analysis snippet",
+    "headingId": "h.s01h91bc9g9k",
+    "level": 3,
+    "page": "000",
+    "text": "4.6.4 Empirical-analysis snippet .............................................................. 000"
+  },
+  {
+    "title": "4.7 Implementation traceability and limits",
+    "headingId": "h.8vkuvzj3tl0r",
+    "level": 2,
+    "page": "000",
+    "text": "4.7 Implementation traceability and limits ................................................... 000"
+  },
+  {
+    "title": "CHAPTER 5. RESULTS AND EVALUATION",
+    "headingId": "h.x4gzqixf87qm",
+    "level": 1,
+    "page": "000",
+    "text": "CHAPTER 5. RESULTS AND EVALUATION ............................................. 000"
+  },
+  {
+    "title": "5.1 Evaluation questions, evidence and boundaries",
+    "headingId": "h.ksknugug3ebp",
+    "level": 2,
+    "page": "000",
+    "text": "5.1 Evaluation questions, evidence and boundaries ..................................... 000"
+  },
+  {
+    "title": "5.2 Native board and search checks of the 23 October engine",
+    "headingId": "h.4e3feq1vanay",
+    "level": 2,
+    "page": "000",
+    "text": "5.2 Native board and search checks of the 23 October engine ..................... 000"
+  },
+  {
+    "title": "5.3 WebAssembly parity and browser observations",
+    "headingId": "h.um9mbintoly",
+    "level": 2,
+    "page": "000",
+    "text": "5.3 WebAssembly parity and browser observations ..................................... 000"
+  },
+  {
+    "title": "5.3.1 Follow-up application validation",
+    "headingId": "h.vjc9kyj8offy",
+    "level": 3,
+    "page": "000",
+    "text": "5.3.1 Follow-up application validation ..................................................... 000"
+  },
+  {
+    "title": "5.4 Separate native reference experiments",
+    "headingId": "h.ehsapit9nzy8",
+    "level": 2,
+    "page": "000",
+    "text": "5.4 Separate native reference experiments ................................................... 000"
+  },
+  {
+    "title": "5.4.1 A paired Minimax and Alpha-Beta example",
+    "headingId": "h.yyqb9ygo25hr",
+    "level": 3,
+    "page": "000",
+    "text": "5.4.1 A paired Minimax and Alpha-Beta example ................................... 000"
+  },
+  {
+    "title": "5.4.2 Candidate caps, ordering and tactical completeness",
+    "headingId": "h.sep6934wxqpa",
+    "level": 3,
+    "page": "000",
+    "text": "5.4.2 Candidate caps, ordering and tactical completeness ....................... 000"
+  },
+  {
+    "title": "5.4.3 Hash, table scope and interrupted search",
+    "headingId": "h.h6oy75sv7019",
+    "level": 3,
+    "page": "000",
+    "text": "5.4.3 Hash, table scope and interrupted search ........................................ 000"
+  },
+  {
+    "title": "5.5 Historical cross-language and Week 4 datasets",
+    "headingId": "h.aidtnilmd7op",
+    "level": 2,
+    "page": "000",
+    "text": "5.5 Historical cross-language and Week 4 datasets ...................................... 000"
+  },
+  {
+    "title": "5.6 Presentation examples and evidence quality",
+    "headingId": "h.5c7dfs581ttj",
+    "level": 2,
+    "page": "000",
+    "text": "5.6 Presentation examples and evidence quality .......................................... 000"
+  },
+  {
+    "title": "5.7 Threats to validity and interpretation",
+    "headingId": "h.sx6fri3t6972",
+    "level": 2,
+    "page": "000",
+    "text": "5.7 Threats to validity and interpretation ...................................................... 000"
+  },
+  {
+    "title": "CHAPTER 6. CONCLUSION AND FUTURE WORK",
+    "headingId": "h.h3dln88p2eyp",
+    "level": 1,
+    "page": "000",
+    "text": "CHAPTER 6. CONCLUSION AND FUTURE WORK .................................. 000"
+  },
+  {
+    "title": "6.1 Work completed and contribution",
+    "headingId": "h.wmsu1zxcto6s",
+    "level": 2,
+    "page": "000",
+    "text": "6.1 Work completed and contribution .......................................................... 000"
+  },
+  {
+    "title": "6.2 Limitations",
+    "headingId": "h.ihchg45onn57",
+    "level": 2,
+    "page": "000",
+    "text": "6.2 Limitations .............................................................................................. 000"
+  },
+  {
+    "title": "6.3 Future development",
+    "headingId": "h.n7j98jjv0ht2",
+    "level": 2,
+    "page": "000",
+    "text": "6.3 Future development ................................................................................ 000"
+  },
+  {
+    "title": "REFERENCES",
+    "headingId": "h.in9eplkodgeb",
+    "level": 1,
+    "page": "000",
+    "text": "REFERENCES ................................................................................................. 000"
+  },
+  {
+    "title": "APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP",
+    "headingId": "h.4lvh3lnoi9vc",
+    "level": 1,
+    "page": "000",
+    "text": "APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP ........ 000"
+  },
+  {
+    "title": "APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER",
+    "headingId": "h.a1ruwmryb0b5",
+    "level": 1,
+    "page": "000",
+    "text": "APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER ... 000"
+  },
+  {
+    "title": "APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE",
+    "headingId": "h.r2ne5nnz9baa",
+    "level": 1,
+    "page": "000",
+    "text": "APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE ........ 000"
+  }
+]

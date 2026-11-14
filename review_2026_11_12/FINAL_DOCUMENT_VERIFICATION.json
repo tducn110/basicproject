@@ -1,0 +1,27 @@
+{
+  "documentId": "1c1QHsS_KvOzDs6GMkuDCm-QGipBBeyxiH3UlKenbBVw",
+  "revisionId": "AHj4eMTD4sfCkn8OVdYlVKDzlKRQJMw47iOc9kAyKZVdlrENWppnfUchgGaP_vckq0sBUNdSp7DsW_-nTFjm7PE_jCASD1Gu6Xk0DdHMfOI",
+  "tabs": [
+    {
+      "id": "t.azb8qty2ktof",
+      "title": "English Report",
+      "endIndex": 174822
+    },
+    {
+      "id": "t.kyyyfwxhoe80",
+      "title": "Tab 2",
+      "endIndex": 95608
+    }
+  ],
+  "native_font_mismatches": 0,
+  "report_pdf_pages": 100,
+  "main_and_appendix_pages": 92,
+  "reference_entries": 53,
+  "toc_heading_entries": 79,
+  "figure_entries": 20,
+  "table_entries": 8,
+  "pagination_mismatches": 0,
+  "toc_method": "Programmatically generated linked contents with actual exported PDF page numbers; not a native refreshable TableOfContents element.",
+  "review_ledger_readback_exact_trimmed": true,
+  "review_ledger_additional_working_tree_findings": true
+}

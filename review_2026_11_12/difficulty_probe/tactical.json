@@ -1,0 +1,349 @@
+{
+  "scope": "Actual TypeScript AIController transpiled in memory, Node no Worker; errors on non-tactical search expected and not browser evidence",
+  "results": [
+    {
+      "fixture": "own_win",
+      "level": "hard",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "hard",
+        "move": {
+          "row": 7,
+          "col": 2
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.4546829999999886,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "own_win",
+      "level": "veryhard",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "veryhard",
+        "move": {
+          "row": 7,
+          "col": 2
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.1890849999999773,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "own_win",
+      "level": "expert",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "expert",
+        "move": {
+          "row": 7,
+          "col": 2
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.20701400000001513,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "own_win",
+      "level": "master",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "master",
+        "move": {
+          "row": 7,
+          "col": 2
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.26325300000002017,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "single_block",
+      "level": "hard",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "hard",
+        "move": {
+          "row": 0,
+          "col": 4
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.35950100000002294,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "single_block",
+      "level": "veryhard",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "veryhard",
+        "move": {
+          "row": 0,
+          "col": 4
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.4377749999999878,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "single_block",
+      "level": "expert",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "expert",
+        "move": {
+          "row": 0,
+          "col": 4
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.28456900000003316,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "single_block",
+      "level": "master",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "master",
+        "move": {
+          "row": 0,
+          "col": 4
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.27753799999999273,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "double_threat",
+      "level": "hard",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "hard",
+        "move": {
+          "row": 7,
+          "col": 3
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.2801019999999994,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "double_threat",
+      "level": "veryhard",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "veryhard",
+        "move": {
+          "row": 7,
+          "col": 3
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.4879349999999931,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "double_threat",
+      "level": "expert",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "expert",
+        "move": {
+          "row": 7,
+          "col": 3
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.2824539999999729,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "double_threat",
+      "level": "master",
+      "result": {
+        "requestId": 1,
+        "roundId": 1,
+        "difficulty": "master",
+        "move": {
+          "row": 7,
+          "col": 3
+        },
+        "stats": {
+          "depth": 0,
+          "nodes": 0,
+          "cutoffs": 0,
+          "leafEvaluations": 0,
+          "orderingEvaluations": 0,
+          "candidateMovesGenerated": 0,
+          "score": null,
+          "strategy": "tactical",
+          "source": "tactical",
+          "elapsedMs": 0.2652509999999779,
+          "elapsedScope": "typescript-tactical",
+          "reason": "tactical"
+        }
+      }
+    },
+    {
+      "fixture": "fork_setup",
+      "level": "hard",
+      "error": "ReferenceError: Worker is not defined"
+    },
+    {
+      "fixture": "fork_setup",
+      "level": "veryhard",
+      "error": "ReferenceError: Worker is not defined"
+    },
+    {
+      "fixture": "fork_setup",
+      "level": "expert",
+      "error": "ReferenceError: Worker is not defined"
+    },
+    {
+      "fixture": "fork_setup",
+      "level": "master",
+      "error": "ReferenceError: Worker is not defined"
+    }
+  ]
+}

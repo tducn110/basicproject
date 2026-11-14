@@ -1,0 +1,20 @@
+{
+  "Bao_cao_Caro_Tieng_Viet.pdf": {
+    "pages": 84,
+    "sample_render_matches_native": [
+      true,
+      true,
+      true
+    ],
+    "file_bytes": 3162434
+  },
+  "Caro_Project_Report_English.pdf": {
+    "pages": 86,
+    "sample_render_matches_native": [
+      true,
+      true,
+      true
+    ],
+    "file_bytes": 1921018
+  }
+}

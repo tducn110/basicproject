@@ -41,3 +41,13 @@ cargo-target-*/
 **/app-build/
 **/present-build/
 **/present-validation/
+
+# Intermediate native QA scratch files
+**/native_qa/
+
+# Intermediate layout PDF iterations and local zip backup
+**/layout*.pdf
+**/browser_layout.pdf
+**/before_contents_title_final.pdf
+review_2026_11_12/*.zip
+review_2026_11_12/Caro_Local_Defense_2026_11_13/

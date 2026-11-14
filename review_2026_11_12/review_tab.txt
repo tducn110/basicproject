@@ -1,0 +1,631 @@
+REVIEW VÀ ĐỐI CHIẾU SOURCE — 12–13 NOVEMBER 2026
+Phạm vi và đầu ra
+Đã review toàn bộ English Report: phần đầu, 6 chương, 53 tài liệu tham khảo và Appendix A–C; đối chiếu cả 20 hình, 8 bảng và ba cấp heading. Bản PDF riêng của English Report có 100 trang, gồm 92 trang từ Chapter 1 đến hết phụ lục.
+Nguồn chuẩn: tducn110/basicproject, main, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc. Remote main và checkout hiện tại cùng revision. Inventory gồm 289 tracked files / 20 thư mục cấp cao. Các source Rust local được định danh bằng hash, tách khỏi baseline công khai và binary WASM.
+English Report đã được sửa trực tiếp. Vòng 12 November chỉ review; theo yêu cầu tiếp theo ngày 13 November đã migrate Rust vào CaroGame/engine, rebuild WASM và nối web trình bày sang local. Không commit, push hay deploy.
+Kết quả kiểm thực chạy
+CaroGame sau migration: 65 test / 9 file pass; TypeScript --noEmit pass; Vite 8.3.1 production build pass. Node 22.23.3 / npm 10.9.9.
+Teaching/present: bản copy riêng ban đầu và working tree sau sửa local entry points đều đã qua TypeScript + Vite 8.3.5 production build.
+Native modified engine: 38 unit + 7 integration tests pass. Native reference: 6 unit + 3 integration tests pass. Các integration test native không được gọi thành browser/WASM tests.
+Hai release harness chạy lại thành công. Toàn bộ 816 engine rows và 544 reference CSV rows khớp dữ liệu lưu ở mọi trường ngoài thời gian; 36/36 source, lockfile và harness hashes khớp provenance. Timing lịch sử vẫn giữ đúng ngày/môi trường của dữ liệu gốc.
+Browser/Worker/viewport lịch sử vẫn giữ đúng ngày và phạm vi. Ngày 13 November đã kiểm mới bằng CUA: chọn cả sáu tier trên game local, quan sát phản hồi và telemetry depth 0/1/2/3/4/5. Root kiểm lại Master depth 5 và thấy iframe local render. Không suy thành tournament hoặc acceptance thiết bị thật.
+Nội dung và văn phong
+Đã phân biệt active WASM, modified Rust, archived baseline, legacy TypeScript và native reference. Sửa Map/array ownership, soft cap, modulo selection, terminal recurrence, leaves/total nodes, TT context, request guards, timing scope và chiều tỷ lệ Node/native.
+Đã biên tập academic English theo US spelling, bỏ lời dẫn của chatbot, câu sáo, quảng bá, checklist mệnh lệnh và cảnh báo lặp. Giữ các điều kiện toán học cần thiết. Đây là rà soát và biên tập văn phong; không phải chứng nhận nguồn gốc tác giả hoặc điểm số từ AI detector.
+Các vấn đề còn tồn tại trong source được mô tả tại Section 6.2 và hướng phát triển tại Section 6.3: direct fractional input, round start trước validation, threshold drag theo từng event, Pyodide loader recovery và thiếu full native dependency trong snapshot công khai.
+Định dạng, citation và mục lục
+Times New Roman 13 cho body, heading, bảng, caption, pseudocode và footer; named styles cũng đã chuẩn hóa. Chương/phụ lục bắt đầu trang mới; bảng lặp header, độ rộng nằm trong vùng nội dung.
+53 nguồn đã được kiểm và đánh số theo lần xuất hiện. Citation trong pseudocode cũng được remap; các nhóm số xếp tăng dần, citation đứng trước dấu câu và URL không chứa dấu chấm kết thúc.
+Mục lục có 79 entry liên kết đến heading native; danh mục 20 hình và 8 bảng được tính lại theo trang PDF. Cả 107 entry khớp phân trang bản cuối. Mục lục được tạo bằng chương trình và có link; không phải phần tử TableOfContents native có nút Refresh. Khi nội dung đổi, cần tái tạo bản đồ trang rồi cập nhật lại.
+Đã render toàn bộ 100 trang để rà bố cục. Kiểm tự động không thấy trang rỗng, cỡ chữ khác 13 hoặc text tràn ngang. Một số ký tự toán học dùng glyph fallback khi render, còn font property trong Docs là Times New Roman 13.
+Sổ finding chi tiết — vòng review nguồn và nội dung
+R001 | Front matter | Condense three inventory-like paragraphs into a coherent self-contained abstract with concrete results and no inflated claim.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json; /home/pro/Downloads/basicproject/research/week_05_09/README.md; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/worker.ts
+R002 | Front matter | Merge the abstract into one paragraph; remove duplicated implementation inventory.
+Source: Abstract consolidated at paragraph 298
+R003 | Front matter | Merge the abstract into one paragraph; retain concrete findings in the consolidated abstract.
+Source: Abstract consolidated at paragraph 298
+R004 | Front matter | Use five focused index terms rather than an eight-item component inventory.
+Source: https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-the-text-of-your-article/structure-your-article/
+R005 | LIST OF TABLES | Define the standard expansion before the project-specific meaning.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/behaviors/match/MatchController.ts
+R006 | LIST OF TABLES | Define the abbreviation and explain its local use.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/behaviors/match/MatchController.ts
+R007 | LIST OF TABLES | Replace audit instruction with a clear reading convention.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/README.md
+R008 | 1.1 Background and motivation | Remove the unsupported claim that independent legacy, native and browser modules form one cohesive executable architecture; standardize PixiJS terminology.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R009 | 1.1 Background and motivation | Replace repeated cautionary meta-commentary with the concrete system problem.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/GomokuWasmEngine.ts
+R010 | 1.2 Objectives and research questions | Make objectives direct and remove redundant framing without changing the game contract.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts
+R011 | 1.2 Objectives and research questions | State the objective positively and replace evidence-policing language with actual comparison methods.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json; /home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json
+R012 | 1.2 Objectives and research questions | Use parallel research-question language and avoid implying formal or universal answers from finite experiments.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/README.md; /home/pro/Downloads/basicproject/research/week_05_09/README.md
+R013 | 1.3 Scope, versions and source identity | Correct the baseline/current-engine identity: archived board.rs is not the source of the active modified binary.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/README.md; /home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md
+R014 | 1.3 Scope, versions and source identity | Remove circular architecture-clarity wording and define a consistent naming convention.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md; /home/pro/Downloads/basicproject/research/week_05_09/README.md
+R015 | 1.3 Scope, versions and source identity | Keep scope readable and move repeated absence/verification narration to the final limitations.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/App.tsx; /home/pro/Downloads/basicproject/present/src/App.tsx
+R016 | 1.4 Method and report structure | Replace audit instructions and source-policing rhetoric with an academic methods paragraph.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/README.md; /home/pro/Downloads/basicproject/research/week_05_09/README.md
+R017 | 1.4 Method and report structure | Remove repeated disclaimer language and accurately describe the corrected appendices.
+Source: /home/pro/Downloads/basicproject/README.md
+R018 | 2.1 Scope, evidence, and notation | Separates source ownership and binary execution; removes unsupported claim that old baseline plus adapter establishes active binary internals.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/executeSearch.ts; /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md; /home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json
+R019 | 2.1 Scope, evidence, and notation | Removes generic promotion and keeps advanced algorithms assigned to legacy/reference owners.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts; /home/pro/Downloads/basicproject/research/week_05_09/README.md
+R020 | 2.1 Scope, evidence, and notation | Removes inflated presentation language and separates explanatory examples from measured results.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md; https://doi.org/10.1080/14786445008521796
+R021 | 2.2.1 Matrix, index conversion, and state ownership | Corrects frontend Map representation; removes false zero-per-node-allocation and unmeasured L1-cache claims; distinguishes cell array from struct size.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board; /home/pro/Downloads/basicproject/CaroGame/src/game/core/GameState.ts:GameState; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:BotBoard; https://doc.rust-lang.org/reference/type-layout.html
+R022 | 2.2.1 Matrix, index conversion, and state ownership | The checked undo and empty-stone rejection are modified-source behavior, absent from old baseline; describes legality owners without universal guarantee.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board::place; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board::undo; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/lib.rs:Game; /home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts
+R023 | 2.2.1 Matrix, index conversion, and state ownership | Clarifies actual root-copy/in-place ownership and counters earlier zero-allocation claim.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:search; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates
+R024 | 2.2.1 Matrix, index conversion, and state ownership | GameState is a sparse Map, not the illustrated contiguous row-major Rust board.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board; /home/pro/Downloads/basicproject/CaroGame/src/game/core/GameState.ts
+R025 | 2.2.2 Apply and undo | Pseudocode includes checks not present in baseline_engine; correct provenance.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W2
+R026 | 2.2.2 Apply and undo | Avoids attributing exception/abort-safe finally semantics to Rust source; distinguishes O(1) cell updates from full state update costs.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:alphaBeta; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:makeMove
+R027 | 2.2.2 Apply and undo | Bounds restoration evidence to recorded checks; removes unlimited 'after every search' claim.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs; /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md
+R028 | 2.2.2 Apply and undo | Corrects baseline provenance.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W2
+R029 | 2.3 Freestyle win detection | Clarifies valid-board precondition rather than asserting WinRule itself validates arbitrary invalid state.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts:FreestyleGomokuWinRule.evaluate; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:check_winner
+R030 | 2.3 Freestyle win detection | Removes unmeasured major-speedup claim and invalid exact comparison to 900 full-board checks; keeps derivation.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts:collect; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:check_winner
+R031 | 2.4.1 Random baseline | Assigns Random policy to modified source instead of old baseline.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline; /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W4/W7
+R032 | 2.4.1 Random baseline | Corrects exact-uniformity implication and explains selection safely without marketing claims.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:seeded_u64; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline
+R033 | 2.4.2 Immediate tactics and one-ply heuristic | Corrects source identity and keeps the two tactical stages distinct.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/TacticalMoveResolver.ts
+R034 | 2.4.2 Immediate tactics and one-ply heuristic | Old [7] source is noise-based minimax, not shown Random/RuleBased dispatcher.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W4/W7
+R035 | 2.5.1 Evaluation of nonterminal positions | Removes false exponential progression, unsupported double-three modelling and unconditional tactical dominance.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:pattern_score; /home/pro/Downloads/basicproject/research/current_2026_10_23/baseline_engine/src/eval.rs:pattern_score
+R036 | 2.5.1 Evaluation of nonterminal positions | Old baseline lacks clamp although weights match; cites correct implementation.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W4; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:evaluate
+R037 | 2.5.1 Evaluation of nonterminal positions | Removes duplicated invariant proof while preserving exact claim.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:evaluate
+R038 | 2.5.1 Evaluation of nonterminal positions | Corrects unsupported order-of-magnitude drop: two-stone weights differ by factor four, not ten.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:pattern_score; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:count_line
+R039 | 2.5.1 Evaluation of nonterminal positions | Removes repetitive benefits/trade-off template and unsupported implication deeper search always resolves split threat.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:evaluate; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:assess
+R040 | 2.5.1 Evaluation of nonterminal positions | Corrects [7] ai.rs citation to actual eval.rs weights [15].
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/baseline_engine/src/eval.rs:pattern_score
+R041 | 2.5.2 Terminal states and the score hierarchy | Corrects open-interval notation to inclusive clamp and specifies modified implementation.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:HEURISTIC_LIMIT
+R042 | 2.6.1 Spatial neighborhood | Removes arithmetically inconsistent 8–36/72.39–83.64% comparison and unmeasured tractability claim.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:get_candidates
+R043 | 2.6.2 Tactical preservation and membership | Fixes cap semantics, bounds tactical guarantee and separates reference hard-cap failure from modified engine.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates; /home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json
+R044 | 2.7 Move ordering versus move selection | Removes unsupported maximum-cutoff claim and unscoped benchmark percentages; keeps concrete example.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates; /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_search_summary.csv
+R045 | 2.8.1 Recurrence and contract | Makes ply-dependent terminal utility explicit and identifies turn in state.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility
+R046 | 2.8.1 Recurrence and contract | Carries terminal ply explicitly in recurrence.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility
+R047 | 2.8.1 Recurrence and contract | Consistent recurrence arguments.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value
+R048 | 2.8.1 Recurrence and contract | Consistent recurrence with terminal ply distance.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value
+R049 | 2.8.1 Recurrence and contract | Consistent recurrence with terminal ply distance.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value
+R050 | 2.8.1 Recurrence and contract | WIN_AT returns player plus cells; terminal utility accepts winner, not tuple.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility
+R051 | 2.8.1 Recurrence and contract | Assigns unified kernel to modified source and avoids vague active-engine identity.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::run; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value
+R052 | 2.8.2 Proof, example and complexity | Removes repeated benefit template and ambiguous 'exact game-theoretic' claim beyond finite heuristic tree.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates
+R053 | 2.9.1 Bounds and pseudocode | Old baseline minimax differs from displayed unified fixed-depth kernel.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W5/W6
+R054 | 2.9.1 Bounds and pseudocode | Correct winner projection for terminal utility.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility; /home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts
+R055 | 2.9.2 Worked cutoff and correctness boundary | Corrects awkward plural 'choose the 2 branches' and makes bound argument precise.
+Source: https://doi.org/10.1016/0004-3702(75)90019-3
+R056 | 2.9.2 Worked cutoff and correctness boundary | Removes mixed unscoped pruning percentages and distinguishes repeated pair counts from independent positions.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md; /home/pro/Downloads/basicproject/research/week_05_09/results/verification.json
+R057 | 2.9.2 Worked cutoff and correctness boundary | Makes odd-depth ideal leaf count precise and removes redundant generic disclaimer list.
+Source: https://doi.org/10.1016/0004-3702(75)90019-3; https://webdocs.cs.ualberta.ca/~jonathan/publications/ai_publications/csn.pdf; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs
+R058 | 2.10 Iterative deepening and budgets | Generic contract omits literal fallback/sentinel details; identify it as explanatory rather than exact source listing.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:findBestMove
+R059 | 2.10 Iterative deepening and budgets | Removes unmeasured reproducibility/per-tier time claims and distinguishes exact budgeting implementations.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:checkAbort; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:findBestMove; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::depth; /home/pro/Downloads/basicproject/research/week_05_09/README.md
+R060 | 2.10 Iterative deepening and budgets | Caption previously cited unrelated native reference [8].
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:findBestMove
+R061 | 2.11.1 Definition and update | FULL_HASH is explanatory pseudocode, not literal source symbol.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:computeInitialState
+R062 | 2.11.1 Definition and update | Avoids implying whole legacy move update is O(1) merely because hash update is.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:makeMove; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:undoMove
+R063 | 2.11.1 Definition and update | Plain academic prose and concrete owner semantics.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:makeMove; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:undoMove; /home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/state.rs; /home/pro/Downloads/basicproject/research/week_05_09/README.md
+R064 | 2.12.1 Meaning of stored values | Generic context-validated pseudocode is stronger than actual legacy probe; do not present it as literal source behavior.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT
+R065 | 2.12.1 Meaning of stored values | Removes false guarantee that depth/bound/legality checks alone prevent corruption; clarifies deeper horizon semantics.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:storeTT; /home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json
+R066 | 2.12.2 Why reuse can be wrong | Keeps concrete negative reference result without repeating unsupported-active-engine disclaimers or a broad advisory list.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json; /home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/search/optimized.rs; /home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/zobrist.rs
+R067 | 2.12.2 Why reuse can be wrong | Removes speculative project advice while preserving actual array-vs-map distinction and necessary contract.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:scoreMove; /home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/search/transposition.rs
+R068 | 2.12.2 Why reuse can be wrong | Removes repetitive rhetorical template and symbol M conflict with terminal score; retains measurable complexity boundaries.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:TT_SIZE; /home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/search/transposition.rs
+R069 | 2.12.2 Why reuse can be wrong | Corrects caption from unrelated [8] source to actual legacy search.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT
+R070 | 2.13 Quiescence search in the legacy TypeScript bot | Removes repeated verification language and states actual owner and scope directly.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:quiescence
+R071 | 2.13 Quiescence search in the legacy TypeScript bot | Retains substantive theoretical limitation, corrects f=1 edge case and removes vague call for more verification.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:quiescence
+R072 | 2.14 Legacy bitmask patterns and incremental line counts | Names exact legacy categories and avoids vague claim of identical strategic semantics.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:initPatternTable; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts
+R073 | 2.14 Legacy bitmask patterns and incremental line counts | Classifier lives in eval.ts, not board.ts; preserves existing reference mapping without fabricating source location.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:initPatternTable
+R074 | 2.14 Legacy bitmask patterns and incremental line counts | Gives exact category for worked example and cites actual classifier source.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:initPatternTable; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:evaluateLine
+R075 | 2.14 Legacy bitmask patterns and incremental line counts | Clarifies full evaluator vs cached counts and removes repetitive generic advice.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:evaluatePosition; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:MAX_LEN; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:updateLines
+R076 | 2.15 Difficulty configurations and the active request path | Removes unsupported progressive-skill claim and assigns table policy provenance correctly.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/contracts.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/contracts.ts; /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_difficulty_runs.csv
+R077 | 2.15 Difficulty configurations and the active request path | Corrects British behavior/US variation and makes mixed provenance explicit.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R078 | 2.15 Difficulty configurations and the active request path | Clearer concise table header.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::strategy
+R079 | 2.15 Difficulty configurations and the active request path | Distinguishes configured maximum from completed measured work.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/contracts.ts:WASM_CONFIGURED_DEPTHS
+R080 | 2.15 Difficulty configurations and the active request path | Modulo selection is not exactly uniform for arbitrary empty-cell counts.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R081 | 2.15 Difficulty configurations and the active request path | Actual default policy radius is 2; table previously omitted it.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:CandidatePolicy::default
+R082 | 2.15 Difficulty configurations and the active request path | Precise plain wording and owner.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R083 | 2.15 Difficulty configurations and the active request path | Soft cap can exceed 15 for assessed tactical moves; removes hard maximum.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::search_config; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R084 | 2.15 Difficulty configurations and the active request path | Consistent table wording and explicit soft cap.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::from_id; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/contracts.ts:WASM_DIFFICULTIES
+R085 | 2.15 Difficulty configurations and the active request path | Consistent table wording.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::search_config; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R086 | 2.15 Difficulty configurations and the active request path | Consistent table wording.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::search_config; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts
+R087 | 2.15 Difficulty configurations and the active request path | Corrects leaves-vs-total nodes, false hard bounds, unmeasured 2000–5000 estimate, unsupported skill/UI guarantees and benchmark interpolation.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates; /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_difficulty_runs.csv
+R088 | 2.15 Difficulty configurations and the active request path | Corrects source citation for tier routing: AIController is [3], resolver geometry is [10].
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts; /home/pro/Downloads/basicproject/CaroGame/src/game/ai/TacticalMoveResolver.ts
+R089 | 2.15 Difficulty configurations and the active request path | Corrects nonexistent direct requestId commit guard and exact elapsed timing scope; removes blanket deterministic guarantee.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/executeSearch.ts:executeWasmSearch; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/GomokuWasmEngine.ts:createWorker; /home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts:startAiTurn; /home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md
+R090 | 2.16 Synthesis and limits of the algorithmic claims | Separates active path from legacy algorithms and removes unsupported unconditional 100%-threat and acceleration claims.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs; /home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts
+R091 | 2.16 Synthesis and limits of the algorithmic claims | Replaces audit-style future instructions and vague multi-level-validation prose with concise academic synthesis.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/wasm_ts_parity.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/G4_real_browser_worker.json; /home/pro/Downloads/basicproject/research/week_05_09/results/verification.json
+R092 | 3.1 Actors, use cases and functional requirements | Replace conversational ownership contrast with a direct actor description.
+Source: CaroGame/src/App.tsx:handleCellClick; CaroGame/src/app/GameController.ts:playCell/startAiTurn
+R093 | 3.1 Actors, use cases and functional requirements | Use functional-requirement language and remove chatbot-style instruction.
+Source: CaroGame/src/components/SearchFeedback.tsx; CaroGame/src/app/GameController.ts:retryAiTurn
+R094 | 3.1 Actors, use cases and functional requirements | State actual behaviour without review-process narration.
+Source: CaroGame/src/app/GameController.ts:replay/newGame/undo; CaroGame/src/game/behaviors/match/MatchController.ts
+R095 | 3.1 Actors, use cases and functional requirements | Remove acceptance-status narration from the report body.
+Source: CaroGame/src/app/GameController.ts; CaroGame/tests/game/controller-lifecycle.test.ts
+R096 | 3.1 Actors, use cases and functional requirements | Correct the false claim that all entry paths already enforce integer indices; retain actual route ownership.
+Source: CaroGame/src/game/core/BoardBounds.ts:isBoardCell; CaroGame/src/board/spatial/CoordinateTransform.ts:screenToCell; CaroGame/src/game/wasm/executeSearch.ts:readMoveResult
+R097 | 3.1 Actors, use cases and functional requirements | Replace repeated test imperatives with concise source-backed design criteria.
+Source: CaroGame/src/game/core/WinRules.ts:FreestyleGomokuWinRule; CaroGame/src/app/GameController.ts:finishMove/undo/startAiTurn
+R098 | 3.1 Actors, use cases and functional requirements | Describe implemented boundaries; consolidate unexecuted platform validation in the final limitations.
+Source: CaroGame/src/pixi/CaroScene.ts; CaroGame/src/integrations/wink/useWinkIntegration.ts; present/src/App.tsx
+R099 | 3.1 Actors, use cases and functional requirements | Separate native, binary, mocked controller and real-browser evidence; remove unsupported end-to-end coverage claim.
+Source: research/current_2026_10_23/engine_verification.json; CaroGame/tests/game/controller-lifecycle.test.ts; CaroGame/tests/game/wasm-runtime.test.ts; research/current_2026_10_23/G4_real_browser_worker.json
+R100 | 3.2 Non-functional requirements and acceptance boundaries | Remove universal responsiveness and deterministic cancellation assertions; Easy/Normal do not expand multi-ply search trees.
+Source: CaroGame/src/game/ai/AIController.ts:requestMove; CaroGame/src/game/wasm/GomokuWasmEngine.ts:cancelPending; CaroGame/src/game/wasm/contracts.ts:WASM_CONFIGURED_DEPTHS
+R101 | 3.3 Architecture and ownership | Align prose with the actual React callback wiring and Figure 3.1.
+Source: CaroGame/src/App.tsx:handleCellClick; CaroGame/src/pixi/CaroGameCanvas.tsx; CaroGame/src/app/GameController.ts
+R102 | 3.3 Architecture and ownership | Keep standard and project responsibilities while removing repetitive audit framing.
+Source: CaroGame/src/game/wasm/GomokuWasmEngine.ts; CaroGame/src/app/GameController.ts:startAiTurn/invalidateAiTurn; https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
+R103 | 3.4 Board state, history and legal transition contract | Preserve the complete coordinate contract and move direct-call remediation to final limitations.
+Source: CaroGame/src/game/core/BoardBounds.ts; CaroGame/src/board/spatial/CoordinateTransform.ts; CaroGame/src/game/wasm/executeSearch.ts
+R104 | 3.4 Board state, history and legal transition contract | Use direct technical prose and exact responsibility boundaries.
+Source: CaroGame/src/game/behaviors/move/PlayMove.ts:playMove; CaroGame/src/app/GameController.ts:playCell
+R105 | 3.5 Match phases and state transitions | Standardize UI action names and remove instructional commentary.
+Source: CaroGame/src/game/behaviors/match/MatchController.ts; CaroGame/src/app/GameController.ts
+R106 | 3.5 Match phases and state transitions | Remove hypothetical implementation failure and state the existing pause contract.
+Source: CaroGame/src/app/GameController.ts:setPaused
+R107 | 3.6 Asynchronous request protocol and cancellation | Remove open-ended verification narration while retaining the actual guards.
+Source: CaroGame/src/app/GameController.ts:startAiTurn; CaroGame/src/game/wasm/GomokuWasmEngine.ts:createWorker
+R108 | 3.7 Coordinate transformation and gesture interpretation | Describe the real per-event threshold without conversational warnings; cumulative-drag improvement goes to Chapter 6.
+Source: CaroGame/src/board/input/BoardInputController.ts
+R109 | 3.7 Coordinate transformation and gesture interpretation | State implemented geometry directly and consolidate physical-device limits at the end.
+Source: CaroGame/src/pixi/CaroScene.ts:setupInteraction/fitBoardToViewport
+R110 | 3.8 Search-result contract and presentation of telemetry | Remove judgmental anti-fabrication language and describe the schema.
+Source: CaroGame/src/game/wasm/executeSearch.ts:readMoveResult
+R111 | 3.8 Search-result contract and presentation of telemetry | Replace repeated proof caveats with a concise distinction between configuration and output.
+Source: CaroGame/src/game/wasm/contracts.ts; CaroGame/src/components/SearchFeedback.tsx
+R112 | 3.9 Verification scenarios derived from the design | Remove acceptance-status boilerplate while preserving the design-to-evaluation link.
+Source: CaroGame/tests/game/controller-lifecycle.test.ts; CaroGame/tests/game/worker-lifecycle.test.ts; CaroGame/tests/pixi/scene.test.ts
+R113 | 4.1 Toolchain and project organization | Lockfiles record versions but alone do not enforce deterministic builds across every workspace.
+Source: CaroGame/package.json; CaroGame/package-lock.json; research/current_2026_10_23/baseline_engine/Cargo.lock
+R114 | 4.1 Toolchain and project organization | Remove promotional phrasing and duplicate folder recital; explain the useful dependency boundary.
+Source: CaroGame/src/game/core/GameState.ts; CaroGame/src/app/GameController.ts; CaroGame/src/pixi/CaroScene.ts
+R115 | 4.2 Accepted move processing | Keep the exact startRound-before-validation sequence and move remediation out of implementation narration.
+Source: CaroGame/src/app/GameController.ts:playCell; CaroGame/src/game/behaviors/move/PlayMove.ts
+R116 | 4.3 AI dispatch, Worker execution and WASM hydration | Describe implemented reuse directly; retain browser-specific evidence in Chapter 5.
+Source: CaroGame/src/game/wasm/GomokuWasmEngine.ts; CaroGame/src/game/wasm/worker.ts; CaroGame/src/game/wasm/executeSearch.ts
+R117 | 4.3 AI dispatch, Worker execution and WASM hydration | Remove repeated missing-source/rebuild commentary; retain binary/source role distinction and provenance.
+Source: CaroGame/src/game/wasm/engine/package.json; research/current_2026_10_23/provenance.json; gomoku-main/engine/src/lib.rs
+R118 | 4.4 Board rendering and interface synchronization | Remove repeated statement about tests not proving browser output.
+Source: CaroGame/src/board/render; CaroGame/src/board/input/BoardInputController.ts; CaroGame/src/board/spatial/CoordinateTransform.ts
+R119 | 4.4 Board rendering and interface synchronization | Specify exact teardown owners, including ResizeObserver, instead of vague component ownership.
+Source: CaroGame/src/App.tsx; CaroGame/src/pixi/CaroGameCanvas.tsx; CaroGame/src/pixi/CaroScene.ts:destroy; CaroGame/src/app/GameController.ts:destroy
+R120 | 4.5 Presentation website and interactive explanation | Replace review-process advice with a description of the presentation artifact.
+Source: present/src/components/PythonVisualizer.tsx; present/src/utils/figureRegistry.ts
+R121 | 4.5 Presentation website and interactive explanation | Remove inventory/audit narration and keep explicit implementation identity.
+Source: present/src/components/InteractiveCaroBoard.tsx; present/src/utils/caroEngine.ts; CaroGame/src/app/GameController.ts
+R122 | 4.6 Python/Pyodide execution and four instructional programs | Move loader failure-recovery limitations to Chapter 6 and describe the implemented instructional workflow.
+Source: present/src/utils/pyodideRunner.ts:getPyodide/executePythonCode; present/src/components/PythonVisualizer.tsx
+R123 | 4.6.1 Pattern scanner | Correct NumPy-only description and remove unsupported four-axis/seven-pattern scope from the explanation.
+Source: present/src/components/PythonVisualizer.tsx:sampleScripts[0]
+R124 | 4.6.1 Pattern scanner | Use direct algorithm explanation and preserve the actual horizontal/gap boundary.
+Source: present/src/components/PythonVisualizer.tsx:detect_patterns
+R125 | 4.6.2 Heuristic calculator | Standardize academic voice and explicitly identify the multiplier.
+Source: present/src/components/PythonVisualizer.tsx:evaluate_position
+R126 | 4.6.3 Chebyshev candidate example | Replace a sequence of negative caveats with a precise description of the example.
+Source: present/src/components/PythonVisualizer.tsx:simulate_chebyshev_pruning
+R127 | 4.6.4 Empirical-analysis snippet | Keep the documented numerical discrepancy explicit and remove chatty evidentiary narration.
+Source: present/src/components/PythonVisualizer.tsx:sampleScripts[3]; benchmark/results/week4_bot_battle.json
+R128 | 4.6.4 Empirical-analysis snippet | Give the actual arithmetic and measurement scope without an unsupported frame-rate claim.
+Source: present/src/components/PythonVisualizer.tsx:sampleScripts[3]
+R129 | 4.7 Implementation traceability and limits | Consolidate reproducibility gaps at the end while preserving artifact traceability.
+Source: research/current_2026_10_23/provenance.json; research/week_05_09/results/provenance.json
+R130 | 5.1 Evaluation questions, evidence and boundaries | Remove formulaic repeated question scaffolding and retain the evaluation design.
+Source: research/current_2026_10_23/engine_verification.json; research/current_2026_10_23/wasm_ts_parity.json; research/week_05_09/results/verification.json
+R131 | 5.1 Evaluation questions, evidence and boundaries | Remove duplicated artifact inventory and distinguish current rerun from historical timing observations.
+Source: review_2026_11_12/source_hash_comparison.json; review_2026_11_12/rerun_comparison.json; review_2026_11_12/logs/engine-harness.log; review_2026_11_12/logs/reference-harness.log
+R132 | 5.1 Evaluation questions, evidence and boundaries | Replace source-hash admonitions with a readable evaluation-method description.
+Source: research/current_2026_10_23/provenance.json; research/current_2026_10_23/wasm_ts_parity.json; research/current_2026_10_23/G4_real_browser_worker.json; research/current_2026_10_23/G5_browser_ui.json
+R133 | 5.2 Native board and search checks of the 23 October engine | Clarify finite corpus and repeated-pair counts; remove implied general algorithmic correctness.
+Source: research/current_2026_10_23/engine_verification.json; gomoku-main/engine/examples/current_evidence.rs:matrix
+R134 | 5.2 Native board and search checks of the 23 October engine | Scope the restoration conclusion to executed checks instead of asserting all recursive calls leave every possible root intact.
+Source: gomoku-main/engine/src/search.rs; gomoku-main/engine/examples/current_evidence.rs:record_search; review_2026_11_12/engine-rerun/engine_verification.json
+R135 | 5.2 Native board and search checks of the 23 October engine | Remove duplicated conclusions and keep fixture-specific node/time calculations with ranking cost.
+Source: research/current_2026_10_23/engine_search_summary.csv:center depth2 radius2 cap8
+R136 | 5.3 WebAssembly parity and browser observations | Preserve all observed parity outcomes while removing inflated 100%-equivalence rhetoric.
+Source: research/current_2026_10_23/wasm_ts_parity.json; CaroGame/tests/game/wasm-runtime.test.ts
+R137 | 5.3 WebAssembly parity and browser observations | Correct sub-4 ms engine-search claim: elapsedScope includes hydration/free and the run covers one fixture.
+Source: research/current_2026_10_23/G4_real_browser_worker.json; CaroGame/src/game/wasm/executeSearch.ts
+R138 | 5.3 WebAssembly parity and browser observations | Separate observed browser output from mocked test assertions and avoid stronger two-ply state claim from UI artifact alone.
+Source: research/current_2026_10_23/G5_browser_ui.json; CaroGame/tests/game/controller-lifecycle.test.ts; CaroGame/tests/game/app-controls.test.tsx
+R139 | 5.3 WebAssembly parity and browser observations | Resolve ledger chronology without promoting finite observations to universal correctness or full gate acceptance.
+Source: research/current_2026_10_23/GATES.md; research/current_2026_10_23/engine_verification.json; research/current_2026_10_23/G5_browser_ui.json
+R140 | 5.3.1 Follow-up local application validation, 27 October | Accommodate the current November rerun alongside the historical October record.
+Source: report_caro_2026/verification_2026_10_27.json; review_2026_11_12/logs/app-test.log
+R141 | 5.3.1 Follow-up local application validation, 27 October | Add actually executed current checks and remove unsupported fast-hydration inference from compressed file size.
+Source: report_caro_2026/verification_2026_10_27.json; review_2026_11_12/logs/app-test.log; review_2026_11_12/logs/app-typecheck.log; review_2026_11_12/logs/app-build.log; review_2026_11_12/logs/present-build-isolated.log
+R142 | 5.3.1 Follow-up local application validation, 27 October | Retain actual viewport observations and remove generalized responsive/mobile correctness claim.
+Source: report_caro_2026/verification_2026_10_27.json:browser_screenshot
+R143 | 5.4 Separate native reference experiments | Replace obsolete blanket missing-source implication with current matched-local-source rerun, keeping implementation identity.
+Source: research/week_05_09/Cargo.toml; research/week_05_09/results/provenance.json; review_2026_11_12/source_hash_comparison.json; review_2026_11_12/rerun_comparison.json
+R144 | 5.4 Separate native reference experiments | Clarify calls versus CSV rows and avoid counting repeated pairs as independent boards.
+Source: research/week_05_09/src/main.rs; research/week_05_09/results/verification.json; research/week_05_09/results/provenance.json
+R145 | 5.4.1 A paired Minimax and Alpha-Beta example | Remove repeated speedup rhetoric; preserve paired value, tree and measured timing ratio.
+Source: research/week_05_09/results/search_summary.csv:clustered all_legal depth2 ordering=false
+R146 | 5.4.2 Candidate caps, ordering and tactical completeness | Keep the real implementation distinction and move proposed ablation experiments to future work.
+Source: gomoku-main/engine/src/candidates.rs:select_candidates; research/current_2026_10_23/engine_verification.json; research/week_05_09/results/cap_loss.json
+R147 | 5.5 Historical cross-language and Week 4 datasets | Replace full algorithmic parity claim with the agreement actually shown by one-fixture records.
+Source: benchmark/results/benchmark_data.json; benchmark/rust_bench/src/main.rs; benchmark/ts_bench/benchmark.ts
+R148 | 5.5 Historical cross-language and Week 4 datasets | Remove unsupported language-wide or Rust-to-WASM computational-advantage inference.
+Source: benchmark/results/benchmark_data.json; benchmark/rust_bench/src/main.rs; benchmark/ts_bench/benchmark.ts
+R149 | 5.5 Historical cross-language and Week 4 datasets | Separate candidate-count arithmetic from tactical fixture outcomes and avoid a search-wide branching guarantee.
+Source: benchmark/results/week4_bot_battle.json
+R150 | 5.6 Presentation examples and evidence quality | Remove repeated code-review criticism while retaining accurate pedagogical scope.
+Source: present/src/components/PythonVisualizer.tsx; present/src/utils/figureRegistry.ts
+R151 | 5.6 Presentation examples and evidence quality | Resolve source conflict explicitly and retain only source-supported benchmark value.
+Source: present/src/components/PythonVisualizer.tsx:sampleScripts[3]; benchmark/results/week4_bot_battle.json
+R152 | 5.7 Threats to validity and interpretation | Acknowledge successful current reproduction and state the remaining publication boundary accurately.
+Source: review_2026_11_12/source_hash_comparison.json; review_2026_11_12/rerun_comparison.json; research/current_2026_10_23/provenance.json; research/week_05_09/results/provenance.json
+R153 | 6.1 Work completed and contribution | Make the conclusion describe delivered work rather than instruct the reader how not to interpret it.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/App.tsx; /home/pro/Downloads/basicproject/present/src/App.tsx
+R154 | 6.1 Work completed and contribution | Remove repetitive audit instructions and use precise algorithm terminology.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/README.md; /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json
+R155 | 6.1 Work completed and contribution | Replace evaluative rhetoric with the concrete results and their implication.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json; /home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json; /home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json
+R156 | 6.2 Limitations | Combine the actual algorithm limitations without calling fixed-depth search a complete anytime implementation.
+Source: /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs::Difficulty; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs::select_candidates; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs; /home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs
+R157 | 6.2 Limitations | Keep confirmed source defects in the final limitations; distinguish direct API exposure from normal UI behavior.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts::playCell; /home/pro/Downloads/basicproject/CaroGame/src/game/core/BoardBounds.ts::isBoardCell; /home/pro/Downloads/basicproject/CaroGame/src/board/input/BoardInputController.ts::pointerMove; /home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts::getPyodide
+R158 | 6.2 Limitations | Collect true reproducibility and validation limitations in the concluding chapter.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/run_checks.py; /home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml; /home/pro/Downloads/basicproject/research/week_05_09/results/provenance.json
+R159 | 6.3 Future development | Replace numbered imperative checklist with academic future-work prose.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json; /home/pro/Downloads/basicproject/research/week_05_09/results/provenance.json
+R160 | 6.3 Future development | Prioritize source-backed defects and concrete discriminating regressions.
+Source: /home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts::playCell; /home/pro/Downloads/basicproject/CaroGame/src/game/core/BoardBounds.ts::isBoardCell; /home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts::getPyodide
+R161 | 6.3 Future development | Express a concrete evaluation design without implying it has already been executed.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/README.md; /home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json
+R162 | 6.3 Future development | Retain the measured cache defect and precise future design implications in natural academic prose.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json; /home/pro/Downloads/basicproject/research/week_05_09/results/tt_semantics.json
+R163 | 6.3 Future development | Remove checklist command voice; connect the proposed feature to the observed counter limitation.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/results/budget_abort.json; /home/pro/Downloads/basicproject/CaroGame/src/game/wasm/GomokuWasmEngine.ts
+R164 | 6.3 Future development | Move unexecuted human/device/strength work to the future section without invented outcomes.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_ui.json; /home/pro/Downloads/basicproject/benchmark/results/week4_bot_battle.json
+R165 | 6.3 Future development | Remove repetitive meta-instructions while retaining specific educational fidelity work.
+Source: /home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts; /home/pro/Downloads/basicproject/present/src/components/PythonVisualizer.tsx
+R166 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R167 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/app/GameController.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R168 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/AIController.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R169 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/WinRules.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R170 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/board.rs; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R171 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/SOURCE_EXCERPTS.md; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R172 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/ai.rs; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R173 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/README.md; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R174 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/contracts.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R175 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/TacticalMoveResolver.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R176 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/search.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R177 | REFERENCES | Keep verified publisher metadata and DOI; remove redundant access-date bracket and final punctuation after the online DOI URL.
+Source: https://doi.org/10.1080/14786445008521796; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R178 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://doc.rust-lang.org/reference/type-layout.html; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R179 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/GameState.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R180 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/eval.rs; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R181 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cap_loss.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R182 | REFERENCES | Keep verified publisher metadata and DOI; remove redundant access-date bracket and final punctuation after the online DOI URL.
+Source: https://doi.org/10.1016/0004-3702(75)90019-3; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R183 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_difficulty_runs.csv; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R184 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://research.cs.wisc.edu/techreports/1970/TR88.pdf; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R185 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/board.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R186 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cache_scope_probe.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R187 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/App.tsx; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R188 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/match/MatchController.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R189 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/pixi/CaroScene.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R190 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://html.spec.whatwg.org/multipage/workers.html; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R191 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/GomokuWasmEngine.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R192 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/executeSearch.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R193 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/move/PlayMove.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R194 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/spatial/CoordinateTransform.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R195 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/input/BoardInputController.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R196 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/package.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R197 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/App.tsx; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R198 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/worker.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R199 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/engine; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R200 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/i18n.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R201 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/caroEngine.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R202 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/pyodideRunner.ts; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R203 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/components/PythonVisualizer.tsx; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R204 | REFERENCES | Correct the current living specification date from the official title page and standardize IEEE online-reference punctuation.
+Source: https://webassembly.github.io/spec/core/; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R205 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/week4_bot_battle.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R206 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/GATES.md; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R207 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_search_summary.csv; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R208 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_verification.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R209 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/README.md; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R210 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/wasm_ts_parity.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R211 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G4_real_browser_worker.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R212 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G5_browser_ui.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R213 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/search_summary.csv; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R214 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/tt_semantics.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R215 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/budget_abort.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R216 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/benchmark_data.json; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R217 | REFERENCES | Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.
+Source: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/Week_05_09_Report_Index.md; https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf
+R218 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Retain the verified complete inventory and replace prescriptive audit language with description.
+Source: /home/pro/Downloads/basicproject@7e1e2d5:git ls-tree; https://api.github.com/repos/tducn110/basicproject/git/trees/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc?recursive=1
+R219 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Use a consistent concise inventory voice.
+Source: /home/pro/Downloads/basicproject/.gemini
+R220 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Remove repeated acceptance disclaimer from the inventory.
+Source: /home/pro/Downloads/basicproject/.obsidian
+R221 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Describe the artifact directly.
+Source: /home/pro/Downloads/basicproject/CaroGame
+R222 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Use descriptive noun phrases consistently.
+Source: /home/pro/Downloads/basicproject/Week1
+R223 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Remove contrastive narration.
+Source: /home/pro/Downloads/basicproject/Week2
+R224 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Keep the inventory factual; engine separation is defined in Section 1.3.
+Source: /home/pro/Downloads/basicproject/Week6
+R225 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Use descriptive inventory wording.
+Source: /home/pro/Downloads/basicproject/archived
+R226 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Describe contents and leave provenance assessment in the evidence appendix.
+Source: /home/pro/Downloads/basicproject/assets
+R227 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Correct misleading suggestion that rules directory contains game-rule implementation; actual files are layout guidance.
+Source: /home/pro/Downloads/basicproject/rules/LAYOUT.md; /home/pro/Downloads/basicproject/rules/layout.md; /home/pro/Downloads/basicproject/rules/roadmap.md; /home/pro/Downloads/basicproject/rules/visual_evidence.md
+R228 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Remove repeated source-authority warnings from inventory.
+Source: /home/pro/Downloads/basicproject@7e1e2d5:git ls-tree
+R229 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Replace negative provenance lecture with a concise project chronology.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R230 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | The original paragraph mislabeled imperative review targets as delivered milestones.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R231 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R232 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R233 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R234 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R235 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R236 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R237 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R238 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R239 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R240 | APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP | Convert instruction-like review targets into accurate topic descriptions.
+Source: /home/pro/Downloads/basicproject/Week_05_09_Report_Index.md
+R241 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Avoid turning an artifact summary into a blanket verification stamp.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md
+R242 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Tie counts to the exact historical record and preserve the native-only boundary.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json
+R243 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Replace vague provenance statement with the published artifact identity.
+Source: /home/pro/Downloads/basicproject/CaroGame
+R244 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Remove unsubstantiated claim that the old source excerpts alone establish59 executed tests.
+Source: /home/pro/Downloads/basicproject/CaroGame/package.json
+R245 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Restore exact counter definitions and avoid universal correctness language.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/results/verification.json
+R246 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Separate two different corpora and environments instead of one combined parity claim.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/wasm_ts_parity.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/G4_real_browser_worker.json
+R247 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Name the actual observed behaviors.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_ui.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_viewports.json
+R248 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Correct viewport evidence and separate layout observations from physical-device interaction.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_ui.json; /home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_viewports.json
+R249 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Replace an unsupported historical-only row with the current recorded revalidation.
+Source: /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs
+R250 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Describe concrete current validation evidence.
+Source: /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs; /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/rerun_comparison.json
+R251 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Replace unsupported historical environment claim with current executed checks; retain timing as historical.
+Source: /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/app-test.log; /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/app-typecheck.log; /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/app-build.log; /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/engine-test.log; /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/reference-test.log; /home/pro/Downloads/vnuk/basicProject/review_2026_11_12/rerun_comparison.json
+R252 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Separate the chronological ledger from subsequent evidence.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md; /home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json
+R253 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Correct the false all-gates-verified claim and preserve source conflict explicitly.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md
+R254 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Qualify the historical speed and win-rate claims without discarding their source values.
+Source: /home/pro/Downloads/basicproject/benchmark/results/benchmark_data.json; /home/pro/Downloads/basicproject/benchmark/results/week4_bot_battle.json
+R255 | APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER | Code presence does not itself establish successful execution of all browser programs.
+Source: /home/pro/Downloads/basicproject/present/src/App.tsx; /home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts; /home/pro/Downloads/basicproject/present/src/components/PythonVisualizer.tsx
+R256 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | Remove false claim that every native reproduction command works in the pinned GitHub snapshot.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/run_checks.py; /home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml
+R257 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | Specify reproducible frontend commands without inventing package success.
+Source: /home/pro/Downloads/basicproject/CaroGame/package.json; /home/pro/Downloads/basicproject/CaroGame/package-lock.json
+R258 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | Make shell starting directory explicit.
+Source: /home/pro/Downloads/basicproject/present/package.json
+R259 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | Replace misleading executable native reproduction sequence with commands valid for the published tree.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json; /home/pro/Downloads/basicproject/research/week_05_09/results/provenance.json
+R260 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | The original command requires an absent local reference library and would overwrite results after dependencies were restored.
+Source: /home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml
+R261 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | The original cargo test command names a manifest absent from the pinned tree.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json
+R262 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | Use a read-only command that exposes actual published top-level dependencies.
+Source: /home/pro/Downloads/basicproject@7e1e2d5:git ls-tree
+R263 | APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE | Correct false orchestration/reproducibility claim and disclose write behavior and missing source dependencies.
+Source: /home/pro/Downloads/basicproject/research/current_2026_10_23/run_checks.py::ENGINE,APP; /home/pro/Downloads/basicproject/research/week_05_09/run.py; /home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml
+Sổ finding chi tiết — vòng kiểm độc lập sau ghép
+Q01 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: This chapter develops the board representation, terminal rule, evaluation function and search algorithms used in the Car
+Q02 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.1 (modified Rust source in [6]) — APPLY(B, (x,y), p):
+Q03 | Finish US English spelling consistency. | Đối tượng: The archived evaluator assigns weights of 1,000,000 to a run of at least five; 50,000 or 5,000 to a four with two or one
+Q04 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.5 (modified Rust evaluator in [6]; run weights in [15]) — EVALUATE(B, p):
+Q05 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.11 (modified Rust search kernel in [6]) — ALPHABETA(B, player, root, depth, last, ply, alpha, beta):
+Q06 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: Alpha and beta summarize bounds supplied by previously examined alternatives and ancestors. When they cross, the remaini
+Q07 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.12 (completed-iteration scheme illustrated by [11]) — ITERATIVE(B, maximum_depth, budget):
+Q08 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.13 (Zobrist scheme illustrated by the legacy board in [20]) — FULL_HASH(B, player):
+Q09 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.14 (general TT contract; legacy implementation in [11]) — PROBE(key, required_depth, alpha, beta, context
+Q10 | Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number. | Đối tượng: // Algorithm 2.16 (legacy pattern evaluator in [53]) — CLASSIFY_SEGMENT(mask, length):
+Q11 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The system has five principal responsibilities. React owns interface composition and subscribes to a controller snapshot
+Q12 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: MatchController defines setup, ready, playing and game-over. Its initial state is ready, local two-player mode, normal d
+Q13 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: GomokuWasmEngine creates a module Worker lazily, registers a pending promise under a transport identifier and posts a se
+Q14 | Avoid presenting the earlier baseline AI source as the corresponding source of the active modified binary. | Đối tượng: The generated package contains JavaScript bindings, TypeScript declarations and the WebAssembly binary loaded by the Wor
+Q15 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The interface includes translation resources for its supported labels and search details. Those resources map keys to di
+Q16 | Use US spelling, remove an unsupported production label, and state the actual distinction between demonstration arithmetic and the application evaluator without checklist-style prohibitions. | Đối tượng: The second program calculates a score from manually supplied pattern counts and a demonstration weight dictionary. The i
+Q17 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The 23 October native verification used four controlled positions and sixteen seeded positions, with three timing repeat
+Q18 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The evidence therefore covers native search comparisons, six Rust Worker requests on one browser fixture and a browser m
+Q19 | Remove editorial emphasis and let the measured example establish its implication. | Đối tượng: The ordered search visits only 2,164 nodes, but performs 48,841 extra ordering evaluations and has a median of 68,457 µs
+Q20 | Correct the ratio direction: the reported values divide Node elapsed time by native Rust elapsed time. | Đối tượng: Across the four depths, the recorded native-to-Node time ratios range from 17.4 to 24.4. Both harnesses report matching 
+Q21 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The recorded native engine experiment reports 408 Minimax/Alpha-Beta comparisons with matching values and 820 successful
+Q22 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The active search is selective. Its soft tactical cap retains immediate winning and blocking completions, but deeper pos
+Q23 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The measurements cover a finite corpus and specific native or browser environments. The published snapshot includes the 
+Q24 | Bring the added bibliography entry into the same IEEE online format and remove the period parsed into its URL. | Đối tượng: [28] tducn110, “CaroGame/src/game/bot/eval.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4
+Q25 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The weekly documentation follows the development topics. Weeks 1–3 cover the problem, board and interface; Week 4 covers
+Q26 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The ledger lists G3 as pending, G4 as partial and G5 as pending. Later files supply specific observations; they do not c
+Q27 | Correct the ratio direction consistently in the evidence summary. | Đối tượng: The historical summaries report native Rust/Node time ratios of 17.4–24.4 on one midgame fixture and 100 Rule-Based wins
+Q28 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The following procedure inspects the published revision and runs the frontend package scripts. The native research direc
+Q29 | Order the consecutive numerical citation cluster in ascending final reference order. | Đối tượng: The original reference runner requires caro-core-reference at the repository root. The current-engine runner requires go
+Bổ sung độ sâu thuật toán — vòng 13 November 2026
+D01 | A01: make the bijection and an out-of-bounds alias failure explicit; existing paragraph already has representation and example.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs: Board::place/get_checked', 'Arithmetic derivation from i=Ny+x; illustrative invalid input, not observed runtime failure.']
+D02 | A02: distinguish proof precondition, expected abort cleanup, and unsupported invariant-failure recovery.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value/run, search, search_in_place', '/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts: alphaBeta/quiescence/findBestMove']
+D03 | A03: recover the causal argument for locality rather than merely state the precondition.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::run/value', '/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs: check_winner/check_winner_at']
+D04 | A04: concrete selection trace and explanation of already disclosed modulo limitation.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs: seeded_u64/baseline', 'Remainder-count derivation; not a statistical test.']
+D05 | A06: expand uniqueness and amortized scan proof, including the concrete duplicate-count failure.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs: evaluate/count_line']
+D06 | A06/A07: show endpoint change, signed center subtraction, and root-relative convention through actual numeric evaluation.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs: evaluate/pattern_score', '/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value']
+D07 | A07: connect pattern score, utility, MAX/MIN sign, and distinct meanings of zero.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs: terminal_utility/evaluate', '/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value']
+D08 | A08: motivate radius and branching trade-off quantitatively without presenting a measured speedup.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs: get_candidates', 'Illustrative fixed-width search-tree derivation.']
+D09 | A05/A09: fill the missing implementation of ASSESS and distinguish quick ranking from full evaluation.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs: count_side/assess/select_candidates']
+D10 | A10: replace generic early-cutoff explanation with a fully traced comparison on identical membership.
+Source: ['Arithmetic trace of the same tree in Sections 2.8 and 2.9.', '/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value']
+D11 | A11: explicitly describe current result limitations rather than invent a fallback/error state absent from source.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchResult, SearchContext::run/value', '/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs: select_candidates']
+D12 | A12/A15/A16: identify actual fail-soft behavior and connect it to TT and quiescence.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value', '/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts: alphaBeta/quiescence']
+D13 | A12: explicit dual cutoff proof rather than a single MIN-node example.
+Source: ['/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value', 'Derivation from max/min monotonicity and incoming window contract.']
+D14 | A13: distinguish actual fallback values and observed source-level status edge cases from ideal pseudocode.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts: findBestMove/checkAbort']
+D15 | A15: explain store/probe sequence using actual source and avoid implying ideal context guard is implemented.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts: alphaBeta/probeTT/storeTT']
+D16 | A16/A07: derive sign and window reversal and qualify terminal exception to fail-hard shorthand.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts: alphaBeta/quiescence', '/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs: SearchContext::value']
+D17 | A17: align COUNT_LINE pseudocode with evaluateLine, which does not increment the NONE bucket.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts: evaluateLine']
+D18 | A17: make the bit operations and classification trace independently implementable.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts: initPatternTable/hasFive/countWinCells']
+D19 | A18: add explicit delta pseudocode, worked make/undo example, and failure mechanism.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts: updateLines/makeMove/undoMove', '/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts: evaluateLine']
+D20 | A17/A18: explain preprocessing/runtime trade-off and actual table memory, rather than an unqualified O(1) classifier.
+Source: ['/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts: MAX_LEN/patternTable/initPatternTable/evaluateLine', '/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts: BotBoard/updateLines']
+Khôi phục sáu mức và migration Rust/WASM
+Source hiện tại có đủ sáu mức theo report; UI live cũ chỉ có bốn nút. Master có trong Worker cũ nhưng thiếu selector; Very Hard chưa có ở cả selector và Worker live. Không quy screenshot cho lỗi xóa source.
+Source Rust đã đưa vào CaroGame/engine, 11 file byte-identical với nguồn cũ. npm run build:wasm rebuild locked/offline thành công; cả 5 generated runtime files byte-identical với canonical package. WASM 111582 bytes, SHA-256 1ff854e6493b39727d07cfcf69b0af06e349a748249d85d688741a4f85017989. Đã kiểm lại 16 hashes trong provenance.
+Kiểm mới: 45 native Rust tests; actual WASM runtime+contract 28 tests; toàn frontend 65 tests. Thêm sáu paired tactical cases, giữ Easy theo random policy. Browser local cho thấy đủ sáu mức và completed depths 0/1/2/3/4/5 trên lượt mở đầu được kiểm.
+gameUrl.ts đồng nhất iframe và các playable entry points về game local cổng 8443 khi development/localhost. Trình bày cổng 5174. Theo user instruction, không cập nhật Vercel khi plugin không truy cập được project.
+Độ sâu không bị đổi sang 4/6/8: report chốt sáu mức 0/1/2/3/4/5, cap 15/12/10/8. Không hứa sức mạnh tăng từ rebuild byte-identical. Acceptance matrix: SIX_TIER_ACCEPTANCE_REVIEW.md; chẩn đoán: DIFFICULTY_SOURCE_DIAGNOSIS.md; migration: ENGINE_MIGRATION_VERIFICATION.md.
+Hồ sơ có thể kiểm tra lại
+Bản trước sửa: before.docx / before.pdf / paragraphs.json. Toàn bộ thay đổi: all_changes.json và final_editorial_fixes.json. Coverage: review_ch2.md, review_ch3_5.md, review_front_end.md, shortfinal_audit.md. Evidence: logs/, source_hash_comparison.json, rerun_comparison.json, historical_verification_2026_10_27.json, render_qa.json và layout11_page_map.json. Các file nằm trong review_2026_11_12 của reporting workspace.
+
+Đối chiếu thêm working tree presentation đang được chỉnh sửa đồng thời — 13 November 2026
+Các layout/component mới trong present khác baseline Git 7e1e2d5. Đã giữ nguyên các chỉnh sửa đang có; bản sửa local entry points chỉ đồng nhất đường dẫn tới game rebuilt.
+Các claim cần người biên tập presentation đối chiếu tiếp với report: BenchmarkSection đang gọi dữ liệu midgame lịch sử là Rust WASM/10 fixtures; bảng dữ liệu thực có một fixture ở bốn độ sâu. Các component mới còn gắn 240 bytes cho mảng 225 Cell, zero heap cho toàn search và 60 FPS/0ms lag; các phạm vi này không được suy từ rebuild, tests hoặc Worker. Report đã phân biệt cell-array payload, struct/counters, candidate allocation và measurement scope.
+Các bảng/tournament/TT/iterative-deepening của teaching website phải giữ phạm vi reference/legacy; không gán chúng cho Rust fixed-depth đang chạy. Việc khôi phục sáu tier local không xác nhận mọi số liệu presentation. Các nhận xét này dựa trên source working tree đọc trong phiên, không phải benchmark hay nghiệm thu giao diện mới.

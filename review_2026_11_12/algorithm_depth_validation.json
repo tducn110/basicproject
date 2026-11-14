@@ -1,0 +1,14 @@
+{
+  "arithmetic_checks": {
+    "two_x": true,
+    "other_perspective": true,
+    "blocked_end": true,
+    "terminal_gap": true,
+    "bit_gap": true,
+    "open_four": true,
+    "table_bytes": true,
+    "minimax": true
+  },
+  "snapshot_matches": 20,
+  "all_passed": true
+}

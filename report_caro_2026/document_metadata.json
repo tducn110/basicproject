@@ -1,0 +1,928 @@
+{
+  "headings": [
+    {
+      "title": "CHƯƠNG 1. GIỚI THIỆU",
+      "level": 1,
+      "bookmark": "h1"
+    },
+    {
+      "title": "1.1. Bối cảnh và lý do thực hiện",
+      "level": 2,
+      "bookmark": "h2"
+    },
+    {
+      "title": "1.2. Mục tiêu và câu hỏi của đồ án",
+      "level": 2,
+      "bookmark": "h3"
+    },
+    {
+      "title": "1.3. Đối tượng, phạm vi và sản phẩm khảo sát",
+      "level": 2,
+      "bookmark": "h4"
+    },
+    {
+      "title": "1.4. Phương pháp và cách sử dụng bằng chứng",
+      "level": 2,
+      "bookmark": "h5"
+    },
+    {
+      "title": "CHƯƠNG 2. CƠ SỞ LÝ THUYẾT VÀ CÁC THUẬT TOÁN",
+      "level": 1,
+      "bookmark": "h6"
+    },
+    {
+      "title": "2.1. Phạm vi và ký hiệu",
+      "level": 2,
+      "bookmark": "h7"
+    },
+    {
+      "title": "2.2. Biểu diễn bàn cờ và bất biến cập nhật",
+      "level": 2,
+      "bookmark": "h8"
+    },
+    {
+      "title": "2.2.1. Ma trận 15 × 15",
+      "level": 3,
+      "bookmark": "h9"
+    },
+    {
+      "title": "2.2.2. Apply và undo trong tìm kiếm",
+      "level": 3,
+      "bookmark": "h10"
+    },
+    {
+      "title": "2.3. Luật thắng Freestyle và quét theo nước cuối",
+      "level": 2,
+      "bookmark": "h11"
+    },
+    {
+      "title": "2.3.1. Điều kiện thắng",
+      "level": 3,
+      "bookmark": "h12"
+    },
+    {
+      "title": "2.3.2. Quy trình và độ phức tạp",
+      "level": 3,
+      "bookmark": "h13"
+    },
+    {
+      "title": "2.4. Random và rule-based: đường cơ sở",
+      "level": 2,
+      "bookmark": "h14"
+    },
+    {
+      "title": "2.4.1. Random",
+      "level": 3,
+      "bookmark": "h15"
+    },
+    {
+      "title": "2.4.2. Rule-based và quét chiến thuật",
+      "level": 3,
+      "bookmark": "h16"
+    },
+    {
+      "title": "2.5. Hàm đánh giá heuristic và terminal utility",
+      "level": 2,
+      "bookmark": "h17"
+    },
+    {
+      "title": "2.5.1. Mục đích và nguyên tắc",
+      "level": 3,
+      "bookmark": "h18"
+    },
+    {
+      "title": "2.5.2. Bảng trọng số và ví dụ",
+      "level": 3,
+      "bookmark": "h19"
+    },
+    {
+      "title": "2.5.3. Phân biệt thắng thực với thế tốt",
+      "level": 3,
+      "bookmark": "h20"
+    },
+    {
+      "title": "2.6. Sinh ứng viên Chebyshev và giới hạn mềm",
+      "level": 2,
+      "bookmark": "h21"
+    },
+    {
+      "title": "2.6.1. Miền lân cận",
+      "level": 3,
+      "bookmark": "h22"
+    },
+    {
+      "title": "2.6.2. Giữ nước chiến thuật trước soft cap",
+      "level": 3,
+      "bookmark": "h23"
+    },
+    {
+      "title": "2.7. Move ordering: sắp thứ tự duyệt",
+      "level": 2,
+      "bookmark": "h24"
+    },
+    {
+      "title": "2.8. Minimax: tìm kiếm đối kháng",
+      "level": 2,
+      "bookmark": "h25"
+    },
+    {
+      "title": "2.8.1. Đầu vào, đầu ra và công thức",
+      "level": 3,
+      "bookmark": "h26"
+    },
+    {
+      "title": "2.8.2. Ví dụ và độ phức tạp",
+      "level": 3,
+      "bookmark": "h27"
+    },
+    {
+      "title": "2.9. Alpha-Beta: cắt tỉa trên cùng cây",
+      "level": 2,
+      "bookmark": "h28"
+    },
+    {
+      "title": "2.9.1. Ý nghĩa alpha, beta và điều kiện cắt",
+      "level": 3,
+      "bookmark": "h29"
+    },
+    {
+      "title": "2.9.2. Điều kiện so sánh và đánh giá",
+      "level": 3,
+      "bookmark": "h30"
+    },
+    {
+      "title": "2.10. Iterative deepening và kiểm soát ngân sách",
+      "level": 2,
+      "bookmark": "h31"
+    },
+    {
+      "title": "2.10.1. Ý tưởng và ví dụ",
+      "level": 3,
+      "bookmark": "h32"
+    },
+    {
+      "title": "2.10.2. Hai implementation và trạng thái",
+      "level": 3,
+      "bookmark": "h33"
+    },
+    {
+      "title": "2.11. Zobrist hashing và cập nhật tăng dần",
+      "level": 2,
+      "bookmark": "h34"
+    },
+    {
+      "title": "2.12. Transposition table và ba loại cận",
+      "level": 2,
+      "bookmark": "h35"
+    },
+    {
+      "title": "2.12.1. Vấn đề lặp lại trạng thái",
+      "level": 3,
+      "bookmark": "h36"
+    },
+    {
+      "title": "2.12.2. Exact, lower, upper",
+      "level": 3,
+      "bookmark": "h37"
+    },
+    {
+      "title": "2.12.3. Ranh giới tính đúng của cache",
+      "level": 3,
+      "bookmark": "h38"
+    },
+    {
+      "title": "2.13. TypeScript legacy và khác biệt với engine hiện tại",
+      "level": 2,
+      "bookmark": "h39"
+    },
+    {
+      "title": "2.14. Sáu cấu hình và đường dữ liệu thực tế",
+      "level": 2,
+      "bookmark": "h40"
+    },
+    {
+      "title": "2.15. Bằng chứng thực nghiệm và giới hạn suy luận",
+      "level": 2,
+      "bookmark": "h41"
+    },
+    {
+      "title": "CHƯƠNG 3. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG",
+      "level": 1,
+      "bookmark": "h42"
+    },
+    {
+      "title": "3.1. Tác nhân và ca sử dụng",
+      "level": 2,
+      "bookmark": "h43"
+    },
+    {
+      "title": "3.2. Yêu cầu phi chức năng và ranh giới",
+      "level": 2,
+      "bookmark": "h44"
+    },
+    {
+      "title": "3.3. Kiến trúc tổng thể",
+      "level": 2,
+      "bookmark": "h45"
+    },
+    {
+      "title": "3.4. Thiết kế dữ liệu bàn cờ và lịch sử",
+      "level": 2,
+      "bookmark": "h46"
+    },
+    {
+      "title": "3.5. Trạng thái ván và chuyển trạng thái",
+      "level": 2,
+      "bookmark": "h47"
+    },
+    {
+      "title": "3.6. Thiết kế bất đồng bộ và xử lý sai lệch",
+      "level": 2,
+      "bookmark": "h48"
+    },
+    {
+      "title": "3.7. Thiết kế hiển thị bàn, tọa độ và tương tác",
+      "level": 2,
+      "bookmark": "h49"
+    },
+    {
+      "title": "3.8. Ngôn ngữ, âm thanh và tích hợp bên ngoài",
+      "level": 2,
+      "bookmark": "h50"
+    },
+    {
+      "title": "3.9. Các kịch bản cần kiểm chứng",
+      "level": 2,
+      "bookmark": "h51"
+    },
+    {
+      "title": "CHƯƠNG 4. TRIỂN KHAI HỆ THỐNG",
+      "level": 1,
+      "bookmark": "h52"
+    },
+    {
+      "title": "4.1. Môi trường và tổ chức mã",
+      "level": 2,
+      "bookmark": "h53"
+    },
+    {
+      "title": "4.2. Triển khai nhận và cập nhật nước đi",
+      "level": 2,
+      "bookmark": "h54"
+    },
+    {
+      "title": "4.3. Triển khai điều phối máy và kết quả",
+      "level": 2,
+      "bookmark": "h55"
+    },
+    {
+      "title": "4.4. Triển khai bàn cờ và thành phần bao quanh",
+      "level": 2,
+      "bookmark": "h56"
+    },
+    {
+      "title": "4.5. Ứng dụng trình bày và figure inspector",
+      "level": 2,
+      "bookmark": "h57"
+    },
+    {
+      "title": "4.6. Pyodide và bàn tương tác của trang trình bày",
+      "level": 2,
+      "bookmark": "h58"
+    },
+    {
+      "title": "4.6.1. Ví dụ quét hình thế bằng Python",
+      "level": 3,
+      "bookmark": "h59"
+    },
+    {
+      "title": "4.6.2. Ví dụ cộng điểm heuristic",
+      "level": 3,
+      "bookmark": "h60"
+    },
+    {
+      "title": "4.6.3. Ví dụ tập ứng viên và mẫu số của tỷ lệ giảm",
+      "level": 3,
+      "bookmark": "h61"
+    },
+    {
+      "title": "4.6.4. Ví dụ thống kê và giới hạn của số được nhập sẵn",
+      "level": 3,
+      "bookmark": "h62"
+    },
+    {
+      "title": "4.7. Ranh giới giữa triển khai và kiểm chứng",
+      "level": 2,
+      "bookmark": "h63"
+    },
+    {
+      "title": "CHƯƠNG 5. KẾT QUẢ VÀ ĐÁNH GIÁ",
+      "level": 1,
+      "bookmark": "h64"
+    },
+    {
+      "title": "5.1. Phạm vi đánh giá và nguồn dữ liệu",
+      "level": 2,
+      "bookmark": "h65"
+    },
+    {
+      "title": "5.2. Kết quả kiểm thử engine và luật chơi",
+      "level": 2,
+      "bookmark": "h66"
+    },
+    {
+      "title": "5.3. Đối chiếu WASM, Worker và giao diện",
+      "level": 2,
+      "bookmark": "h67"
+    },
+    {
+      "title": "5.4. So sánh Minimax và Alpha-Beta trên engine ứng dụng",
+      "level": 2,
+      "bookmark": "h68"
+    },
+    {
+      "title": "5.5. Thực nghiệm thuật toán trên reference core",
+      "level": 2,
+      "bookmark": "h69"
+    },
+    {
+      "title": "5.6. Mục tiêu và cấu trúc các tập dữ liệu",
+      "level": 2,
+      "bookmark": "h70"
+    },
+    {
+      "title": "5.7. Bảng số liệu được lưu cho một fixture benchmark",
+      "level": 2,
+      "bookmark": "h71"
+    },
+    {
+      "title": "5.8. Khảo sát 100 ván Rule-Based và Random",
+      "level": 2,
+      "bookmark": "h72"
+    },
+    {
+      "title": "5.9. Truy nguyên biểu đồ và dữ liệu minh họa",
+      "level": 2,
+      "bookmark": "h73"
+    },
+    {
+      "title": "5.10. Cách dùng evidence và bảo toàn khả năng tái lập",
+      "level": 2,
+      "bookmark": "h74"
+    },
+    {
+      "title": "CHƯƠNG 6. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "level": 1,
+      "bookmark": "h75"
+    },
+    {
+      "title": "6.1. Kết luận",
+      "level": 2,
+      "bookmark": "h76"
+    },
+    {
+      "title": "6.2. Hạn chế",
+      "level": 2,
+      "bookmark": "h77"
+    },
+    {
+      "title": "6.3. Hướng phát triển",
+      "level": 2,
+      "bookmark": "h78"
+    },
+    {
+      "title": "TÀI LIỆU THAM KHẢO",
+      "level": 1,
+      "bookmark": "h79"
+    },
+    {
+      "title": "PHỤ LỤC A. TỔNG HỢP CÔNG VIỆC THEO TUẦN",
+      "level": 1,
+      "bookmark": "h80"
+    },
+    {
+      "title": "A.1. Tuần 1: mô hình và phạm vi đề tài",
+      "level": 2,
+      "bookmark": "h81"
+    },
+    {
+      "title": "A.2. Tuần 2: thao tác trạng thái và kiểm tra kết thúc",
+      "level": 2,
+      "bookmark": "h82"
+    },
+    {
+      "title": "A.3. Tuần 3: giao diện và vòng đời ván chơi",
+      "level": 2,
+      "bookmark": "h83"
+    },
+    {
+      "title": "A.4. Tuần 4: hình thế, lượng giá và baseline",
+      "level": 2,
+      "bookmark": "h84"
+    },
+    {
+      "title": "A.5. Tuần 5: Minimax và cây trò chơi",
+      "level": 2,
+      "bookmark": "h85"
+    },
+    {
+      "title": "A.6. Tuần 6: Alpha-Beta",
+      "level": 2,
+      "bookmark": "h86"
+    },
+    {
+      "title": "A.7. Tuần 7: ứng viên, thứ tự và cấu hình độ khó",
+      "level": 2,
+      "bookmark": "h87"
+    },
+    {
+      "title": "A.8. Tuần 8: move ordering",
+      "level": 2,
+      "bookmark": "h88"
+    },
+    {
+      "title": "A.9. Tuần 9: Zobrist và bảng chuyển vị",
+      "level": 2,
+      "bookmark": "h89"
+    },
+    {
+      "title": "A.10. Tuần 10: iterative deepening và kế hoạch đánh giá",
+      "level": 2,
+      "bookmark": "h90"
+    },
+    {
+      "title": "PHỤ LỤC B. KIỂM KÊ THƯ MỤC VÀ HỒ SƠ LIÊN QUAN",
+      "level": 1,
+      "bookmark": "h91"
+    },
+    {
+      "title": "B.1. Source, sản phẩm và hồ sơ theo tuần",
+      "level": 2,
+      "bookmark": "h92"
+    },
+    {
+      "title": "B.2. File gốc, mẫu và giới hạn của bản kiểm kê",
+      "level": 2,
+      "bookmark": "h93"
+    },
+    {
+      "title": "PHỤ LỤC C. HƯỚNG DẪN CHẠY VÀ HỒ SƠ BÀN GIAO",
+      "level": 1,
+      "bookmark": "h94"
+    },
+    {
+      "title": "C.1. Chạy ứng dụng chính",
+      "level": 2,
+      "bookmark": "h95"
+    },
+    {
+      "title": "C.2. Tái chạy nghiên cứu và giới hạn dependency",
+      "level": 2,
+      "bookmark": "h96"
+    },
+    {
+      "title": "C.3. Danh mục toàn bộ thư mục gốc",
+      "level": 2,
+      "bookmark": "h97"
+    },
+    {
+      "title": "C.4. Hình ảnh và khả năng cập nhật",
+      "level": 2,
+      "bookmark": "h98"
+    },
+    {
+      "title": "C.5. Phần còn thiếu và điều kiện chốt bản nộp",
+      "level": 2,
+      "bookmark": "h99"
+    }
+  ],
+  "figures": [
+    {
+      "title": "Hình 1.1. Biểu diễn bàn 15 × 15 và chỉ số theo hàng",
+      "key": "board-index"
+    },
+    {
+      "title": "Hình 2.1. Bất biến khôi phục trạng thái sau place và undo",
+      "key": "apply-undo"
+    },
+    {
+      "title": "Hình 2.2. Bốn trục kiểm tra thắng quanh nước cuối",
+      "key": "win-axes"
+    },
+    {
+      "title": "Hình 2.3. Các nhánh ưu tiên của bot Rule-based",
+      "key": "rule-decision"
+    },
+    {
+      "title": "Hình 2.4. Chuỗi liên tiếp và trọng số trong engine hiện hành",
+      "key": "heuristic-runs"
+    },
+    {
+      "title": "Hình 2.5. Ảnh hưởng bán kính và biên bàn tới tập ứng viên",
+      "key": "chebyshev-radius"
+    },
+    {
+      "title": "Hình 2.6. So sánh hai thứ tự duyệt trên cùng membership",
+      "key": "ordering"
+    },
+    {
+      "title": "Hình 2.7. Ví dụ Minimax với hai tầng quyết định",
+      "key": "minimax-tree"
+    },
+    {
+      "title": "Hình 2.8. Cây Alpha-Beta với một lá được cắt",
+      "key": "alpha-beta-cutoff"
+    },
+    {
+      "title": "Hình 2.9. Iterative deepening giữ kết quả vòng hoàn tất gần nhất",
+      "key": "iterative-depth"
+    },
+    {
+      "title": "Hình 2.10. Cập nhật và hoàn tác Zobrist bằng XOR",
+      "key": "zobrist-xor"
+    },
+    {
+      "title": "Hình 2.11. Ba loại kết quả lưu trong bảng chuyển vị",
+      "key": "tt-bounds"
+    },
+    {
+      "title": "Hình 2.12. Hai tuyến tactical và Rust được nhập tại controller",
+      "key": "ai-pipeline"
+    },
+    {
+      "title": "Hình 3.1. Trách nhiệm và liên hệ giữa controller, core, Pixi và AI",
+      "key": "system-architecture"
+    },
+    {
+      "title": "Hình 3.2. Trạng thái ván và các nhánh yêu cầu hoặc hủy AI",
+      "key": "state-flow"
+    },
+    {
+      "title": "Hình 3.3. Biến đổi tọa độ và kiểm tra biên",
+      "key": "coordinate-flow"
+    },
+    {
+      "title": "Hình 4.1. Giao diện hai người chơi trên bản build local",
+      "key": "game-desktop"
+    },
+    {
+      "title": "Hình 4.2. Ván đấu máy sau một lượt người và một lượt bot",
+      "key": "game-ai"
+    },
+    {
+      "title": "Hình 4.3. Giao diện tại viewport 390 × 844",
+      "key": "game-mobile"
+    },
+    {
+      "title": "Hình 4.4. Thông tin của một lần tìm kiếm Hard trong browser local",
+      "key": "game-telemetry"
+    },
+    {
+      "title": "Hình 4.5. Chi tiết khối App và trang điều phối trong sơ đồ present",
+      "key": "present-components"
+    },
+    {
+      "title": "Hình 4.6. Chi tiết hooks và domain trong sơ đồ present",
+      "key": "present-hooks"
+    },
+    {
+      "title": "Hình 4.7. Tái dựng ví dụ Chebyshev năm quân của present",
+      "key": "present-candidates"
+    },
+    {
+      "title": "Hình 5.1. Số node của cùng cấu hình tìm kiếm trên engine game",
+      "key": "current-nodes"
+    },
+    {
+      "title": "Hình 5.2. So sánh số node trên reference core",
+      "key": "reference-nodes"
+    },
+    {
+      "title": "Hình 5.3. Benchmark native và TypeScript trên một fixture midgame",
+      "key": "legacy-benchmark"
+    }
+  ],
+  "tables": [
+    {
+      "title": "Bảng 2.1. Trọng số các chuỗi trong engine game"
+    },
+    {
+      "title": "Bảng 2.2. Cấu hình sáu mức bot"
+    },
+    {
+      "title": "Bảng 3.1. Các yêu cầu chức năng được đối chiếu với thành phần nguồn."
+    },
+    {
+      "title": "Bảng 3.2. Kịch bản và kết quả mong đợi để thiết kế kiểm thử; trạng thái chạy thực tế cần đối chiếu với hồ sơ kiểm thử riêng."
+    },
+    {
+      "title": "Bảng 5.1. Dữ liệu benchmark native và TypeScript"
+    },
+    {
+      "title": "Bảng C.1. Kiểm kê các thư mục gốc theo vai trò"
+    }
+  ],
+  "toc": [
+    {
+      "title": "CHƯƠNG 1. GIỚI THIỆU",
+      "level": 1
+    },
+    {
+      "title": "1.1. Bối cảnh và lý do thực hiện",
+      "level": 2
+    },
+    {
+      "title": "1.2. Mục tiêu và câu hỏi của đồ án",
+      "level": 2
+    },
+    {
+      "title": "1.3. Đối tượng, phạm vi và sản phẩm khảo sát",
+      "level": 2
+    },
+    {
+      "title": "1.4. Phương pháp và cách sử dụng bằng chứng",
+      "level": 2
+    },
+    {
+      "title": "CHƯƠNG 2. CƠ SỞ LÝ THUYẾT VÀ CÁC THUẬT TOÁN",
+      "level": 1
+    },
+    {
+      "title": "2.1. Phạm vi và ký hiệu",
+      "level": 2
+    },
+    {
+      "title": "2.2. Biểu diễn bàn cờ và bất biến cập nhật",
+      "level": 2
+    },
+    {
+      "title": "2.3. Luật thắng Freestyle và quét theo nước cuối",
+      "level": 2
+    },
+    {
+      "title": "2.4. Random và rule-based: đường cơ sở",
+      "level": 2
+    },
+    {
+      "title": "2.5. Hàm đánh giá heuristic và terminal utility",
+      "level": 2
+    },
+    {
+      "title": "2.6. Sinh ứng viên Chebyshev và giới hạn mềm",
+      "level": 2
+    },
+    {
+      "title": "2.7. Move ordering: sắp thứ tự duyệt",
+      "level": 2
+    },
+    {
+      "title": "2.8. Minimax: tìm kiếm đối kháng",
+      "level": 2
+    },
+    {
+      "title": "2.9. Alpha-Beta: cắt tỉa trên cùng cây",
+      "level": 2
+    },
+    {
+      "title": "2.10. Iterative deepening và kiểm soát ngân sách",
+      "level": 2
+    },
+    {
+      "title": "2.11. Zobrist hashing và cập nhật tăng dần",
+      "level": 2
+    },
+    {
+      "title": "2.12. Transposition table và ba loại cận",
+      "level": 2
+    },
+    {
+      "title": "2.13. TypeScript legacy và khác biệt với engine hiện tại",
+      "level": 2
+    },
+    {
+      "title": "2.14. Sáu cấu hình và đường dữ liệu thực tế",
+      "level": 2
+    },
+    {
+      "title": "2.15. Bằng chứng thực nghiệm và giới hạn suy luận",
+      "level": 2
+    },
+    {
+      "title": "CHƯƠNG 3. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG",
+      "level": 1
+    },
+    {
+      "title": "3.1. Tác nhân và ca sử dụng",
+      "level": 2
+    },
+    {
+      "title": "3.2. Yêu cầu phi chức năng và ranh giới",
+      "level": 2
+    },
+    {
+      "title": "3.3. Kiến trúc tổng thể",
+      "level": 2
+    },
+    {
+      "title": "3.4. Thiết kế dữ liệu bàn cờ và lịch sử",
+      "level": 2
+    },
+    {
+      "title": "3.5. Trạng thái ván và chuyển trạng thái",
+      "level": 2
+    },
+    {
+      "title": "3.6. Thiết kế bất đồng bộ và xử lý sai lệch",
+      "level": 2
+    },
+    {
+      "title": "3.7. Thiết kế hiển thị bàn, tọa độ và tương tác",
+      "level": 2
+    },
+    {
+      "title": "3.8. Ngôn ngữ, âm thanh và tích hợp bên ngoài",
+      "level": 2
+    },
+    {
+      "title": "3.9. Các kịch bản cần kiểm chứng",
+      "level": 2
+    },
+    {
+      "title": "CHƯƠNG 4. TRIỂN KHAI HỆ THỐNG",
+      "level": 1
+    },
+    {
+      "title": "4.1. Môi trường và tổ chức mã",
+      "level": 2
+    },
+    {
+      "title": "4.2. Triển khai nhận và cập nhật nước đi",
+      "level": 2
+    },
+    {
+      "title": "4.3. Triển khai điều phối máy và kết quả",
+      "level": 2
+    },
+    {
+      "title": "4.4. Triển khai bàn cờ và thành phần bao quanh",
+      "level": 2
+    },
+    {
+      "title": "4.5. Ứng dụng trình bày và figure inspector",
+      "level": 2
+    },
+    {
+      "title": "4.6. Pyodide và bàn tương tác của trang trình bày",
+      "level": 2
+    },
+    {
+      "title": "4.7. Ranh giới giữa triển khai và kiểm chứng",
+      "level": 2
+    },
+    {
+      "title": "CHƯƠNG 5. KẾT QUẢ VÀ ĐÁNH GIÁ",
+      "level": 1
+    },
+    {
+      "title": "5.1. Phạm vi đánh giá và nguồn dữ liệu",
+      "level": 2
+    },
+    {
+      "title": "5.2. Kết quả kiểm thử engine và luật chơi",
+      "level": 2
+    },
+    {
+      "title": "5.3. Đối chiếu WASM, Worker và giao diện",
+      "level": 2
+    },
+    {
+      "title": "5.4. So sánh Minimax và Alpha-Beta trên engine ứng dụng",
+      "level": 2
+    },
+    {
+      "title": "5.5. Thực nghiệm thuật toán trên reference core",
+      "level": 2
+    },
+    {
+      "title": "5.6. Mục tiêu và cấu trúc các tập dữ liệu",
+      "level": 2
+    },
+    {
+      "title": "5.7. Bảng số liệu được lưu cho một fixture benchmark",
+      "level": 2
+    },
+    {
+      "title": "5.8. Khảo sát 100 ván Rule-Based và Random",
+      "level": 2
+    },
+    {
+      "title": "5.9. Truy nguyên biểu đồ và dữ liệu minh họa",
+      "level": 2
+    },
+    {
+      "title": "5.10. Cách dùng evidence và bảo toàn khả năng tái lập",
+      "level": 2
+    },
+    {
+      "title": "CHƯƠNG 6. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+      "level": 1
+    },
+    {
+      "title": "6.1. Kết luận",
+      "level": 2
+    },
+    {
+      "title": "6.2. Hạn chế",
+      "level": 2
+    },
+    {
+      "title": "6.3. Hướng phát triển",
+      "level": 2
+    },
+    {
+      "title": "TÀI LIỆU THAM KHẢO",
+      "level": 1
+    },
+    {
+      "title": "PHỤ LỤC A. TỔNG HỢP CÔNG VIỆC THEO TUẦN",
+      "level": 1
+    },
+    {
+      "title": "A.1. Tuần 1: mô hình và phạm vi đề tài",
+      "level": 2
+    },
+    {
+      "title": "A.2. Tuần 2: thao tác trạng thái và kiểm tra kết thúc",
+      "level": 2
+    },
+    {
+      "title": "A.3. Tuần 3: giao diện và vòng đời ván chơi",
+      "level": 2
+    },
+    {
+      "title": "A.4. Tuần 4: hình thế, lượng giá và baseline",
+      "level": 2
+    },
+    {
+      "title": "A.5. Tuần 5: Minimax và cây trò chơi",
+      "level": 2
+    },
+    {
+      "title": "A.6. Tuần 6: Alpha-Beta",
+      "level": 2
+    },
+    {
+      "title": "A.7. Tuần 7: ứng viên, thứ tự và cấu hình độ khó",
+      "level": 2
+    },
+    {
+      "title": "A.8. Tuần 8: move ordering",
+      "level": 2
+    },
+    {
+      "title": "A.9. Tuần 9: Zobrist và bảng chuyển vị",
+      "level": 2
+    },
+    {
+      "title": "A.10. Tuần 10: iterative deepening và kế hoạch đánh giá",
+      "level": 2
+    },
+    {
+      "title": "PHỤ LỤC B. KIỂM KÊ THƯ MỤC VÀ HỒ SƠ LIÊN QUAN",
+      "level": 1
+    },
+    {
+      "title": "B.1. Source, sản phẩm và hồ sơ theo tuần",
+      "level": 2
+    },
+    {
+      "title": "B.2. File gốc, mẫu và giới hạn của bản kiểm kê",
+      "level": 2
+    },
+    {
+      "title": "PHỤ LỤC C. HƯỚNG DẪN CHẠY VÀ HỒ SƠ BÀN GIAO",
+      "level": 1
+    },
+    {
+      "title": "C.1. Chạy ứng dụng chính",
+      "level": 2
+    },
+    {
+      "title": "C.2. Tái chạy nghiên cứu và giới hạn dependency",
+      "level": 2
+    },
+    {
+      "title": "C.3. Danh mục toàn bộ thư mục gốc",
+      "level": 2
+    },
+    {
+      "title": "C.4. Hình ảnh và khả năng cập nhật",
+      "level": 2
+    },
+    {
+      "title": "C.5. Phần còn thiếu và điều kiện chốt bản nộp",
+      "level": 2
+    }
+  ],
+  "word_count": 19714
+}

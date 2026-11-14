@@ -1,0 +1,93 @@
+[
+  {
+    "start": 91318,
+    "end": 91364,
+    "style": "NORMAL_TEXT",
+    "text": "An AI request is pending, succeeds, or fails.\n",
+    "equations": 0
+  },
+  {
+    "start": 92829,
+    "end": 93433,
+    "style": "NORMAL_TEXT",
+    "text": "F01: Mode and difficulty selection clear the previous board and AI feedback, invalidate pending AI work and establish the selected configuration. Subsequent AI requests carry the selected difficulty. F02: A legal cell is an integer row and column from 0 to 14 and must be empty. The controller checks pause, match phase and AI-turn availability; the domain move operation checks occupancy and numeric bounds. The pointer route obtains integer indices with Math.floor, and the WASM result adapter independently checks Number.isInteger and bounds. Direct-call validation limits are addressed in Chapter 6.\n",
+    "equations": 0
+  },
+  {
+    "start": 93433,
+    "end": 94031,
+    "style": "NORMAL_TEXT",
+    "text": "F03: The four-axis Freestyle rule accepts a line of at least five stones, including an overline. The controller evaluates a win before a full-board draw. F04: Undo reverses one local two-player move or the applicable human–AI pair and restores the turn and match phase. Replay and New Game clear board state and invalidate pending work. F05: Only a result applicable to the active AI turn and round can be committed. F06: Feedback exposes the pending state, the returned result or a recoverable error; counters and durations retain the source and measurement scope of the route that produced them.\n",
+    "equations": 0
+  },
+  {
+    "start": 97682,
+    "end": 98032,
+    "style": "NORMAL_TEXT",
+    "text": "A Web Worker executes independently of the main interface script [34]. GomokuWasmEngine owns the Worker object, transport identifiers and pending promises. GameController owns turn validity. Resource cancellation stops obsolete Worker execution, and the controller token also rejects a response that resolved before cancellation reached it [2], [6].\n",
+    "equations": 0
+  },
+  {
+    "start": 101408,
+    "end": 101966,
+    "style": "NORMAL_TEXT",
+    "text": "An AI action captures a new turn token, the round identifier and difficulty before setting thinking state. The request contains a copied move history. The transport wrapper adds its own message identifier so the correct pending promise receives the corresponding Worker response. The returned domain result carries its request/round identity, difficulty, move and statistics. The message identifier, AI request identifier and round identifier serve related but different scopes; they should not be collapsed into a single undocumented counter [2], [3], [6].\n",
+    "equations": 0
+  },
+  {
+    "start": 102485,
+    "end": 103054,
+    "style": "NORMAL_TEXT",
+    "text": "A concrete race illustrates the mechanism. Suppose request A is searching round 8. The person invokes a New game before A finishes. The controller increments its token, clears state and changes the round. Even if A's response was already queued, its captured token no longer matches. The promise resolution cannot insert A's move into the new board. Meanwhile, cancelPending rejects pending transport promises and terminates the old Worker, so future requests construct a new one. The token guard and resource cancellation address different parts of the race [2], [6].\n",
+    "equations": 0
+  },
+  {
+    "start": 103054,
+    "end": 103381,
+    "style": "NORMAL_TEXT",
+    "text": "A caught error changes feedback only while its captured turn token remains current. GomokuWasmEngine ignores messages from a Worker that is no longer active and ignores envelope identifiers absent from its pending map. Together, these checks keep an obsolete completion or rejection from replacing the current turn’s feedback.\n",
+    "equations": 0
+  },
+  {
+    "start": 107570,
+    "end": 107625,
+    "style": "NORMAL_TEXT",
+    "text": "Human move followed by Undo while a request is pending\n",
+    "equations": 0
+  },
+  {
+    "start": 107882,
+    "end": 107957,
+    "style": "NORMAL_TEXT",
+    "text": "Pending work rejects; error visible; a new Worker can serve a new request.\n",
+    "equations": 0
+  },
+  {
+    "start": 112322,
+    "end": 112730,
+    "style": "NORMAL_TEXT",
+    "text": "GomokuWasmEngine creates a module Worker lazily, registers a pending promise under a transport identifier and posts a search message. worker.ts initializes the generated module and calls executeWasmSearch. The same adapter is used by the binary tests, so both routes share coordinate and telemetry conversion. A returned envelope resolves its matching promise, while a structured error rejects it [7], [30].\n",
+    "equations": 0
+  },
+  {
+    "start": 128335,
+    "end": 128708,
+    "style": "NORMAL_TEXT",
+    "text": "The evidence therefore covers native search comparisons, six Rust Worker requests on one browser fixture and a browser move/feedback/Undo interaction. These later result records extend the earlier gate ledger, whose G3–G5 entries were still pending or partial when it was written. The evaluation uses the dated result artifacts for each observation [19], [24], [32], [48].\n",
+    "equations": 0
+  },
+  {
+    "start": 169334,
+    "end": 169529,
+    "style": "NORMAL_TEXT",
+    "text": "The ledger lists G3 as pending, G4 as partial and G5 as pending. Later files supply specific observations; they do not constitute an updated sign-off for every gate [19], [24], [31], [32], [48].\n",
+    "equations": 0
+  },
+  {
+    "start": 172939,
+    "end": 173544,
+    "style": "NORMAL_TEXT",
+    "text": "The original reference runner requires caro-core-reference at the repository root. The current-engine research runner expects gomoku-main/engine and an application directory named 10_caro; its WASM stage copies generated files into that application. These paths belong to the original experiment workspace. The local application release instead owns its Rust source at CaroGame/engine and uses the following commands from CaroGame to rebuild it. Rust with the wasm32-unknown-unknown target and wasm-pack must be installed; the offline build also requires the locked Cargo dependencies in the local cache.\n",
+    "equations": 0
+  }
+]

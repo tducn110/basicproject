@@ -1,0 +1,1251 @@
+{
+  "heads": [
+    {
+      "start": 286,
+      "end": 295,
+      "text": "ABSTRACT\n",
+      "id": "h.w863n5ynb1ud"
+    },
+    {
+      "start": 5302,
+      "end": 5318,
+      "text": "LIST OF FIGURES\n",
+      "id": "h.azn2ldeky5h7"
+    },
+    {
+      "start": 7196,
+      "end": 7211,
+      "text": "LIST OF TABLES\n",
+      "id": "h.phc670xhf3x7"
+    },
+    {
+      "start": 7961,
+      "end": 7999,
+      "text": "ABBREVIATIONS AND READING CONVENTIONS\n",
+      "id": "h.xgxpqvt19qw1"
+    },
+    {
+      "start": 8711,
+      "end": 8735,
+      "text": "CHAPTER 1. INTRODUCTION\n",
+      "id": "h.mbkundapb6fz"
+    },
+    {
+      "start": 8735,
+      "end": 8765,
+      "text": "1.1 Background and motivation\n",
+      "id": "h.28zjm4cj92dt"
+    },
+    {
+      "start": 10442,
+      "end": 10480,
+      "text": "1.2 Objectives and research questions\n",
+      "id": "h.s3shfhiwyz3d"
+    },
+    {
+      "start": 12165,
+      "end": 12205,
+      "text": "1.3 Scope, versions and source identity\n",
+      "id": "h.gewf96xcpzri"
+    },
+    {
+      "start": 13908,
+      "end": 13940,
+      "text": "1.4 Method and report structure\n",
+      "id": "h.16ldjhlw7ms6"
+    },
+    {
+      "start": 15011,
+      "end": 15053,
+      "text": "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES\n",
+      "id": "h.tb4zab5ysoyn"
+    },
+    {
+      "start": 15053,
+      "end": 15087,
+      "text": "2.1 Scope, evidence, and notation\n",
+      "id": "h.f564q6ofb9iz"
+    },
+    {
+      "start": 17413,
+      "end": 17456,
+      "text": "2.2 Board representation and legal updates\n",
+      "id": "h.ox3085n6q948"
+    },
+    {
+      "start": 17456,
+      "end": 17508,
+      "text": "2.2.1 Matrix, index conversion, and state ownership\n",
+      "id": "h.v5ssqmhnici6"
+    },
+    {
+      "start": 20051,
+      "end": 20072,
+      "text": "2.2.2 Apply and undo\n",
+      "id": "h.ixliekovwady"
+    },
+    {
+      "start": 23790,
+      "end": 23818,
+      "text": "2.3 Freestyle win detection\n",
+      "id": "h.llgaaxp2vihy"
+    },
+    {
+      "start": 27483,
+      "end": 27530,
+      "text": "2.4 Baselines: random play and rule-based play\n",
+      "id": "h.t89694iwlib"
+    },
+    {
+      "start": 27530,
+      "end": 27552,
+      "text": "2.4.1 Random baseline\n",
+      "id": "h.gf3ld6hrgsyr"
+    },
+    {
+      "start": 29596,
+      "end": 29642,
+      "text": "2.4.2 Immediate tactics and one-ply heuristic\n",
+      "id": "h.e7kjz3j76vr2"
+    },
+    {
+      "start": 32439,
+      "end": 32482,
+      "text": "2.5 Static evaluation and terminal utility\n",
+      "id": "h.oh14t8qso23p"
+    },
+    {
+      "start": 32482,
+      "end": 32524,
+      "text": "2.5.1 Evaluation of nonterminal positions\n",
+      "id": "h.odpwbopwyu4e"
+    },
+    {
+      "start": 37186,
+      "end": 37232,
+      "text": "2.5.2 Terminal states and the score hierarchy\n",
+      "id": "h.ty6bcng513tg"
+    },
+    {
+      "start": 39204,
+      "end": 39253,
+      "text": "2.6 Candidate generation and a soft tactical cap\n",
+      "id": "h.n2msphwxgbc8"
+    },
+    {
+      "start": 39253,
+      "end": 39280,
+      "text": "2.6.1 Spatial neighborhood\n",
+      "id": "h.ki6ogpu2c3b0"
+    },
+    {
+      "start": 42108,
+      "end": 42151,
+      "text": "2.6.2 Tactical preservation and membership\n",
+      "id": "h.uooxa7pye6zy"
+    },
+    {
+      "start": 45561,
+      "end": 45601,
+      "text": "2.7 Move ordering versus move selection\n",
+      "id": "h.mop38wrt6f8f"
+    },
+    {
+      "start": 48133,
+      "end": 48152,
+      "text": "2.8 Minimax search\n",
+      "id": "h.ka1fnecs6on7"
+    },
+    {
+      "start": 48152,
+      "end": 48182,
+      "text": "2.8.1 Recurrence and contract\n",
+      "id": "h.qona5aytdcz9"
+    },
+    {
+      "start": 51376,
+      "end": 51412,
+      "text": "2.8.2 Proof, example and complexity\n",
+      "id": "h.mfxc5fc4ntt7"
+    },
+    {
+      "start": 52896,
+      "end": 52919,
+      "text": "2.9 Alpha-Beta pruning\n",
+      "id": "h.m2zshj9xhidg"
+    },
+    {
+      "start": 52919,
+      "end": 52947,
+      "text": "2.9.1 Bounds and pseudocode\n",
+      "id": "h.fl4c0ur4c4wj"
+    },
+    {
+      "start": 55412,
+      "end": 55457,
+      "text": "2.9.2 Worked cutoff and correctness boundary\n",
+      "id": "h.chp989x4d9hw"
+    },
+    {
+      "start": 57818,
+      "end": 57855,
+      "text": "2.10 Iterative deepening and budgets\n",
+      "id": "h.4nux9as0w8f4"
+    },
+    {
+      "start": 61527,
+      "end": 61570,
+      "text": "2.11 Zobrist hashing and incremental state\n",
+      "id": "h.u6wnsrodysn"
+    },
+    {
+      "start": 61570,
+      "end": 61599,
+      "text": "2.11.1 Definition and update\n",
+      "id": "h.uew8hqaidmzp"
+    },
+    {
+      "start": 64854,
+      "end": 64908,
+      "text": "2.12 Transposition table: entries, bounds and context\n",
+      "id": "h.4v52azsb4fkd"
+    },
+    {
+      "start": 64908,
+      "end": 64940,
+      "text": "2.12.1 Meaning of stored values\n",
+      "id": "h.kd6sx6kollmi"
+    },
+    {
+      "start": 68154,
+      "end": 68184,
+      "text": "2.12.2 Why reuse can be wrong\n",
+      "id": "h.wblsbkp7rwlb"
+    },
+    {
+      "start": 70480,
+      "end": 70532,
+      "text": "2.13 Quiescence search in the legacy TypeScript bot\n",
+      "id": "h.w6poqxjs9r4h"
+    },
+    {
+      "start": 75070,
+      "end": 75127,
+      "text": "2.14 Legacy bitmask patterns and incremental line counts\n",
+      "id": "h.u1io5ql1vutd"
+    },
+    {
+      "start": 80629,
+      "end": 80688,
+      "text": "2.15 Difficulty configurations and the active request path\n",
+      "id": "h.aousdh82aqys"
+    },
+    {
+      "start": 83890,
+      "end": 83942,
+      "text": "2.16 Synthesis and limits of the algorithmic claims\n",
+      "id": "h.deo9zlys1cxk"
+    },
+    {
+      "start": 87421,
+      "end": 87459,
+      "text": "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN\n",
+      "id": "h.9ty3awaoyfn1"
+    },
+    {
+      "start": 87459,
+      "end": 87509,
+      "text": "3.1 Decision problem and algorithmic requirements\n",
+      "id": "h.cezhdukw22a5"
+    },
+    {
+      "start": 94562,
+      "end": 94620,
+      "text": "3.2 Non-functional requirements and acceptance boundaries\n",
+      "id": "h.l93wek48u6pv"
+    },
+    {
+      "start": 95602,
+      "end": 95633,
+      "text": "3.3 Architecture and ownership\n",
+      "id": "h.44ilrwr6m6hi"
+    },
+    {
+      "start": 97645,
+      "end": 97700,
+      "text": "3.4 Board state, history and legal transition contract\n",
+      "id": "h.ykhczgk1573"
+    },
+    {
+      "start": 99328,
+      "end": 99367,
+      "text": "3.5 Match phases and state transitions\n",
+      "id": "h.o3qnfo717c4z"
+    },
+    {
+      "start": 100970,
+      "end": 101021,
+      "text": "3.6 Asynchronous request protocol and cancellation\n",
+      "id": "h.rbfbaqfupooi"
+    },
+    {
+      "start": 102992,
+      "end": 103049,
+      "text": "3.7 Coordinate transformation and gesture interpretation\n",
+      "id": "h.xsluc2cfh6fq"
+    },
+    {
+      "start": 105034,
+      "end": 105091,
+      "text": "3.8 Search-result contract and presentation of telemetry\n",
+      "id": "h.pj0epyw80iuc"
+    },
+    {
+      "start": 106464,
+      "end": 106515,
+      "text": "3.9 Verification scenarios derived from the design\n",
+      "id": "h.uqgphbx7d2i"
+    },
+    {
+      "start": 108269,
+      "end": 108295,
+      "text": "CHAPTER 4. IMPLEMENTATION\n",
+      "id": "h.3opfa5jx1z65"
+    },
+    {
+      "start": 108295,
+      "end": 108334,
+      "text": "4.1 Toolchain and project organization\n",
+      "id": "h.hefb34yw4eqb"
+    },
+    {
+      "start": 109847,
+      "end": 109876,
+      "text": "4.2 Accepted move processing\n",
+      "id": "h.kuw4himka0b"
+    },
+    {
+      "start": 111523,
+      "end": 111576,
+      "text": "4.3 AI dispatch, Worker execution and WASM hydration\n",
+      "id": "h.7yn47n5rr1d9"
+    },
+    {
+      "start": 113754,
+      "end": 113804,
+      "text": "4.4 Board rendering and interface synchronization\n",
+      "id": "h.duk1kwe4t3bo"
+    },
+    {
+      "start": 115641,
+      "end": 115694,
+      "text": "4.5 Presentation website and interactive explanation\n",
+      "id": "h.ivnxw4hj6ag2"
+    },
+    {
+      "start": 116937,
+      "end": 116998,
+      "text": "4.6 Python/Pyodide execution and four instructional programs\n",
+      "id": "h.vgxp54qbkd6t"
+    },
+    {
+      "start": 117934,
+      "end": 117956,
+      "text": "4.6.1 Pattern scanner\n",
+      "id": "h.htgwz1b54vki"
+    },
+    {
+      "start": 118687,
+      "end": 118714,
+      "text": "4.6.2 Heuristic calculator\n",
+      "id": "h.c1ks7fdjnbzp"
+    },
+    {
+      "start": 119465,
+      "end": 119499,
+      "text": "4.6.3 Chebyshev candidate example\n",
+      "id": "h.j6j4kiyfvtac"
+    },
+    {
+      "start": 120456,
+      "end": 120489,
+      "text": "4.6.4 Empirical-analysis snippet\n",
+      "id": "h.s01h91bc9g9k"
+    },
+    {
+      "start": 121115,
+      "end": 121158,
+      "text": "4.7 Implementation traceability and limits\n",
+      "id": "h.8vkuvzj3tl0r"
+    },
+    {
+      "start": 122079,
+      "end": 122113,
+      "text": "CHAPTER 5. RESULTS AND EVALUATION\n",
+      "id": "h.x4gzqixf87qm"
+    },
+    {
+      "start": 122113,
+      "end": 122163,
+      "text": "5.1 Evaluation questions, evidence and boundaries\n",
+      "id": "h.ksknugug3ebp"
+    },
+    {
+      "start": 123677,
+      "end": 123737,
+      "text": "5.2 Native board and search checks of the 23 October engine\n",
+      "id": "h.4e3feq1vanay"
+    },
+    {
+      "start": 126558,
+      "end": 126606,
+      "text": "5.3 WebAssembly parity and browser observations\n",
+      "id": "h.um9mbintoly"
+    },
+    {
+      "start": 128705,
+      "end": 128744,
+      "text": "5.3.1 Follow-up application validation\n",
+      "id": "h.vjc9kyj8offy"
+    },
+    {
+      "start": 129553,
+      "end": 129595,
+      "text": "5.4 Separate native reference experiments\n",
+      "id": "h.ehsapit9nzy8"
+    },
+    {
+      "start": 131340,
+      "end": 131386,
+      "text": "5.4.1 A paired Minimax and Alpha-Beta example\n",
+      "id": "h.yyqb9ygo25hr"
+    },
+    {
+      "start": 132866,
+      "end": 132923,
+      "text": "5.4.2 Candidate caps, ordering and tactical completeness\n",
+      "id": "h.sep6934wxqpa"
+    },
+    {
+      "start": 134054,
+      "end": 134101,
+      "text": "5.4.3 Hash, table scope and interrupted search\n",
+      "id": "h.h6oy75sv7019"
+    },
+    {
+      "start": 135887,
+      "end": 135937,
+      "text": "5.5 Historical cross-language and Week 4 datasets\n",
+      "id": "h.aidtnilmd7op"
+    },
+    {
+      "start": 137531,
+      "end": 137578,
+      "text": "5.6 Presentation examples and evidence quality\n",
+      "id": "h.5c7dfs581ttj"
+    },
+    {
+      "start": 138322,
+      "end": 138365,
+      "text": "5.7 Threats to validity and interpretation\n",
+      "id": "h.sx6fri3t6972"
+    },
+    {
+      "start": 140311,
+      "end": 140349,
+      "text": "CHAPTER 6. CONCLUSION AND FUTURE WORK\n",
+      "id": "h.h3dln88p2eyp"
+    },
+    {
+      "start": 140349,
+      "end": 140385,
+      "text": "6.1 Work completed and contribution\n",
+      "id": "h.wmsu1zxcto6s"
+    },
+    {
+      "start": 142783,
+      "end": 142799,
+      "text": "6.2 Limitations\n",
+      "id": "h.ihchg45onn57"
+    },
+    {
+      "start": 144643,
+      "end": 144666,
+      "text": "6.3 Future development\n",
+      "id": "h.n7j98jjv0ht2"
+    },
+    {
+      "start": 147752,
+      "end": 147763,
+      "text": "REFERENCES\n",
+      "id": "h.in9eplkodgeb"
+    },
+    {
+      "start": 163923,
+      "end": 163973,
+      "text": "APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP\n",
+      "id": "h.4lvh3lnoi9vc"
+    },
+    {
+      "start": 167336,
+      "end": 167383,
+      "text": "APPENDIX B. EVIDENCE AND VERIFICATION REGISTER\n",
+      "id": "h.a1ruwmryb0b5"
+    },
+    {
+      "start": 171622,
+      "end": 171672,
+      "text": "APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE\n",
+      "id": "h.r2ne5nnz9baa"
+    }
+  ],
+  "toc": [
+    {
+      "start": 1783,
+      "end": 1794,
+      "text": "ABSTRACT\t1\n",
+      "link": {
+        "id": "h.w863n5ynb1ud",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1794,
+      "end": 1812,
+      "text": "LIST OF FIGURES\t5\n",
+      "link": {
+        "id": "h.azn2ldeky5h7",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1812,
+      "end": 1829,
+      "text": "LIST OF TABLES\t6\n",
+      "link": {
+        "id": "h.phc670xhf3x7",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1829,
+      "end": 1869,
+      "text": "ABBREVIATIONS AND READING CONVENTIONS\t7\n",
+      "link": {
+        "id": "h.xgxpqvt19qw1",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1869,
+      "end": 1895,
+      "text": "CHAPTER 1. INTRODUCTION\t1\n",
+      "link": {
+        "id": "h.mbkundapb6fz",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1895,
+      "end": 1927,
+      "text": "1.1 Background and motivation\t1\n",
+      "link": {
+        "id": "h.28zjm4cj92dt",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1927,
+      "end": 1967,
+      "text": "1.2 Objectives and research questions\t1\n",
+      "link": {
+        "id": "h.s3shfhiwyz3d",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 1967,
+      "end": 2009,
+      "text": "1.3 Scope, versions and source identity\t2\n",
+      "link": {
+        "id": "h.gewf96xcpzri",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2009,
+      "end": 2043,
+      "text": "1.4 Method and report structure\t3\n",
+      "link": {
+        "id": "h.16ldjhlw7ms6",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2043,
+      "end": 2087,
+      "text": "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES\t4\n",
+      "link": {
+        "id": "h.tb4zab5ysoyn",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2087,
+      "end": 2123,
+      "text": "2.1 Scope, evidence, and notation\t4\n",
+      "link": {
+        "id": "h.f564q6ofb9iz",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2123,
+      "end": 2168,
+      "text": "2.2 Board representation and legal updates\t5\n",
+      "link": {
+        "id": "h.ox3085n6q948",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2168,
+      "end": 2222,
+      "text": "2.2.1 Matrix, index conversion, and state ownership\t5\n",
+      "link": {
+        "id": "h.v5ssqmhnici6",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2222,
+      "end": 2245,
+      "text": "2.2.2 Apply and undo\t6\n",
+      "link": {
+        "id": "h.ixliekovwady",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2245,
+      "end": 2275,
+      "text": "2.3 Freestyle win detection\t8\n",
+      "link": {
+        "id": "h.llgaaxp2vihy",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2275,
+      "end": 2325,
+      "text": "2.4 Baselines: random play and rule-based play\t10\n",
+      "link": {
+        "id": "h.t89694iwlib",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2325,
+      "end": 2350,
+      "text": "2.4.1 Random baseline\t10\n",
+      "link": {
+        "id": "h.gf3ld6hrgsyr",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2350,
+      "end": 2399,
+      "text": "2.4.2 Immediate tactics and one-ply heuristic\t11\n",
+      "link": {
+        "id": "h.e7kjz3j76vr2",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2399,
+      "end": 2445,
+      "text": "2.5 Static evaluation and terminal utility\t13\n",
+      "link": {
+        "id": "h.oh14t8qso23p",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2445,
+      "end": 2490,
+      "text": "2.5.1 Evaluation of nonterminal positions\t13\n",
+      "link": {
+        "id": "h.odpwbopwyu4e",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2490,
+      "end": 2539,
+      "text": "2.5.2 Terminal states and the score hierarchy\t15\n",
+      "link": {
+        "id": "h.ty6bcng513tg",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2539,
+      "end": 2591,
+      "text": "2.6 Candidate generation and a soft tactical cap\t16\n",
+      "link": {
+        "id": "h.n2msphwxgbc8",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2591,
+      "end": 2621,
+      "text": "2.6.1 Spatial neighborhood\t16\n",
+      "link": {
+        "id": "h.ki6ogpu2c3b0",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2621,
+      "end": 2667,
+      "text": "2.6.2 Tactical preservation and membership\t18\n",
+      "link": {
+        "id": "h.uooxa7pye6zy",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2667,
+      "end": 2710,
+      "text": "2.7 Move ordering versus move selection\t19\n",
+      "link": {
+        "id": "h.mop38wrt6f8f",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2710,
+      "end": 2732,
+      "text": "2.8 Minimax search\t21\n",
+      "link": {
+        "id": "h.ka1fnecs6on7",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2732,
+      "end": 2765,
+      "text": "2.8.1 Recurrence and contract\t21\n",
+      "link": {
+        "id": "h.qona5aytdcz9",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2765,
+      "end": 2804,
+      "text": "2.8.2 Proof, example and complexity\t22\n",
+      "link": {
+        "id": "h.mfxc5fc4ntt7",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2804,
+      "end": 2830,
+      "text": "2.9 Alpha-Beta pruning\t24\n",
+      "link": {
+        "id": "h.m2zshj9xhidg",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2830,
+      "end": 2861,
+      "text": "2.9.1 Bounds and pseudocode\t24\n",
+      "link": {
+        "id": "h.fl4c0ur4c4wj",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2861,
+      "end": 2909,
+      "text": "2.9.2 Worked cutoff and correctness boundary\t25\n",
+      "link": {
+        "id": "h.chp989x4d9hw",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2909,
+      "end": 2949,
+      "text": "2.10 Iterative deepening and budgets\t26\n",
+      "link": {
+        "id": "h.4nux9as0w8f4",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2949,
+      "end": 2995,
+      "text": "2.11 Zobrist hashing and incremental state\t28\n",
+      "link": {
+        "id": "h.u6wnsrodysn",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 2995,
+      "end": 3027,
+      "text": "2.11.1 Definition and update\t28\n",
+      "link": {
+        "id": "h.uew8hqaidmzp",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3027,
+      "end": 3084,
+      "text": "2.12 Transposition table: entries, bounds and context\t30\n",
+      "link": {
+        "id": "h.4v52azsb4fkd",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3084,
+      "end": 3119,
+      "text": "2.12.1 Meaning of stored values\t30\n",
+      "link": {
+        "id": "h.kd6sx6kollmi",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3119,
+      "end": 3152,
+      "text": "2.12.2 Why reuse can be wrong\t31\n",
+      "link": {
+        "id": "h.wblsbkp7rwlb",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3152,
+      "end": 3207,
+      "text": "2.13 Quiescence search in the legacy TypeScript bot\t33\n",
+      "link": {
+        "id": "h.w6poqxjs9r4h",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3207,
+      "end": 3267,
+      "text": "2.14 Legacy bitmask patterns and incremental line counts\t35\n",
+      "link": {
+        "id": "h.u1io5ql1vutd",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3267,
+      "end": 3329,
+      "text": "2.15 Difficulty configurations and the active request path\t38\n",
+      "link": {
+        "id": "h.aousdh82aqys",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3329,
+      "end": 3384,
+      "text": "2.16 Synthesis and limits of the algorithmic claims\t40\n",
+      "link": {
+        "id": "h.deo9zlys1cxk",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3384,
+      "end": 3425,
+      "text": "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN\t42\n",
+      "link": {
+        "id": "h.9ty3awaoyfn1",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3425,
+      "end": 3478,
+      "text": "3.1 Decision problem and algorithmic requirements\t42\n",
+      "link": {
+        "id": "h.cezhdukw22a5",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3478,
+      "end": 3539,
+      "text": "3.2 Non-functional requirements and acceptance boundaries\t45\n",
+      "link": {
+        "id": "h.l93wek48u6pv",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3539,
+      "end": 3573,
+      "text": "3.3 Architecture and ownership\t45\n",
+      "link": {
+        "id": "h.44ilrwr6m6hi",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3573,
+      "end": 3631,
+      "text": "3.4 Board state, history and legal transition contract\t47\n",
+      "link": {
+        "id": "h.ykhczgk1573",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3631,
+      "end": 3673,
+      "text": "3.5 Match phases and state transitions\t47\n",
+      "link": {
+        "id": "h.o3qnfo717c4z",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3673,
+      "end": 3727,
+      "text": "3.6 Asynchronous request protocol and cancellation\t48\n",
+      "link": {
+        "id": "h.rbfbaqfupooi",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3727,
+      "end": 3787,
+      "text": "3.7 Coordinate transformation and gesture interpretation\t49\n",
+      "link": {
+        "id": "h.xsluc2cfh6fq",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3787,
+      "end": 3847,
+      "text": "3.8 Search-result contract and presentation of telemetry\t50\n",
+      "link": {
+        "id": "h.pj0epyw80iuc",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3847,
+      "end": 3901,
+      "text": "3.9 Verification scenarios derived from the design\t51\n",
+      "link": {
+        "id": "h.uqgphbx7d2i",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3901,
+      "end": 3930,
+      "text": "CHAPTER 4. IMPLEMENTATION\t53\n",
+      "link": {
+        "id": "h.3opfa5jx1z65",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3930,
+      "end": 3972,
+      "text": "4.1 Toolchain and project organization\t53\n",
+      "link": {
+        "id": "h.hefb34yw4eqb",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 3972,
+      "end": 4004,
+      "text": "4.2 Accepted move processing\t53\n",
+      "link": {
+        "id": "h.kuw4himka0b",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4004,
+      "end": 4060,
+      "text": "4.3 AI dispatch, Worker execution and WASM hydration\t54\n",
+      "link": {
+        "id": "h.7yn47n5rr1d9",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4060,
+      "end": 4113,
+      "text": "4.4 Board rendering and interface synchronization\t56\n",
+      "link": {
+        "id": "h.duk1kwe4t3bo",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4113,
+      "end": 4169,
+      "text": "4.5 Presentation website and interactive explanation\t56\n",
+      "link": {
+        "id": "h.ivnxw4hj6ag2",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4169,
+      "end": 4233,
+      "text": "4.6 Python/Pyodide execution and four instructional programs\t57\n",
+      "link": {
+        "id": "h.vgxp54qbkd6t",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4233,
+      "end": 4258,
+      "text": "4.6.1 Pattern scanner\t57\n",
+      "link": {
+        "id": "h.htgwz1b54vki",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4258,
+      "end": 4288,
+      "text": "4.6.2 Heuristic calculator\t58\n",
+      "link": {
+        "id": "h.c1ks7fdjnbzp",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4288,
+      "end": 4325,
+      "text": "4.6.3 Chebyshev candidate example\t58\n",
+      "link": {
+        "id": "h.j6j4kiyfvtac",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4325,
+      "end": 4361,
+      "text": "4.6.4 Empirical-analysis snippet\t59\n",
+      "link": {
+        "id": "h.s01h91bc9g9k",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4361,
+      "end": 4407,
+      "text": "4.7 Implementation traceability and limits\t60\n",
+      "link": {
+        "id": "h.8vkuvzj3tl0r",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4407,
+      "end": 4444,
+      "text": "CHAPTER 5. RESULTS AND EVALUATION\t61\n",
+      "link": {
+        "id": "h.x4gzqixf87qm",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4444,
+      "end": 4497,
+      "text": "5.1 Evaluation questions, evidence and boundaries\t61\n",
+      "link": {
+        "id": "h.ksknugug3ebp",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4497,
+      "end": 4560,
+      "text": "5.2 Native board and search checks of the 23 October engine\t61\n",
+      "link": {
+        "id": "h.4e3feq1vanay",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4560,
+      "end": 4611,
+      "text": "5.3 WebAssembly parity and browser observations\t63\n",
+      "link": {
+        "id": "h.um9mbintoly",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4611,
+      "end": 4653,
+      "text": "5.3.1 Follow-up application validation\t64\n",
+      "link": {
+        "id": "h.vjc9kyj8offy",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4653,
+      "end": 4698,
+      "text": "5.4 Separate native reference experiments\t64\n",
+      "link": {
+        "id": "h.ehsapit9nzy8",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4698,
+      "end": 4747,
+      "text": "5.4.1 A paired Minimax and Alpha-Beta example\t65\n",
+      "link": {
+        "id": "h.yyqb9ygo25hr",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4747,
+      "end": 4807,
+      "text": "5.4.2 Candidate caps, ordering and tactical completeness\t66\n",
+      "link": {
+        "id": "h.sep6934wxqpa",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4807,
+      "end": 4857,
+      "text": "5.4.3 Hash, table scope and interrupted search\t67\n",
+      "link": {
+        "id": "h.h6oy75sv7019",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4857,
+      "end": 4910,
+      "text": "5.5 Historical cross-language and Week 4 datasets\t67\n",
+      "link": {
+        "id": "h.aidtnilmd7op",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4910,
+      "end": 4960,
+      "text": "5.6 Presentation examples and evidence quality\t69\n",
+      "link": {
+        "id": "h.5c7dfs581ttj",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 4960,
+      "end": 5006,
+      "text": "5.7 Threats to validity and interpretation\t69\n",
+      "link": {
+        "id": "h.sx6fri3t6972",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5006,
+      "end": 5047,
+      "text": "CHAPTER 6. CONCLUSION AND FUTURE WORK\t71\n",
+      "link": {
+        "id": "h.h3dln88p2eyp",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5047,
+      "end": 5086,
+      "text": "6.1 Work completed and contribution\t71\n",
+      "link": {
+        "id": "h.wmsu1zxcto6s",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5086,
+      "end": 5105,
+      "text": "6.2 Limitations\t72\n",
+      "link": {
+        "id": "h.ihchg45onn57",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5105,
+      "end": 5131,
+      "text": "6.3 Future development\t72\n",
+      "link": {
+        "id": "h.n7j98jjv0ht2",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5131,
+      "end": 5145,
+      "text": "REFERENCES\t74\n",
+      "link": {
+        "id": "h.in9eplkodgeb",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5145,
+      "end": 5198,
+      "text": "APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP\t82\n",
+      "link": {
+        "id": "h.4lvh3lnoi9vc",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5198,
+      "end": 5248,
+      "text": "APPENDIX B. EVIDENCE AND VERIFICATION REGISTER\t84\n",
+      "link": {
+        "id": "h.a1ruwmryb0b5",
+        "tabId": "t.azb8qty2ktof"
+      }
+    },
+    {
+      "start": 5248,
+      "end": 5301,
+      "text": "APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE\t87\n",
+      "link": {
+        "id": "h.r2ne5nnz9baa",
+        "tabId": "t.azb8qty2ktof"
+      }
+    }
+  ]
+}

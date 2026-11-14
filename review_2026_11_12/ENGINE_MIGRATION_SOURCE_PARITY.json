@@ -1,0 +1,60 @@
+{
+  "scope": "Canonical source migration only; reporting source left unchanged",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "identicalToReportingSource": true,
+      "sha256": "39caf80c50a68fd40c08feec3fe4218ecf72a9597ddba11ff2ae087a75cc4e6b"
+    },
+    {
+      "path": "Cargo.toml",
+      "identicalToReportingSource": true,
+      "sha256": "427514ef32eeeeba4c9572b7783436c2e943a2ae30a61720b5c0fdb92ee6cdaa"
+    },
+    {
+      "path": "examples/current_evidence.rs",
+      "identicalToReportingSource": true,
+      "sha256": "2b40d36c3e0e9a55a28129e40c564c93ae29adaf01c4a20670571d565cc93c01"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "identicalToReportingSource": true,
+      "sha256": "045aa0b806e6faad4d96d385fd3825ec1186f58a7e20eca9f71be833fad12ca4"
+    },
+    {
+      "path": "src/ai.rs",
+      "identicalToReportingSource": true,
+      "sha256": "4e118d28036c321c9dd9835b92428a11340aa0220a8a9fcf34b1072d1433ba62"
+    },
+    {
+      "path": "src/board.rs",
+      "identicalToReportingSource": true,
+      "sha256": "35d64b2e80041342a673da2f9cf8b4e5457c331f873e4230cdec7efd439a13fe"
+    },
+    {
+      "path": "src/candidates.rs",
+      "identicalToReportingSource": true,
+      "sha256": "9a83974ad61d8bcae016561f1db35ebb45a8b826c3ee8ec524cd12277ff776ea"
+    },
+    {
+      "path": "src/eval.rs",
+      "identicalToReportingSource": true,
+      "sha256": "eec5757ca15216c782820588c2e7fc250fa7fe5e34a4737dee740063534f0d15"
+    },
+    {
+      "path": "src/lib.rs",
+      "identicalToReportingSource": true,
+      "sha256": "916d8e8d61587c24cbd3ba06d95577a10d07c31c18f77aa2c691a4301685d539"
+    },
+    {
+      "path": "src/search.rs",
+      "identicalToReportingSource": true,
+      "sha256": "3bea1e8366054a78b7ce4165319b3beb6fbd24144d6504201e26d25a1fbba1dd"
+    },
+    {
+      "path": "tests/wasm.rs",
+      "identicalToReportingSource": true,
+      "sha256": "91919db518e347bd43026ef78b42f6724a4928143b4e304d529de77748519ed5"
+    }
+  ]
+}

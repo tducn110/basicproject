@@ -1,0 +1,176 @@
+[
+  {
+    "start": 17531,
+    "old": "This chapter develops the board representation, terminal rule, evaluation function and search algorithms used in the Caro project. The current frontend and its Worker adapter are examined alongside two research implementations: the modified Rust engine recorded in the 23 October source snapshot [10], and the separate native reference engine [13]. The active application calls a vendored WebAssembly package through the request interface and Worker adapter [3], [14], [6]. These sources have different roles: frontend source establishes request and commit behavior, Rust source explains the recorded algorithm, and binary execution establishes the behavior of the tested package.",
+    "new": "This chapter develops the board representation, terminal rule, evaluation function and search algorithms used in the Caro project. The current frontend and its Worker adapter are examined alongside two research implementations: the modified Rust engine recorded in the 23 October source snapshot [10], and the separate native reference engine [13]. The active application calls a vendored WebAssembly package through the request interface and Worker adapter [3], [6], [14]. These sources have different roles: frontend source establishes request and commit behavior, Rust source explains the recorded algorithm, and binary execution establishes the behavior of the tested package.",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 22369,
+    "old": "// Algorithm 2.1 (modified Rust source in [6]) — APPLY(B, (x,y), p):",
+    "new": "// Algorithm 2.1 (modified Rust source in [10]) — APPLY(B, (x,y), p):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 33257,
+    "old": "The archived evaluator assigns weights of 1,000,000 to a run of at least five; 50,000 or 5,000 to a four with two or one open ends; 5,000 or 500 to a three; and 200 or 50 to a two. A run of five or more receives the same weight even with closed ends. Other cases receive zero [21]. These manually chosen weights favour longer, open formations, while the center term adds a smaller positional preference. They are heuristic parameters, rather than a proof that a named threat always outweighs every combination of shorter runs.",
+    "new": "The archived evaluator assigns weights of 1,000,000 to a run of at least five; 50,000 or 5,000 to a four with two or one open ends; 5,000 or 500 to a three; and 200 or 50 to a two. A run of five or more receives the same weight even with closed ends. Other cases receive zero [21]. These manually chosen weights favor longer, open formations, while the center term adds a smaller positional preference. They are heuristic parameters, rather than a proof that a named threat always outweighs every combination of shorter runs.",
+    "reason": "Finish US English spelling consistency."
+  },
+  {
+    "start": 33784,
+    "old": "// Algorithm 2.5 (modified Rust evaluator in [6]; run weights in [15]) — EVALUATE(B, p):",
+    "new": "// Algorithm 2.5 (modified Rust evaluator in [10]; run weights in [21]) — EVALUATE(B, p):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 48252,
+    "old": "// Algorithm 2.11 (modified Rust search kernel in [6]) — ALPHABETA(B, player, root, depth, last, ply, alpha, beta):",
+    "new": "// Algorithm 2.11 (modified Rust search kernel in [10]) — ALPHABETA(B, player, root, depth, last, ply, alpha, beta):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 49922,
+    "old": "Alpha and beta summarize bounds supplied by previously examined alternatives and ancestors. When they cross, the remaining siblings cannot improve the relevant ancestor's choice. Combined with the Minimax and restoration invariants, this preserves the root value on the same finite tree [23]. The archived modified-engine corpus records 408 Minimax/Alpha-Beta pairs, and the separate native reference corpus records 112 pairs with equal root scores. These totals include repeated configurations; they are finite experiment results, presented with their node counts in Chapter 5 [13], [24], [19].",
+    "new": "Alpha and beta summarize bounds supplied by previously examined alternatives and ancestors. When they cross, the remaining siblings cannot improve the relevant ancestor's choice. Combined with the Minimax and restoration invariants, this preserves the root value on the same finite tree [23]. The archived modified-engine corpus records 408 Minimax/Alpha-Beta pairs, and the separate native reference corpus records 112 pairs with equal root scores. These totals include repeated configurations; they are finite experiment results, presented with their node counts in Chapter 5 [13], [19], [24].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 51751,
+    "old": "// Algorithm 2.12 (completed-iteration scheme illustrated by [11]) — ITERATIVE(B, maximum_depth, budget):",
+    "new": "// Algorithm 2.12 (completed-iteration scheme illustrated by [15]) — ITERATIVE(B, maximum_depth, budget):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 55045,
+    "old": "// Algorithm 2.13 (Zobrist scheme illustrated by the legacy board in [20]) — FULL_HASH(B, player):",
+    "new": "// Algorithm 2.13 (Zobrist scheme illustrated by the legacy board in [26]) — FULL_HASH(B, player):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 58398,
+    "old": "// Algorithm 2.14 (general TT contract; legacy implementation in [11]) — PROBE(key, required_depth, alpha, beta, context):",
+    "new": "// Algorithm 2.14 (general TT contract; legacy implementation in [15]) — PROBE(key, required_depth, alpha, beta, context):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 66358,
+    "old": "// Algorithm 2.16 (legacy pattern evaluator in [53]) — CLASSIFY_SEGMENT(mask, length):",
+    "new": "// Algorithm 2.16 (legacy pattern evaluator in [28]) — CLASSIFY_SEGMENT(mask, length):",
+    "reason": "Correct a source citation inside a pseudocode comment that retained its pre-remapping reference number."
+  },
+  {
+    "start": 80523,
+    "old": "The system has five principal responsibilities. React owns interface composition and subscribes to a controller snapshot. GameController owns the game-facing action boundary, current-player choice, AI-turn lifecycle and notification. The core owns board cells, legal-move history and rule evaluation. Pixi owns the visual board and converts gestures through an input/coordinate layer. The AI adapter owns search dispatch and Worker resources; it proposes a move but does not directly mutate the authoritative application board [4], [2], [5], [18].",
+    "new": "The system has five principal responsibilities. React owns interface composition and subscribes to a controller snapshot. GameController owns the game-facing action boundary, current-player choice, AI-turn lifecycle and notification. The core owns board cells, legal-move history and rule evaluation. Pixi owns the visual board and converts gestures through an input/coordinate layer. The AI adapter owns search dispatch and Worker resources; it proposes a move but does not directly mutate the authoritative application board [2], [4], [5], [18].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 84257,
+    "old": "MatchController defines setup, ready, playing and game-over. Its initial state is ready, local two-player mode, normal difficulty and round identifier zero. Calling playCell from setup or ready invokes startRound, which increments the round identifier, clears the old outcome and enters playing. An accepted win or full-board draw changes the match to game-over. The thinking flag belongs to the AI request lifecycle; it is not a fifth value in the phase enumeration [33], [2].",
+    "new": "MatchController defines setup, ready, playing and game-over. Its initial state is ready, local two-player mode, normal difficulty and round identifier zero. Calling playCell from setup or ready invokes startRound, which increments the round identifier, clears the old outcome and enters playing. An accepted win or full-board draw changes the match to game-over. The thinking flag belongs to the AI request lifecycle; it is not a fifth value in the phase enumeration [2], [33].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 96825,
+    "old": "GomokuWasmEngine creates a module Worker lazily, registers a pending promise under a transport identifier and posts a search message. worker.ts initializes the generated module and calls executeWasmSearch. The same adapter is used by the binary tests, so both routes share coordinate and telemetry conversion. A returned envelope resolves its matching promise, while a structured error rejects it [30], [7].",
+    "new": "GomokuWasmEngine creates a module Worker lazily, registers a pending promise under a transport identifier and posts a search message. worker.ts initializes the generated module and calls executeWasmSearch. The same adapter is used by the binary tests, so both routes share coordinate and telemetry conversion. A returned envelope resolves its matching promise, while a structured error rejects it [7], [30].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 97847,
+    "old": "The generated package contains JavaScript bindings, TypeScript declarations and the WebAssembly binary loaded by the Worker. The corresponding Rust code implements the search algorithms; the bindings expose their interface to JavaScript. The recorded binary hash identifies the package used for the parity and browser observations, and Appendix B lists the source and build records associated with that implementation [10], [12], [40].",
+    "new": "The generated package contains JavaScript bindings, TypeScript declarations and the WebAssembly binary loaded by the Worker. Selected modified-engine source excerpts describe the recorded Rust search, while the bindings expose its interface to JavaScript. The recorded binary hash identifies the package used for the parity and browser observations, and Appendix B lists the associated source and build records [10], [40].",
+    "reason": "Avoid presenting the earlier baseline AI source as the corresponding source of the active modified binary."
+  },
+  {
+    "start": 99698,
+    "old": "The interface includes translation resources for its supported labels and search details. Those resources map keys to displayed text; they do not change difficulty semantics or engine telemetry. An elapsed label, a completed-depth label and a strategy/source label should all refer to the current AI result. Undo, reset or a mode change clears stale feedback in the controller, ensuring that an old score is not displayed as though it belonged to the new board [41], [2].",
+    "new": "The interface includes translation resources for its supported labels and search details. Those resources map keys to displayed text; they do not change difficulty semantics or engine telemetry. An elapsed label, a completed-depth label and a strategy/source label should all refer to the current AI result. Undo, reset or a mode change clears stale feedback in the controller, ensuring that an old score is not displayed as though it belonged to the new board [2], [41].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 103233,
+    "old": "The second program calculates a score from manually supplied pattern counts and a demonstration weight dictionary. The instructional attack/defence cases yield 94,000 and −7,000 under those inputs and its defensive factor. These are arithmetic outcomes of the supplied feature counts, not results obtained by asking the production Rust evaluator to scan a live board. Its weights must not be substituted for the game's different published baseline weights [44], [21].",
+    "new": "The second program calculates a score from manually supplied pattern counts and a demonstration weight dictionary. The instructional attack/defense cases yield 94,000 and −7,000 under those inputs and the defensive multiplier. These are arithmetic outcomes of the supplied feature counts. The application’s Rust evaluator scans the board using a different set of weights [21], [44].",
+    "reason": "Use US spelling, remove an unsupported production label, and state the actual distinction between demonstration arithmetic and the application evaluator without checklist-style prohibitions."
+  },
+  {
+    "start": 108341,
+    "old": "The 23 October native verification used four controlled positions and sixteen seeded positions, with three timing repeats for the controlled configurations. It recorded 816 measurement rows, 408 Minimax/Alpha-Beta comparison pairs, 408 ordering-value comparison pairs and 820 root-restoration checks. The corpus also included 84 candidate configurations, 12 tactical-completion retention checks, four terminal checks and 225 native address-offset checks. All recorded assertions passed. These totals include repeated configurations; they are not counts of distinct board positions [19], [11].",
+    "new": "The 23 October native verification used four controlled positions and sixteen seeded positions, with three timing repeats for the controlled configurations. It recorded 816 measurement rows, 408 Minimax/Alpha-Beta comparison pairs, 408 ordering-value comparison pairs and 820 root-restoration checks. The corpus also included 84 candidate configurations, 12 tactical-completion retention checks, four terminal checks and 225 native address-offset checks. All recorded assertions passed. These totals include repeated configurations; they are not counts of distinct board positions [11], [19].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 112936,
+    "old": "The evidence therefore covers native search comparisons, six Rust Worker requests on one browser fixture and a browser move/feedback/Undo interaction. These later result records extend the earlier gate ledger, whose G3–G5 entries were still pending or partial when it was written. The evaluation uses the dated result artifacts for each observation [24], [19], [32], [48].",
+    "new": "The evidence therefore covers native search comparisons, six Rust Worker requests on one browser fixture and a browser move/feedback/Undo interaction. These later result records extend the earlier gate ledger, whose G3–G5 entries were still pending or partial when it was written. The evaluation uses the dated result artifacts for each observation [19], [24], [32], [48].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 116749,
+    "old": "The ordered search visits only 2,164 nodes, but performs 48,841 extra ordering evaluations and has a median of 68,457 µs. The counterexample is important: fewer recursively visited nodes do not necessarily mean lower elapsed time, because ranking candidates also costs work. At depth one, ordering cannot prune a lower level and can add overhead. The run uses native std::time::Instant, excludes state cloning and table/Zobrist initialization from the timer, has only three sequential controlled repeats, and does not randomize order or pin a CPU. Values must not be presented as browser timings [49].",
+    "new": "The ordered search visits only 2,164 nodes, but performs 48,841 extra ordering evaluations and has a median of 68,457 µs. Fewer recursively visited nodes therefore do not necessarily mean lower elapsed time, because ranking candidates also costs work. At depth one, ordering cannot prune a lower level and can add overhead. The run uses native std::time::Instant, excludes state cloning and table/Zobrist initialization from the timer, has only three sequential controlled repeats, and does not randomize order or pin a CPU. Values must not be presented as browser timings [49].",
+    "reason": "Remove editorial emphasis and let the measured example establish its implication."
+  },
+  {
+    "start": 121431,
+    "old": "Across the four depths, the recorded native-to-Node time ratios range from 17.4 to 24.4. Both harnesses report matching node counts, cutoff counts and scores on this fixture. The comparison describes these two implementations and runtime environments; the application’s WebAssembly execution is evaluated separately in Section 5.3 [52].",
+    "new": "Across the four depths, the recorded Node-to-native time ratios range from 17.4 to 24.4. Both harnesses report matching node counts, cutoff counts and scores on this fixture. The comparison describes these two implementations and runtime environments; the application’s WebAssembly execution is evaluated separately in Section 5.3 [52].",
+    "reason": "Correct the ratio direction: the reported values divide Node elapsed time by native Rust elapsed time."
+  },
+  {
+    "start": 126059,
+    "old": "The recorded native engine experiment reports 408 Minimax/Alpha-Beta comparisons with matching values and 820 successful restoration checks. Separate adapter and browser records exercise the connection between search and the application. In the reference experiments, move ordering reduced visited nodes on some positions, but its additional evaluation work could outweigh the saving in elapsed time. A hard candidate cap discarded immediate wins in one fixture, and cache reuse after a root-player change produced an incorrect score in another. These results show that search depth and node count alone are insufficient to assess correctness or efficiency [19], [31], [32], [49], [22], [27].",
+    "new": "The recorded native engine experiment reports 408 Minimax/Alpha-Beta comparisons with matching values and 820 successful restoration checks. Separate adapter and browser records exercise the connection between search and the application. In the reference experiments, move ordering reduced visited nodes on some positions, but its additional evaluation work could outweigh the saving in elapsed time. A hard candidate cap discarded immediate wins in one fixture, and cache reuse after a root-player change produced an incorrect score in another. These results show that search depth and node count alone are insufficient to assess correctness or efficiency [19], [22], [27], [31], [32], [49].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 126768,
+    "old": "The active search is selective. Its soft tactical cap retains immediate winning and blocking completions, but deeper positional moves remain subject to the candidate limit. The configured limit falls from 15 at Hard to 8 at Master as depth rises from two to five plies. The static evaluator scores contiguous runs; gapped formations and intersecting threats depend on tactical assessment and deeper search. Persistent transposition tables and iterative-deepening budgets are studied in separate implementations rather than used by the active Rust search [10], [29], [13].",
+    "new": "The active search is selective. Its soft tactical cap retains immediate winning and blocking completions, but deeper positional moves remain subject to the candidate limit. The configured limit falls from 15 at Hard to 8 at Master as depth rises from two to five plies. The static evaluator scores contiguous runs; gapped formations and intersecting threats depend on tactical assessment and deeper search. Persistent transposition tables and iterative-deepening budgets are studied in separate implementations rather than used by the active Rust search [10], [13], [29].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 127932,
+    "old": "The measurements cover a finite corpus and specific native or browser environments. The published snapshot includes the application and its binary, but the complete modified Rust engine and the caro-core-reference dependency are absent from that Git tree, limiting reproduction from a fresh clone. Historical timing and bot-match summaries also have narrower provenance than the controlled research records. Physical-device interaction, live host integration, human usability and calibrated playing strength remain subjects for further evaluation [1], [13], [46], [24], [11], [52].",
+    "new": "The measurements cover a finite corpus and specific native or browser environments. The published snapshot includes the application and its binary, but the complete modified Rust engine and the caro-core-reference dependency are absent from that Git tree, limiting reproduction from a fresh clone. Historical timing and bot-match summaries also have narrower provenance than the controlled research records. Physical-device interaction, live host integration, human usability and calibrated playing strength remain subjects for further evaluation [1], [11], [13], [24], [46], [52].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 139732,
+    "old": "[28] tducn110, “CaroGame/src/game/bot/eval.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/eval.ts. [Accessed: Nov. 12, 2026].",
+    "new": "[28] tducn110, “CaroGame/src/game/bot/eval.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/eval.ts",
+    "reason": "Bring the added bibliography entry into the same IEEE online format and remove the period parsed into its URL."
+  },
+  {
+    "start": 149863,
+    "old": "The weekly documentation follows the development topics. Weeks 1–3 cover the problem, board and interface; Week 4 covers local patterns and baseline bots; Weeks 5–6 examine adversarial search and pruning; Weeks 7–8 examine candidate selection and ordering; Weeks 9–10 address hashing, table reuse and interrupted search. The dated research records give the experimental context for these topics [53], [13].",
+    "new": "The weekly documentation follows the development topics. Weeks 1–3 cover the problem, board and interface; Week 4 covers local patterns and baseline bots; Weeks 5–6 examine adversarial search and pruning; Weeks 7–8 examine candidate selection and ordering; Weeks 9–10 address hashing, table reuse and interrupted search. The dated research records give the experimental context for these topics [13], [53].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 153231,
+    "old": "The ledger lists G3 as pending, G4 as partial and G5 as pending. Later files supply specific observations; they do not constitute an updated sign-off for every gate [24], [19], [31], [32], [48].",
+    "new": "The ledger lists G3 as pending, G4 as partial and G5 as pending. Later files supply specific observations; they do not constitute an updated sign-off for every gate [19], [24], [31], [32], [48].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 153500,
+    "old": "The historical summaries report native Rust/Node time ratios of 17.4–24.4 on one midgame fixture and 100 Rule-Based wins in 100 matches against Random. These are dataset-specific results [46], [52].",
+    "new": "The historical summaries report Node-to-native Rust time ratios of 17.4–24.4 on one midgame fixture and 100 Rule-Based wins in 100 matches against Random. These are dataset-specific results [46], [52].",
+    "reason": "Correct the ratio direction consistently in the evidence summary."
+  },
+  {
+    "start": 153949,
+    "old": "The following procedure inspects the published revision and runs the frontend package scripts. The native research directories retain their original harnesses, manifests, result files and provenance. Their local source dependencies differ from the published repository layout, as explained at the end of this appendix [1], [13], [11].",
+    "new": "The following procedure inspects the published revision and runs the frontend package scripts. The native research directories retain their original harnesses, manifests, result files and provenance. Their local source dependencies differ from the published repository layout, as explained at the end of this appendix [1], [11], [13].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  },
+  {
+    "start": 155251,
+    "old": "The original reference runner requires caro-core-reference at the repository root. The current-engine runner requires gomoku-main/engine and an application directory named 10_caro, and its wasm stage copies generated files into that application. The pinned Git tree instead publishes CaroGame, an earlier Rust baseline and selected modified-engine excerpts. Regenerating those native datasets therefore requires restoring the exact dependency sources from their recorded hashes and adapting paths in a separate workspace. Complete source publication is proposed in Section 6.3 [13], [11].",
+    "new": "The original reference runner requires caro-core-reference at the repository root. The current-engine runner requires gomoku-main/engine and an application directory named 10_caro, and its wasm stage copies generated files into that application. The pinned Git tree instead publishes CaroGame, an earlier Rust baseline and selected modified-engine excerpts. Regenerating those native datasets therefore requires restoring the exact dependency sources from their recorded hashes and adapting paths in a separate workspace. Complete source publication is proposed in Section 6.3 [11], [13].",
+    "reason": "Order the consecutive numerical citation cluster in ascending final reference order."
+  }
+]

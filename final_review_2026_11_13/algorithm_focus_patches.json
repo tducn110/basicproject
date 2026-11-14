@@ -1,0 +1,79 @@
+{
+  "purpose": "Recenter the existing six-chapter academic report on algorithms solving Caro rather than instructions for playing the software.",
+  "snapshot_sha256": "ba10fb112052e515bcd9aac6ded8bd597645449efb7b576d528ba5e76147deb6",
+  "patches": [
+    {
+      "id": "FOCUS-01",
+      "paragraph_number": 147,
+      "start": 14483,
+      "end": 14952,
+      "old": "The first objective is to define the game rules and state transitions. The application uses a 15 × 15 board and the Freestyle win condition: a contiguous line of at least five stones wins, including longer lines. The report explains the last-move scan and the assumptions that make it sufficient. The second objective is to describe move selection through its inputs, evaluation policy, candidate set, recursive decisions, state restoration and computational cost [8].\n",
+      "new": "The first objective is to formulate Caro as an adversarial decision problem: a board state, legal stone placements, alternating players and a terminal outcome. The application uses a 15 × 15 board and the Freestyle win condition, under which a contiguous line of at least five stones wins, including longer lines. The report derives the last-move detection procedure and states the assumptions that make it sufficient. The second objective is to explain how evaluation, candidate selection and recursive search turn a position into a move, with worked examples, correctness arguments and computational complexity [8].\n",
+      "reason": "Make the problem formulation, mechanism, worked examples, correctness and complexity explicit in the objectives.",
+      "status": "proposed_editorial_reframing",
+      "source_fact_change": false
+    },
+    {
+      "id": "FOCUS-02",
+      "paragraph_number": 148,
+      "start": 14952,
+      "end": 15440,
+      "old": "The third objective is to explain how the algorithms connect to the application: board ownership, guarded move commitment, history replay into WebAssembly and rejection of stale responses. The fourth objective is to evaluate search under controlled conditions. The experiments compare Minimax with Alpha-Beta on the same candidate tree, separate move-ranking work from recursive search visits, and examine whether selective candidate policies retain immediate winning and blocking moves.\n",
+      "new": "The third objective is to examine the conditions under which a computed move remains a valid decision in an asynchronous application. Board ownership, guarded move commitment, history replay into WebAssembly and stale-response rejection connect algorithm inputs and outputs to a consistent game state. The fourth objective is experimental: compare Minimax and Alpha-Beta on the same candidate tree, separate move-ranking work from recursive search visits, and test whether selective candidate policies retain immediate winning and blocking moves.\n",
+      "reason": "Frame application architecture as the validity conditions for an algorithmic decision and preserve the experimental objective.",
+      "status": "proposed_editorial_reframing",
+      "source_fact_change": false
+    },
+    {
+      "id": "FOCUS-03",
+      "paragraph_number": 153,
+      "start": 17085,
+      "end": 17469,
+      "old": "The implemented scope is local two-player play, play against the computer, and interactive algorithm demonstrations. Online multiplayer, learned policies and model training are outside the project. Search strength and user experience are evaluated through the experiments and observations described in Chapter 5; broader evaluation and further development are discussed in Chapter 6.\n",
+      "new": "The study covers board representation, Freestyle win detection, heuristic evaluation, selective candidate generation and adversarial search, together with the state and execution contracts needed to use their results correctly. Local two-player play, play against the computer and interactive demonstrations provide the application context for that study. Online multiplayer, learned policies and model training are outside the project. Chapter 5 evaluates the recorded algorithms and their integration under the stated experimental conditions; Chapter 6 discusses the limits of those results and further development.\n",
+      "reason": "State the algorithm study scope before the software modes without adding methods or outcomes.",
+      "status": "proposed_editorial_reframing",
+      "source_fact_change": false
+    },
+    {
+      "id": "FOCUS-04",
+      "paragraph_number": 572,
+      "start": 89254,
+      "end": 89596,
+      "old": "The primary actor is the player, who can choose local two-player play or a computer opponent. The AI service receives a board snapshot and proposes a move. Host integration supplies lifecycle signals such as pause and resume. GameController validates the resulting actions and owns the accepted transitions of the application state [2], [4].\n",
+      "new": "This chapter states the system conditions required for a search result to solve the intended Caro decision problem. The player supplies accepted moves in local two-player or computer-opponent mode; the AI service receives a board snapshot and proposes a move; and host integration supplies lifecycle signals such as pause and resume. GameController validates these actions and owns accepted state transitions. The requirements below therefore define how a legal position becomes an algorithm input, when its returned move may be committed and how obsolete computation is rejected [2], [4].\n",
+      "reason": "Introduce requirements as input/state/result contracts for search; retain actors, lifecycle ownership and existing citations.",
+      "status": "proposed_editorial_reframing",
+      "source_fact_change": false
+    },
+    {
+      "id": "FOCUS-05",
+      "paragraph_number": 693,
+      "start": 109584,
+      "end": 109902,
+      "old": "This organization keeps domain state and rules independent of React components and Pixi objects. AI modules use domain history as input, and rendering modules receive state-derived drawing data. The resulting boundaries also support focused tests of moves, controller lifecycle and coordinate mapping [5], [38], [39].\n",
+      "new": "The implementation is examined through the decision pipeline: accepted moves establish the board and history, the selected AI route computes a proposal, and validation determines whether that proposal may update the current position. Domain state and rules remain independent of React components and Pixi objects. AI modules consume domain history, while rendering modules receive state-derived drawing data. These boundaries support focused checks of legal moves, coordinate mapping and controller lifecycle; the interface provides an observable setting for the algorithms rather than a substitute for their evaluation [5], [38], [39].\n",
+      "reason": "Introduce Chapter 4 as implementation of the algorithm decision pipeline while retaining module boundaries and testable contracts.",
+      "status": "proposed_editorial_reframing",
+      "source_fact_change": false
+    },
+    {
+      "id": "FOCUS-06",
+      "paragraph_number": 858,
+      "start": 140388,
+      "end": 140849,
+      "old": "The project implements a Caro web application and a teaching website for board representation, Freestyle rules, heuristic evaluation and adversarial search. The application connects a React interface and PixiJS board to a Rust/WebAssembly search Worker. The teaching website provides visual explanations and executable Python examples. Weekly reports and native research artifacts document the algorithmic development and its experimental evaluation [1], [53].\n",
+      "new": "This project studies how board representation, Freestyle win detection, heuristic evaluation and adversarial search solve the move-selection problem in Caro. A web application connects those decisions to a React interface and PixiJS board through a Rust/WebAssembly search Worker, providing a concrete setting for checking legal state transitions and asynchronous result handling. A separate teaching website provides visual explanations and executable Python examples. Weekly reports and native research artifacts document the algorithmic development and experimental evaluation [1], [53].\n",
+      "reason": "Lead the conclusion with the Caro move-selection problem and algorithm study; preserve the actual implementation and teaching artifacts.",
+      "status": "proposed_editorial_reframing",
+      "source_fact_change": false
+    }
+  ],
+  "preserve": [
+    "Keep all six chapters, the algorithm derivations and examples, experiment results, limitations and evidence boundaries.",
+    "Keep board/history ownership, apply/undo, Worker protocol, stale-result rejection and coordinate mapping: they establish whether search inputs and outputs refer to the intended legal state.",
+    "Do not remove Chapter 3/4 wholesale or convert implementation limitations into verified correctness.",
+    "No new measurements, source assertions, algorithms or research claims are introduced."
+  ],
+  "note": "These are framing changes. The existing Chapter 2 already contains substantial mechanism, correctness, worked-example and complexity analysis. Do not expand the game-operation walkthrough as a substitute for that content."
+}

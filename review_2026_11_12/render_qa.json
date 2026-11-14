@@ -1,0 +1,49 @@
+{
+  "pages": 100,
+  "body_first_physical_page": 9,
+  "body_pages": 92,
+  "font_sizes": [
+    13.0
+  ],
+  "font_character_counts": {
+    "TimesNewRomanPSMT 13.0": 169296,
+    "TimesNewRomanPS-BoldMT 13.0": 4102,
+    "TimesNewRomanPS-ItalicMT 13.0": 1410,
+    "MS-PMincho 13.0": 14
+  },
+  "layout_violations": [],
+  "empty_pages": [],
+  "chapter_pages": [
+    [
+      9,
+      "CHAPTER 1. INTRODUCTION"
+    ],
+    [
+      12,
+      "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES"
+    ],
+    [
+      52,
+      "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN"
+    ],
+    [
+      62,
+      "CHAPTER 4. IMPLEMENTATION"
+    ],
+    [
+      69,
+      "CHAPTER 5. RESULTS AND EVALUATION"
+    ],
+    [
+      79,
+      "CHAPTER 6. CONCLUSION AND FUTURE WORK"
+    ]
+  ],
+  "images": 21,
+  "pdf_links": 459,
+  "toc_entries": 79,
+  "figures_list_entries": 20,
+  "table_list_entries": 8,
+  "pagination_mismatches": [],
+  "pdf_sha256": "fd3f5666296f15f710702f7231189fa4a0b14ebd6ce4e8d1f80b896aee40ca1e"
+}

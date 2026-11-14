@@ -1,0 +1,57 @@
+[
+  {
+    "archive": "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_search_runs.csv",
+    "rerun": "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/engine-rerun/engine_search_runs.csv",
+    "archived_rows": 816,
+    "rerun_rows": 816,
+    "compared_fields": [
+      "fixture",
+      "algorithm",
+      "ordered",
+      "requested_depth",
+      "radius",
+      "soft_cap",
+      "repeat",
+      "best_x",
+      "best_y",
+      "score",
+      "nodes",
+      "leaves",
+      "cutoffs",
+      "rank_evaluations",
+      "candidates_before_cap",
+      "completed_depth",
+      "root_restored"
+    ],
+    "nontiming_discrepancies": []
+  },
+  {
+    "archive": "/home/pro/Downloads/basicproject/research/week_05_09/results/search_runs.csv",
+    "rerun": "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/reference-rerun/search_runs.csv",
+    "archived_rows": 544,
+    "rerun_rows": 544,
+    "compared_fields": [
+      "fixture",
+      "algorithm",
+      "move_mode",
+      "radius",
+      "cap",
+      "ordering",
+      "depth",
+      "repeat",
+      "score",
+      "best_row",
+      "best_col",
+      "nodes",
+      "leaf_evaluations",
+      "cutoffs",
+      "skipped_siblings",
+      "candidates_generated",
+      "ordering_evaluations",
+      "tt_lookups",
+      "tt_hits",
+      "tt_entries"
+    ],
+    "nontiming_discrepancies": []
+  }
+]

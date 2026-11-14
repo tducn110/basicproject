@@ -1,0 +1,802 @@
+[
+  {
+    "title": "CHAPTER 1. INTRODUCTION",
+    "page": 1,
+    "physical": 9,
+    "headingId": "h.mbkundapb6fz",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "1.1 Background and motivation",
+    "page": 1,
+    "physical": 9,
+    "headingId": "h.28zjm4cj92dt",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "1.2 Objectives and research questions",
+    "page": 1,
+    "physical": 9,
+    "headingId": "h.s3shfhiwyz3d",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "1.3 Scope, versions and source identity",
+    "page": 2,
+    "physical": 10,
+    "headingId": "h.gewf96xcpzri",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "1.4 Method and report structure",
+    "page": 3,
+    "physical": 11,
+    "headingId": "h.16ldjhlw7ms6",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES",
+    "page": 4,
+    "physical": 12,
+    "headingId": "h.tb4zab5ysoyn",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "2.1 Scope, evidence, and notation",
+    "page": 4,
+    "physical": 12,
+    "headingId": "h.f564q6ofb9iz",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.2 Board representation and legal updates",
+    "page": 5,
+    "physical": 13,
+    "headingId": "h.ox3085n6q948",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.2.1 Matrix, index conversion, and state ownership",
+    "page": 5,
+    "physical": 13,
+    "headingId": "h.v5ssqmhnici6",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.2.2 Apply and undo",
+    "page": 6,
+    "physical": 14,
+    "headingId": "h.ixliekovwady",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.3 Freestyle win detection",
+    "page": 8,
+    "physical": 16,
+    "headingId": "h.llgaaxp2vihy",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.4 Baselines: random play and rule-based play",
+    "page": 11,
+    "physical": 19,
+    "headingId": "h.t89694iwlib",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.4.1 Random baseline",
+    "page": 11,
+    "physical": 19,
+    "headingId": "h.gf3ld6hrgsyr",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.4.2 Immediate tactics and one-ply heuristic",
+    "page": 12,
+    "physical": 20,
+    "headingId": "h.e7kjz3j76vr2",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.5 Static evaluation and terminal utility",
+    "page": 14,
+    "physical": 22,
+    "headingId": "h.oh14t8qso23p",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.5.1 Evaluation of nonterminal positions",
+    "page": 14,
+    "physical": 22,
+    "headingId": "h.odpwbopwyu4e",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.5.2 Terminal states and the score hierarchy",
+    "page": 17,
+    "physical": 25,
+    "headingId": "h.ty6bcng513tg",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.6 Candidate generation and a soft tactical cap",
+    "page": 18,
+    "physical": 26,
+    "headingId": "h.n2msphwxgbc8",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.6.1 Spatial neighborhood",
+    "page": 18,
+    "physical": 26,
+    "headingId": "h.ki6ogpu2c3b0",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.6.2 Tactical preservation and membership",
+    "page": 20,
+    "physical": 28,
+    "headingId": "h.uooxa7pye6zy",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.7 Move ordering versus move selection",
+    "page": 21,
+    "physical": 29,
+    "headingId": "h.mop38wrt6f8f",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.8 Minimax search",
+    "page": 22,
+    "physical": 30,
+    "headingId": "h.ka1fnecs6on7",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.8.1 Recurrence and contract",
+    "page": 22,
+    "physical": 30,
+    "headingId": "h.qona5aytdcz9",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.8.2 Proof, example and complexity",
+    "page": 24,
+    "physical": 32,
+    "headingId": "h.mfxc5fc4ntt7",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.9 Alpha-Beta pruning",
+    "page": 25,
+    "physical": 33,
+    "headingId": "h.m2zshj9xhidg",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.9.1 Bounds and pseudocode",
+    "page": 25,
+    "physical": 33,
+    "headingId": "h.fl4c0ur4c4wj",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.9.2 Worked cutoff and correctness boundary",
+    "page": 27,
+    "physical": 35,
+    "headingId": "h.chp989x4d9hw",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.10 Iterative deepening and budgets",
+    "page": 28,
+    "physical": 36,
+    "headingId": "h.4nux9as0w8f4",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.11 Zobrist hashing and incremental state",
+    "page": 30,
+    "physical": 38,
+    "headingId": "h.u6wnsrodysn",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.11.1 Definition and update",
+    "page": 30,
+    "physical": 38,
+    "headingId": "h.uew8hqaidmzp",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.12 Transposition table: entries, bounds and context",
+    "page": 32,
+    "physical": 40,
+    "headingId": "h.4v52azsb4fkd",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.12.1 Meaning of stored values",
+    "page": 32,
+    "physical": 40,
+    "headingId": "h.kd6sx6kollmi",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.12.2 Why reuse can be wrong",
+    "page": 34,
+    "physical": 42,
+    "headingId": "h.wblsbkp7rwlb",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "2.13 Quiescence search in the legacy TypeScript bot",
+    "page": 35,
+    "physical": 43,
+    "headingId": "h.w6poqxjs9r4h",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.14 Legacy bitmask patterns and incremental line counts",
+    "page": 37,
+    "physical": 45,
+    "headingId": "h.u1io5ql1vutd",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.15 Difficulty configurations and the active request path",
+    "page": 40,
+    "physical": 48,
+    "headingId": "h.aousdh82aqys",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "2.16 Synthesis and limits of the algorithmic claims",
+    "page": 42,
+    "physical": 50,
+    "headingId": "h.deo9zlys1cxk",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN",
+    "page": 44,
+    "physical": 52,
+    "headingId": "h.9ty3awaoyfn1",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "3.1 Actors, use cases and functional requirements",
+    "page": 44,
+    "physical": 52,
+    "headingId": "h.cezhdukw22a5",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.2 Non-functional requirements and acceptance boundaries",
+    "page": 46,
+    "physical": 54,
+    "headingId": "h.l93wek48u6pv",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.3 Architecture and ownership",
+    "page": 47,
+    "physical": 55,
+    "headingId": "h.44ilrwr6m6hi",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.4 Board state, history and legal transition contract",
+    "page": 48,
+    "physical": 56,
+    "headingId": "h.ykhczgk1573",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.5 Match phases and state transitions",
+    "page": 49,
+    "physical": 57,
+    "headingId": "h.o3qnfo717c4z",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.6 Asynchronous request protocol and cancellation",
+    "page": 50,
+    "physical": 58,
+    "headingId": "h.rbfbaqfupooi",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.7 Coordinate transformation and gesture interpretation",
+    "page": 51,
+    "physical": 59,
+    "headingId": "h.xsluc2cfh6fq",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.8 Search-result contract and presentation of telemetry",
+    "page": 52,
+    "physical": 60,
+    "headingId": "h.pj0epyw80iuc",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "3.9 Verification scenarios derived from the design",
+    "page": 52,
+    "physical": 60,
+    "headingId": "h.uqgphbx7d2i",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "CHAPTER 4. IMPLEMENTATION",
+    "page": 54,
+    "physical": 62,
+    "headingId": "h.3opfa5jx1z65",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "4.1 Toolchain and project organization",
+    "page": 54,
+    "physical": 62,
+    "headingId": "h.hefb34yw4eqb",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "4.2 Accepted move processing",
+    "page": 54,
+    "physical": 62,
+    "headingId": "h.kuw4himka0b",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "4.3 AI dispatch, Worker execution and WASM hydration",
+    "page": 55,
+    "physical": 63,
+    "headingId": "h.7yn47n5rr1d9",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "4.4 Board rendering and interface synchronization",
+    "page": 56,
+    "physical": 64,
+    "headingId": "h.duk1kwe4t3bo",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "4.5 Presentation website and interactive explanation",
+    "page": 57,
+    "physical": 65,
+    "headingId": "h.ivnxw4hj6ag2",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "4.6 Python/Pyodide execution and four instructional programs",
+    "page": 57,
+    "physical": 65,
+    "headingId": "h.vgxp54qbkd6t",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "4.6.1 Pattern scanner",
+    "page": 58,
+    "physical": 66,
+    "headingId": "h.htgwz1b54vki",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "4.6.2 Heuristic calculator",
+    "page": 58,
+    "physical": 66,
+    "headingId": "h.c1ks7fdjnbzp",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "4.6.3 Chebyshev candidate example",
+    "page": 58,
+    "physical": 66,
+    "headingId": "h.j6j4kiyfvtac",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "4.6.4 Empirical-analysis snippet",
+    "page": 59,
+    "physical": 67,
+    "headingId": "h.s01h91bc9g9k",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "4.7 Implementation traceability and limits",
+    "page": 60,
+    "physical": 68,
+    "headingId": "h.8vkuvzj3tl0r",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "CHAPTER 5. RESULTS AND EVALUATION",
+    "page": 61,
+    "physical": 69,
+    "headingId": "h.x4gzqixf87qm",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "5.1 Evaluation questions, evidence and boundaries",
+    "page": 61,
+    "physical": 69,
+    "headingId": "h.ksknugug3ebp",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "5.2 Native board and search checks of the 23 October engine",
+    "page": 61,
+    "physical": 69,
+    "headingId": "h.4e3feq1vanay",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "5.3 WebAssembly parity and browser observations",
+    "page": 63,
+    "physical": 71,
+    "headingId": "h.um9mbintoly",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "5.3.1 Follow-up application validation",
+    "page": 64,
+    "physical": 72,
+    "headingId": "h.vjc9kyj8offy",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "5.4 Separate native reference experiments",
+    "page": 65,
+    "physical": 73,
+    "headingId": "h.ehsapit9nzy8",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "5.4.1 A paired Minimax and Alpha-Beta example",
+    "page": 65,
+    "physical": 73,
+    "headingId": "h.yyqb9ygo25hr",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "5.4.2 Candidate caps, ordering and tactical completeness",
+    "page": 67,
+    "physical": 75,
+    "headingId": "h.sep6934wxqpa",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "5.4.3 Hash, table scope and interrupted search",
+    "page": 67,
+    "physical": 75,
+    "headingId": "h.h6oy75sv7019",
+    "level": 3,
+    "kind": "heading"
+  },
+  {
+    "title": "5.5 Historical cross-language and Week 4 datasets",
+    "page": 68,
+    "physical": 76,
+    "headingId": "h.aidtnilmd7op",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "5.6 Presentation examples and evidence quality",
+    "page": 69,
+    "physical": 77,
+    "headingId": "h.5c7dfs581ttj",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "5.7 Threats to validity and interpretation",
+    "page": 70,
+    "physical": 78,
+    "headingId": "h.sx6fri3t6972",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "CHAPTER 6. CONCLUSION AND FUTURE WORK",
+    "page": 71,
+    "physical": 79,
+    "headingId": "h.h3dln88p2eyp",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "6.1 Work completed and contribution",
+    "page": 71,
+    "physical": 79,
+    "headingId": "h.wmsu1zxcto6s",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "6.2 Limitations",
+    "page": 72,
+    "physical": 80,
+    "headingId": "h.ihchg45onn57",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "6.3 Future development",
+    "page": 72,
+    "physical": 80,
+    "headingId": "h.n7j98jjv0ht2",
+    "level": 2,
+    "kind": "heading"
+  },
+  {
+    "title": "REFERENCES",
+    "page": 75,
+    "physical": 83,
+    "headingId": "h.in9eplkodgeb",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP",
+    "page": 86,
+    "physical": 94,
+    "headingId": "h.4lvh3lnoi9vc",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER",
+    "page": 88,
+    "physical": 96,
+    "headingId": "h.a1ruwmryb0b5",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE",
+    "page": 91,
+    "physical": 99,
+    "headingId": "h.r2ne5nnz9baa",
+    "level": 1,
+    "kind": "heading"
+  },
+  {
+    "title": "Figure 2.1. Row-major board representation",
+    "page": 6,
+    "physical": 14,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.2. Search must restore its caller state",
+    "page": 8,
+    "physical": 16,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.3. Last-move scan along four axes",
+    "page": 11,
+    "physical": 19,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.4. Rule-based tactical priorities",
+    "page": 14,
+    "physical": 22,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.5. Contiguous-run weights of the archived Rust evaluator",
+    "page": 17,
+    "physical": 25,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.6. Radius and board edges affect candidate membership",
+    "page": 19,
+    "physical": 27,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.7. Alternative traversal orders on identical membership",
+    "page": 22,
+    "physical": 30,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.8. A two-level Minimax example",
+    "page": 25,
+    "physical": 33,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.9. Alpha-Beta cutoff on an unchanged tree",
+    "page": 28,
+    "physical": 36,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.10. Iterative deepening and incomplete work",
+    "page": 30,
+    "physical": 38,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.11. Incremental XOR and turn-key handling",
+    "page": 32,
+    "physical": 40,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 2.12. Bound semantics in a transposition table",
+    "page": 35,
+    "physical": 43,
+    "kind": "figure"
+  },
+  {
+    "title": "Table 2.1. Recorded Rust difficulty configurations and frontend request path",
+    "page": 41,
+    "physical": 49,
+    "kind": "table"
+  },
+  {
+    "title": "Table 3.1. Functional requirements F01–F09",
+    "page": 44,
+    "physical": 52,
+    "kind": "table"
+  },
+  {
+    "title": "Figure 3.1. Responsibilities in the playable application",
+    "page": 47,
+    "physical": 55,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 3.2. Match phases and the separate AI waiting flag",
+    "page": 49,
+    "physical": 57,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 3.3. Inverse camera transform before board bounds checking",
+    "page": 51,
+    "physical": 59,
+    "kind": "figure"
+  },
+  {
+    "title": "Table 3.2. Verification scenarios and expected outcomes",
+    "page": 52,
+    "physical": 60,
+    "kind": "table"
+  },
+  {
+    "title": "Figure 4.1. Tactical and Rust routes converge at the guarded commit",
+    "page": 55,
+    "physical": 63,
+    "kind": "figure"
+  },
+  {
+    "title": "Figure 4.2. Union of clipped Chebyshev neighborhoods in a five-stone example",
+    "page": 59,
+    "physical": 67,
+    "kind": "figure"
+  },
+  {
+    "title": "Table 5.1. Native engine search on the center fixture at depth two",
+    "page": 62,
+    "physical": 70,
+    "kind": "table"
+  },
+  {
+    "title": "Figure 5.1. Recorded native engine nodes on the center fixture",
+    "page": 63,
+    "physical": 71,
+    "kind": "figure"
+  },
+  {
+    "title": "Table 5.2. Native reference search on the clustered fixture at depth two",
+    "page": 66,
+    "physical": 74,
+    "kind": "table"
+  },
+  {
+    "title": "Figure 5.2. Native reference node counts, with ranking cost excluded from bars",
+    "page": 66,
+    "physical": 74,
+    "kind": "figure"
+  },
+  {
+    "title": "Table 5.3. Historical native Rust and TypeScript/Node benchmark",
+    "page": 68,
+    "physical": 76,
+    "kind": "table"
+  },
+  {
+    "title": "Figure 5.3. Historical native-versus-Node benchmark on one midgame fixture",
+    "page": 69,
+    "physical": 77,
+    "kind": "figure"
+  },
+  {
+    "title": "Table A.1. Repository inventory and roles",
+    "page": 86,
+    "physical": 94,
+    "kind": "table"
+  },
+  {
+    "title": "Table B.1. Evidence summary and verification status",
+    "page": 88,
+    "physical": 96,
+    "kind": "table"
+  }
+]

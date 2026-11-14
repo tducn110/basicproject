@@ -1,0 +1,51 @@
+[
+  {
+    "start": 32204,
+    "end": 32786,
+    "style": "NORMAL_TEXT",
+    "text": "For example, if the ordered legal list is [a,b,c] and the generated unsigned integer is 8, the remainder is 2 and the selected move is c. No comparison of the positions after a, b and c occurs. More generally, write 2^64 = qL + r for a list of L cells. Under a hypothetical uniform 64-bit input, the first r remainders have q+1 preimages and the rest have q, explaining the modulo bias. This counting argument does not establish that a fixed seed is random or that a finite run samples moves uniformly. The source uses a SplitMix64-style mixer with wrapping 64-bit arithmetic [10].\n",
+    "equations": 0
+  },
+  {
+    "start": 44799,
+    "end": 45539,
+    "style": "NORMAL_TEXT",
+    "text": "With a single central stone, radius two offers 24 candidates instead of 224 legal empty cells. In a hypothetical uniform depth-d tree, reducing width from b to k changes the leaf model from b^d to k^d; this explains why selection can affect search cost more strongly than a small constant-time optimization. Actual widths vary, and later tactical preservation may enlarge them. A radius includes nearby diagonal and orthogonal cells equally under Chebyshev distance. A larger radius admits more distant plans but increases assessment and search work; a smaller radius saves work by making a stronger assumption about where useful moves occur. The raw set is complete for its spatial predicate, not for all strategically useful legal moves.\n",
+    "equations": 0
+  },
+  {
+    "start": 55954,
+    "end": 56365,
+    "style": "NORMAL_TEXT",
+    "text": "For branching factor at most b > 1 and depth d, the complete generated tree has O(b^d) nodes. Branching varies with position, candidate policy and terminal events. Depth-first search stores O(d) stack frames, up to O(db) live move entries, and an O(N²) working board. Candidate generation and horizon evaluation add per-node costs, so O(b^d) describes the node growth rather than a complete elapsed-time model.\n",
+    "equations": 0
+  },
+  {
+    "start": 60770,
+    "end": 61285,
+    "style": "NORMAL_TEXT",
+    "text": "The worst case remains O(b^d) nodes. For a uniform tree with perfect ordering, the ideal minimum leaf count is b^ceil(d/2) + b^floor(d/2) − 1; for even depth this has the familiar O(b^(d/2)) growth [23]. Neither bound is an elapsed-time prediction, because node costs and branching vary. Memory remains depth-first: O(d) stack frames and up to O(db) live move entries, in addition to the board. Equality cutoffs preserve the root value, although tie selection and visited-node counts can depend on traversal order.\n",
+    "equations": 0
+  },
+  {
+    "start": 78095,
+    "end": 78643,
+    "style": "NORMAL_TEXT",
+    "text": "Stand-pat evaluation supplies the initial bound without placing a stone. Because Gomoku requires a move, this is a modeling assumption rather than a legal pass; an immediate cutoff in a forced-defense position need not equal an all-legal-replies result. The forcing set and the five-level extension limit define the selective horizon. With at most f > 1 forcing moves per level and q extra levels, a coarse bound is O(f^q) nodes and O(qf) stored move entries, plus per-node generation, ordering and evaluation costs. If f = 1, node growth is O(q).\n",
+    "equations": 0
+  },
+  {
+    "start": 83353,
+    "end": 84203,
+    "style": "NORMAL_TEXT",
+    "text": "The lookup speed is purchased with initialization work and storage. The allocated Uint8Array has (15+1)×32,768 entries, or 524,288 payload bytes, including unused slots for shorter masks. If the maximum supported length L were allowed to grow, enumerating every mask would be exponential in L. The direct classification routines can perform nested empty-cell trials and five scans, giving a coarse O(L³) bound per mask and O(2^L L³) preprocessing overall. Once initialized, lookup is constant time for a supported segment, but constructing its mask still scans its cells. Incremental counts therefore reduce which lines are recomputed; they do not make an arbitrary whole-board evaluation O(1). A source-level extension beyond length 15 must also revise the fixed shift/index layout rather than relying on the larger coordinate capacity of BotBoard.\n",
+    "equations": 0
+  },
+  {
+    "start": 85566,
+    "end": 86339,
+    "style": "NORMAL_TEXT",
+    "text": "The tiers change both search method and search width. Easy uses random selection; Normal adds immediate tactical priorities and one-ply evaluation. The remaining tiers use Alpha-Beta at depths 2–5 with radius 2 and nominal caps 15, 12, 10 and 8. Reducing the nominal width offsets some of the growth from increased depth, but these are soft caps: assessed wins and blocks can increase the retained set. For illustration, a uniform tree of width 8 and depth 5 has 8^5 = 32,768 leaves and 37,449 total nodes before pruning. This is a fixed-width model, not an upper bound for the implemented soft-cap search. The tier timings and actual counters are reported in Chapter 5; configuration alone does not establish a latency bound or a measured progression in playing strength.\n",
+    "equations": 0
+  }
+]

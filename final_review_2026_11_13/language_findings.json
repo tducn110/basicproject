@@ -1,0 +1,172 @@
+{
+  "mode": "REVIEW_ONLY; only review artifacts created, no source or native document edited",
+  "snapshot": {
+    "paragraphs_path": "/home/pro/Downloads/vnuk/basicProject/final_review_2026_11_13/paragraphs.json",
+    "report_path": "/home/pro/Downloads/vnuk/basicProject/final_review_2026_11_13/report.txt",
+    "paragraphs_sha256": "ba10fb112052e515bcd9aac6ded8bd597645449efb7b576d528ba5e76147deb6",
+    "report_sha256": "b9246eab1893b0e161f8bdc64675ac7556a501e4b0d6a13d8381516db76928de"
+  },
+  "coverage": {
+    "total_paragraphs": 1054,
+    "read_paragraphs": 1054,
+    "nonempty_paragraphs": 1018,
+    "coverage_groups": [
+      {
+        "paragraphs": "1-350",
+        "status": "read"
+      },
+      {
+        "paragraphs": "351-700",
+        "status": "read"
+      },
+      {
+        "paragraphs": "701-1054",
+        "status": "read"
+      }
+    ],
+    "references": "all 53 entries read",
+    "tables": "all eight tables and individual cell paragraphs read",
+    "equation_elements": 0,
+    "report_text_parity": "report.txt is exactly the paragraph texts joined with one additional newline"
+  },
+  "summary": {
+    "editorial_patches": 4,
+    "blocking_editorial_findings": 0,
+    "placeholder_or_GPT_review_residue": 0,
+    "raw_LaTeX_or_unbalanced_LaTeX_delimiter_findings": 0,
+    "fresh_research_or_source_validation_performed": false
+  },
+  "patches": [
+    {
+      "id": "LANG-01",
+      "severity": "minor",
+      "status": "recommended_editorial_patch",
+      "category": "condition clarity",
+      "paragraph_number": 304,
+      "start": 43810,
+      "end": 44330,
+      "confidence": "high",
+      "old": "For a stone at (7,7), radius one gives a 3 × 3 square with eight empty candidates; radius two gives a 5 × 5 square with 24. With the single stone at (0,0), the radius-two square is clipped to a 3 × 3 corner and yields eight candidates. Multiple stones may nominate the same cell, but seen prevents duplicates. If a radius produces no raw candidates on a nonfull board, the documented selection code falls back to legal moves, avoiding an occupied placeholder. An empty player and a full board return no candidates [10].\n",
+      "new": "For a stone at (7,7), radius one gives a 3 × 3 square with eight empty candidates; radius two gives a 5 × 5 square with 24. With the single stone at (0,0), the radius-two square is clipped to a 3 × 3 corner and yields eight candidates. Multiple stones may nominate the same cell, but seen prevents duplicates. If a radius produces no raw candidates on a nonfull board, the documented selection code falls back to legal moves, avoiding an occupied placeholder. An empty player value or a full board produces no candidates [10].\n",
+      "reason": "The existing sentence coordinates the two cases with “and”. Algorithm 2.8 explicitly returns no candidates if either condition holds. The replacement clarifies that existing contract without changing the implementation claim."
+    },
+    {
+      "id": "LANG-02",
+      "severity": "minor",
+      "status": "recommended_editorial_patch",
+      "category": "plain-text mathematical grouping",
+      "paragraph_number": 396,
+      "start": 60770,
+      "end": 61285,
+      "confidence": "high",
+      "old": "The worst case remains O(b^d) nodes. For a uniform tree with perfect ordering, the ideal minimum leaf count is b^ceil(d/2) + b^floor(d/2) − 1; for even depth this has the familiar O(b^(d/2)) growth [23]. Neither bound is an elapsed-time prediction, because node costs and branching vary. Memory remains depth-first: O(d) stack frames and up to O(db) live move entries, in addition to the board. Equality cutoffs preserve the root value, although tie selection and visited-node counts can depend on traversal order.\n",
+      "new": "The worst case remains O(b^d) nodes. For a uniform tree with perfect ordering, the ideal minimum leaf count is b^(ceil(d/2)) + b^(floor(d/2)) − 1; for even depth this has the familiar O(b^(d/2)) growth [23]. Neither bound is an elapsed-time prediction, because node costs and branching vary. Memory remains depth-first: O(d) stack frames and up to O(db) live move entries, in addition to the board. Equality cutoffs preserve the root value, although tie selection and visited-node counts can depend on traversal order.\n",
+      "reason": "Group each complete exponent in the plain-text formula. This preserves the Alpha-Beta leaf-count expression; it is a notation improvement, not evidence of broken LaTeX."
+    },
+    {
+      "id": "LANG-03",
+      "severity": "minor",
+      "status": "recommended_editorial_patch",
+      "category": "UI action name",
+      "paragraph_number": 638,
+      "start": 102485,
+      "end": 103054,
+      "confidence": "high",
+      "old": "A concrete race illustrates the mechanism. Suppose request A is searching round 8. The person invokes a New game before A finishes. The controller increments its token, clears state and changes the round. Even if A's response was already queued, its captured token no longer matches. The promise resolution cannot insert A's move into the new board. Meanwhile, cancelPending rejects pending transport promises and terminates the old Worker, so future requests construct a new one. The token guard and resource cancellation address different parts of the race [2], [6].\n",
+      "new": "A concrete race illustrates the mechanism. Suppose request A is searching round 8. The person invokes New Game before A finishes. The controller increments its token, clears state and changes the round. Even if A's response was already queued, its captured token no longer matches. The promise resolution cannot insert A's move into the new board. Meanwhile, cancelPending rejects pending transport promises and terminates the old Worker, so future requests construct a new one. The token guard and resource cancellation address different parts of the race [2], [6].\n",
+      "reason": "Use the same New Game action name and capitalization used elsewhere; remove the unnatural article before the action label."
+    },
+    {
+      "id": "LANG-04",
+      "severity": "minor",
+      "status": "recommended_editorial_patch",
+      "category": "English grammar",
+      "paragraph_number": 677,
+      "start": 107882,
+      "end": 107957,
+      "confidence": "high",
+      "old": "Pending work rejects; error visible; a new Worker can serve a new request.\n",
+      "new": "Pending requests are rejected; an error is visible; a new Worker can serve a new request.\n",
+      "reason": "Work does not reject itself. The passive form identifies the rejected pending requests and makes the table observation grammatical."
+    }
+  ],
+  "preserve": [
+    {
+      "paragraph_numbers": [
+        593,
+        607,
+        608,
+        621,
+        636,
+        638,
+        639,
+        670,
+        677,
+        703,
+        717
+      ],
+      "reason": "pending refers to asynchronous runtime work or initialization, not unfinished verification"
+    },
+    {
+      "paragraph_numbers": [
+        776,
+        1013
+      ],
+      "reason": "pending/partial explicitly describes the historical gate ledger and avoids falsely claiming full sign-off"
+    },
+    {
+      "paragraph_numbers": [
+        1046
+      ],
+      "reason": "wasm32-unknown-unknown is a legitimate target identifier"
+    },
+    {
+      "paragraph_numbers": [
+        304
+      ],
+      "reason": "placeholder refers to avoiding an occupied fallback move, not a document placeholder"
+    },
+    {
+      "paragraph_numbers": [
+        735,
+        865,
+        867
+      ],
+      "reason": "Remaining publication work is consistent: the local source rebuild exists, while publishing that source and the separate reference dependency remains future work"
+    },
+    {
+      "paragraph_numbers": [
+        855,
+        861,
+        865,
+        1021,
+        1022,
+        1023,
+        1026,
+        1052,
+        1054
+      ],
+      "reason": "Preserve dated separation between pinned historical evidence, the local 13 November rebuild, and the unchanged public deployment"
+    },
+    {
+      "paragraph_numbers": [
+        863,
+        864,
+        865,
+        867,
+        868,
+        869,
+        870,
+        871,
+        872,
+        873
+      ],
+      "reason": "Research limitations, identified implementation boundary cases and future development are legitimate final-report content, not GPT-review residue"
+    }
+  ],
+  "limits": [
+    "This pass verifies the supplied complete textual snapshot, not the native document render, pagination, equation styling or working hyperlinks.",
+    "No fresh benchmark, source-code, deployment or literature validation was performed. Existing research claims and limitations were preserved.",
+    "Plain-text math uses underscore/caret conventions and is readable. LANG-02 only makes two compound exponents explicit; no blanket equation conversion is proposed."
+  ]
+}

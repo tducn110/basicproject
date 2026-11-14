@@ -1,0 +1,15 @@
+{
+  "heading_matches": 83,
+  "caption_matches": 28,
+  "caption_list_matches": 0,
+  "body_expected_changes_only": true,
+  "first_use_sequential": true,
+  "reference_entries_sequential": true,
+  "changed_pages": [
+    6,
+    7,
+    50,
+    67,
+    74
+  ]
+}

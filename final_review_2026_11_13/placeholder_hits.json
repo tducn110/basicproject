@@ -1,0 +1,9 @@
+[
+  {
+    "start": 43810,
+    "end": 44330,
+    "style": "NORMAL_TEXT",
+    "text": "For a stone at (7,7), radius one gives a 3 × 3 square with eight empty candidates; radius two gives a 5 × 5 square with 24. With the single stone at (0,0), the radius-two square is clipped to a 3 × 3 corner and yields eight candidates. Multiple stones may nominate the same cell, but seen prevents duplicates. If a radius produces no raw candidates on a nonfull board, the documented selection code falls back to legal moves, avoiding an occupied placeholder. An empty player and a full board return no candidates [10].\n",
+    "equations": 0
+  }
+]

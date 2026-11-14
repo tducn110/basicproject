@@ -1,0 +1,32 @@
+[
+  {
+    "tier": "Easy",
+    "search": "\t\t28 button (collapsed) Last search · Random · Completed depth: 0, Secondary Actions: Expand",
+    "undoEnabled": true
+  },
+  {
+    "tier": "Normal",
+    "search": "\t\t28 button (collapsed) Last search · Rule based and heuristic · Completed depth: 1, Secondary Actions: Expand",
+    "undoEnabled": true
+  },
+  {
+    "tier": "Hard",
+    "search": "\t\t28 button (collapsed) Last search · Alpha-Beta · Completed depth: 2, Secondary Actions: Expand",
+    "undoEnabled": true
+  },
+  {
+    "tier": "Very Hard",
+    "search": "\t\t28 button (collapsed) Last search · Alpha-Beta · Completed depth: 3, Secondary Actions: Expand",
+    "undoEnabled": true
+  },
+  {
+    "tier": "Expert",
+    "search": "\t\t28 button (collapsed) Last search · Alpha-Beta · Completed depth: 4, Secondary Actions: Expand",
+    "undoEnabled": true
+  },
+  {
+    "tier": "Master",
+    "search": "\t\t28 button (collapsed) Last search · Alpha-Beta · Completed depth: 5, Secondary Actions: Expand",
+    "undoEnabled": true
+  }
+]

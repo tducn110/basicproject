@@ -1,0 +1,749 @@
+[
+  {
+    "start": 14054,
+    "old": "This chapter explains how a Caro position can be represented, tested for a result, evaluated and searched. It connects the concepts to evidence from the project while distinguishing three implementation contexts. The current application controller and frontend rules can be inspected directly in the application source. The repository's source excerpts and baseline modules document the core Rust engine functions, state representations, and search procedures used by the WebAssembly package [6]. Together with the compiled WebAssembly binary and TypeScript adapter contracts, these artifacts specify the active engine behavior and its boundary with the frontend controller [6], [7], [9].",
+    "new": "This chapter develops the board representation, terminal rule, evaluation function and search algorithms used in the Caro project. The current frontend and its Worker adapter are examined alongside two research implementations: the modified Rust engine recorded in the 23 October source snapshot [6], and the separate native reference engine [8]. The active application calls a vendored WebAssembly package through the request interface and Worker adapter [3], [9], [26]. These sources have different roles: frontend source establishes request and commit behavior, Rust source explains the recorded algorithm, and binary execution establishes the behavior of the tested package.",
+    "reason": "Separates source ownership and binary execution; removes unsupported claim that old baseline plus adapter establishes active binary internals.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/executeSearch.ts",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json"
+    ]
+  },
+  {
+    "start": 14743,
+    "old": "The repository additionally contains a TypeScript bot implementation under the older bot module. It is called the legacy bot here because the current AIController constructs GomokuWasmEngine and sends the normal AI request through that adapter, with a separate tactical prepass for higher difficulties. Its quiescence search, iterative deepening, and transposition table provide concrete implementations of advanced game-tree optimizations analyzed in this chapter [10], [11]. A separate Rust reference engine has historical native research reports and test outputs. Results from that native reference library quantify algorithmic scaling and pruning behavior in controlled native experiments [8].",
+    "new": "The repository also retains a TypeScript bot under src/game/bot. It is referred to as the legacy bot because AIController sends ordinary requests to GomokuWasmEngine and uses a separate tactical check for the four higher difficulty levels. Iterative deepening, quiescence search and transposition-table examples in this chapter come from that legacy implementation [3], [11]. Experiments on the separate Rust reference engine are identified as native reference results [8].",
+    "reason": "Removes generic promotion and keeps advanced algorithms assigned to legacy/reference owners.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md"
+    ]
+  },
+  {
+    "start": 16290,
+    "old": "The mathematical formulations and pseudocode specify each algorithm's inputs, state transitions, invariants, and complexity bounds, complemented by step-by-step worked examples and empirical measurements. Shannon's foundational model of adversarial look-ahead and static horizon evaluation provides the theoretical framework for the depth-limited search architecture [12].",
+    "new": "The formulations and pseudocode state the input, transition rule and assumptions of each algorithm. Worked examples illustrate their operation; measurements are presented separately in Chapter 5. Depth-limited search follows the distinction between look-ahead and static horizon evaluation described by Shannon [12].",
+    "reason": "Removes inflated presentation language and separates explanatory examples from measured results.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md",
+      "https://doi.org/10.1080/14786445008521796"
+    ]
+  },
+  {
+    "start": 16758,
+    "old": "A position consists of 225 cells, each containing empty, X or O. In an array indexed as B[y][x], row-major conversion to a flat logical index is i = 15y + x; the inverse is x = i mod 15, y = floor(i/15). Hence the center (7,7) has index 112, and (14,14) has index 224. The system divides board representation across three specialized structures according to architectural role: (1) the Rust search engine (Board) stores a contiguous 15 × 15 grid of 225 one-byte repr(u8) cells (Empty = 0, Black = 1, White = 2) paired with move_count; (2) the match wrapper (Game) and frontend (GameState) store match progression and an ordered Move history; and (3) the legacy TypeScript bot (BotBoard) uses a 1D sentinel-padded array with directional bitmask segments. The rationale for this division is to decouple high-frequency recursive search from match-lifecycle management. Its primary benefit is O(1) direct indexing, O(1) in-place apply/undo during depth-first search, zero per-node heap allocation, and compact L1-cache locality; the trade-off is that the raw 225-cell matrix does not record chronological move order, requiring the outer Game/GameState layer to maintain history and full-board unindexed scans to take O(N²) time [13].",
+    "new": "A position contains 225 cells, each empty, X or O. For a logical matrix B[y][x], row-major conversion is i = 15y + x, with inverse x = i mod 15 and y = floor(i/15). The center (7,7) therefore has index 112, and (14,14) has index 224. In the modified Rust source, Board stores a 15 × 15 array of repr(u8) cells and a move counter. Its cell values are Empty = 0, Black = 1 and White = 2; the array occupies 225 bytes, while the complete Board also contains the counter and any alignment padding [6], [13]. The frontend GameState instead stores occupied coordinates in a Map and maintains ordered move history [14]. The legacy BotBoard uses a one-dimensional array padded with boundary sentinels. These representations support different operations: direct Rust cell access, frontend match history, and incremental line analysis in the legacy bot.",
+    "reason": "Corrects frontend Map representation; removes false zero-per-node-allocation and unmeasured L1-cache claims; distinguishes cell array from struct size.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/GameState.ts:GameState",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:BotBoard",
+      "https://doc.rust-lang.org/reference/type-layout.html"
+    ]
+  },
+  {
+    "start": 17988,
+    "old": "The archived Rust place excerpt validates bounds, rejects an empty stone, rejects an occupied cell, writes a cell and increments a move counter. The companion undo rejects an out-of-range or already-empty cell and otherwise clears it and decrements that counter [6]. Dividing responsibility between low-level cell mutation (Board::place and Board::undo) and match-level legality (Game::play_move and GameController) keeps inner-loop search operations lightweight while ensuring that turn alternation and post-win lockouts are strictly enforced on committed game moves.",
+    "new": "In the modified Rust snapshot, Board::place checks bounds, rejects an empty stone or occupied cell, writes the stone and increments move_count. Board::undo rejects an invalid or empty coordinate, then clears the occupied cell and decrements the counter [6]. These operations maintain the position. Turn alternation, move history and terminal lockout belong to the Rust Game wrapper and the frontend match controller, rather than to Board::place itself [2].",
+    "reason": "The checked undo and empty-stone rejection are modified-source behavior, absent from old baseline; describes legality owners without universal guarantee.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board::place",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board::undo",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/lib.rs:Game",
+      "/home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts"
+    ]
+  },
+  {
+    "start": 18557,
+    "old": "A board and a game are different state owners. Cells and the count describe the position; turn, winner, and move history describe the match's progression. A history provides the information needed to restore actual game moves in reverse order. A recursive search temporarily changes a working board to explore alternatives, which must not silently become the player's actual move. The documented Rust search makes a copy at its outer entry, while its in-place search relies on restoration of the working board [6]. Cloning the root board once per search request isolates exploratory tree mutations from the live game state, while in-place apply and undo avoid O(N²) board copying at internal nodes.",
+    "new": "Board mutation and match progression have separate owners. Board holds the cells and move count; Game and the frontend controller maintain turn, result and history. Search explores hypothetical moves on a working board, while the match commits only the selected move. The modified Rust search clones the root board once and applies and undoes moves within that copy [6]. This avoids a complete board copy for each child, although candidate generation still allocates move lists at internal nodes.",
+    "reason": "Clarifies actual root-copy/in-place ownership and counters earlier zero-allocation claim.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:search",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates"
+    ]
+  },
+  {
+    "start": 19301,
+    "old": "Source: CaroGame/src/game/core/GameState.ts [14].",
+    "new": "Source: Illustration of logical row-major indexing, based on the Rust board representation [6], [13].",
+    "reason": "GameState is a sparse Map, not the illustrated contiguous row-major Rust board.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:Board",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/GameState.ts"
+    ]
+  },
+  {
+    "start": 19823,
+    "old": "// Algorithm 2.1 (research/current_2026_10_23/baseline_engine/src/board.rs) — APPLY(B, (x,y), p):",
+    "new": "// Algorithm 2.1 (modified Rust source in [6]) — APPLY(B, (x,y), p):",
+    "reason": "Pseudocode includes checks not present in baseline_engine; correct provenance.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W2"
+    ]
+  },
+  {
+    "start": 20418,
+    "old": "The finally in this explanatory version means every normal return, cutoff and supported abort must pass through restoration. In languages without such a construct, equivalent structured cleanup is necessary. Additional state such as a hash, side to move, cached pattern counts, last move or winner must also be restored by its actual owner. This paired apply/undo contract guarantees O(1) state transitions per branch while preserving parent-state integrity across arbitrary search depths.",
+    "new": "The try/finally structure in this explanatory pseudocode requires restoration after a return, cutoff or supported abort. An implementation must provide equivalent cleanup for every exit it supports. A matching apply/undo restores the cell and count in O(1) time; hashes, cached patterns, turn and other mutable fields must be restored separately by their owners. The modified Rust kernel uses structured returns without a deadline-abort path, whereas the legacy TypeScript search uses try/finally when it can throw a search-abort sentinel.",
+    "reason": "Avoids attributing exception/abort-safe finally semantics to Rust source; distinguishes O(1) cell updates from full state update costs.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:alphaBeta",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:makeMove"
+    ]
+  },
+  {
+    "start": 21516,
+    "old": "For example, let X occupy (7,7), O occupy (8,7), and the count be two. Trying X at (7,8) changes that cell and makes the count three. Undoing (7,8) returns both the cells and count to their initial values. Clearing the cell but leaving count three makes fullness checks unreliable; decrementing without clearing contaminates the next branch. With direct indexing, each operation is O(1) time and O(1) auxiliary space; copying an N × N board costs O(N²). Rejecting an occupied or out-of-bounds move must leave the board unchanged. Together with the inductive restoration invariant, automated root-restoration checks across 820 engine search runs confirm that the working board is returned unchanged after every search.",
+    "new": "For example, let X occupy (7,7), O occupy (8,7), and move_count be two. Applying X at (7,8) sets that cell and raises the count to three; undoing the same move restores both fields. Clearing the cell without decrementing the counter would make fullness checks unreliable. With direct indexing, each cell/count update takes O(1) time and O(1) auxiliary space; copying an N × N board takes O(N²). The archived native experiment records 820 successful working-board restoration checks, including repeated search configurations. This is the finite test result used in Chapter 5 [43].",
+    "reason": "Bounds restoration evidence to recorded checks; removes unlimited 'after every search' claim.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md"
+    ]
+  },
+  {
+    "start": 22285,
+    "old": "Source: research/current_2026_10_23/baseline_engine/src/board.rs [6].",
+    "new": "Source: Illustration of paired apply/undo in the modified Rust source [6].",
+    "reason": "Corrects baseline provenance.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W2"
+    ]
+  },
+  {
+    "start": 22828,
+    "old": "Inputs, outputs and preconditions. The procedure takes a board and the last placed coordinate m, and returns the winner and a collection of winning cells when a qualifying line is found, or no result otherwise. It assumes m refers to the move that may have just caused the transition. If the board was already won before that move, testing only a line through m cannot detect every earlier win. A root-level validation of an arbitrary imported board needs a separate full-board check. The current frontend rule reads the player at m; an empty or invalid location produces no winner.",
+    "new": "The procedure receives a valid board and the last placed coordinate m. It returns the winning player and collected winning cells, or no result. It assumes the preceding position was unfinished, so any newly created winning line passes through m. An arbitrary imported position instead requires a full-board result check at the search root. Under the frontend state contract, an empty last-move coordinate yields no winner [4].",
+    "reason": "Clarifies valid-board precondition rather than asserting WinRule itself validates arbitrary invalid state.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts:FreestyleGomokuWinRule.evaluate",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:check_winner"
+    ]
+  },
+  {
+    "start": 24998,
+    "old": "Consider X X [X] X X on one row with the bracketed center as the last move. Each side contributes two; 1+2+2=5. For X X X [X] X X, the value exceeds five and remains a win. An empty last cell returns no winner; a gap interrupts the run; edge and corner scans stop safely. Why last-move 4-axis ray scanning is used: because any newly formed winning line in an ongoing game must pass through the stone m just placed, scanning at most K − 1 = 4 steps in both directions (+1 and −1) along the 4 axes D = {(1,0), (0,1), (1,1), (1,−1)} inspects at most 4 × 2 × 4 = 32 neighboring cells. Benefits and trade-offs: this reduces terminal win detection at every recursive search node from an O(N²) full-board scan (225 × 4 = 900 directional checks) to O(K) = O(1) time and O(K) space, yielding a major speedup inside Minimax and Alpha-Beta; the trade-off is that it relies on the inductive invariant that no prior move had already won, so arbitrary imported positions require a one-time O(N²) root validation.",
+    "new": "For X X [X] X X on a row, with the bracketed cell placed last, each side contributes two stones and 1 + 2 + 2 = 5. For X X X [X] X X, the run exceeds five and is still a win. A gap or board edge stops the corresponding scan. With K = 5, the frontend examines at most 4 × 2 × 4 = 32 neighboring positions, giving O(K) time and O(K) space for the collected cells. These bounds are constant for the configured winning length. A full-board scan checks every occupied starting point and has a different cost; the report does not infer an elapsed-time speedup from the operation count alone.",
+    "reason": "Removes unmeasured major-speedup claim and invalid exact comparison to 900 full-board checks; keeps derivation.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts:collect",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:check_winner"
+    ]
+  },
+  {
+    "start": 26159,
+    "old": "A random baseline makes the meaning of added search explicit: it selects without comparing a tree of future replies. The documented Rust baseline first checks for a terminal position or an invalid empty player; for Easy it gathers legal empty cells, uses a seeded pseudo-random value modulo the number of cells, and evaluates the resulting move for the returned result. That evaluation occurs after selection and does not choose the Easy move [6].",
+    "new": "A random baseline selects a legal move without comparing future replies. In the modified Rust snapshot, Easy first rejects an empty player or terminal board, enumerates empty cells, and selects an index using a seeded 64-bit mixer modulo the list length. It evaluates the chosen move afterwards to populate the result; that evaluation does not influence selection [6].",
+    "reason": "Assigns Random policy to modified source instead of old baseline.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W4/W7"
+    ]
+  },
+  {
+    "start": 26873,
+    "old": "The input includes the seed because pseudo-random generation is deterministic for a particular generator state and input. The output is either an element of L or no move. With a board containing only one stone, |L|=224; a one-element list always returns its sole entry. A full or terminal board must not perform modulo zero. The legality argument is immediate from construction of L, provided the game-level preconditions and list are correct. Using a deterministic 64-bit splitmix-style mixer over the legal move list ensures fast O(1) index selection after O(N²) empty-cell enumeration.",
+    "new": "The seed is part of the input because the mixer is deterministic. The output is a member of L or no move. A board with one stone has 224 empty cells, while a one-element list always returns its sole coordinate. Terminal handling precedes modulo selection, so a full board cannot cause division by zero. Index selection takes O(1) after enumeration. Modulo reduction does not in general produce an exactly uniform distribution over arbitrary list lengths.",
+    "reason": "Corrects exact-uniformity implication and explains selection safely without marketing claims.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:seeded_u64",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline"
+    ]
+  },
+  {
+    "start": 27880,
+    "old": "The documented Normal baseline first obtains candidates, then chooses an immediate win when available, otherwise an immediate blocking coordinate, and otherwise compares the evaluations of candidate moves. These are priorities, not a multi-ply adversarial proof. The candidate assessment is the source of the immediate-win and block markers [6]. The current frontend also has a separate tactical resolver for Hard, Very Hard, Expert and Master before it requests the WASM engine. Easy and Normal skip that frontend prepass. A tactical response reports its own source and zero Rust search work; it must not be presented as a completed alpha-beta search [10].",
+    "new": "The modified Rust Normal policy selects an immediate win when one is available, then an immediate blocking coordinate, and otherwise the highest-valued one-ply candidate. Candidate assessment supplies the win and block markers [6]. The frontend has a separate tactical resolver for Hard, Very Hard, Expert and Master; Easy and Normal bypass it. A frontend tactical result identifies its source as tactical and reports zero Rust nodes, because it returns before a WASM request [3], [10].",
+    "reason": "Corrects source identity and keeps the two tactical stages distinct.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/TacticalMoveResolver.ts"
+    ]
+  },
+  {
+    "start": 30777,
+    "old": "Source: research/current_2026_10_23/baseline_engine/src/ai.rs [7].",
+    "new": "Source: Illustration of the modified Rust rule-based priorities [6].",
+    "reason": "Old [7] source is noise-based minimax, not shown Random/RuleBased dispatcher.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W4/W7"
+    ]
+  },
+  {
+    "start": 31769,
+    "old": "The publicly archived Rust baseline defines the following weights for two open ends and one open end, respectively: length at least five, 1,000,000 and 1,000,000; length four, 50,000 and 5,000; length three, 5,000 and 500; and length two, 200 and 50. A run of five or more has the same weight even when both ends are closed; otherwise unmatched cases receive zero from the run-weight function [15]. Why exponential pattern weights are used: scaling weights by an order of magnitude per stone—from 50/200 for two-stone runs to 500/5,000 for three-stone runs, 5,000/50,000 for four-stone runs, and 1,000,000 for five-or-more—ensures that an unstoppable open four (50,000) or double-three threat decisively outweighs multiple scattered two-stone formations, while the Manhattan center term c(x,y) = max(0, 14 − |x − 7| − |y − 7|) breaks positional ties in the opening.",
+    "new": "The archived evaluator assigns weights of 1,000,000 to a run of at least five; 50,000 or 5,000 to a four with two or one open ends; 5,000 or 500 to a three; and 200 or 50 to a two. A run of five or more receives the same weight even with closed ends. Other cases receive zero [15]. These manually chosen weights favour longer, open formations, while the center term adds a smaller positional preference. They are heuristic parameters, rather than a proof that a named threat always outweighs every combination of shorter runs.",
+    "reason": "Removes false exponential progression, unsupported double-three modelling and unconditional tactical dominance.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:pattern_score",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/baseline_engine/src/eval.rs:pattern_score"
+    ]
+  },
+  {
+    "start": 32635,
+    "old": "// Algorithm 2.5 (research/current_2026_10_23/baseline_engine/src/eval.rs) — EVALUATE(B, p):",
+    "new": "// Algorithm 2.5 (modified Rust evaluator in [6]; run weights in [15]) — EVALUATE(B, p):",
+    "reason": "Old baseline lacks clamp although weights match; cites correct implementation.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W4",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:evaluate"
+    ]
+  },
+  {
+    "start": 33158,
+    "old": "The loop invariant is that score equals the signed contribution of all starts already visited, plus center terms for occupied cells already visited. Every maximal run has exactly one start in each orientation, so the preceding-cell test avoids counting that run repeatedly. Because every maximal contiguous run has a unique starting cell along each axis, the preceding-cell guard (skipping cell s when s − d holds the same color) guarantees that each run is weighted exactly once per axis without double-counting sub-segments.",
+    "new": "After each visited run start, score contains the signed run contributions processed so far and the center contributions of previously visited occupied cells. The preceding-cell guard skips interior stones of the same run. Every maximal run therefore contributes once per axis, even when it contains several stones.",
+    "reason": "Removes duplicated invariant proof while preserving exact claim.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:evaluate"
+    ]
+  },
+  {
+    "start": 33685,
+    "old": "For an illustrative board with X alone at (7,7), its singleton has no run weight and its center term is 14, so E(B,X)=14. Add X at (8,7) while leaving the remainder empty: the horizontal length-two run has two open ends and contributes 200; center terms are 14 and 13, so the value is 227. A blocked endpoint reduces open(r) from 2 to 1 (or 0 when blocked on both sides), shifting the run weight down by an order of magnitude; board boundaries act as closed endpoints.",
+    "new": "For a board containing only X at (7,7), no length-two-or-longer run contributes, and the center term gives E(B,X) = 14. Adding X at (8,7) creates an open horizontal two worth 200; the center terms are 14 and 13, giving 227. For a run shorter than five, changing an empty endpoint to an occupied endpoint changes its open-end classification and corresponding weight. A board boundary also closes an endpoint.",
+    "reason": "Corrects unsupported order-of-magnitude drop: two-stone weights differ by factor four, not ten.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:pattern_score",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:count_line"
+    ]
+  },
+  {
+    "start": 34154,
+    "old": "Scanning all maximal runs across a constant number of directions is O(N²): although a run is traversed, each occupied cell participates in at most one maximal run per direction. Auxiliary space beyond the board is O(1) in the described scan. The evaluator recognizes contiguous runs; a gap such as XX_XX is not automatically a single contiguous run, even though a separate move test can recognize the winning gap. Benefits and trade-offs of maximal contiguous-run scanning: it evaluates any board in O(N²) time and O(1) auxiliary memory without dynamic allocation; the trade-off is that single-gap threats (such as XX_XX) are not scored as a single contiguous run at depth 0, relying instead on multi-ply look-ahead recursion and the candidate generator's tactical assessment to resolve split completions.",
+    "new": "Scanning maximal runs in four directions takes O(N²) time and O(1) auxiliary space beyond the board: each occupied cell belongs to at most one maximal run per direction. This evaluator counts contiguous runs. A split formation such as XX_XX is represented as separate runs at the horizon, although candidate assessment can identify the empty gap as a winning completion. Thus horizon evaluation and tactical move assessment capture different properties of the position.",
+    "reason": "Removes repetitive benefits/trade-off template and unsupported implication deeper search always resolves split threat.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:evaluate",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:assess"
+    ]
+  },
+  {
+    "start": 35028,
+    "old": "Source: research/current_2026_10_23/baseline_engine/src/eval.rs [7].",
+    "new": "Source: Illustration of the run weights in the archived Rust evaluator [15].",
+    "reason": "Corrects [7] ai.rs citation to actual eval.rs weights [15].",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/baseline_engine/src/eval.rs:pattern_score"
+    ]
+  },
+  {
+    "start": 35143,
+    "old": "Terminal outcomes must be evaluated before a depth cutoff. In the engine implementation, the terminal base constant is M = 100,000,000, the ply distance from the root is q ≤ 225, and nonterminal heuristic scores are clamped to (−H, +H) with H = M − 225 − 1 = 99,999,774 [6]. The result from root perspective is M−q for a root win, −M+q for a root loss, and zero for a draw. An unfinished board has no terminal utility and is evaluated only when the search horizon is reached [6].",
+    "new": "Terminal outcomes are checked before the depth cutoff. In the modified Rust snapshot, M = 100,000,000 and q is the ply distance from the root, capped at 225. A root win returns M − q, a root loss returns −M + q, and a draw returns zero. Nonterminal evaluations are clamped to the closed interval [−H,H], where H = M − 225 − 1 = 99,999,774 [6].",
+    "reason": "Corrects open-interval notation to inclusive clamp and specifies modified implementation.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:HEURISTIC_LIMIT"
+    ]
+  },
+  {
+    "start": 38110,
+    "old": "The membership invariant says that each appended coordinate is on the board, empty and not previously appended. Conversely, every empty cell in a visited neighborhood is appended on its first encounter. This proves correctness for the defined neighborhood, not equivalence to all legal moves. With m occupied cells, scanning the board and their neighborhoods costs O(N² + m(2r+1)²) before assessment; the seen matrix and candidate list use O(N²) space. The domain can be clipped at the board edge. Benefits and trade-offs of Chebyshev spatial pruning: restricting moves to d∞(a,b) = max(|a_x − b_x|, |a_y − b_y|) ≤ r reduces the branching factor from ~220 empty cells in the opening to 8–36 local candidates (a 72.39%–83.64% reduction), making multi-ply search tractable; the trade-off is that distant non-local sacrifices outside radius r are excluded from the search tree.",
+    "new": "Each appended coordinate is in bounds, empty and previously unseen. Conversely, every empty cell in a visited neighborhood is appended on its first encounter. This establishes membership in the radius policy. With m occupied cells, board scanning and neighborhood enumeration take O(N² + m(2r + 1)²) time before assessment; the seen matrix and move list use O(N²) space. The policy reduces the set searched, but can exclude legal moves outside the chosen neighborhood.",
+    "reason": "Removes arithmetically inconsistent 8–36/72.39–83.64% comparison and unmeasured tractability claim.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/board.rs:get_candidates"
+    ]
+  },
+  {
+    "start": 41005,
+    "old": "For k raw candidates, assessment takes O(kK) when the relevant directional scan is bounded by K, sorting O(k log k), and storage O(k), in addition to spatial generation. With fixed K=5 the scan term is linear in k. Candidate assessment and full-board evaluation are different operations; a counter named ordering evaluations should be interpreted using its own recorded definition. Why a soft tactical cap C' = T ∪ Top_max(0, c − |T|)(C \\ T) is used instead of a hard cap: a hard truncation at cap c can discard critical winning or blocking moves if their static heuristic rank falls below index c—as demonstrated in the cap_loss.json benchmark where a hard cap of 6 discarded both winning endpoints (7,2) and (7,7) out of 20 candidates. By taking max(cap, 1, tactical_count), the soft cap guarantees 100% retention of immediate 1-ply wins and blocks (T) while bounding non-tactical branching to at most c candidates [16].",
+    "new": "For k raw candidates, bounded directional assessment takes O(kK), sorting takes O(k log k), and move storage takes O(k), in addition to neighborhood generation. Let C be the raw set, T its assessed win-or-block subset, and c the normalized cap. Selection retains T plus the highest-ranked non-tactical moves needed to reach c, when available. Its total size is min(|C|, max(c, |T|)); it can exceed c. The separate native reference experiment in cap_loss.json illustrates the danger of a hard cap: cap 6 retained six of twenty candidates and omitted both winning endpoints. That result concerns the reference policy, while the modified policy preserves every assessed member of T [16].",
+    "reason": "Fixes cap semantics, bounds tactical guarantee and separates reference hard-cap failure from modified engine.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json"
+    ]
+  },
+  {
+    "start": 42751,
+    "old": "For example, if A, B and C have quick ranking scores 10, 50 and 30, score order is B, C, A, while coordinate order may be A, B, C. Neither order establishes that B is ultimately the best move. If all are still visited under minimax, only traversal changes. Alpha-beta may finish earlier after B supplies a strong bound. Sorting k moves costs O(k log k), plus the cost of computing keys and O(k) storage in a conventional array implementation. Benefits and trade-offs of move ordering: examining immediate wins, blocks, and high-adjacency moves first maximizes early α ≥ β cutoffs and reduces visited nodes by 44.68%–80.22% in depth-2 benchmarks; the trade-off is the O(k log k) sorting and key-assessment overhead at each node, which must remain lightweight so ranking cost does not exceed pruning savings.",
+    "new": "If A, B and C have quick scores 10, 50 and 30, score order is B, C, A, whereas coordinate order may be A, B, C. Ranking B first does not establish that it is the best searched move. Minimax still evaluates every retained child; alpha-beta may reach a useful cutoff sooner. Sorting k moves takes O(k log k), plus key computation and O(k) move storage in the described implementation. Whether the saved search work outweighs ranking cost is measured in Chapter 5.",
+    "reason": "Removes unsupported maximum-cutoff claim and unscoped benchmark percentages; keeps concrete example.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_search_summary.csv"
+    ]
+  },
+  {
+    "start": 44756,
+    "old": "Define U(s,R) for terminal states, E(s,R) for a nonterminal horizon, and transition T(s,a). With a fixed deterministic candidate function A, the depth-limited value is",
+    "new": "Let U(s,R,q) be terminal utility at root distance q, and E(s,R) the nonterminal horizon evaluation. Transition T(s,a) places the side-to-move stone and changes the turn. For a fixed candidate function A and rule/evaluation configuration, the depth-limited value is",
+    "reason": "Makes ply-dependent terminal utility explicit and identifies turn in state.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility"
+    ]
+  },
+  {
+    "start": 44924,
+    "old": "V(s,d) = U(s,R) if s is terminal;",
+    "new": "V(s,d,q) = U(s,R,q) if s is terminal;",
+    "reason": "Carries terminal ply explicitly in recurrence.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility"
+    ]
+  },
+  {
+    "start": 44958,
+    "old": "V(s,0) = E(s,R) if s is not terminal;",
+    "new": "V(s,0,q) = E(s,R) if s is not terminal;",
+    "reason": "Consistent recurrence arguments.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value"
+    ]
+  },
+  {
+    "start": 44996,
+    "old": "V(s,d) = max[a∈A(s)] V(T(s,a),d−1) if MAX moves;",
+    "new": "V(s,d,q) = max[a∈A(s)] V(T(s,a),d−1,q+1) if MAX moves;",
+    "reason": "Consistent recurrence with terminal ply distance.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value"
+    ]
+  },
+  {
+    "start": 45045,
+    "old": "V(s,d) = min[a∈A(s)] V(T(s,a),d−1) if MIN moves.",
+    "new": "V(s,d,q) = min[a∈A(s)] V(T(s,a),d−1,q+1) if MIN moves.",
+    "reason": "Consistent recurrence with terminal ply distance.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value"
+    ]
+  },
+  {
+    "start": 45559,
+    "old": "    t ← TERMINAL_UTILITY(WIN_AT(B,last), IS_FULL(B), root, ply)",
+    "new": "    t ← TERMINAL_UTILITY(winner from WIN_AT(B,last), IS_FULL(B), root, ply)",
+    "reason": "WIN_AT returns player plus cells; terminal utility accepts winner, not tuple.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility"
+    ]
+  },
+  {
+    "start": 46101,
+    "old": "At the root, test each allowed root move, remember an action that achieves the greatest value, and restore the board after every branch. Initial root validation may need to scan for a pre-existing winner, whereas recursive checks can use the just-played move under the earlier precondition. The engine implements a unified recursive search kernel configurable as either full-tree Minimax or Alpha-Beta pruning over the same candidate generator and evaluator [6].",
+    "new": "The root routine validates an existing result, searches each retained root move, stores a best action and restores the board after each branch. Recursive checks use the just-played coordinate, because a newly formed line passes through that move. The modified Rust implementation uses one recursive kernel whose configuration enables plain minimax or alpha-beta pruning while retaining the same candidate policy and evaluator [6].",
+    "reason": "Assigns unified kernel to modified source and avoids vague active-engine identity.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::run",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value"
+    ]
+  },
+  {
+    "start": 47585,
+    "old": "If the maximum number of generated moves is b at each level, the full tree has O(b^d) nodes for b>1; actual branching may vary by state, cap and terminal events. Depth-first exploration uses O(d) stack frames plus the live candidate lists, conservatively O(db) move entries and a working board of O(N²), not storage for the whole tree. Each node also incurs candidate-generation or evaluation costs, which can be substantial. If the terminal is reached sooner, recursion stops early. Benefits and trade-offs of Minimax: it provides an exact game-theoretic baseline over the generated finite tree with O(db + N²) memory, but its exponential O(b^d) time complexity restricts unpruned search to shallow depths.",
+    "new": "For branching factor at most b > 1 and depth d, the complete generated tree has O(b^d) nodes. Branching varies with position, candidate policy and terminal events. Depth-first search stores O(d) stack frames, up to O(db) live move entries, and an O(N²) working board. Candidate generation and horizon evaluation add per-node costs, so O(b^d) describes the node growth rather than a complete elapsed-time model.",
+    "reason": "Removes repeated benefit template and ambiguous 'exact game-theoretic' claim beyond finite heuristic tree.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs:SearchContext::value",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates"
+    ]
+  },
+  {
+    "start": 49025,
+    "old": "// Algorithm 2.11 (research/current_2026_10_23/baseline_engine/src/ai.rs) — ALPHABETA(B, player, root, depth, last, ply, alpha, beta):",
+    "new": "// Algorithm 2.11 (modified Rust search kernel in [6]) — ALPHABETA(B, player, root, depth, last, ply, alpha, beta):",
+    "reason": "Old baseline minimax differs from displayed unified fixed-depth kernel.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md:W5/W6"
+    ]
+  },
+  {
+    "start": 49160,
+    "old": "    t ← TERMINAL_UTILITY(WIN_AT(B,last), IS_FULL(B), root, ply)",
+    "new": "    t ← TERMINAL_UTILITY(winner from WIN_AT(B,last), IS_FULL(B), root, ply)",
+    "reason": "Correct winner projection for terminal utility.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs:terminal_utility",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts"
+    ]
+  },
+  {
+    "start": 50264,
+    "old": "Use the same abstract tree. Search A first: its MIN node sees 3 and 5, returns 3, and MAX updates alpha to 3. At B, MIN first sees 2, so beta becomes 2. Because beta ≤ alpha, B cannot supply MAX a value exceeding the already available 3: MIN can choose the 2 branches. The remaining B child, whose illustration value is 9, is unnecessary for choosing the root action. The root answer remains A, 3. Visiting the children in another order may produce fewer or no cutoffs without changing the full-tree result.",
+    "new": "In the preceding depth-two tree, searching A first returns 3 and raises the root alpha to 3. At B, MIN encounters 2 first and lowers beta to 2. Since beta ≤ alpha, MIN already has an option no greater than 2, so B cannot improve MAX's available value of 3. The remaining leaf, illustrated as 9, can be skipped. The root still selects A with value 3. Another traversal order may produce fewer cutoffs while retaining the same root value.",
+    "reason": "Corrects awkward plural 'choose the 2 branches' and makes bound argument precise.",
+    "evidence": [
+      "https://doi.org/10.1016/0004-3702(75)90019-3"
+    ]
+  },
+  {
+    "start": 50772,
+    "old": "The invariant is that alpha and beta summarize bounds supplied by already considered alternatives and ancestors. Once they cross, further siblings at the current node cannot alter the ancestor choice under the minimax ordering. Combined with the minimax induction and the restoration invariant, pruning preserves the root value on the same tree. A practical check compares minimax and alpha-beta with identical positions, turns, depth, terminal rule, evaluator, candidate set and preferably deterministic tie behavior. If the set of candidate moves differs, the comparison tests two different games rather than pruning alone. Across all 408 paired native engine comparisons and 112 reference comparisons, Alpha-Beta and Minimax return identical root scores while Alpha-Beta visits 35.62%–77.60% fewer nodes.",
+    "new": "Alpha and beta summarize bounds supplied by previously examined alternatives and ancestors. When they cross, the remaining siblings cannot improve the relevant ancestor's choice. Combined with the minimax and restoration invariants, this preserves the root value on the same finite tree [17]. The archived modified-engine corpus records 408 minimax/alpha-beta pairs, and the separate native reference corpus records 112 pairs with equal root scores. These totals include repeated configurations; they are finite experiment results, presented with their node counts in Chapter 5 [8], [41], [43].",
+    "reason": "Removes mixed unscoped pruning percentages and distinguishes repeated pair counts from independent positions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/verification.json"
+    ]
+  },
+  {
+    "start": 51580,
+    "old": "Worst-case O(b^d) remains possible, for instance with unhelpful ordering. Idealized ordering in a uniform tree can reduce the effective leaf growth toward O(b^(d/2)); this is a model, not a promise of a particular elapsed time. The recursion stack and live candidate lists have the same conservative O(db) bound as depth-first minimax, in addition to the board. Cutoff at equality is valid for the value, though tie selection and visited-node counts can depend on ordering. The algorithm alone does not address deadline, collision safety, illegal input or selective candidate loss.",
+    "new": "The worst case remains O(b^d) nodes. For a uniform tree with perfect ordering, the ideal minimum leaf count is b^ceil(d/2) + b^floor(d/2) − 1; for even depth this has the familiar O(b^(d/2)) growth [17]. Neither bound is an elapsed-time prediction, because node costs and branching vary. Memory remains depth-first: O(d) stack frames and up to O(db) live move entries, in addition to the board. Equality cutoffs preserve the root value, although tie selection and visited-node counts can depend on traversal order.",
+    "reason": "Makes odd-depth ideal leaf count precise and removes redundant generic disclaimer list.",
+    "evidence": [
+      "https://doi.org/10.1016/0004-3702(75)90019-3",
+      "https://webdocs.cs.ualberta.ca/~jonathan/publications/ai_publications/csn.pdf",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs"
+    ]
+  },
+  {
+    "start": 52880,
+    "old": "// Algorithm 2.12 (CaroGame/src/game/bot/search.ts) — ITERATIVE(B, maximum_depth, budget):",
+    "new": "// Algorithm 2.12 (completed-iteration scheme illustrated by [11]) — ITERATIVE(B, maximum_depth, budget):",
+    "reason": "Generic contract omits literal fallback/sentinel details; identify it as explanatory rather than exact source listing.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:findBestMove"
+    ]
+  },
+  {
+    "start": 54353,
+    "old": "The legacy TypeScript findBestMove uses performance.now(), a deadline and a periodic node check, and catches its search-abort sentinel. It initializes a fallback from the first candidate before any depth is completed; its completed-depth field remains zero if the first iteration aborts. Its recursive search wraps move application in try/finally blocks so that an aborted depth unwinds all working-board mutations cleanly [11]. The historical Rust reference instead used a node budget, and its report states that its aggregate omits work inside an aborted iteration. Those semantics should not be combined into one universal time-budget claim [8]. The inspected local game engine specifies fixed depth for its tiers; archived runs separately record each configured depth [18]. Using deterministic fixed-depth Alpha-Beta per tier trades dynamic wall-clock cutoffs for predictable per-tier search depth and reproducible move selection.",
+    "new": "The legacy TypeScript findBestMove uses a performance.now() deadline, checks it at the first search node and every 32 nodes, and catches a dedicated abort sentinel. It initializes a fallback candidate before an iteration completes and reports depth zero if the first iteration aborts. Recursive search uses try/finally to undo moves during unwinding [11]. The historical Rust reference instead uses a node budget, and its aggregate excludes work inside an aborted iteration [8]. The modified Rust engine uses the fixed tier depths shown in Table 2.1 [6]. These are separate budget and counter conventions.",
+    "reason": "Removes unmeasured reproducibility/per-tier time claims and distinguishes exact budgeting implementations.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:checkAbort",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:findBestMove",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::depth",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md"
+    ]
+  },
+  {
+    "start": 55343,
+    "old": "Source: CaroGame/src/game/bot/search.ts [8].",
+    "new": "Source: Illustration of completed-depth handling in the legacy TypeScript bot [11].",
+    "reason": "Caption previously cited unrelated native reference [8].",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:findBestMove"
+    ]
+  },
+  {
+    "start": 56447,
+    "old": "// Algorithm 2.13 (CaroGame/src/game/bot/board.ts) — FULL_HASH(B, player):",
+    "new": "// Algorithm 2.13 (Zobrist scheme illustrated by the legacy board in [20]) — FULL_HASH(B, player):",
+    "reason": "FULL_HASH is explanatory pseudocode, not literal source symbol.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:computeInitialState"
+    ]
+  },
+  {
+    "start": 56768,
+    "old": "For an illustrative four-bit example, let h=1010 and the inserted stone's key be 0110, ignoring the side for the moment. Apply gives 1100; undoing XOR with 0110 restores 1010. Because XOR is both commutative and self-inverse, applying the same stone key Z(m,p) and turning key S on both make and undo restores the exact 64-bit state hash in O(1) time.",
+    "new": "For a four-bit example, let h = 1010 and the inserted stone key be 0110, temporarily omitting the side key. Applying XOR gives 1100; applying XOR with 0110 again restores 1010. The same identity applies to each half of the legacy bot's 64-bit fingerprint. XORing both the stone key and side key on make and undo restores the hash in O(1) time; restoring cached line counts has its own cost.",
+    "reason": "Avoids implying whole legacy move update is O(1) merely because hash update is.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:makeMove",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:undoMove"
+    ]
+  },
+  {
+    "start": 57588,
+    "old": "The legacy TypeScript board maintains two 32-bit halves, a seeded key table and a side key, and updates them with make and undo. Its pattern counts and stone count are also incrementally updated; restoring only the hash would not restore the whole board state [20]. Historical reference reports document incremental hash checks and note that a terminal winning move may leave to_move unchanged in that separate implementation, so its side-key update must follow the actual state transition [8]. This distinction cannot be transferred automatically between implementations.",
+    "new": "The legacy board stores the fingerprint as two 32-bit halves and uses a seeded table of stone and side keys. Make and undo also update pattern counts and stoneCount [20]. These fields must all return to their preceding values; the hash alone is not a complete restoration check. In the separate native reference, a winning move can leave to_move unchanged, so the side-key update follows that implementation's actual turn transition [8].",
+    "reason": "Plain academic prose and concrete owner semantics.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:makeMove",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:undoMove",
+      "/home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/state.rs",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md"
+    ]
+  },
+  {
+    "start": 59871,
+    "old": "// Algorithm 2.14 (CaroGame/src/game/bot/search.ts) — PROBE(key, required_depth, alpha, beta, context):",
+    "new": "// Algorithm 2.14 (general TT contract; legacy implementation in [11]) — PROBE(key, required_depth, alpha, beta, context):",
+    "reason": "Generic context-validated pseudocode is stronger than actual legacy probe; do not present it as literal source behavior.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT"
+    ]
+  },
+  {
+    "start": 60734,
+    "old": "Validating entry depth, bound type, and move legality during table lookup guarantees that cached bounds never corrupt the active Alpha-Beta window. The classification uses the original search window; using a window altered by a prior lookup without carefully defining semantics can mislabel a bound as exact. Cache storage and retrieval must agree about whether a returned cutoff value is fail-hard or fail-soft.",
+    "new": "The probe is sound only when the key, search context, score convention and depth interpretation are compatible. Checking depth, bound type and move legality alone does not establish all of these conditions. Classification uses the original search window, and storage and retrieval must agree about fail-hard or fail-soft returns. A conventional entry.depth ≥ required_depth test accepts deeper results; strict equality with a particular depth-limited horizon requires an additional depth-reuse contract.",
+    "reason": "Removes false guarantee that depth/bound/legality checks alone prevent corruption; clarifies deeper horizon semantics.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:storeTT",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json"
+    ]
+  },
+  {
+    "start": 61722,
+    "old": "The historical reference report documents a concrete context hazard. It records one same-root warm reuse, then a probe after playing a move and changing root player: a fresh table returned score 0, whereas reuse of the prior table returned 19,800. Its hash omitted several contextual factors, including root perspective, and the report does not claim a patch. These are results of a particular native reference probe, not a measurement or defect proven in the current browser engine [21]. The report also notes that mate scores depend on ply from the root; a cached value reused at another ply may require normalization or a sufficiently narrow reuse scope. Rules, evaluation weights, side, candidate radius/cap, ordering semantics, terminal metadata and requested depth can likewise matter. A board fingerprint by itself does not certify those conditions.",
+    "new": "The native reference records a context-reuse failure: after a clustered depth-4 search, same-root warm reuse returns the same score of 0, but after playing a move and changing the root player, a fresh table returns 0 and the reused table returns 19,800 [21]. The stored scores are root-relative, and the key omits that perspective as well as other configuration fields. This is a result from the reference engine. It motivates matching cache lifetime to the search context. Ply-relative mate scores also require normalization or a restricted reuse scope when stored values can be reached at a different root distance.",
+    "reason": "Keeps concrete negative reference result without repeating unsupported-active-engine disclaimers or a broad advisory list.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json",
+      "/home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/search/optimized.rs",
+      "/home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/zobrist.rs"
+    ]
+  },
+  {
+    "start": 62579,
+    "old": "The legacy TypeScript uses parallel fixed-size arrays indexed by a modulo operation on one hash half and compares both halves before using a slot. It stores depth, score, flag and best move. This is a different storage and replacement design from the reference's hash map [11], [8]. The existence of a depth check does not resolve every context hazard; in particular, project-wide claims require inspecting lifecycle, perspective and score conventions. A cached move hint should be checked against current legal candidates before application. A new game, changed rules, new evaluator or changed root is a reason to reassess or clear a cache unless compatibility is proved.",
+    "new": "The legacy TypeScript table uses fixed-size parallel arrays. A slot is indexed from the low hash half, then both halves are compared before its depth, flag and score are considered. The stored move is used as an ordering hint [11]. The native reference instead uses a hash map [8]. These storage choices do not establish compatibility between search contexts. A hint must refer to a legal retained move before it influences move application, and cache lifetime must match the interpretation of its stored scores.",
+    "reason": "Removes speculative project advice while preserving actual array-vs-map distinction and necessary contract.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:scoreMove",
+      "/home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/search/transposition.rs"
+    ]
+  },
+  {
+    "start": 63252,
+    "old": "Expected lookup can be O(1) for an appropriate hash table, but collisions, table implementation and replacement behavior affect actual costs. Space is proportional to the allocated slots or stored entries plus keys, buckets and overhead. Initial hash-map capacity is not a strict maximum, and the native size of one entry is not the total memory of the container. Benefits and trade-offs of transposition tables: O(1) expected hash lookup avoids re-searching transposed subtrees and supplies best-move ordering hints, at the trade-off of O(M) table memory, potential 64-bit hash collisions, and the requirement to scope or clear cached entries when root perspective or rule context changes.",
+    "new": "Expected lookup is O(1) for a suitably configured hash table; actual access cost depends on indexing, collisions and replacement. Memory is proportional to allocated slots or entries, together with container overhead. A hash map's initial capacity is not a maximum, and the size of one entry is not the container's total allocation. A TT can save repeated search work and supply move hints, at the cost of memory and the need to preserve compatible score and state semantics.",
+    "reason": "Removes repetitive rhetorical template and symbol M conflict with terminal score; retains measurable complexity boundaries.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:TT_SIZE",
+      "/home/pro/Downloads/vnuk/basicProject/caro-core-reference/src/search/transposition.rs"
+    ]
+  },
+  {
+    "start": 63999,
+    "old": "Source: CaroGame/src/game/bot/search.ts [8].",
+    "new": "Source: Illustration of bound classes and lookup in the legacy TypeScript search [11].",
+    "reason": "Corrects caption from unrelated [8] source to actual legacy search.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:probeTT"
+    ]
+  },
+  {
+    "start": 64096,
+    "old": "A fixed-depth search can stop at an unstable position: a static evaluator may prefer a move just before an immediate tactical reply. Quiescence extends selected tactical continuations beyond the ordinary horizon so that the evaluator is applied after a limited forcing sequence. This is a selective model and has its own horizon; it cannot eliminate every tactical error. The relevant implementation is the legacy TypeScript bot, not a feature established for the current WASM engine [11].",
+    "new": "A fixed-depth horizon can fall immediately before a forcing reply, causing a static evaluation to overrate the position. Quiescence search extends selected tactical continuations beyond that horizon. The legacy TypeScript bot implements this extension with a separate depth limit and forcing-move generator [11]. Its result describes that selective continuation tree.",
+    "reason": "Removes repeated verification language and states actual owner and scope directly.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:quiescence"
+    ]
+  },
+  {
+    "start": 67292,
+    "old": "The stand-pat assumption deserves care in a game where a player must move: static evaluation does not literally grant a legal pass. In a forced-defense position an immediate static cutoff may not establish the same value as examining all legal replies. The finite depth, selective forcing set and candidate implementation further limit the result. A rigorous claim requires a specified tactical contract and tests that compare against an appropriate full or deeper reference on representative positions. With at most f forcing moves at each quiescence level and maximum extra depth q, a coarse upper bound is O(f^q) nodes plus candidate generation, ordering and evaluation at each node; actual cost may differ sharply. The stack and stored move lists take O(qf) space under the same conventional assumption, in addition to board and caches.",
+    "new": "Stand-pat evaluation supplies the initial bound without placing a stone. Because Gomoku requires a move, this is a modelling assumption rather than a legal pass; an immediate cutoff in a forced-defense position need not equal an all-legal-replies result. The forcing set and the five-level extension limit define the selective horizon. With at most f > 1 forcing moves per level and q extra levels, a coarse bound is O(f^q) nodes and O(qf) stored move entries, plus per-node generation, ordering and evaluation costs. If f = 1, node growth is O(q).",
+    "reason": "Retains substantive theoretical limitation, corrects f=1 edge case and removes vague call for more verification.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts:quiescence"
+    ]
+  },
+  {
+    "start": 68190,
+    "old": "The older TypeScript bot represents a line segment available to one player as a bitmask: a one denotes the player's stone and zero denotes an empty cell; an opposing stone divides the line into separate segments. It precomputes a classification for eligible lengths and masks using completion tests. Categories include a five, an open four, a four, an open three and a broken three. The terminology is the implementation's category scheme; it must not be silently equated to the maximal contiguous runs and weights of the documented Rust snapshot [20], [11].",
+    "new": "The legacy TypeScript bot classifies a line segment with a bitmask: one denotes the player's stone and zero an empty cell, while an opposing stone ends the segment. Its evaluator precomputes categories for segment lengths up to 15 using tests for existing fives and empty cells that would complete a five. The categories are FIVE, OPEN_FOUR, FOUR, OPEN_THREE, BROKEN_THREE and NONE. They follow this classifier's completion-count rules and differ from the modified Rust evaluator's contiguous-run weights [20], [53].",
+    "reason": "Names exact legacy categories and avoids vague claim of identical strategic semantics.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:initPatternTable",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts"
+    ]
+  },
+  {
+    "start": 68749,
+    "old": "// Algorithm 2.16 (CaroGame/src/game/bot/board.ts) — CLASSIFY_SEGMENT(mask, length):",
+    "new": "// Algorithm 2.16 (legacy pattern evaluator in [53]) — CLASSIFY_SEGMENT(mask, length):",
+    "reason": "Classifier lives in eval.ts, not board.ts; preserves existing reference mapping without fabricating source location.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:initPatternTable"
+    ]
+  },
+  {
+    "start": 69498,
+    "old": "For a hypothetical five-cell segment XX_XX, setting the middle zero creates five consecutive bits, so the segment has at least one immediate winning completion under this rule. A segment with two distinct empty completion cells is classified above a one-completion segment, assuming no five is already present. The precise category depends on the whole segment and the code's precedence, not only on a local substring. Opponent cells split the segment; a board boundary is also a boundary. Short segments cannot contain five and do not contribute a five-capable pattern.",
+    "new": "For the five-cell segment XX_XX, setting the middle zero creates five consecutive bits, giving one winning completion and the FOUR category. A segment with two distinct winning completion cells is OPEN_FOUR if no five is already present. The category is computed for the whole segment, with the precedence in Algorithm 2.16; an opposing stone or board boundary ends that segment [53].",
+    "reason": "Gives exact category for worked example and cites actual classifier source.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:initPatternTable",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:evaluateLine"
+    ]
+  },
+  {
+    "start": 70715,
+    "old": "The legacy position evaluator shown in the repository scans lines and sums category weights from the selected perspective; cached counts are also used by other routines. A full evaluation over a constant number of axes is O(N²) for fixed-time table lookup per segment; recalculating four affected lines is O(N) in board width per player, in addition to the cost of table lookup. Precomputing a pattern table trades initialization work and memory for later lookup; its precise limits, size and supported board lengths are implementation constraints. The actual code initializes for line lengths up to 15, so changing board size without reviewing this bound is unsafe. A cached count is only trustworthy when every mutation follows the update discipline and every aborted sequence restores it.",
+    "new": "The legacy evaluatePosition scans board lines and sums the category weights from the requested perspective. Other routines consult the incrementally maintained counts. With fixed-time pattern-table lookup per segment, a full scan over four axes takes O(N²) time; recomputing the four affected lines takes O(N) per player. The table is initialized for lengths up to 15, so this implementation requires that limit to be reviewed before using a larger board. Its cached counts remain consistent only when every move and undo follows the update procedure [20], [53].",
+    "reason": "Clarifies full evaluator vs cached counts and removes repetitive generic advice.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:evaluatePosition",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/eval.ts:MAX_LEN",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/board.ts:updateLines"
+    ]
+  },
+  {
+    "start": 71566,
+    "old": "The application partitions gameplay into two primary modes—local two-player PvP (1v1) and human-versus-bot PvE (ai)—and divides the PvE bot into six progressive difficulty tiers (Easy, Normal, Hard, Very Hard, Expert, and Master), whose strategy, search depth d, Chebyshev radius r, and soft candidate cap c are specified in Table 2.1 [18]. Each tier maps to an explicit search strategy and candidate-generation policy in the Rust engine dispatch [6]. The TypeScript WASM contract validates and forwards the selected difficulty identifier and returned telemetry across the Web Worker boundary [9].",
+    "new": "The application offers local two-player mode and human-versus-bot mode. The latter has six labels: Easy, Normal, Hard, Very Hard, Expert and Master. Table 2.1 combines the frontend request path with the configurations in the modified Rust source and archived difficulty runs [3], [6], [9], [18]. These labels select policies and depths; no player study or strength rating is used to calibrate the spacing between tiers.",
+    "reason": "Removes unsupported progressive-skill claim and assigns table policy provenance correctly.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/contracts.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/contracts.ts",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_difficulty_runs.csv"
+    ]
+  },
+  {
+    "start": 72164,
+    "old": "Table 2.1. Difficulty configurations and recorded search behaviour",
+    "new": "Table 2.1. Recorded Rust difficulty configurations and frontend request path",
+    "reason": "Corrects British behavior/US variation and makes mixed provenance explicit.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 72246,
+    "old": "Recorded strategy",
+    "new": "Rust policy",
+    "reason": "Clearer concise table header.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::strategy"
+    ]
+  },
+  {
+    "start": 72265,
+    "old": "Depth",
+    "new": "Configured depth",
+    "reason": "Distinguishes configured maximum from completed measured work.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/contracts.ts:WASM_CONFIGURED_DEPTHS"
+    ]
+  },
+  {
+    "start": 72348,
+    "old": "Bypasses tactical prepass; selects uniformly via seeded PRNG (no look-ahead).",
+    "new": "Bypasses frontend tactics; selects a seeded pseudorandom legal cell without look-ahead.",
+    "reason": "Modulo selection is not exactly uniform for arbitrary empty-cell counts.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 72451,
+    "old": "Neighborhood, no fixed cap in default policy",
+    "new": "2 / uncapped",
+    "reason": "Actual default policy radius is 2; table previously omitted it.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:CandidatePolicy::default"
+    ]
+  },
+  {
+    "start": 72497,
+    "old": "Bypasses frontend prepass; Rust 1-ply immediate win/block then static heuristic.",
+    "new": "Bypasses frontend tactics; Rust checks wins and blocks, then compares one-ply evaluations.",
+    "reason": "Precise plain wording and owner.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:baseline",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 72609,
+    "old": "Frontend tactical prepass first; 2-ply Alpha-Beta over up to 15 local candidates.",
+    "new": "Frontend tactical check first; otherwise depth-2 alpha-beta with nominal cap 15.",
+    "reason": "Soft cap can exceed 15 for assessed tactical moves; removes hard maximum.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::search_config",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 72727,
+    "old": "Frontend tactical prepass first; 3-ply Alpha-Beta (API ID 5) with soft cap 12.",
+    "new": "Frontend tactical check first; otherwise depth-3 alpha-beta with nominal cap 12 (API ID 5).",
+    "reason": "Consistent table wording and explicit soft cap.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::from_id",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/contracts.ts:WASM_DIFFICULTIES"
+    ]
+  },
+  {
+    "start": 72839,
+    "old": "Frontend tactical prepass first; 4-ply Alpha-Beta with soft tactical cap 10.",
+    "new": "Frontend tactical check first; otherwise depth-4 alpha-beta with nominal cap 10.",
+    "reason": "Consistent table wording.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::search_config",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 72948,
+    "old": "Frontend tactical prepass first; 5-ply fixed-depth Alpha-Beta with soft cap 8.",
+    "new": "Frontend tactical check first; otherwise depth-5 alpha-beta with nominal cap 8.",
+    "reason": "Consistent table wording.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty::search_config",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 73029,
+    "old": "Why the six difficulty tiers are divided this way: the configuration table is designed around two mathematical principles. First, it separates qualitative decision regimes: Easy (d = 0, Random across all empty cells) provides a non-tactical baseline for beginners; Normal (d = 1, uncapped local neighborhood) introduces 1-ply immediate win/block priority and static heuristic scoring; and Hard through Master (d = 2 to 5, Chebyshev radius r = 2) engage multi-ply Alpha-Beta look-ahead. Second, across the four Alpha-Beta tiers, search depth increases linearly (d = 2, 3, 4, 5) while the soft candidate cap tightens inversely (c = 15, 12, 10, 8). Because an adversarial tree with branching factor c and depth d scales as O(c^d) in the worst case (and O(c^(d/2)) under ideal Alpha-Beta ordering), keeping c = 15 at d = 5 would expand up to 15^5 = 759,375 nodes per turn. Tightening the soft cap to c = 8 bounds the worst-case tree to 8^5 = 32,768 nodes (and ~2,000–5,000 nodes with Alpha-Beta pruning), keeping Web Worker latency within interactive browser budgets (47, 252, 551, and 1,418 visited nodes in 1.1–3.0 ms on the benchmarked midgame fixture). Benefits and trade-offs: this inverse (d, c) scaling delivers smooth skill progression and responsive UI performance while the soft tactical cap max(c, 1, |T|) and frontend tactical prepass guarantee that zero immediate 1-ply wins or blocks are ever dropped; the trade-off is that deeper tiers (Expert, Master) prune lower-ranked quiet positional candidates (ranked below index 10 or 8) in exchange for deeper 4-to-5-ply tactical calculation.",
+    "new": "The tiers change both search method and search width. Easy uses random selection; Normal adds immediate tactical priorities and one-ply evaluation. The remaining tiers use alpha-beta at depths 2–5 with radius 2 and nominal caps 15, 12, 10 and 8. Reducing the nominal width offsets some of the growth from increased depth, but these are soft caps: assessed wins and blocks can increase the retained set. For illustration, a uniform tree of width 8 and depth 5 has 8^5 = 32,768 leaves and 37,449 total nodes before pruning. This is a fixed-width model, not an upper bound for the implemented soft-cap search. The tier timings and actual counters are reported in Chapter 5; configuration alone does not establish a latency bound or a measured progression in playing strength.",
+    "reason": "Corrects leaves-vs-total nodes, false hard bounds, unmeasured 2000–5000 estimate, unsupported skill/UI guarantees and benchmark interpolation.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs:Difficulty",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs:select_candidates",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_difficulty_runs.csv"
+    ]
+  },
+  {
+    "start": 74625,
+    "old": "The current frontend controller's input is an application state, round identity and difficulty. It increments a request identifier. For Easy and Normal it proceeds to the WASM engine adapter. For the four higher tiers it first asks the TypeScript tactical resolver for a forced move for O; if one is returned, it creates a tactical result without requesting engine search. Otherwise it copies move history into a request to the engine. The frontend prepass and the Normal Rust rule-based policy are different decision stages [10].",
+    "new": "AIController receives the application state, round identity and selected difficulty, then assigns a request identifier. Easy and Normal proceed directly to GomokuWasmEngine. The four higher tiers first call the TypeScript tactical resolver for O; a returned move becomes a tactical result without Rust search. Otherwise the controller copies move history into the engine request. This frontend prepass and the Rust Normal rule-based policy are separate decision stages [3], [10].",
+    "reason": "Corrects source citation for tier routing: AIController is [3], resolver geometry is [10].",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/TacticalMoveResolver.ts"
+    ]
+  },
+  {
+    "start": 75156,
+    "old": "The archived adapter excerpt shows a new game instance being populated from the request's move history, rejecting an unsuccessful replay, asking for an AI move, freeing the game in finally, converting Rust (x,y) into frontend (row,col), and attaching request/round identity and statistics. Its elapsed scope is named worker-hydrate-and-search, which includes history reconstruction and the search call, rather than being an isolated inner-loop benchmark [6]. By pairing Worker-level hydration and cleanup with controller-level requestId and roundId verification, the architecture guarantees that stale asynchronous search completions from prior turns, undos, or resets are deterministically discarded before mutating the active board.",
+    "new": "executeWasmSearch creates a Game, replays the request history through play_move, rejects an unsuccessful replay, calls ai_move, and frees the instance in finally. It converts Rust (x,y) to frontend (row,col). Its elapsed scope, worker-hydrate-and-search, includes reconstruction, search and cleanup, but excludes WASM loading and message delivery [27]. GomokuWasmEngine routes replies by Worker identity and envelope ID [26]. GameController separately checks its turn token, round, pause state, phase, mode and current player before accepting a move. These owners implement resource cleanup and stale-result rejection at different boundaries [2].",
+    "reason": "Corrects nonexistent direct requestId commit guard and exact elapsed timing scope; removes blanket deterministic guarantee.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/executeSearch.ts:executeWasmSearch",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/GomokuWasmEngine.ts:createWorker",
+      "/home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts:startAiTurn",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md"
+    ]
+  },
+  {
+    "start": 76626,
+    "old": "Each algorithmic layer enforces a distinct invariant within the overall decision pipeline: 4-axis ray scanning detects Freestyle terminal lines in O(K) time; in-place apply/undo preserves board state across recursive branches in O(1) time; Chebyshev spatial generation and the soft tactical cap bound the branching factor while retaining 100% of immediate 1-ply threats; move ordering prioritizes high-value branches; Alpha-Beta pruning eliminates provably suboptimal subtrees while preserving the exact Minimax root value; and Zobrist XOR hashing with bound-typed transposition tables accelerates repeated state lookups.",
+    "new": "The current decision path uses frontend tactical checks and a Worker-hosted WASM request. The modified Rust source explains board updates, Freestyle detection, candidate generation, horizon evaluation and fixed-depth alpha-beta. The legacy bot supplies the iterative-deepening, hashing, transposition-table and quiescence examples. Their contracts are examined independently: candidate selection defines the searched tree; ordering changes its traversal; and alpha-beta preserves minimax's root value for that same tree under the stated assumptions.",
+    "reason": "Separates active path from legacy algorithms and removes unsupported unconditional 100%-threat and acceleration claims.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/bot/search.ts"
+    ]
+  },
+  {
+    "start": 77248,
+    "old": "The recorded research tests and experiments are useful because they specify fixtures, configurations and counters, including negative cases and restoration checks. Together, the native algorithmic benchmarks, Node WASM parity checks, and browser Web Worker telemetry provide complementary multi-level validation [8]. For a reproducible claim about a particular application build, the report must identify the source revision or snapshot, binary provenance, rule and evaluation configuration, player and position, candidate set, depth, platform, and meaning of each reported counter. The following chapters can then describe the system integration and evidence without turning theory into an unmeasured product outcome.",
+    "new": "Chapter 5 evaluates the recorded implementations using native search experiments, WASM parity checks and browser Worker observations. Each result is interpreted with its own position, configuration, platform and counter definition. The theoretical arguments in this chapter establish properties of specified algorithms; the experiments assess those properties on the recorded finite fixtures [8], [43], [45], [46].",
+    "reason": "Replaces audit-style future instructions and vague multi-level-validation prose with concise academic synthesis.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/wasm_ts_parity.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G4_real_browser_worker.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/verification.json"
+    ]
+  }
+]

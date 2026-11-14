@@ -1,0 +1,26 @@
+[
+  {
+    "script": "pattern_scanner.py",
+    "exit_code": 0,
+    "stdout": "=== KẾT QUẢ QUÉT HÌNH THẾ CARO (numpy (WebAssembly C-Extension)) ===\nQuân cờ hiện tại trên bàn:\n- Bot (X) có chuỗi 4 quân mở 2 đầu tại hàng 7: cols [4..7]\n- Đối thủ (O) có chuỗi 3 quân mở 2 đầu tại cột 7: rows [3..5]\n\\nThế cờ nhận diện của Bot (X): {'five': 0, 'open_four': 1, 'closed_four': 0, 'open_three': 0, 'closed_three': 0}\n-> Phát hiện 'open_four': 1 (Thế cờ thắng tất định ở lượt kế tiếp!)\n",
+    "stderr": ""
+  },
+  {
+    "script": "heuristic_evaluator.py",
+    "exit_code": 0,
+    "stdout": "=== KỊCH BẢN 1: Bot có Open Four vs Human có Open Three ===\nTổng điểm Heuristic f(s) = 94,000 (Atk: +100,000 | Def Threat: -6,000)\n-> Bot ưu tiên hoàn thành thế tấn công không thể cản phá.\\n\n=== KỊCH BẢN 2: Đối thủ có Closed Four nguy hiểm ===\nTổng điểm Heuristic f(s) = -7,000 (Atk: +5,000 | Def Threat: -12,000)\n-> Điểm âm nặng do hệ số phòng thủ 1.2x buộc Bot phải chặn nước này trước.\n",
+    "stderr": ""
+  },
+  {
+    "script": "chebyshev_pruner.py",
+    "exit_code": 0,
+    "stdout": "=== THỰC NGHIỆM CẮT GIẢM KHÔNG GIAN TÌM KIẾM CHEBYSHEV ===\nKích thước bàn cờ: 15 x 15 = 225 ô\nSố quân cờ đã đánh: 5 quân\nSố ô trống lý thuyết cần duyệt (Brute-Force): 220 ô\nSố ô ứng viên sau lọc bán kính Chebyshev r <= 2: 36 ô\n-> TỶ LỆ CẮT GIẢM KHÔNG GIAN: 83.64%\n-> Giảm hệ số phân nhánh tìm kiếm từ 220 xuống còn 36 ô!\n",
+    "stderr": ""
+  },
+  {
+    "script": "empirical_analysis.py",
+    "exit_code": 0,
+    "stdout": "=== BÁO CÁO KẾT QUẢ THỰC NGHIỆM ĐỐI ĐẦU TUẦN 4 ===\n- Tổng số ván đấu kiểm chứng: 100 ván\n- Tỷ lệ thắng của Rule-Based Bot: 100.00% (100/100 ván)\n- Số nước đi trung bình một ván: 9.9 nước\n- Thời gian tính toán trung bình: 42.24 µs/nước\n- Ngân sách khung hình 60 FPS: 16.67 ms (16670 µs)\n-> TỶ LỆ CHIẾM DỤNG FRAME BUDGET: 0.253% (Chỉ 0.25%!)\n-> Kết luận: Động cơ Rust chạy cực nhanh, sẵn sàng tích hợp WebAssembly không drop frame!\n",
+    "stderr": ""
+  }
+]

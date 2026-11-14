@@ -1,0 +1,198 @@
+[
+  {
+    "title": "Figure 2.1. Row-major board representation",
+    "physical": 14,
+    "footer": 6,
+    "listed": 6,
+    "match": true
+  },
+  {
+    "title": "Figure 2.2. Search must restore its caller state",
+    "physical": 16,
+    "footer": 8,
+    "listed": 8,
+    "match": true
+  },
+  {
+    "title": "Figure 2.3. Last-move scan along four axes",
+    "physical": 18,
+    "footer": 10,
+    "listed": 10,
+    "match": true
+  },
+  {
+    "title": "Figure 2.4. Rule-based tactical priorities",
+    "physical": 21,
+    "footer": 13,
+    "listed": 13,
+    "match": true
+  },
+  {
+    "title": "Figure 2.5. Contiguous-run weights of the archived Rust evaluator",
+    "physical": 23,
+    "footer": 15,
+    "listed": 15,
+    "match": true
+  },
+  {
+    "title": "Figure 2.6. Radius and board edges affect candidate membership",
+    "physical": 26,
+    "footer": 18,
+    "listed": 18,
+    "match": true
+  },
+  {
+    "title": "Figure 2.7. Alternative traversal orders on identical membership",
+    "physical": 29,
+    "footer": 21,
+    "listed": 21,
+    "match": true
+  },
+  {
+    "title": "Figure 2.8. A two-level Minimax example",
+    "physical": 31,
+    "footer": 23,
+    "listed": 23,
+    "match": true
+  },
+  {
+    "title": "Figure 2.9. Alpha-Beta cutoff on an unchanged tree",
+    "physical": 34,
+    "footer": 26,
+    "listed": 26,
+    "match": true
+  },
+  {
+    "title": "Figure 2.10. Iterative deepening and incomplete work",
+    "physical": 36,
+    "footer": 28,
+    "listed": 28,
+    "match": true
+  },
+  {
+    "title": "Figure 2.11. Incremental XOR and turn-key handling",
+    "physical": 38,
+    "footer": 30,
+    "listed": 30,
+    "match": true
+  },
+  {
+    "title": "Figure 2.12. Bound semantics in a transposition table",
+    "physical": 41,
+    "footer": 33,
+    "listed": 33,
+    "match": true
+  },
+  {
+    "title": "Figure 3.1. Responsibilities in the playable application",
+    "physical": 54,
+    "footer": 46,
+    "listed": 46,
+    "match": true
+  },
+  {
+    "title": "Figure 3.2. Match phases and the separate AI waiting flag",
+    "physical": 56,
+    "footer": 48,
+    "listed": 48,
+    "match": true
+  },
+  {
+    "title": "Figure 3.3. Inverse camera transform before board bounds checking",
+    "physical": 58,
+    "footer": 50,
+    "listed": 50,
+    "match": true
+  },
+  {
+    "title": "Figure 4.1. Tactical and Rust routes converge at the guarded commit",
+    "physical": 63,
+    "footer": 55,
+    "listed": 55,
+    "match": true
+  },
+  {
+    "title": "Figure 4.2. Union of clipped Chebyshev neighborhoods",
+    "physical": 67,
+    "footer": 59,
+    "listed": 59,
+    "match": true
+  },
+  {
+    "title": "Figure 5.1. Recorded native engine nodes on the center fixture",
+    "physical": 71,
+    "footer": 63,
+    "listed": 63,
+    "match": true
+  },
+  {
+    "title": "Figure 5.2. Native reference node counts (ranking cost excluded)",
+    "physical": 74,
+    "footer": 66,
+    "listed": 66,
+    "match": true
+  },
+  {
+    "title": "Figure 5.3. Historical native-versus-Node benchmark on one midgame fixture",
+    "physical": 76,
+    "footer": 68,
+    "listed": 68,
+    "match": true
+  },
+  {
+    "title": "Table 2.1. Recorded Rust difficulty configurations and frontend request path",
+    "physical": 47,
+    "footer": 39,
+    "listed": 39,
+    "match": true
+  },
+  {
+    "title": "Table 3.1. Algorithmic requirements AR01–AR09",
+    "physical": 50,
+    "footer": 42,
+    "listed": 42,
+    "match": true
+  },
+  {
+    "title": "Table 3.2. Verification scenarios and expected outcomes",
+    "physical": 59,
+    "footer": 51,
+    "listed": 51,
+    "match": true
+  },
+  {
+    "title": "Table 5.1. Native engine search on the center fixture at depth two",
+    "physical": 70,
+    "footer": 62,
+    "listed": 62,
+    "match": true
+  },
+  {
+    "title": "Table 5.2. Native reference search on the clustered fixture at depth two",
+    "physical": 73,
+    "footer": 65,
+    "listed": 65,
+    "match": true
+  },
+  {
+    "title": "Table 5.3. Historical native Rust and TypeScript/Node benchmark",
+    "physical": 76,
+    "footer": 68,
+    "listed": 68,
+    "match": true
+  },
+  {
+    "title": "Table A.1. Repository inventory and roles",
+    "physical": 90,
+    "footer": 82,
+    "listed": 82,
+    "match": true
+  },
+  {
+    "title": "Table B.1. Evidence summary and verification status",
+    "physical": 92,
+    "footer": 84,
+    "listed": 84,
+    "match": true
+  }
+]

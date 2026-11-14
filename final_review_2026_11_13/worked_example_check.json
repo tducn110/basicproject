@@ -1,0 +1,116 @@
+{
+  "status": "valid",
+  "coordinate_convention": "(x,y)=(column,row), X=Black, O=White",
+  "history": [
+    [
+      "X",
+      4,
+      7
+    ],
+    [
+      "O",
+      0,
+      0
+    ],
+    [
+      "X",
+      5,
+      7
+    ],
+    [
+      "O",
+      1,
+      0
+    ],
+    [
+      "X",
+      7,
+      7
+    ],
+    [
+      "O",
+      0,
+      1
+    ],
+    [
+      "X",
+      8,
+      7
+    ],
+    [
+      "O",
+      1,
+      1
+    ]
+  ],
+  "checks": {
+    "valid_alternation": true,
+    "distinct_in_bounds_cells": 8,
+    "no_earlier_winner": true,
+    "next_player": "X",
+    "only_immediate_X_win": [
+      6,
+      7
+    ],
+    "immediate_O_wins": [],
+    "radius_two_includes_gap": true,
+    "horizontal_own_counts": [
+      2,
+      2
+    ],
+    "sum_with_placement": 5,
+    "tactical_set": [
+      [
+        6,
+        7
+      ]
+    ],
+    "nominal_cap": 1,
+    "retained_candidates": [
+      [
+        6,
+        7
+      ]
+    ],
+    "requires_positive_search_depth": true,
+    "fixed_root_player": "X",
+    "child_ply_from_root": 1,
+    "terminal_utility": 99999999,
+    "before_apply_count": 8,
+    "after_apply_count": 9,
+    "after_undo_count": 8
+  },
+  "method": "Read canonical included engine source and archived source excerpts; independently enumerated all 217 empty cells with a finite Python geometry check. No Rust engine, WASM, Worker or browser was executed for this example.",
+  "source_files": [
+    {
+      "path": "/home/pro/Downloads/basicproject/CaroGame/engine/src/board.rs",
+      "sha256": "35d64b2e80041342a673da2f9cf8b4e5457c331f873e4230cdec7efd439a13fe"
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/CaroGame/engine/src/candidates.rs",
+      "sha256": "9a83974ad61d8bcae016561f1db35ebb45a8b826c3ee8ec524cd12277ff776ea"
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/CaroGame/engine/src/eval.rs",
+      "sha256": "eec5757ca15216c782820588c2e7fc250fa7fe5e34a4737dee740063534f0d15"
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/CaroGame/engine/src/search.rs",
+      "sha256": "3bea1e8366054a78b7ce4165319b3beb6fbd24144d6504201e26d25a1fbba1dd"
+    }
+  ],
+  "source_roles": {
+    "board.rs": "place/undo, last-move winner scan and radius neighborhoods",
+    "candidates.rs": "assess own>=4, win-first ordering and soft tactical cap",
+    "eval.rs": "MATE_SCORE=100000000 and root-relative terminal utility",
+    "search.rs": "terminal-before-depth check, child ply1, make/unmake and fixed root"
+  },
+  "report_reference": "[10] supports the same recorded algorithm through SOURCE_EXCERPTS.md; this insertion is a derivation, not an additional benchmark result.",
+  "draft_paragraphs": [
+    "An integrated position connects these mechanisms to the Caro decision problem. Coordinates below are (x,y), meaning column and row. Starting from an empty board, play X(4,7), O(0,0), X(5,7), O(1,0), X(7,7), O(0,1), X(8,7), O(1,1). All eight placements are distinct and in bounds, neither player has won, and X is next. Row 7 contains X X _ X X at columns 4–8; the empty cell (6,7) is X’s only immediate winning move.",
+    "The gap belongs to the radius-two candidate set because it is within that distance of existing X stones. Directional assessment finds two X stones on each horizontal side, so the hypothetical placement gives 1 + 2 + 2 = 5 and receives the immediate-win flag. O has no immediate winning completion in this position, making the assessed tactical set T = {(6,7)}. With a nominal cap of one, the soft-cap rule retains max(1, |T|) = 1 candidate: the winning gap [10].",
+    "For a fixed-root Minimax or Alpha-Beta search with root X and positive depth, applying that candidate creates a terminal child at root distance one. Terminal detection precedes the horizon evaluator, so its value is U = M − 1 = 99,999,999 with M = 100,000,000. Both algorithms therefore return the same winning decision on this selected tree. This example demonstrates tactical membership and terminal backup; its single retained root move does not demonstrate a pruning speedup [10].",
+    "The hypothetical placement raises move_count from eight to nine. After evaluating the child, undo clears (6,7) and restores the count to eight, leaving the original decision position available to the caller. These cell-and-count changes take constant time, while candidate generation and assessment retain the costs analyzed earlier. The example is a source-derived calculation, not a new timing measurement or a record of frontend or Worker execution [10]."
+  ],
+  "caution": "Use the example to explain membership, terminal utility, same-tree agreement and restoration; do not claim pruning savings from the one-move root or claim that the application executed this X-root position."
+}

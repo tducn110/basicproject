@@ -1,0 +1,158 @@
+{
+  "board-index": {
+    "file": "board-index.png",
+    "title": "Biểu diễn bàn 15 × 15 và chỉ số theo hàng",
+    "source": "board.rs; core/types.ts",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "apply-undo": {
+    "file": "apply-undo.png",
+    "title": "Bất biến khôi phục trạng thái sau place và undo",
+    "source": "engine/src/board.rs::{place,undo}",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "win-axes": {
+    "file": "win-axes.png",
+    "title": "Bốn trục kiểm tra thắng quanh nước cuối",
+    "source": "board.rs::check_winner_at; WinRules.ts",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "rule-decision": {
+    "file": "rule-decision.png",
+    "title": "Các nhánh ưu tiên của bot Rule-based",
+    "source": "engine/src/ai.rs::baseline",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "heuristic-runs": {
+    "file": "heuristic-runs.png",
+    "title": "Chuỗi liên tiếp và trọng số trong engine hiện hành",
+    "source": "engine/src/eval.rs::pattern_score",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "chebyshev-radius": {
+    "file": "chebyshev-radius.png",
+    "title": "Ảnh hưởng bán kính và biên bàn tới tập ứng viên",
+    "source": "board.rs::get_candidates; minh họa một quân",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "ordering": {
+    "file": "ordering.png",
+    "title": "So sánh hai thứ tự duyệt trên cùng membership",
+    "source": "engine/src/candidates.rs",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "minimax-tree": {
+    "file": "minimax-tree.png",
+    "title": "Ví dụ Minimax với hai tầng quyết định",
+    "source": "Ví dụ toán học tác giả dựng; search.rs",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "alpha-beta-cutoff": {
+    "file": "alpha-beta-cutoff.png",
+    "title": "Cây Alpha-Beta với một lá được cắt",
+    "source": "Ví dụ toán học tác giả dựng; search.rs",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "iterative-depth": {
+    "file": "iterative-depth.png",
+    "title": "Iterative deepening giữ kết quả vòng hoàn tất gần nhất",
+    "source": "reference search/iterative.rs; sơ đồ nguyên lý",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "zobrist-xor": {
+    "file": "zobrist-xor.png",
+    "title": "Cập nhật và hoàn tác Zobrist bằng XOR",
+    "source": "reference zobrist.rs; ví dụ 4 bit",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "tt-bounds": {
+    "file": "tt-bounds.png",
+    "title": "Ba loại kết quả lưu trong bảng chuyển vị",
+    "source": "reference search/optimized.rs; ví dụ toán",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "ai-pipeline": {
+    "file": "ai-pipeline.png",
+    "title": "Hai tuyến tactical và Rust được nhập tại controller",
+    "source": "AIController.ts; executeSearch.ts; GameController.ts",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "system-architecture": {
+    "file": "system-architecture.png",
+    "title": "Trách nhiệm và liên hệ giữa controller, core, Pixi và AI",
+    "source": "CaroGame/src/{app,game,pixi,board}",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "state-flow": {
+    "file": "state-flow.png",
+    "title": "Trạng thái ván và các nhánh yêu cầu hoặc hủy AI",
+    "source": "GameController.ts; GameState.ts; thinking là trạng thái chờ hiển thị",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "coordinate-flow": {
+    "file": "coordinate-flow.png",
+    "title": "Biến đổi tọa độ và kiểm tra biên",
+    "source": "BoardInputController.ts; CoordinateTransform.ts",
+    "kind": "Sơ đồ giải thích dựng từ mã nguồn"
+  },
+  "current-nodes": {
+    "file": "current-nodes.png",
+    "title": "Số node của cùng cấu hình tìm kiếm trên engine game",
+    "source": "research/current_2026_10_23/engine_search_summary.csv",
+    "kind": "Biểu đồ từ dữ liệu native đã lưu"
+  },
+  "reference-nodes": {
+    "file": "reference-nodes.png",
+    "title": "So sánh số node trên reference core",
+    "source": "research/week_05_09/results/search_summary.csv",
+    "kind": "Biểu đồ từ dữ liệu native đã lưu"
+  },
+  "legacy-benchmark": {
+    "file": "legacy-benchmark.png",
+    "title": "Benchmark native và TypeScript trên một fixture midgame",
+    "source": "benchmark/results/benchmark_data.json; một fixture, lịch sử",
+    "kind": "Biểu đồ tái dựng dữ liệu benchmark lịch sử"
+  },
+  "game-desktop": {
+    "file": "game-desktop.png",
+    "title": "Giao diện hai người chơi trên bản build local",
+    "source": "Ảnh chụp Chrome ngày 27/10/2026, 1365 × 900",
+    "kind": "Ảnh chụp trình duyệt local"
+  },
+  "game-ai": {
+    "file": "game-ai.png",
+    "title": "Ván đấu máy sau một lượt người và một lượt bot",
+    "source": "Ảnh chụp Chrome ngày 27/10/2026; Hard, completed depth 2",
+    "kind": "Ảnh chụp trình duyệt local"
+  },
+  "game-mobile": {
+    "file": "game-mobile.png",
+    "title": "Giao diện tại viewport 390 × 844",
+    "source": "Ảnh chụp Chrome ngày 27/10/2026; viewport giả lập",
+    "kind": "Ảnh chụp trình duyệt local"
+  },
+  "present-components": {
+    "file": "present-components.png",
+    "title": "Chi tiết khối App và trang điều phối trong sơ đồ present",
+    "source": "present/public/assets/component_hierarchy.png; crop bằng Pillow",
+    "kind": "Ảnh tài liệu lịch sử của frontend DOM"
+  },
+  "present-hooks": {
+    "file": "present-hooks.png",
+    "title": "Chi tiết hooks và domain trong sơ đồ present",
+    "source": "present/public/assets/component_hierarchy.png; crop bằng Pillow",
+    "kind": "Ảnh tài liệu lịch sử của frontend DOM"
+  },
+  "game-telemetry": {
+    "file": "game-telemetry.png",
+    "title": "Thông tin của một lần tìm kiếm Hard trong browser local",
+    "source": "Ảnh chụp Chrome ngày 27/10/2026; một quan sát, không phải benchmark",
+    "kind": "Ảnh chụp trình duyệt local"
+  },
+  "present-candidates": {
+    "file": "present-candidates.png",
+    "title": "Tái dựng ví dụ Chebyshev năm quân của present",
+    "source": "PythonVisualizer.tsx::chebyshev_pruner.py; 36/220, giảm 83,64%",
+    "kind": "Ví dụ hình học tính lại bằng Python"
+  }
+}

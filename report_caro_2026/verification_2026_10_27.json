@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-27",
+  "app": "/home/pro/Downloads/basicproject/CaroGame",
+  "node": "24.22.1",
+  "checks": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run",
+      "exit_code": 0,
+      "test_files": 9,
+      "tests": 59,
+      "duration_seconds": 2.22
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exit_code": 0
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "exit_code": 0,
+      "vite": "8.3.1",
+      "warnings": [
+        "native config loader __dirname",
+        "JavaScript chunk larger than 500 kB"
+      ],
+      "wasm_size_kb": 111.58,
+      "wasm_gzip_kb": 34.14
+    }
+  ],
+  "browser_screenshot": {
+    "url": "http://127.0.0.1:4180",
+    "viewports": [
+      "1365x900",
+      "390x844"
+    ],
+    "interaction": "Synthetic PointerEvent at canvas center; Hard AI responds, telemetry visible",
+    "scope": "one local browser observation, not devices, tournament or Wink host"
+  }
+}

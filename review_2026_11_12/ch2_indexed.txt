@@ -1,0 +1,391 @@
+13978 [HEADING_1] CHAPTER 2. ALGORITHMS AND DATA STRUCTURES
+14020 [HEADING_2] 2.1 Scope, evidence, and notation
+14054 [NORMAL_TEXT] This chapter explains how a Caro position can be represented, tested for a result, evaluated and searched. It connects the concepts to evidence from the project while distinguishing three implementation contexts. The current application controller and frontend rules can be inspected directly in the application source. The repository's source excerpts and baseline modules document the core Rust engine functions, state representations, and search procedures used by the WebAssembly package [6]. Together with the compiled WebAssembly binary and TypeScript adapter contracts, these artifacts specify the active engine behavior and its boundary with the frontend controller [6], [7], [9].
+14743 [NORMAL_TEXT] The repository additionally contains a TypeScript bot implementation under the older bot module. It is called the legacy bot here because the current AIController constructs GomokuWasmEngine and sends the normal AI request through that adapter, with a separate tactical prepass for higher difficulties. Its quiescence search, iterative deepening, and transposition table provide concrete implementations of advanced game-tree optimizations analyzed in this chapter [10], [11]. A separate Rust reference engine has historical native research reports and test outputs. Results from that native reference library quantify algorithmic scaling and pruning behavior in controlled native experiments [8].
+15441 [NORMAL_TEXT] The notation throughout uses an N × N board with N = 15 and winning length K = 5 unless stated otherwise. Coordinates (x,y) mean column and row, respectively, with both in 0…14. In frontend code the equivalent coordinate is (row,col) = (y,x). A ply is one placed stone. Let B denote a board, p the side to move, opp(p) the other side, and m a legal move. The transition T(B,p,m) places p at m; it is defined only if the cell is empty and the game permits a move. Let A(B,p) be the moves the selected search policy actually generates, which may be a strict subset of the legal empty cells. A root player R is the player whose advantage is represented by a larger score. These distinctions matter because a proof about the generated search tree cannot establish a claim about every legal move if the generation policy has already excluded some moves.
+16290 [NORMAL_TEXT] The mathematical formulations and pseudocode specify each algorithm's inputs, state transitions, invariants, and complexity bounds, complemented by step-by-step worked examples and empirical measurements. Shannon's foundational model of adversarial look-ahead and static horizon evaluation provides the theoretical framework for the depth-limited search architecture [12].
+16663 [HEADING_2] 2.2 Board representation and legal updates
+16706 [HEADING_3] 2.2.1 Matrix, index conversion, and state ownership
+16758 [NORMAL_TEXT] A position consists of 225 cells, each containing empty, X or O. In an array indexed as B[y][x], row-major conversion to a flat logical index is i = 15y + x; the inverse is x = i mod 15, y = floor(i/15). Hence the center (7,7) has index 112, and (14,14) has index 224. The system divides board representation across three specialized structures according to architectural role: (1) the Rust search engine (Board) stores a contiguous 15 × 15 grid of 225 one-byte repr(u8) cells (Empty = 0, Black = 1, White = 2) paired with move_count; (2) the match wrapper (Game) and frontend (GameState) store match progression and an ordered Move history; and (3) the legacy TypeScript bot (BotBoard) uses a 1D sentinel-padded array with directional bitmask segments. The rationale for this division is to decouple high-frequency recursive search from match-lifecycle management. Its primary benefit is O(1) direct indexing, O(1) in-place apply/undo during depth-first search, zero per-node heap allocation, and compact L1-cache locality; the trade-off is that the raw 225-cell matrix does not record chronological move order, requiring the outer Game/GameState layer to maintain history and full-board unindexed scans to take O(N²) time [13].
+17988 [NORMAL_TEXT] The archived Rust place excerpt validates bounds, rejects an empty stone, rejects an occupied cell, writes a cell and increments a move counter. The companion undo rejects an out-of-range or already-empty cell and otherwise clears it and decrements that counter [6]. Dividing responsibility between low-level cell mutation (Board::place and Board::undo) and match-level legality (Game::play_move and GameController) keeps inner-loop search operations lightweight while ensuring that turn alternation and post-win lockouts are strictly enforced on committed game moves.
+18557 [NORMAL_TEXT] A board and a game are different state owners. Cells and the count describe the position; turn, winner, and move history describe the match's progression. A history provides the information needed to restore actual game moves in reverse order. A recursive search temporarily changes a working board to explore alternatives, which must not silently become the player's actual move. The documented Rust search makes a copy at its outer entry, while its in-place search relies on restoration of the working board [6]. Cloning the root board once per search request isolates exploratory tree mutations from the live game state, while in-place apply and undo avoid O(N²) board copying at internal nodes.
+19256 [NORMAL_TEXT] 
+19258 [NORMAL_TEXT] Figure 2.1. Row-major board representation
+19301 [NORMAL_TEXT] Source: CaroGame/src/game/core/GameState.ts [14].
+19351 [HEADING_3] 2.2.2 Apply and undo
+19372 [NORMAL_TEXT] Inputs and output. APPLY(B,m,p) takes the working board, a coordinate and a nonempty player; it returns success or failure. UNDO(B,m) takes the coordinate of a previously applied move and returns whether removal was possible. The stronger search precondition is that undo is paired with the most recent successful hypothetical move on that branch. An individual undo that merely removes an occupied cell does not enforce the whole history discipline.
+19823 [NORMAL_TEXT] // Algorithm 2.1 (research/current_2026_10_23/baseline_engine/src/board.rs) — APPLY(B, (x,y), p):
+19921 [NORMAL_TEXT]     if x or y is outside the board, or p is empty: return failure
+19987 [NORMAL_TEXT]     if B[y][x] is not empty: return failure
+20031 [NORMAL_TEXT]     B[y][x] ← p
+20047 [NORMAL_TEXT]     B.move_count ← B.move_count + 1
+20083 [NORMAL_TEXT]     return success
+20102 [NORMAL_TEXT] 
+20103 [NORMAL_TEXT] UNDO(B, (x,y)):
+20119 [NORMAL_TEXT]     if (x,y) is outside the board or B[y][x] is empty: return failure
+20189 [NORMAL_TEXT]     B[y][x] ← empty
+20209 [NORMAL_TEXT]     B.move_count ← B.move_count - 1
+20245 [NORMAL_TEXT]     return success
+20264 [NORMAL_TEXT] 
+20265 [NORMAL_TEXT] VISIT_CHILD(B, p, m):
+20287 [NORMAL_TEXT]     require APPLY(B, m, p) succeeds
+20323 [NORMAL_TEXT]     try: value ← VISIT(B, opp(p), m)
+20360 [NORMAL_TEXT]     finally: require UNDO(B, m) succeeds
+20401 [NORMAL_TEXT]     return value
+20418 [NORMAL_TEXT] The finally in this explanatory version means every normal return, cutoff and supported abort must pass through restoration. In languages without such a construct, equivalent structured cleanup is necessary. Additional state such as a hash, side to move, cached pattern counts, last move or winner must also be restored by its actual owner. This paired apply/undo contract guarantees O(1) state transitions per branch while preserving parent-state integrity across arbitrary search depths.
+20908 [NORMAL_TEXT] Invariant and argument. Immediately before exploring each sibling, the working state must equal the state at the parent node. A successful apply changes exactly the selected empty cell and increments the count. Its matching undo clears that same cell and decrements the count; therefore these fields equal their former values. By induction over nested calls, assuming each recursive child restores every state field it owns, the parent sees the same state for the next sibling. The induction depends on legal matching calls; it is not guaranteed if an exception bypasses undo or a different move is removed.
+21516 [NORMAL_TEXT] For example, let X occupy (7,7), O occupy (8,7), and the count be two. Trying X at (7,8) changes that cell and makes the count three. Undoing (7,8) returns both the cells and count to their initial values. Clearing the cell but leaving count three makes fullness checks unreliable; decrementing without clearing contaminates the next branch. With direct indexing, each operation is O(1) time and O(1) auxiliary space; copying an N × N board costs O(N²). Rejecting an occupied or out-of-bounds move must leave the board unchanged. Together with the inductive restoration invariant, automated root-restoration checks across 820 engine search runs confirm that the working board is returned unchanged after every search.
+22234 [NORMAL_TEXT] 
+22236 [NORMAL_TEXT] Figure 2.2. Search must restore its caller state
+22285 [NORMAL_TEXT] Source: research/current_2026_10_23/baseline_engine/src/board.rs [6].
+22355 [HEADING_2] 2.3 Freestyle win detection
+22383 [NORMAL_TEXT] The frontend win rule treats a contiguous line of at least five stones as a win, including an overline of six or more. It checks four axes through the last move, with both directions on each axis. It does not require exactly five or impose an additional two-blocked-ends condition [4]. The term Caro is used for the application, but this particular rule is specified explicitly because games with similar names may use other winning conditions.
+22828 [NORMAL_TEXT] Inputs, outputs and preconditions. The procedure takes a board and the last placed coordinate m, and returns the winner and a collection of winning cells when a qualifying line is found, or no result otherwise. It assumes m refers to the move that may have just caused the transition. If the board was already won before that move, testing only a line through m cannot detect every earlier win. A root-level validation of an arbitrary imported board needs a separate full-board check. The current frontend rule reads the player at m; an empty or invalid location produces no winner.
+23411 [NORMAL_TEXT] For directions D = {(1,0), (0,1), (1,1), (1,-1)}, let f_d and b_d count consecutive stones equal to the stone at m in the positive and negative direction. A win through the last move occurs exactly when some 1 + f_d + b_d ≥ K. To decide whether the threshold is reached, scanning at most K−1 matching cells in each direction is sufficient: any additional cells cannot change a negative result to a positive result after K−1 matching cells already exist on one side.
+23877 [NORMAL_TEXT] // Algorithm 2.2 (CaroGame/src/game/core/WinRules.ts) — WIN_AT(B, m, K):
+23950 [NORMAL_TEXT]     if m is out of bounds or B[m] is empty: return NONE
+24006 [NORMAL_TEXT]     p ← B[m]
+24019 [NORMAL_TEXT]     for d in [(1,0),(0,1),(1,1),(1,-1)]:
+24060 [NORMAL_TEXT]         cells ← [m]
+24080 [NORMAL_TEXT]         for sign in [+1,-1]:
+24109 [NORMAL_TEXT]             for step from 1 to K-1:
+24145 [NORMAL_TEXT]                 q ← m + sign * step * d
+24185 [NORMAL_TEXT]                 if q is outside or B[q] ≠ p: break
+24236 [NORMAL_TEXT]                 append q to cells
+24270 [NORMAL_TEXT]         if length(cells) ≥ K: return (p, cells)
+24318 [NORMAL_TEXT]     return NONE
+24334 [NORMAL_TEXT] The scan invariant is that every collected cell is on the selected axis, adjacent to the preceding segment and occupied by p. Stopping at the first boundary or different cell prevents joining disconnected sequences. If a contiguous run through m has length at least K, either its collected positive and negative portions together reach K−1 neighbors or a single portion does, so the check succeeds. Conversely, K collected stones form a contiguous same-player segment through m, establishing the stated rule. The returned display collection may be truncated to K−1 stones per side; it is sufficient to prove a win but is not necessarily the full maximal overline.
+24998 [NORMAL_TEXT] Consider X X [X] X X on one row with the bracketed center as the last move. Each side contributes two; 1+2+2=5. For X X X [X] X X, the value exceeds five and remains a win. An empty last cell returns no winner; a gap interrupts the run; edge and corner scans stop safely. Why last-move 4-axis ray scanning is used: because any newly formed winning line in an ongoing game must pass through the stone m just placed, scanning at most K − 1 = 4 steps in both directions (+1 and −1) along the 4 axes D = {(1,0), (0,1), (1,1), (1,−1)} inspects at most 4 × 2 × 4 = 32 neighboring cells. Benefits and trade-offs: this reduces terminal win detection at every recursive search node from an O(N²) full-board scan (225 × 4 = 900 directional checks) to O(K) = O(1) time and O(K) space, yielding a major speedup inside Minimax and Alpha-Beta; the trade-off is that it relies on the inductive invariant that no prior move had already won, so arbitrary imported positions require a one-time O(N²) root validation.
+25997 [NORMAL_TEXT] 
+25999 [NORMAL_TEXT] Figure 2.3. Last-move scan along four axes
+26042 [NORMAL_TEXT] Source: CaroGame/src/game/core/WinRules.ts [4].
+26090 [HEADING_2] 2.4 Baselines: random play and rule-based play
+26137 [HEADING_3] 2.4.1 Random baseline
+26159 [NORMAL_TEXT] A random baseline makes the meaning of added search explicit: it selects without comparing a tree of future replies. The documented Rust baseline first checks for a terminal position or an invalid empty player; for Easy it gathers legal empty cells, uses a seeded pseudo-random value modulo the number of cells, and evaluates the resulting move for the returned result. That evaluation occurs after selection and does not choose the Easy move [6].
+26607 [NORMAL_TEXT] // Algorithm 2.3 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — RANDOM_MOVE(B, p, seed):
+26700 [NORMAL_TEXT]     if p is empty or B is terminal: return NONE
+26748 [NORMAL_TEXT]     L ← all legal empty cells in B
+26783 [NORMAL_TEXT]     if L is empty: return NONE
+26814 [NORMAL_TEXT]     i ← SEEDED_INTEGER(seed) mod length(L)
+26857 [NORMAL_TEXT]     return L[i]
+26873 [NORMAL_TEXT] The input includes the seed because pseudo-random generation is deterministic for a particular generator state and input. The output is either an element of L or no move. With a board containing only one stone, |L|=224; a one-element list always returns its sole entry. A full or terminal board must not perform modulo zero. The legality argument is immediate from construction of L, provided the game-level preconditions and list are correct. Using a deterministic 64-bit splitmix-style mixer over the legal move list ensures fast O(1) index selection after O(N²) empty-cell enumeration.
+27462 [NORMAL_TEXT] Gathering all cells takes O(N²) time and O(N²) space in the worst case; selection after that is O(1). A post-selection evaluation has its own cost. A fixed seed makes the selection reproducible under the same generator and ordering, not necessarily across different implementations or changed inputs. A random policy does not promise to notice an immediate win or threat.
+27834 [HEADING_3] 2.4.2 Immediate tactics and one-ply heuristic
+27880 [NORMAL_TEXT] The documented Normal baseline first obtains candidates, then chooses an immediate win when available, otherwise an immediate blocking coordinate, and otherwise compares the evaluations of candidate moves. These are priorities, not a multi-ply adversarial proof. The candidate assessment is the source of the immediate-win and block markers [6]. The current frontend also has a separate tactical resolver for Hard, Very Hard, Expert and Master before it requests the WASM engine. Easy and Normal skip that frontend prepass. A tactical response reports its own source and zero Rust search work; it must not be presented as a completed alpha-beta search [10].
+28538 [NORMAL_TEXT] // Algorithm 2.4 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — RULE_BASED(B, p, policy):
+28632 [NORMAL_TEXT]     if B is terminal or p is invalid: return NONE
+28682 [NORMAL_TEXT]     C ← SELECT_CANDIDATES(B, p, policy)
+28722 [NORMAL_TEXT]     if an m in C wins immediately for p: return m
+28772 [NORMAL_TEXT]     if an m in C is an immediate winning cell for opp(p): return m
+28839 [NORMAL_TEXT]     best_move ← NONE; best_score ← -infinity
+28884 [NORMAL_TEXT]     for m in C:
+28900 [NORMAL_TEXT]         APPLY(B,m,p)
+28921 [NORMAL_TEXT]         try:
+28934 [NORMAL_TEXT]             score ← TERMINAL_OR_EVALUATE(B,p,m)
+28982 [NORMAL_TEXT]         finally:
+28999 [NORMAL_TEXT]             UNDO(B,m)
+29021 [NORMAL_TEXT]         if best_move is NONE or score > best_score:
+29073 [NORMAL_TEXT]             best_move ← m; best_score ← score
+29119 [NORMAL_TEXT]     return best_move, best_score
+29152 [NORMAL_TEXT] The decision invariant after processing the first j non-tactical candidates is that best_score is the greatest observed value among those j moves and the board is restored. A separate invariant places the win and block checks before the one-ply loop. Thus the routine picks the best score among the evaluated candidates when neither tactical condition applies. Correctness of the tactical marker itself depends on the assessment recognizing the corresponding winning geometry and on the move being included in C.
+29665 [NORMAL_TEXT] For a concrete threat, suppose X occupies row 0, columns 0–3, column 4 is empty, and O is to move. The left endpoint lies outside the board; placing O at (4,0) blocks the only immediate completion along this row. If the same four consecutive X stones are in the interior with both endpoints empty, there are two distinct winning cells. A single O move can occupy one cell, not both. Retaining both choices avoids losing information but does not establish that either saves the game. Similarly, an immediate winning move for O takes priority over blocking if both are available under the algorithm's ordering.
+30274 [NORMAL_TEXT] If k candidates are generated, one-ply evaluation costs roughly O(k × evaluation-cost), in addition to candidate generation and ordering. A constant-time local win scan does not make the whole rule-based procedure constant time. A nonterminal board with no generated move requires a defined fallback or no-move response; terminal handling must precede any selection. A short tactical prepass is not a substitute for searching through arbitrary combinations.
+30732 [NORMAL_TEXT] 
+30734 [NORMAL_TEXT] Figure 2.4. Rule-based tactical priorities
+30777 [NORMAL_TEXT] Source: research/current_2026_10_23/baseline_engine/src/ai.rs [7].
+30844 [HEADING_2] 2.5 Static evaluation and terminal utility
+30887 [HEADING_3] 2.5.1 Evaluation of nonterminal positions
+30929 [NORMAL_TEXT] A search with finite depth can stop before a winner exists. Its evaluator assigns an approximate score to that horizon position. In the documented modified Rust snapshot, evaluate scans maximal contiguous runs in four directions, adds the root player's run weights, subtracts the opponent's, and adds or subtracts a center preference. The snapshot counts a run once per axis by skipping a cell when the previous cell on the same axis has the same color. It then clamps the final heuristic to a range below terminal scores [6].
+31456 [NORMAL_TEXT] Let R_p(B) be maximal runs of p over the four axes, len(r) their length and open(r) their number of empty endpoints. Let c(x,y)=max(0,14−|x−7|−|y−7|) and C(B,p) be p's sum of c minus the opponent's. The descriptive formula is
+31682 [NORMAL_TEXT] E_raw(B,p) = Σ[r∈R_p(B)] w(len(r),open(r)) − Σ[r∈R_opp(B)] w(len(r),open(r)) + C(B,p).
+31769 [NORMAL_TEXT] The publicly archived Rust baseline defines the following weights for two open ends and one open end, respectively: length at least five, 1,000,000 and 1,000,000; length four, 50,000 and 5,000; length three, 5,000 and 500; and length two, 200 and 50. A run of five or more has the same weight even when both ends are closed; otherwise unmatched cases receive zero from the run-weight function [15]. Why exponential pattern weights are used: scaling weights by an order of magnitude per stone—from 50/200 for two-stone runs to 500/5,000 for three-stone runs, 5,000/50,000 for four-stone runs, and 1,000,000 for five-or-more—ensures that an unstoppable open four (50,000) or double-three threat decisively outweighs multiple scattered two-stone formations, while the Manhattan center term c(x,y) = max(0, 14 − |x − 7| − |y − 7|) breaks positional ties in the opening.
+32635 [NORMAL_TEXT] // Algorithm 2.5 (research/current_2026_10_23/baseline_engine/src/eval.rs) — EVALUATE(B, p):
+32728 [NORMAL_TEXT]     score ← 0
+32742 [NORMAL_TEXT]     for each occupied cell s:
+32772 [NORMAL_TEXT]         for d in the four axes:
+32804 [NORMAL_TEXT]             if preceding cell along d has the same color: continue
+32871 [NORMAL_TEXT]             (length, open_ends) ← scan maximal same-color run
+32933 [NORMAL_TEXT]             value ← WEIGHT(length, open_ends)
+32979 [NORMAL_TEXT]             if B[s] is p: score ← score + value
+33027 [NORMAL_TEXT]             else: score ← score - value
+33067 [NORMAL_TEXT]         score ← score + center contribution signed by color
+33127 [NORMAL_TEXT]     return CLAMP(score, -H, H)
+33158 [NORMAL_TEXT] The loop invariant is that score equals the signed contribution of all starts already visited, plus center terms for occupied cells already visited. Every maximal run has exactly one start in each orientation, so the preceding-cell test avoids counting that run repeatedly. Because every maximal contiguous run has a unique starting cell along each axis, the preceding-cell guard (skipping cell s when s − d holds the same color) guarantees that each run is weighted exactly once per axis without double-counting sub-segments.
+33685 [NORMAL_TEXT] For an illustrative board with X alone at (7,7), its singleton has no run weight and its center term is 14, so E(B,X)=14. Add X at (8,7) while leaving the remainder empty: the horizontal length-two run has two open ends and contributes 200; center terms are 14 and 13, so the value is 227. A blocked endpoint reduces open(r) from 2 to 1 (or 0 when blocked on both sides), shifting the run weight down by an order of magnitude; board boundaries act as closed endpoints.
+34154 [NORMAL_TEXT] Scanning all maximal runs across a constant number of directions is O(N²): although a run is traversed, each occupied cell participates in at most one maximal run per direction. Auxiliary space beyond the board is O(1) in the described scan. The evaluator recognizes contiguous runs; a gap such as XX_XX is not automatically a single contiguous run, even though a separate move test can recognize the winning gap. Benefits and trade-offs of maximal contiguous-run scanning: it evaluates any board in O(N²) time and O(1) auxiliary memory without dynamic allocation; the trade-off is that single-gap threats (such as XX_XX) are not scored as a single contiguous run at depth 0, relying instead on multi-ply look-ahead recursion and the candidate generator's tactical assessment to resolve split completions.
+34960 [NORMAL_TEXT] 
+34962 [NORMAL_TEXT] Figure 2.5. Contiguous-run weights of the archived Rust evaluator
+35028 [NORMAL_TEXT] Source: research/current_2026_10_23/baseline_engine/src/eval.rs [7].
+35097 [HEADING_3] 2.5.2 Terminal states and the score hierarchy
+35143 [NORMAL_TEXT] Terminal outcomes must be evaluated before a depth cutoff. In the engine implementation, the terminal base constant is M = 100,000,000, the ply distance from the root is q ≤ 225, and nonterminal heuristic scores are clamped to (−H, +H) with H = M − 225 − 1 = 99,999,774 [6]. The result from root perspective is M−q for a root win, −M+q for a root loss, and zero for a draw. An unfinished board has no terminal utility and is evaluated only when the search horizon is reached [6].
+35623 [NORMAL_TEXT] // Algorithm 2.6 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — TERMINAL_UTILITY(winner, full, root, ply):
+35734 [NORMAL_TEXT]     q ← min(ply, 225)
+35756 [NORMAL_TEXT]     if winner = root: return M - q
+35791 [NORMAL_TEXT]     if winner is the opponent: return -M + q
+35836 [NORMAL_TEXT]     if full: return 0
+35858 [NORMAL_TEXT]     return NONE
+35874 [NORMAL_TEXT] The clamp ensures every nonterminal heuristic lies between −H and H. Since M−225 = 99,999,775 > H, even the slowest represented win exceeds a nonterminal score; similarly a loss is below every nonterminal score. A win at q=2 receives 99,999,998 and a win at q=4 receives 99,999,996, so maximizing prefers the earlier win. Conversely, if a loss is unavoidable, increasing q makes its negative score less severe and thus delays the loss. This preference follows from the formula; it is conditional on the search actually reaching and correctly identifying those terminal outcomes. The winner must be decided before a full-board draw when the last empty cell completes a line.
+36548 [HEADING_2] 2.6 Candidate generation and a soft tactical cap
+36597 [HEADING_3] 2.6.1 Spatial neighborhood
+36624 [NORMAL_TEXT] Considering every empty cell creates a large branching factor. A candidate policy can instead choose empty cells close to existing stones. For cells a and b, Chebyshev distance is d∞(a,b)=max(|a_x−b_x|, |a_y−b_y|). With radius r, a spatial candidate is an empty cell within distance r of at least one occupied cell. The empty board has a special center choice, and a full board has no move. The exact selection, fallback and ranking below describe the archived modified-engine policy, not the legacy bot's different forcing-move generator [6].
+37168 [NORMAL_TEXT] // Algorithm 2.7 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — RAW_CANDIDATES(B, r):
+37258 [NORMAL_TEXT]     if B is full: return []
+37286 [NORMAL_TEXT]     if B has no stones: return [center]
+37326 [NORMAL_TEXT]     seen ← N × N false array; C ← []
+37363 [NORMAL_TEXT]     for each occupied cell s in B:
+37398 [NORMAL_TEXT]         for each q in the radius-r square around s clipped to the board:
+37471 [NORMAL_TEXT]             if B[q] is empty and not seen[q]:
+37517 [NORMAL_TEXT]                 seen[q] ← true
+37548 [NORMAL_TEXT]                 append q to C
+37578 [NORMAL_TEXT]     return C
+37591 [NORMAL_TEXT] For a stone at (7,7), radius one gives a 3 × 3 square with eight empty candidates; radius two gives a 5 × 5 square with 24. With the single stone at (0,0), the radius-two square is clipped to a 3 × 3 corner and yields eight candidates. Multiple stones may nominate the same cell, but seen prevents duplicates. If a radius produces no raw candidates on a nonfull board, the documented selection code falls back to legal moves, avoiding an occupied placeholder. An empty player and a full board return no candidates [6].
+38110 [NORMAL_TEXT] The membership invariant says that each appended coordinate is on the board, empty and not previously appended. Conversely, every empty cell in a visited neighborhood is appended on its first encounter. This proves correctness for the defined neighborhood, not equivalence to all legal moves. With m occupied cells, scanning the board and their neighborhoods costs O(N² + m(2r+1)²) before assessment; the seen matrix and candidate list use O(N²) space. The domain can be clipped at the board edge. Benefits and trade-offs of Chebyshev spatial pruning: restricting moves to d∞(a,b) = max(|a_x − b_x|, |a_y − b_y|) ≤ r reduces the branching factor from ~220 empty cells in the opening to 8–36 local candidates (a 72.39%–83.64% reduction), making multi-ply search tractable; the trade-off is that distant non-local sacrifices outside radius r are excluded from the search tree.
+38985 [NORMAL_TEXT] 
+38987 [NORMAL_TEXT] Figure 2.6. Radius and board edges affect candidate membership
+39050 [NORMAL_TEXT] Source: research/current_2026_10_23/SOURCE_EXCERPTS.md [6].
+39110 [HEADING_3] 2.6.2 Tactical preservation and membership
+39153 [NORMAL_TEXT] For each raw move, the documented select_candidates assesses whether it wins for the moving side, blocks an immediate opponent win, and assigns a quick ranking score. Sorting prioritizes a win, then a block, then descending score, with row-major coordinates used to break ties. If a cap is configured, the ranked list is truncated at max(cap,1,tactical_count), so every assessed immediate winning or blocking coordinate remains even if the number of such coordinates exceeds the cap. After selecting membership, disabling move ordering sorts the retained set by coordinate rather than changing its members [6].
+39764 [NORMAL_TEXT] // Algorithm 2.8 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — SELECT_CANDIDATES(B, p, policy):
+39865 [NORMAL_TEXT]     if p is empty or B is full: return empty set
+39914 [NORMAL_TEXT]     raw ← RAW_CANDIDATES(B, policy.radius)
+39957 [NORMAL_TEXT]     if raw is empty and B is not full: raw ← LEGAL_MOVES(B)
+40017 [NORMAL_TEXT]     ranked ← ASSESS each move for win, block, and quick score
+40079 [NORMAL_TEXT]     sort ranked by win first, block second, score descending, coordinate
+40152 [NORMAL_TEXT]     tactical_count ← count of entries marked win OR block
+40210 [NORMAL_TEXT]     if policy.cap exists:
+40236 [NORMAL_TEXT]         retain first max(policy.cap, 1, tactical_count) entries
+40300 [NORMAL_TEXT]     if ordering is disabled: sort retained entries by coordinate
+40365 [NORMAL_TEXT]     return retained entries and assessment metadata
+40417 [NORMAL_TEXT] Let C be the raw set, T its marked tactical subset, and c the configured cap normalized to at least one. The selected set is the union of T and enough highest-ranked non-tactical members to reach c when possible. If |T|=2 and c=1, both tactical moves remain, so this is a soft cap, not an absolute maximum. The proof depends on tactical entries being ordered before every non-tactical entry and on every relevant move first being in raw. It does not show that all useful multi-ply tactical moves are preserved, or that a move excluded by the spatial policy is later recovered by the cap.
+41005 [NORMAL_TEXT] For k raw candidates, assessment takes O(kK) when the relevant directional scan is bounded by K, sorting O(k log k), and storage O(k), in addition to spatial generation. With fixed K=5 the scan term is linear in k. Candidate assessment and full-board evaluation are different operations; a counter named ordering evaluations should be interpreted using its own recorded definition. Why a soft tactical cap C' = T ∪ Top_max(0, c − |T|)(C \ T) is used instead of a hard cap: a hard truncation at cap c can discard critical winning or blocking moves if their static heuristic rank falls below index c—as demonstrated in the cap_loss.json benchmark where a hard cap of 6 discarded both winning endpoints (7,2) and (7,7) out of 20 candidates. By taking max(cap, 1, tactical_count), the soft cap guarantees 100% retention of immediate 1-ply wins and blocks (T) while bounding non-tactical branching to at most c candidates [16].
+41928 [HEADING_2] 2.7 Move ordering versus move selection
+41968 [NORMAL_TEXT] A search traverses the retained moves in an order. Ordering permutes an already chosen set; filtering or capping changes its membership and therefore the tree itself. In a complete minimax evaluation of the same deterministic tree, any permutation produces the same value, although a tied best move can differ if the first best move is retained. In alpha-beta search, ordering influences how soon useful bounds are discovered and can alter the number of cutoffs, while preserving the root value under the algorithm's assumptions [17].
+42503 [NORMAL_TEXT] // Algorithm 2.9 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — ORDER(retained_moves, rank):
+42600 [NORMAL_TEXT]     calculate a rank key for each retained move
+42648 [NORMAL_TEXT]     sort by the chosen key with a deterministic tie breaker
+42708 [NORMAL_TEXT]     return the same moves in the new order
+42751 [NORMAL_TEXT] For example, if A, B and C have quick ranking scores 10, 50 and 30, score order is B, C, A, while coordinate order may be A, B, C. Neither order establishes that B is ultimately the best move. If all are still visited under minimax, only traversal changes. Alpha-beta may finish earlier after B supplies a strong bound. Sorting k moves costs O(k log k), plus the cost of computing keys and O(k) storage in a conventional array implementation. Benefits and trade-offs of move ordering: examining immediate wins, blocks, and high-adjacency moves first maximizes early α ≥ β cutoffs and reduces visited nodes by 44.68%–80.22% in depth-2 benchmarks; the trade-off is the O(k log k) sorting and key-assessment overhead at each node, which must remain lightweight so ranking cost does not exceed pruning savings.
+43558 [NORMAL_TEXT] The documented candidate selection uses fast local information for ranking; the historical reference experiment uses its own evaluation and ordering behavior [6], [8]. Comparisons should hold the board, depth, scoring, candidate membership and terminal rules fixed, changing only ordering. Equal values but different tied moves can both be consistent. A comparison that changes both cap and ordering cannot isolate ordering's effect.
+43992 [NORMAL_TEXT] 
+43994 [NORMAL_TEXT] Figure 2.7. Alternative traversal orders on identical membership
+44059 [NORMAL_TEXT] Source: research/current_2026_10_23/SOURCE_EXCERPTS.md [6].
+44119 [HEADING_2] 2.8 Minimax search
+44138 [HEADING_3] 2.8.1 Recurrence and contract
+44168 [NORMAL_TEXT] Minimax assumes two alternating decision-makers. MAX chooses a move to maximize a score from the root player's perspective; MIN chooses to minimize it. Its input is the current board, the side to move, a nonnegative depth d in plies, the last move when available, a candidate policy and an evaluator. The output is a value and, at the root, a selected move, or no move for an already finished game. State includes the mutable working board, remaining depth, root perspective and recursion stack. Search must begin from a board compatible with the chosen rules, or validate it separately.
+44756 [NORMAL_TEXT] Define U(s,R) for terminal states, E(s,R) for a nonterminal horizon, and transition T(s,a). With a fixed deterministic candidate function A, the depth-limited value is
+44924 [NORMAL_TEXT] V(s,d) = U(s,R) if s is terminal;
+44958 [NORMAL_TEXT] V(s,0) = E(s,R) if s is not terminal;
+44996 [NORMAL_TEXT] V(s,d) = max[a∈A(s)] V(T(s,a),d−1) if MAX moves;
+45045 [NORMAL_TEXT] V(s,d) = min[a∈A(s)] V(T(s,a),d−1) if MIN moves.
+45094 [NORMAL_TEXT] An empty generated set for a nonterminal board must have a specified behavior. The documented value routine returns zero for an empty list, while candidate fallback is intended to avoid this on a nonfull valid position. That fallback convention should not be silently reinterpreted as a win or as a comprehensive validation of arbitrary positions [6].
+45446 [NORMAL_TEXT] // Algorithm 2.10 (research/current_2026_10_23/SOURCE_EXCERPTS.md) — MINIMAX(B, player, root, depth, last, ply):
+45559 [NORMAL_TEXT]     t ← TERMINAL_UTILITY(WIN_AT(B,last), IS_FULL(B), root, ply)
+45623 [NORMAL_TEXT]     if t exists: return t
+45649 [NORMAL_TEXT]     if depth = 0: return EVALUATE(B,root)
+45691 [NORMAL_TEXT]     moves ← SELECT_CANDIDATES(B,player)
+45731 [NORMAL_TEXT]     if moves is empty: return 0   // documented convention for this case
+45804 [NORMAL_TEXT]     best ← -infinity if player = root else +infinity
+45857 [NORMAL_TEXT]     for m in moves:
+45877 [NORMAL_TEXT]         require APPLY(B,m,player)
+45911 [NORMAL_TEXT]         try: v ← MINIMAX(B,opp(player),root,depth-1,m,ply+1)
+45972 [NORMAL_TEXT]         finally: require UNDO(B,m)
+46007 [NORMAL_TEXT]         if player = root: best ← max(best,v)
+46052 [NORMAL_TEXT]         else: best ← min(best,v)
+46085 [NORMAL_TEXT]     return best
+46101 [NORMAL_TEXT] At the root, test each allowed root move, remember an action that achieves the greatest value, and restore the board after every branch. Initial root validation may need to scan for a pre-existing winner, whereas recursive checks can use the just-played move under the earlier precondition. The engine implements a unified recursive search kernel configurable as either full-tree Minimax or Alpha-Beta pruning over the same candidate generator and evaluator [6].
+46564 [HEADING_3] 2.8.2 Proof, example and complexity
+46600 [NORMAL_TEXT] Use induction on d. For terminal nodes or d=0 the procedure returns exactly the corresponding definition. Assume recursive results equal V for depth d−1 and that each apply/undo restores the parent. At a MAX node the loop's best value after j children is the maximum of the first j child values; at completion it is the maximum over A. The MIN case is symmetric. Each recursive call reduces d, so a finite candidate list guarantees termination. This proves evaluation of the specified finite tree if transition, terminal detection, evaluation and candidate generation satisfy their contracts; it does not prove the evaluator predicts the outcome of an unrestricted game.
+47271 [NORMAL_TEXT] In an abstract depth-two tree, MAX has actions A and B; MIN's leaves under A have values 3 and 5, and under B have values 2 and 9. MIN returns 3 for A and 2 for B; MAX chooses A with 3. This two-ply trace illustrates how alternating MAX and MIN backups propagate exact horizon utility values to the root decision.
+47585 [NORMAL_TEXT] If the maximum number of generated moves is b at each level, the full tree has O(b^d) nodes for b>1; actual branching may vary by state, cap and terminal events. Depth-first exploration uses O(d) stack frames plus the live candidate lists, conservatively O(db) move entries and a working board of O(N²), not storage for the whole tree. Each node also incurs candidate-generation or evaluation costs, which can be substantial. If the terminal is reached sooner, recursion stops early. Benefits and trade-offs of Minimax: it provides an exact game-theoretic baseline over the generated finite tree with O(db + N²) memory, but its exponential O(b^d) time complexity restricts unpruned search to shallow depths.
+48293 [NORMAL_TEXT] 
+48295 [NORMAL_TEXT] Figure 2.8. A two-level Minimax example
+48335 [NORMAL_TEXT] Source: Depth-limited Minimax formulation [12].
+48383 [HEADING_2] 2.9 Alpha-beta pruning
+48406 [HEADING_3] 2.9.1 Bounds and pseudocode
+48434 [NORMAL_TEXT] Alpha-beta pruning computes the same root value as minimax on the same finite deterministic tree under a consistent utility and candidate policy, while sometimes skipping subtrees. alpha is the best lower bound MAX can already secure in the current ancestor context; beta is the best upper bound MIN can already secure. At a MAX node, update alpha after observing a child; at a MIN node, update beta. When alpha ≥ beta, the remaining siblings cannot improve the relevant ancestor's decision. Knuth and Moore analyze alpha-beta and the effects of move ordering under stated assumptions [17].
+49025 [NORMAL_TEXT] // Algorithm 2.11 (research/current_2026_10_23/baseline_engine/src/ai.rs) — ALPHABETA(B, player, root, depth, last, ply, alpha, beta):
+49160 [NORMAL_TEXT]     t ← TERMINAL_UTILITY(WIN_AT(B,last), IS_FULL(B), root, ply)
+49224 [NORMAL_TEXT]     if t exists: return t
+49250 [NORMAL_TEXT]     if depth = 0: return EVALUATE(B,root)
+49292 [NORMAL_TEXT]     moves ← SELECT_CANDIDATES(B,player)
+49332 [NORMAL_TEXT]     if moves is empty: return 0
+49364 [NORMAL_TEXT]     best ← -infinity if player = root else +infinity
+49417 [NORMAL_TEXT]     for m in moves:
+49437 [NORMAL_TEXT]         require APPLY(B,m,player)
+49471 [NORMAL_TEXT]         try: v ← ALPHABETA(B,opp(player),root,depth-1,m,ply+1,alpha,beta)
+49545 [NORMAL_TEXT]         finally: require UNDO(B,m)
+49580 [NORMAL_TEXT]         if player = root:
+49606 [NORMAL_TEXT]             best ← max(best,v); alpha ← max(alpha,best)
+49662 [NORMAL_TEXT]         else:
+49676 [NORMAL_TEXT]             best ← min(best,v); beta ← min(beta,best)
+49730 [NORMAL_TEXT]         if alpha ≥ beta: break
+49761 [NORMAL_TEXT]     return best
+49777 [NORMAL_TEXT] Here restoration occurs before a cutoff is tested. The caller starts with an unbounded window when it needs a root result. A value returned from an internally cut-off node may represent a bound rather than an exact independent value. This distinction becomes essential when such results are cached. The code excerpt increments a cutoff counter at a break; that event count is not the total number of theoretical descendant nodes omitted [6].
+50219 [HEADING_3] 2.9.2 Worked cutoff and correctness boundary
+50264 [NORMAL_TEXT] Use the same abstract tree. Search A first: its MIN node sees 3 and 5, returns 3, and MAX updates alpha to 3. At B, MIN first sees 2, so beta becomes 2. Because beta ≤ alpha, B cannot supply MAX a value exceeding the already available 3: MIN can choose the 2 branches. The remaining B child, whose illustration value is 9, is unnecessary for choosing the root action. The root answer remains A, 3. Visiting the children in another order may produce fewer or no cutoffs without changing the full-tree result.
+50772 [NORMAL_TEXT] The invariant is that alpha and beta summarize bounds supplied by already considered alternatives and ancestors. Once they cross, further siblings at the current node cannot alter the ancestor choice under the minimax ordering. Combined with the minimax induction and the restoration invariant, pruning preserves the root value on the same tree. A practical check compares minimax and alpha-beta with identical positions, turns, depth, terminal rule, evaluator, candidate set and preferably deterministic tie behavior. If the set of candidate moves differs, the comparison tests two different games rather than pruning alone. Across all 408 paired native engine comparisons and 112 reference comparisons, Alpha-Beta and Minimax return identical root scores while Alpha-Beta visits 35.62%–77.60% fewer nodes.
+51580 [NORMAL_TEXT] Worst-case O(b^d) remains possible, for instance with unhelpful ordering. Idealized ordering in a uniform tree can reduce the effective leaf growth toward O(b^(d/2)); this is a model, not a promise of a particular elapsed time. The recursion stack and live candidate lists have the same conservative O(db) bound as depth-first minimax, in addition to the board. Cutoff at equality is valid for the value, though tie selection and visited-node counts can depend on ordering. The algorithm alone does not address deadline, collision safety, illegal input or selective candidate loss.
+52162 [NORMAL_TEXT] 
+52164 [NORMAL_TEXT] Figure 2.9. Alpha-Beta cutoff on an unchanged tree
+52215 [NORMAL_TEXT] Source: Alpha-Beta pruning cutoff formulation [17].
+52267 [HEADING_2] 2.10 Iterative deepening and budgets
+52304 [NORMAL_TEXT] Iterative deepening performs complete searches at depths 1, 2, … until reaching a configured maximum or a budget interrupts an iteration. Its input is a root position, a maximum depth and a budget. Its output should distinguish the best result from the most recently completed iteration, the completed depth, and the reason for stopping. The working board, search counters, and any table or ordering hints must obey the respective implementation's lifecycle. An incomplete iteration's partially explored best move is not the same as a completed minimax result for that depth.
+52880 [NORMAL_TEXT] // Algorithm 2.12 (CaroGame/src/game/bot/search.ts) — ITERATIVE(B, maximum_depth, budget):
+52971 [NORMAL_TEXT]     last_complete ← NONE
+52996 [NORMAL_TEXT]     for depth from 1 to maximum_depth:
+53035 [NORMAL_TEXT]         if budget is exhausted: break
+53073 [NORMAL_TEXT]         result ← SEARCH_AT_DEPTH(B, depth, budget)
+53124 [NORMAL_TEXT]         if result was interrupted: break
+53165 [NORMAL_TEXT]         last_complete ← result
+53196 [NORMAL_TEXT]     return last_complete, completed depth, stop reason
+53251 [NORMAL_TEXT] The invariant after iteration d is that last_complete corresponds to a whole completed search at d under that iteration's search contract. It follows inductively because the result is replaced only after the iteration returns normally. A separate abort-safe restoration guarantee is required: interruption in a child must unwind all applied moves. If depth one returns A, depth two returns B and depth three aborts, the completed result is B at depth two. If no iteration completes, a caller must explicitly handle the absence of a completed result; a fallback candidate is useful but should be labeled as such.
+53863 [NORMAL_TEXT] Repeated shallow searches consume work, although the deepest full iteration can dominate for a sufficiently large, regular branching factor. Each iteration has the complexity of its selected search; total time is the sum over attempted depths plus ordering and bookkeeping. No hard real-time guarantee follows from this scheme. A search interrupted only at periodic checks can exceed its nominal wall-clock deadline before the next check, especially if individual operations are expensive.
+54353 [NORMAL_TEXT] The legacy TypeScript findBestMove uses performance.now(), a deadline and a periodic node check, and catches its search-abort sentinel. It initializes a fallback from the first candidate before any depth is completed; its completed-depth field remains zero if the first iteration aborts. Its recursive search wraps move application in try/finally blocks so that an aborted depth unwinds all working-board mutations cleanly [11]. The historical Rust reference instead used a node budget, and its report states that its aggregate omits work inside an aborted iteration. Those semantics should not be combined into one universal time-budget claim [8]. The inspected local game engine specifies fixed depth for its tiers; archived runs separately record each configured depth [18]. Using deterministic fixed-depth Alpha-Beta per tier trades dynamic wall-clock cutoffs for predictable per-tier search depth and reproducible move selection.
+55288 [NORMAL_TEXT] 
+55290 [NORMAL_TEXT] Figure 2.10. Iterative deepening and incomplete work
+55343 [NORMAL_TEXT] Source: CaroGame/src/game/bot/search.ts [8].
+55388 [HEADING_2] 2.11 Zobrist hashing and incremental state
+55431 [HEADING_3] 2.11.1 Definition and update
+55460 [NORMAL_TEXT] A transposition can arise when different sequences of moves lead to the same board and relevant side to move. Comparing all cells at each cache access costs O(N²), so a compact hash can serve as an index. Zobrist's method assigns a pseudorandom word to each (cell, player) pair and combines the keys for occupied cells with exclusive OR (XOR) [19]. One also needs a side-to-move key if the same occupancy can be evaluated with different players to move. The hash is a compact fingerprint, not mathematical proof that two states are identical.
+56003 [NORMAL_TEXT] Define Z[x,y,p] as a fixed random word for a stone, and S as a fixed side key. Under one convention,
+56104 [NORMAL_TEXT] H(B,p) = XOR Z[x,y,color] over occupied cells, XOR S if p is the designated second side.
+56193 [NORMAL_TEXT] All keys must remain fixed for the lifetime of the table. Applying a move of p at m adds its key with XOR. If the transition changes the side, XOR S as well. Undo repeats the same XOR operations in reverse. The essential identity is (h XOR z) XOR z = h.
+56447 [NORMAL_TEXT] // Algorithm 2.13 (CaroGame/src/game/bot/board.ts) — FULL_HASH(B, player):
+56522 [NORMAL_TEXT]     h ← 0
+56532 [NORMAL_TEXT]     for each occupied cell m with stone color c: h ← h XOR Z[m,c]
+56598 [NORMAL_TEXT]     if player is designated second side: h ← h XOR S
+56651 [NORMAL_TEXT]     return h
+56664 [NORMAL_TEXT] 
+56665 [NORMAL_TEXT] UPDATE_HASH(h, m, p, side_changed):
+56701 [NORMAL_TEXT]     h ← h XOR Z[m,p]
+56722 [NORMAL_TEXT]     if side_changed: h ← h XOR S
+56755 [NORMAL_TEXT]     return h
+56768 [NORMAL_TEXT] For an illustrative four-bit example, let h=1010 and the inserted stone's key be 0110, ignoring the side for the moment. Apply gives 1100; undoing XOR with 0110 restores 1010. Because XOR is both commutative and self-inverse, applying the same stone key Z(m,p) and turning key S on both make and undo restores the exact 64-bit state hash in O(1) time.
+57120 [NORMAL_TEXT] The hash invariant is incremental_hash = FULL_HASH(current board, current side). It holds initially if computed from the board; XORing the stone's key exactly accounts for adding that feature, and XORing the side key exactly accounts for a side change. Repeating those operations removes the features on undo. This proof assumes the same keys, actual transition semantics, and no omitted state features relevant to the hash contract. It does not eliminate collisions.
+57588 [NORMAL_TEXT] The legacy TypeScript board maintains two 32-bit halves, a seeded key table and a side key, and updates them with make and undo. Its pattern counts and stone count are also incrementally updated; restoring only the hash would not restore the whole board state [20]. Historical reference reports document incremental hash checks and note that a terminal winning move may leave to_move unchanged in that separate implementation, so its side-key update must follow the actual state transition [8]. This distinction cannot be transferred automatically between implementations.
+58161 [NORMAL_TEXT] A full recomputation scans O(N²) cells; one incremental XOR update uses O(1) time. The key table has O(N²) entries for a fixed number of players; the board and any pattern caches have their own space costs. A finite hash collision remains possible even when incremental and recomputed hashes agree on every tested position. A table may verify a full key or full state, or otherwise accept a defined collision risk. A player key alone also does not encode rules, search depth, evaluator, root perspective or a candidate policy.
+58688 [NORMAL_TEXT] 
+58690 [NORMAL_TEXT] Figure 2.11. Incremental XOR and turn-key handling
+58741 [NORMAL_TEXT] Source: CaroGame/src/game/bot/board.ts [20].
+58786 [HEADING_2] 2.12 Transposition table: entries, bounds and context
+58840 [HEADING_3] 2.12.1 Meaning of stored values
+58872 [NORMAL_TEXT] A transposition table (TT) maps a position fingerprint to a previously computed search result. A typical entry stores a hash or verification key, remaining search depth, value, bound type and a suggested best move. The move may help order later search even if the stored score is unusable. A cache lookup is sound only when its represented search problem is compatible with the current one, its depth is sufficient under the selected contract, and its bound justifies the requested cutoff or exact result.
+59378 [NORMAL_TEXT] For an original search window [α₀,β₀], a common classification is: result v ≤ α₀ is an upper bound; v ≥ β₀ is a lower bound; and α₀ < v < β₀ is exact, subject to the search's assumptions. Equality is treated conservatively at the boundary. For instance, with window [3,8], a returned 2 is an upper bound, 5 is exact and 9 is a lower bound. Consequently, a stored LOWER bound triggers an immediate cutoff whenever entry.score ≥ β, and an UPPER bound triggers a cutoff whenever entry.score ≤ α.
+59871 [NORMAL_TEXT] // Algorithm 2.14 (CaroGame/src/game/bot/search.ts) — PROBE(key, required_depth, alpha, beta, context):
+59975 [NORMAL_TEXT]     entry ← table.lookup(key)
+60005 [NORMAL_TEXT]     if entry missing or key/context is incompatible: return MISS
+60070 [NORMAL_TEXT]     hint ← entry.best_move if it is legal in this position else NONE
+60139 [NORMAL_TEXT]     if entry.depth < required_depth: return HINT_ONLY(hint)
+60199 [NORMAL_TEXT]     if entry.bound = EXACT: return VALUE(entry.score, hint)
+60259 [NORMAL_TEXT]     if entry.bound = LOWER and entry.score ≥ beta:
+60310 [NORMAL_TEXT]         return VALUE(entry.score, hint)
+60350 [NORMAL_TEXT]     if entry.bound = UPPER and entry.score ≤ alpha:
+60402 [NORMAL_TEXT]         return VALUE(entry.score, hint)
+60442 [NORMAL_TEXT]     return HINT_ONLY(hint)
+60469 [NORMAL_TEXT] 
+60470 [NORMAL_TEXT] STORE(key, depth, score, alpha_original, beta_original, best_move):
+60538 [NORMAL_TEXT]     if score ≤ alpha_original: bound ← UPPER
+60583 [NORMAL_TEXT]     else if score ≥ beta_original: bound ← LOWER
+60632 [NORMAL_TEXT]     else: bound ← EXACT
+60656 [NORMAL_TEXT]     store key, depth, score, bound, best_move according to replacement policy
+60734 [NORMAL_TEXT] Validating entry depth, bound type, and move legality during table lookup guarantees that cached bounds never corrupt the active Alpha-Beta window. The classification uses the original search window; using a window altered by a prior lookup without carefully defining semantics can mislabel a bound as exact. Cache storage and retrieval must agree about whether a returned cutoff value is fail-hard or fail-soft.
+61147 [HEADING_3] 2.12.2 Why reuse can be wrong
+61177 [NORMAL_TEXT] A useful invariant is: whenever a TT score is reused, it is valid for the current position, depth interpretation, perspective, rule set, evaluation and move-generation context, and its bound permits the intended conclusion. An exact compatible entry may answer a query; a lower or upper bound is usable only in its permitted direction. If any premise is false, the stored number can change the decision. A full hash comparison narrows ordinary index collisions but still does not guarantee that different game states cannot share a fingerprint.
+61722 [NORMAL_TEXT] The historical reference report documents a concrete context hazard. It records one same-root warm reuse, then a probe after playing a move and changing root player: a fresh table returned score 0, whereas reuse of the prior table returned 19,800. Its hash omitted several contextual factors, including root perspective, and the report does not claim a patch. These are results of a particular native reference probe, not a measurement or defect proven in the current browser engine [21]. The report also notes that mate scores depend on ply from the root; a cached value reused at another ply may require normalization or a sufficiently narrow reuse scope. Rules, evaluation weights, side, candidate radius/cap, ordering semantics, terminal metadata and requested depth can likewise matter. A board fingerprint by itself does not certify those conditions.
+62579 [NORMAL_TEXT] The legacy TypeScript uses parallel fixed-size arrays indexed by a modulo operation on one hash half and compares both halves before using a slot. It stores depth, score, flag and best move. This is a different storage and replacement design from the reference's hash map [11], [8]. The existence of a depth check does not resolve every context hazard; in particular, project-wide claims require inspecting lifecycle, perspective and score conventions. A cached move hint should be checked against current legal candidates before application. A new game, changed rules, new evaluator or changed root is a reason to reassess or clear a cache unless compatibility is proved.
+63252 [NORMAL_TEXT] Expected lookup can be O(1) for an appropriate hash table, but collisions, table implementation and replacement behavior affect actual costs. Space is proportional to the allocated slots or stored entries plus keys, buckets and overhead. Initial hash-map capacity is not a strict maximum, and the native size of one entry is not the total memory of the container. Benefits and trade-offs of transposition tables: O(1) expected hash lookup avoids re-searching transposed subtrees and supplies best-move ordering hints, at the trade-off of O(M) table memory, potential 64-bit hash collisions, and the requirement to scope or clear cached entries when root perspective or rule context changes.
+63943 [NORMAL_TEXT] 
+63945 [NORMAL_TEXT] Figure 2.12. Bound semantics in a transposition table
+63999 [NORMAL_TEXT] Source: CaroGame/src/game/bot/search.ts [8].
+64044 [HEADING_2] 2.13 Quiescence search in the legacy TypeScript bot
+64096 [NORMAL_TEXT] A fixed-depth search can stop at an unstable position: a static evaluator may prefer a move just before an immediate tactical reply. Quiescence extends selected tactical continuations beyond the ordinary horizon so that the evaluator is applied after a limited forcing sequence. This is a selective model and has its own horizon; it cannot eliminate every tactical error. The relevant implementation is the legacy TypeScript bot, not a feature established for the current WASM engine [11].
+64586 [NORMAL_TEXT] Inputs and state. The legacy routine receives the board, alpha and beta bounds, current ply and a quiescence depth. It works from the perspective of the side to move, uses negamax sign reversal, increments a node counter and checks for abort. Its state includes board cells, side, hash and cached pattern counts. Its output is a bounded score for the selected forcing continuation, or an abort propagated to the caller. It first checks whether either side has a five pattern. It then calculates standPat, applies a beta cutoff if that static score is at least beta, raises alpha if appropriate, and stops at quiescence depth five. Otherwise it generates forcing candidates, orders them and recurses after a move with (-beta,-alpha); each recursive branch uses try/finally to undo [11].
+65372 [NORMAL_TEXT] // Algorithm 2.15 (CaroGame/src/game/bot/search.ts) — QUIESCENCE(B, alpha, beta, ply, qDepth):
+65467 [NORMAL_TEXT]     count node; check budget or deadline
+65508 [NORMAL_TEXT]     if previous player has a five: return -MATE + ply
+65562 [NORMAL_TEXT]     if side to move has a five: return MATE - ply
+65612 [NORMAL_TEXT]     standPat ← EVALUATE_FROM_SIDE_TO_MOVE(B)
+65657 [NORMAL_TEXT]     if standPat ≥ beta: return beta
+65693 [NORMAL_TEXT]     alpha ← max(alpha, standPat)
+65726 [NORMAL_TEXT]     if qDepth ≥ 5: return alpha
+65758 [NORMAL_TEXT]     moves ← GENERATE_FORCING_CANDIDATES(B)
+65801 [NORMAL_TEXT]     order moves by their quick score
+65838 [NORMAL_TEXT]     for m in moves:
+65858 [NORMAL_TEXT]         MAKE(B,m)
+65876 [NORMAL_TEXT]         try: v ← -QUIESCENCE(B,-beta,-alpha,ply+1,qDepth+1)
+65936 [NORMAL_TEXT]         finally: UNMAKE(B,m)
+65965 [NORMAL_TEXT]         if v ≥ beta: return beta
+65998 [NORMAL_TEXT]         alpha ← max(alpha,v)
+66027 [NORMAL_TEXT]     return alpha
+66044 [NORMAL_TEXT] The sign change reflects the negamax convention for an evaluation whose perspective changes with the side to move. The procedure returns beta on a fail-high and alpha otherwise, so its return can be a bound rather than an exact unrestricted game value. Its loop invariant is that alpha is at least the stand-pat score and all examined forcing continuations, subject to the window and fail-hard convention; the board must equal the incoming state before every sibling. The depth limit guarantees termination even when forcing candidates continue to exist. It also creates a new horizon.
+66630 [NORMAL_TEXT] For a simplified numeric example, suppose the window is [−10,10], stand-pat is 2, and the first searched forcing move returns 6 after sign reversal. Alpha rises to 6. If another move returns 12, the routine returns beta, 10, as a fail-high bound. This does not assert that 10 is the exact minimax value. In a real position, the forcing generator's definition and threat patterns decide which moves are included. The legacy code considers outcomes such as five, open four and four for either side when identifying forcing moves. These categories arise from its own bitmask pattern evaluator, which differs from the snapshot's contiguous-run evaluator [11], [20].
+67292 [NORMAL_TEXT] The stand-pat assumption deserves care in a game where a player must move: static evaluation does not literally grant a legal pass. In a forced-defense position an immediate static cutoff may not establish the same value as examining all legal replies. The finite depth, selective forcing set and candidate implementation further limit the result. A rigorous claim requires a specified tactical contract and tests that compare against an appropriate full or deeper reference on representative positions. With at most f forcing moves at each quiescence level and maximum extra depth q, a coarse upper bound is O(f^q) nodes plus candidate generation, ordering and evaluation at each node; actual cost may differ sharply. The stack and stored move lists take O(qf) space under the same conventional assumption, in addition to board and caches.
+68133 [HEADING_2] 2.14 Legacy bitmask patterns and incremental line counts
+68190 [NORMAL_TEXT] The older TypeScript bot represents a line segment available to one player as a bitmask: a one denotes the player's stone and zero denotes an empty cell; an opposing stone divides the line into separate segments. It precomputes a classification for eligible lengths and masks using completion tests. Categories include a five, an open four, a four, an open three and a broken three. The terminology is the implementation's category scheme; it must not be silently equated to the maximal contiguous runs and weights of the documented Rust snapshot [20], [11].
+68749 [NORMAL_TEXT] // Algorithm 2.16 (CaroGame/src/game/bot/board.ts) — CLASSIFY_SEGMENT(mask, length):
+68834 [NORMAL_TEXT]     if mask contains five consecutive 1 bits: return FIVE
+68892 [NORMAL_TEXT]     wins ← number of zero positions which become a five when set
+68957 [NORMAL_TEXT]     if wins ≥ 2: return OPEN_FOUR
+68991 [NORMAL_TEXT]     if wins = 1: return FOUR
+69020 [NORMAL_TEXT]     threats ← number of zero positions which, when set,
+69076 [NORMAL_TEXT]               leave at least two immediate winning positions
+69137 [NORMAL_TEXT]     if threats ≥ 2: return OPEN_THREE
+69175 [NORMAL_TEXT]     if threats = 1: return BROKEN_THREE
+69215 [NORMAL_TEXT]     return NONE
+69231 [NORMAL_TEXT] 
+69232 [NORMAL_TEXT] COUNT_LINE(B, p, start, step, length):
+69271 [NORMAL_TEXT]     split the line wherever an opponent stone occurs
+69324 [NORMAL_TEXT]     encode p and empty cells of each segment as a mask
+69379 [NORMAL_TEXT]     for each segment of length at least 5:
+69422 [NORMAL_TEXT]         increment the bucket returned by CLASSIFY_SEGMENT
+69480 [NORMAL_TEXT]     return counts
+69498 [NORMAL_TEXT] For a hypothetical five-cell segment XX_XX, setting the middle zero creates five consecutive bits, so the segment has at least one immediate winning completion under this rule. A segment with two distinct empty completion cells is classified above a one-completion segment, assuming no five is already present. The precise category depends on the whole segment and the code's precedence, not only on a local substring. Opponent cells split the segment; a board boundary is also a boundary. Short segments cannot contain five and do not contribute a five-capable pattern.
+70069 [NORMAL_TEXT] The board's incremental update subtracts old counts for the four lines crossing a changed cell, makes the move, then adds counts for the new versions of those lines. Undo performs the inverse around clearing the cell. The invariant is that accumulated per-player counts equal a fresh sum of classifications for the board, assuming the untouched lines are unchanged and the four affected lines are correctly identified. Each changed cell lies on exactly one line of each axis, so only those lines need recomputation. This is a proof sketch for the update scheme, not a proof that the classifier expresses every strategically meaningful formation.
+70715 [NORMAL_TEXT] The legacy position evaluator shown in the repository scans lines and sums category weights from the selected perspective; cached counts are also used by other routines. A full evaluation over a constant number of axes is O(N²) for fixed-time table lookup per segment; recalculating four affected lines is O(N) in board width per player, in addition to the cost of table lookup. Precomputing a pattern table trades initialization work and memory for later lookup; its precise limits, size and supported board lengths are implementation constraints. The actual code initializes for line lengths up to 15, so changing board size without reviewing this bound is unsafe. A cached count is only trustworthy when every mutation follows the update discipline and every aborted sequence restores it.
+71507 [HEADING_2] 2.15 Difficulty configurations and the active request path
+71566 [NORMAL_TEXT] The application partitions gameplay into two primary modes—local two-player PvP (1v1) and human-versus-bot PvE (ai)—and divides the PvE bot into six progressive difficulty tiers (Easy, Normal, Hard, Very Hard, Expert, and Master), whose strategy, search depth d, Chebyshev radius r, and soft candidate cap c are specified in Table 2.1 [18]. Each tier maps to an explicit search strategy and candidate-generation policy in the Rust engine dispatch [6]. The TypeScript WASM contract validates and forwards the selected difficulty identifier and returned telemetry across the Web Worker boundary [9].
+72164 [NORMAL_TEXT] Table 2.1. Difficulty configurations and recorded search behaviour
+72234 [NORMAL_TEXT] Difficulty
+72246 [NORMAL_TEXT] Recorded strategy
+72265 [NORMAL_TEXT] Depth
+72272 [NORMAL_TEXT] Radius / soft cap
+72291 [NORMAL_TEXT] Interpretation
+72308 [NORMAL_TEXT] Easy
+72314 [NORMAL_TEXT] Random
+72322 [NORMAL_TEXT] 0
+72325 [NORMAL_TEXT] All legal empty cells
+72348 [NORMAL_TEXT] Bypasses tactical prepass; selects uniformly via seeded PRNG (no look-ahead).
+72428 [NORMAL_TEXT] Normal
+72436 [NORMAL_TEXT] Rule-based
+72448 [NORMAL_TEXT] 1
+72451 [NORMAL_TEXT] Neighborhood, no fixed cap in default policy
+72497 [NORMAL_TEXT] Bypasses frontend prepass; Rust 1-ply immediate win/block then static heuristic.
+72580 [NORMAL_TEXT] Hard
+72586 [NORMAL_TEXT] Alpha-beta
+72598 [NORMAL_TEXT] 2
+72601 [NORMAL_TEXT] 2 / 15
+72609 [NORMAL_TEXT] Frontend tactical prepass first; 2-ply Alpha-Beta over up to 15 local candidates.
+72693 [NORMAL_TEXT] Very Hard
+72704 [NORMAL_TEXT] Alpha-beta
+72716 [NORMAL_TEXT] 3
+72719 [NORMAL_TEXT] 2 / 12
+72727 [NORMAL_TEXT] Frontend tactical prepass first; 3-ply Alpha-Beta (API ID 5) with soft cap 12.
+72808 [NORMAL_TEXT] Expert
+72816 [NORMAL_TEXT] Alpha-beta
+72828 [NORMAL_TEXT] 4
+72831 [NORMAL_TEXT] 2 / 10
+72839 [NORMAL_TEXT] Frontend tactical prepass first; 4-ply Alpha-Beta with soft tactical cap 10.
+72918 [NORMAL_TEXT] Master
+72926 [NORMAL_TEXT] Alpha-beta
+72938 [NORMAL_TEXT] 5
+72941 [NORMAL_TEXT] 2 / 8
+72948 [NORMAL_TEXT] Frontend tactical prepass first; 5-ply fixed-depth Alpha-Beta with soft cap 8.
+73028 [NORMAL_TEXT] 
+73029 [NORMAL_TEXT] Why the six difficulty tiers are divided this way: the configuration table is designed around two mathematical principles. First, it separates qualitative decision regimes: Easy (d = 0, Random across all empty cells) provides a non-tactical baseline for beginners; Normal (d = 1, uncapped local neighborhood) introduces 1-ply immediate win/block priority and static heuristic scoring; and Hard through Master (d = 2 to 5, Chebyshev radius r = 2) engage multi-ply Alpha-Beta look-ahead. Second, across the four Alpha-Beta tiers, search depth increases linearly (d = 2, 3, 4, 5) while the soft candidate cap tightens inversely (c = 15, 12, 10, 8). Because an adversarial tree with branching factor c and depth d scales as O(c^d) in the worst case (and O(c^(d/2)) under ideal Alpha-Beta ordering), keeping c = 15 at d = 5 would expand up to 15^5 = 759,375 nodes per turn. Tightening the soft cap to c = 8 bounds the worst-case tree to 8^5 = 32,768 nodes (and ~2,000–5,000 nodes with Alpha-Beta pruning), keeping Web Worker latency within interactive browser budgets (47, 252, 551, and 1,418 visited nodes in 1.1–3.0 ms on the benchmarked midgame fixture). Benefits and trade-offs: this inverse (d, c) scaling delivers smooth skill progression and responsive UI performance while the soft tactical cap max(c, 1, |T|) and frontend tactical prepass guarantee that zero immediate 1-ply wins or blocks are ever dropped; the trade-off is that deeper tiers (Expert, Master) prune lower-ranked quiet positional candidates (ranked below index 10 or 8) in exchange for deeper 4-to-5-ply tactical calculation.
+74625 [NORMAL_TEXT] The current frontend controller's input is an application state, round identity and difficulty. It increments a request identifier. For Easy and Normal it proceeds to the WASM engine adapter. For the four higher tiers it first asks the TypeScript tactical resolver for a forced move for O; if one is returned, it creates a tactical result without requesting engine search. Otherwise it copies move history into a request to the engine. The frontend prepass and the Normal Rust rule-based policy are different decision stages [10].
+75156 [NORMAL_TEXT] The archived adapter excerpt shows a new game instance being populated from the request's move history, rejecting an unsuccessful replay, asking for an AI move, freeing the game in finally, converting Rust (x,y) into frontend (row,col), and attaching request/round identity and statistics. Its elapsed scope is named worker-hydrate-and-search, which includes history reconstruction and the search call, rather than being an isolated inner-loop benchmark [6]. By pairing Worker-level hydration and cleanup with controller-level requestId and roundId verification, the architecture guarantees that stale asynchronous search completions from prior turns, undos, or resets are deterministically discarded before mutating the active board.
+75891 [HEADING_2] 2.16 Synthesis and limits of the algorithmic claims
+75943 [NORMAL_TEXT] The algorithms in this chapter have different responsibilities. Win detection decides the stated terminal rule; board mutation maintains a position; random and rule-based choices provide baselines; the evaluator assigns an approximate horizon value; candidate generation restricts the moves explored; ordering permutes the retained moves; minimax evaluates the resulting tree; alpha-beta skips provably irrelevant branches of that same tree; iterative deepening manages progressive search; and hashing plus a transposition table aim to reuse compatible earlier work. Quiescence extends a selected class of tactical moves at a horizon, but its own assumptions and depth limit remain.
+76626 [NORMAL_TEXT] Each algorithmic layer enforces a distinct invariant within the overall decision pipeline: 4-axis ray scanning detects Freestyle terminal lines in O(K) time; in-place apply/undo preserves board state across recursive branches in O(1) time; Chebyshev spatial generation and the soft tactical cap bound the branching factor while retaining 100% of immediate 1-ply threats; move ordering prioritizes high-value branches; Alpha-Beta pruning eliminates provably suboptimal subtrees while preserving the exact Minimax root value; and Zobrist XOR hashing with bound-typed transposition tables accelerates repeated state lookups.
+77248 [NORMAL_TEXT] The recorded research tests and experiments are useful because they specify fixtures, configurations and counters, including negative cases and restoration checks. Together, the native algorithmic benchmarks, Node WASM parity checks, and browser Web Worker telemetry provide complementary multi-level validation [8]. For a reproducible claim about a particular application build, the report must identify the source revision or snapshot, binary provenance, rule and evaluation configuration, player and position, candidate set, depth, platform, and meaning of each reported counter. The following chapters can then describe the system integration and evidence without turning theory into an unmeasured product outcome.
+77967 [HEADING_1] CHAPTER 3. SYSTEM ANALYSIS AND DESIGN

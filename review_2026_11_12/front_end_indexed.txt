@@ -1,0 +1,324 @@
+[1..26] body NORMAL_TEXT THE UNIVERSITY OF DANANG
+[26..79] body NORMAL_TEXT VN-UK INSTITUTE FOR RESEARCH AND EXECUTIVE EDUCATION
+[79..81] body NORMAL_TEXT 
+[81..119] body NORMAL_TEXT DEVELOPMENT OF A CARO WEB APPLICATION
+[119..155] body NORMAL_TEXT USING ADVERSARIAL SEARCH ALGORITHMS
+[155..176] body NORMAL_TEXT BASIC PROJECT REPORT
+[176..200] body NORMAL_TEXT Student: Nguyễn Tâm Đức
+[200..221] body NORMAL_TEXT Student ID: 24020005
+[221..248] body NORMAL_TEXT Supervisor: Nguyễn Văn Thọ
+[248..261] body NORMAL_TEXT Class: CSE24
+[261..286] body NORMAL_TEXT Academic year: 2026–2027
+[286..288] body NORMAL_TEXT 
+[288..289] body NORMAL_TEXT 
+[289..298] body NORMAL_TEXT ABSTRACT
+[298..1072] body NORMAL_TEXT This project studies the design and implementation of a Caro web application together with a set of adversarial-search experiments and teaching materials. The report specifies a 15 × 15 Freestyle game, the board and move-history contracts, and the algorithms used to select and evaluate moves. It explains random and rule-based baselines, contiguous-run heuristics, tactical checks, Chebyshev candidate generation, soft candidate caps, Minimax and Alpha-Beta. It also treats iterative deepening, Zobrist hashing, transposition-table bounds, quiescence and incremental pattern counting in their corresponding reference or legacy implementations. Each algorithm is presented with its inputs, state, decision procedure, invariants, complexity, worked examples and limitations.
+[1072..1598] body NORMAL_TEXT The application combines React interface components, a Pixi board, an authoritative controller and a Worker-based Rust/WebAssembly route. Request identity, round identity, cancellation, coordinate conversion and telemetry validation preserve the connection between a proposed AI move and the round in which it may be committed. The separate presentation website provides interactive explanations and Python/Pyodide examples. Its demonstrations are analysed individually rather than treated as measurements of the game engine.
+[1598..2213] body NORMAL_TEXT Evaluation distinguishes published native experiments, binary/adapter parity, actual browser Worker observations, selected UI interactions and historical cross-language benchmarks. GitHub references identify immutable source and evidence snapshots. The analysis includes negative findings such as tactical moves discarded by a reference candidate cap, increased timing despite fewer searched nodes, and unsafe table reuse across a changed context. The resulting report connects algorithmic principles to concrete implementation while stating the boundaries of finite tests, source availability and reproducibility.
+[2213..2323] body NORMAL_TEXT Keywords: Caro; Gomoku; Minimax; Alpha-Beta; candidate generation; Rust; WebAssembly; game-state consistency.
+[2323..2332] body NORMAL_TEXT CONTENTS
+[2332..2360] body NORMAL_TEXT CHAPTER 1. INTRODUCTION … 1
+[2360..2394] body NORMAL_TEXT 1.1 Background and motivation … 1
+[2394..2436] body NORMAL_TEXT 1.2 Objectives and research questions … 1
+[2436..2480] body NORMAL_TEXT 1.3 Scope, versions and source identity … 2
+[2480..2516] body NORMAL_TEXT 1.4 Method and report structure … 3
+[2516..2562] body NORMAL_TEXT CHAPTER 2. ALGORITHMS AND DATA STRUCTURES … 4
+[2562..2600] body NORMAL_TEXT 2.1 Scope, evidence, and notation … 4
+[2600..2647] body NORMAL_TEXT 2.2 Board representation and legal updates … 5
+[2647..2679] body NORMAL_TEXT 2.3 Freestyle win detection … 8
+[2679..2731] body NORMAL_TEXT 2.4 Baselines: random play and rule-based play … 10
+[2731..2779] body NORMAL_TEXT 2.5 Static evaluation and terminal utility … 13
+[2779..2833] body NORMAL_TEXT 2.6 Candidate generation and a soft tactical cap … 16
+[2833..2878] body NORMAL_TEXT 2.7 Move ordering versus move selection … 19
+[2878..2902] body NORMAL_TEXT 2.8 Minimax search … 20
+[2902..2930] body NORMAL_TEXT 2.9 Alpha-beta pruning … 23
+[2930..2972] body NORMAL_TEXT 2.10 Iterative deepening and budgets … 26
+[2972..3020] body NORMAL_TEXT 2.11 Zobrist hashing and incremental state … 27
+[3020..3079] body NORMAL_TEXT 2.12 Transposition table: entries, bounds and context … 29
+[3079..3136] body NORMAL_TEXT 2.13 Quiescence search in the legacy TypeScript bot … 32
+[3136..3198] body NORMAL_TEXT 2.14 Legacy bitmask patterns and incremental line counts … 34
+[3198..3262] body NORMAL_TEXT 2.15 Difficulty configurations and the active request path … 36
+[3262..3319] body NORMAL_TEXT 2.16 Synthesis and limits of the algorithmic claims … 38
+[3319..3362] body NORMAL_TEXT CHAPTER 3. SYSTEM ANALYSIS AND DESIGN … 40
+[3362..3417] body NORMAL_TEXT 3.1 Actors, use cases and functional requirements … 40
+[3417..3480] body NORMAL_TEXT 3.2 Non-functional requirements and acceptance boundaries … 43
+[3480..3516] body NORMAL_TEXT 3.3 Architecture and ownership … 43
+[3516..3576] body NORMAL_TEXT 3.4 Board state, history and legal transition contract … 45
+[3576..3620] body NORMAL_TEXT 3.5 Match phases and state transitions … 45
+[3620..3676] body NORMAL_TEXT 3.6 Asynchronous request protocol and cancellation … 47
+[3676..3738] body NORMAL_TEXT 3.7 Coordinate transformation and gesture interpretation … 48
+[3738..3800] body NORMAL_TEXT 3.8 Search-result contract and presentation of telemetry … 49
+[3800..3856] body NORMAL_TEXT 3.9 Verification scenarios derived from the design … 50
+[3856..3887] body NORMAL_TEXT CHAPTER 4. IMPLEMENTATION … 52
+[3887..3931] body NORMAL_TEXT 4.1 Toolchain and project organization … 52
+[3931..3965] body NORMAL_TEXT 4.2 Accepted move processing … 52
+[3965..4023] body NORMAL_TEXT 4.3 AI dispatch, Worker execution and WASM hydration … 53
+[4023..4078] body NORMAL_TEXT 4.4 Board rendering and interface synchronization … 55
+[4078..4136] body NORMAL_TEXT 4.5 Presentation website and interactive explanation … 56
+[4136..4202] body NORMAL_TEXT 4.6 Python/Pyodide execution and four instructional programs … 56
+[4202..4250] body NORMAL_TEXT 4.7 Implementation traceability and limits … 59
+[4250..4289] body NORMAL_TEXT CHAPTER 5. RESULTS AND EVALUATION … 60
+[4289..4344] body NORMAL_TEXT 5.1 Evaluation questions, evidence and boundaries … 60
+[4344..4409] body NORMAL_TEXT 5.2 Native board and search checks of the 23 October engine … 60
+[4409..4462] body NORMAL_TEXT 5.3 WebAssembly parity and browser observations … 62
+[4462..4524] body NORMAL_TEXT 5.3.1 Follow-up local application validation, 27 October … 64
+[4524..4571] body NORMAL_TEXT 5.4 Separate native reference experiments … 64
+[4571..4626] body NORMAL_TEXT 5.5 Historical cross-language and Week 4 datasets … 67
+[4626..4678] body NORMAL_TEXT 5.6 Presentation examples and evidence quality … 69
+[4678..4726] body NORMAL_TEXT 5.7 Threats to validity and interpretation … 69
+[4726..4769] body NORMAL_TEXT CHAPTER 6. CONCLUSION AND FUTURE WORK … 71
+[4769..4810] body NORMAL_TEXT 6.1 Work completed and contribution … 71
+[4810..4831] body NORMAL_TEXT 6.2 Limitations … 71
+[4831..4859] body NORMAL_TEXT 6.3 Future development … 72
+[4859..4875] body NORMAL_TEXT REFERENCES … 74
+[4875..4930] body NORMAL_TEXT APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP … 82
+[4930..4990] body NORMAL_TEXT APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER … 85
+[4990..5045] body NORMAL_TEXT APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE … 87
+[5045..5061] body NORMAL_TEXT LIST OF FIGURES
+[5061..5108] body NORMAL_TEXT Figure 2.1. Row-major board representation … 6
+[5108..5161] body NORMAL_TEXT Figure 2.2. Search must restore its caller state … 8
+[5161..5209] body NORMAL_TEXT Figure 2.3. Last-move scan along four axes … 10
+[5209..5257] body NORMAL_TEXT Figure 2.4. Rule-based tactical priorities … 13
+[5257..5328] body NORMAL_TEXT Figure 2.5. Contiguous-run weights of the archived Rust evaluator … 15
+[5328..5396] body NORMAL_TEXT Figure 2.6. Radius and board edges affect candidate membership … 18
+[5396..5466] body NORMAL_TEXT Figure 2.7. Alternative traversal orders on identical membership … 20
+[5466..5511] body NORMAL_TEXT Figure 2.8. A two-level Minimax example … 23
+[5511..5567] body NORMAL_TEXT Figure 2.9. Alpha-Beta cutoff on an unchanged tree … 25
+[5567..5625] body NORMAL_TEXT Figure 2.10. Iterative deepening and incomplete work … 27
+[5625..5681] body NORMAL_TEXT Figure 2.11. Incremental XOR and turn-key handling … 29
+[5681..5740] body NORMAL_TEXT Figure 2.12. Bound semantics in a transposition table … 32
+[5740..5802] body NORMAL_TEXT Figure 3.1. Responsibilities in the playable application … 44
+[5802..5865] body NORMAL_TEXT Figure 3.2. Match phases and the separate AI waiting flag … 46
+[5865..5936] body NORMAL_TEXT Figure 3.3. Inverse camera transform before board bounds checking … 48
+[5936..6009] body NORMAL_TEXT Figure 4.1. Tactical and Rust routes converge at the guarded commit … 54
+[6009..6092] body NORMAL_TEXT Figure 4.2. Union of clipped Chebyshev neighbourhoods in a five-stone example … 58
+[6092..6160] body NORMAL_TEXT Figure 5.1. Recorded native engine nodes on the centre fixture … 62
+[6160..6244] body NORMAL_TEXT Figure 5.2. Native reference node counts, with ranking cost excluded from bars … 66
+[6244..6324] body NORMAL_TEXT Figure 5.3. Historical native-versus-Node benchmark on one midgame fixture … 68
+[6324..6339] body HEADING_1 LIST OF TABLES
+[6339..6411] body NORMAL_TEXT Table 2.1. Difficulty configurations and recorded search behaviour … 36
+[6411..6459] body NORMAL_TEXT Table 3.1. Functional requirements F01–F09 … 40
+[6459..6520] body NORMAL_TEXT Table 3.2. Verification scenarios and expected outcomes … 50
+[6520..6592] body NORMAL_TEXT Table 5.1. Native engine search on the centre fixture at depth two … 61
+[6592..6670] body NORMAL_TEXT Table 5.2. Native reference search on the clustered fixture at depth two … 65
+[6670..6739] body NORMAL_TEXT Table 5.3. Historical native Rust and TypeScript/Node benchmark … 68
+[6739..6786] body NORMAL_TEXT Table A.1. Repository inventory and roles … 82
+[6786..6843] body NORMAL_TEXT Table B.1. Evidence summary and verification status … 85
+[6843..6881] body NORMAL_TEXT ABBREVIATIONS AND READING CONVENTIONS
+[6881..6911] body NORMAL_TEXT AI — Artificial Intelligence.
+[6911..6949] body NORMAL_TEXT DSA — Data structures and algorithms.
+[6949..6975] body NORMAL_TEXT DFS — Depth-first search.
+[6975..7004] body NORMAL_TEXT DOM — Document Object Model.
+[7004..7042] body NORMAL_TEXT PRNG — Pseudorandom number generator.
+[7042..7092] body NORMAL_TEXT PvP — Two people playing on the same application.
+[7092..7152] body NORMAL_TEXT PvE — A person playing against the computer in this report.
+[7152..7178] body NORMAL_TEXT TT — Transposition table.
+[7178..7199] body NORMAL_TEXT UI — User interface.
+[7199..7219] body NORMAL_TEXT WASM — WebAssembly.
+[7219..7263] body NORMAL_TEXT Ply — One stone-placement move by one side.
+[7263..7339] body NORMAL_TEXT Fixture — A deliberately prepared input position for a test or measurement.
+[7339..7417] body NORMAL_TEXT Coordinates — Frontend (row,col) equals Rust (y,x); indices run from 0 to 14.
+[7417..7521] body NORMAL_TEXT Evidence — Published source, a recorded experiment and an author observation are identified separately.
+[7521..7522] body HEADING_1 
+[7523..7547] body HEADING_1 CHAPTER 1. INTRODUCTION
+[7547..7577] body HEADING_2 1.1 Background and motivation
+[7577..8183] body NORMAL_TEXT Caro is a two-player placement game in which a small set of rules produces a large adversarial decision space. A player places one stone on an empty cell, attempts to complete a winning line and must anticipate the opponent's reply. The board representation is simple enough to implement explicitly, while the number of possible move sequences makes exhaustive search impractical beyond shallow depths. This combination makes the project suitable for studying data structures, recursive search, evaluation functions, pruning and the relationship between algorithmic results and an interactive application.
+[8183..8871] body NORMAL_TEXT The project develops both a playable web application and material for explaining its algorithms. In the application, React supplies the surrounding interface, Pixi renders the board and a controller coordinates accepted moves, match state and AI requests. The AI path combines a TypeScript tactical check with a Worker-based WebAssembly engine. The repository also preserves a TypeScript search implementation, native Rust benchmark programs, baseline Rust engine code, weekly research reports and a separate presentation website. These modules form a cohesive architecture spanning interactive gameplay, WebAssembly search execution, and reproducible algorithmic benchmarks. [1] [2] [3]
+[8871..9431] body NORMAL_TEXT The practical problem is to return a legal and useful move while maintaining coherent application state. A search that produces a high score is insufficient if it changes the caller's board, uses an incompatible win rule, blocks interaction unnecessarily or commits a result after the user has reset the round. The report therefore considers both the mathematical search problem and the application boundary at which a result becomes a move. It also distinguishes an observed counter from a configured limit and a native experiment from a browser measurement.
+[9431..9469] body HEADING_2 1.2 Objectives and research questions
+[9469..10071] body NORMAL_TEXT The first objective is to specify the actual game rules and state transitions. A 15 × 15 board and a five-stone target do not uniquely define a Caro variant. The application's Freestyle rule accepts a contiguous line of at least five stones, including longer lines. Its implementation is explained from the last-move scan, with the assumptions under which that local test is valid. The second objective is to specify the AI algorithms precisely: their inputs, outputs, recurrence or decision policy, candidate membership, state mutation and restoration, stopping conditions and computational cost. [4]
+[10071..10649] body NORMAL_TEXT The third objective is to connect those algorithms to the implementation. The report identifies which component owns the board, who may commit a move, how history is replayed into the Rust/WASM object and how stale responses are rejected. The fourth objective is to evaluate the published experiment records without turning limited measurements into universal claims. In particular, it asks whether Minimax and Alpha-Beta agree on the same selected tree, whether ordering reduces total work or only visited nodes, and whether a cap can discard an immediate tactical completion.
+[10649..11318] body NORMAL_TEXT These objectives lead to four research questions. RQ1 asks how legal board state and the Freestyle win condition can be represented and checked deterministically. RQ2 asks how evaluation, candidate generation and adversarial recursion produce a move, and which assumptions preserve correctness. RQ3 asks how pruning, ordering and caching affect the measured search, including counterexamples and context hazards. RQ4 asks how the native and browser components preserve a consistent game when requests are asynchronous. The evaluation chapter answers each question using the corresponding source implementation, mathematical invariants, and empirical benchmark records.
+[11318..11358] body HEADING_2 1.3 Scope, versions and source identity
+[11358..11849] body NORMAL_TEXT The public project reference used throughout this English report is the immutable tducn110/basicproject revision 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc. The application is under CaroGame; the report also covers present, the weekly folders, benchmark and research. The active game implementation under CaroGame is paired with the Rust board and engine modules in research/current_2026_10_23/baseline_engine/src/board.rs and the WebAssembly package in CaroGame/src/game/wasm/engine. [1] [5]
+[11849..12281] body NORMAL_TEXT The repository integrates a TypeScript/React/Pixi frontend with a Rust engine compiled to WebAssembly, alongside native Rust benchmark harnesses and a legacy TypeScript search module. To maintain architectural clarity across these modules, this report explicitly distinguishes the active Rust/WASM application engine, the baseline Rust engine, the legacy TypeScript bot, and the native Rust reference benchmark library. [6] [7] [8]
+[12281..12776] body NORMAL_TEXT The work excludes an online multiplayer server, a training pipeline, a learned neural policy and a demonstrated tournament ranking. These are not required to explain the implemented algorithms. Browser and host behaviour are discussed only to the extent supported by source and recorded observations. A rule recommendation, a future experiment and an implemented feature are labelled separately. This scope allows the report to be detailed without claiming capabilities absent from the project.
+[12776..12808] body HEADING_2 1.4 Method and report structure
+[12808..13444] body NORMAL_TEXT The analysis follows the path from an input to its visible consequence: pointer event, cell coordinate, legal move check, board mutation, win or draw evaluation, next-turn decision, AI request, validated response, committed move and updated display. Source inspection establishes the mechanism. Published test and measurement records establish what was exercised on their particular corpus and environment. Primary literature explains general search concepts; it is not used as proof that the project implements a feature. All project citations in the reference list resolve to GitHub resources rather than machine-specific file paths.
+[13444..13978] body NORMAL_TEXT Chapter 2 specifies the data structures and algorithms. Chapter 3 gives the requirements, ownership boundaries and state/data flows. Chapter 4 explains the implementation of the playable application and presentation project. Chapter 5 evaluates the published native, WASM, Worker, UI and benchmark records with explicit limits. Chapter 6 states the achieved outcomes and development directions. The appendices inventory the repository and explain how to inspect or reproduce the work without silently substituting a different engine.
+[137530..137568] body HEADING_1 CHAPTER 6. CONCLUSION AND FUTURE WORK
+[137568..137604] body HEADING_2 6.1 Work completed and contribution
+[137604..138210] body NORMAL_TEXT The project combines a playable Caro application with an educational sequence on representation, rules, heuristic evaluation and adversarial search. The application repository provides the user interface and game-side code; the weekly material documents the development sequence from initial proposal to search and advanced techniques. The presentation project supplies visual and executable teaching examples. Separate research artifacts provide controlled search data and record experimental boundaries. These products have different purposes and should not be treated as one executable engine. [1] [52]
+[138210..138984] body NORMAL_TEXT The technical contribution is the mapping from game decisions to data structures and algorithms. A board state supports legal placement, directional line checks, history and rollback. A heuristic gives a bounded estimate for nonterminal positions, while terminal outcomes take precedence. Minimax specifies alternating decisions; Alpha-Beta can discard branches that cannot alter the selected-tree value. Candidate generation restricts the search space, and ordering changes traversal order. The reference experiments further evaluate incremental Zobrist hashing, transposition-table bounds, and iterative-deepening budgets on controlled native benchmarks. The application and reference implementations must each be described through their own source and evidence. [44] [8]
+[138984..139590] body NORMAL_TEXT The 23 October native record reports agreement and restoration on its finite corpus, and the separate Node and browser artifacts exercise selected integration paths. The reference data shows a substantial node reduction in one paired example and also shows that ordering can consume enough additional evaluation work to remove the elapsed-time benefit. The cap-loss and cross-root cache probes expose concrete correctness risks. These findings are more useful than a single headline speedup because they identify both the assumptions under which the method works and the conditions that require more care.
+[139590..139606] body HEADING_2 6.2 Limitations
+[139606..139875] body NORMAL_TEXT First, while the engine's soft tactical cap preserves all immediate 1-ply winning and blocking moves, tightening the non-tactical candidate cap at higher depths (from 15 at Hard to 8 at Master) trades broad positional exploration for deeper 5-ply tactical calculation.
+[139875..140235] body NORMAL_TEXT Second, the active WebAssembly engine uses stateless fixed-depth Alpha-Beta search per turn without a persistent cross-turn transposition table or wall-clock iterative deepening, and empirical evaluation is currently scoped to controlled benchmark fixtures and automated bot-versus-bot matches rather than large-scale human tournament play. [41] [44] [8] [40]
+[140235..140509] body NORMAL_TEXT Third, the static heuristic evaluator scans maximal contiguous runs and therefore relies on multi-ply search recursion and the tactical candidate assessor to recognize gapped formations (such as XX_XX) or multi-axis forks, motivating the future enhancements outlined below.
+[140509..140532] body HEADING_2 6.3 Future development
+[140532..140911] body NORMAL_TEXT 1. Publish a reproducible source bundle. Include the exact current Rust engine, reference library, manifests, lockfiles, harnesses, recorded hashes and build instructions under immutable revisions. Record any local modifications instead of presenting an earlier baseline as the measured source. Provide a script that compares binary hashes and states the platform and toolchain.
+[140911..141283] body NORMAL_TEXT 2. Expand rule and tactical testing. Add board-edge and long-line cases, occupied and out-of-range inputs, full-board draws, simultaneous threats, undo after terminal states and independently checked randomized move sequences. Compare TypeScript and WebAssembly outcomes under an explicit terminal-turn convention. Each new rule variant needs its own contract and oracle.
+[141283..141635] body NORMAL_TEXT 3. Measure candidates and order policies separately. Use a fixed corpus of reachable positions, include known immediate wins and blocks, compare all-legal and selective search, and report missed tactics, decision quality, ranking evaluations, nodes and elapsed time. Separate soft-cap tactical retention from a hard cap; record ties and ordering cost.
+[141635..141970] body NORMAL_TEXT 4. Harden and test table reuse. Specify the key namespace for rules, evaluation weights, root perspective and mate distance; validate exact/lower/upper entry semantics at varying depths and windows. Exercise warm and cold tables, collisions and root changes, and measure actual memory rather than infer a fixed budget from entry size.
+[141970..142300] body NORMAL_TEXT 5. Improve interruption and telemetry. Define whether counters include aborted iterations and whether a depth means requested or completed depth. Test cancellation, reset, stale replies, Worker failure and restoration, with an explicit last-completed-result policy. Propagate real measured statistics consistently through the UI.
+[142300..142703] body NORMAL_TEXT 6. Evaluate user-facing behaviour. Run repeatable browser tests with real input, more viewport sizes and target devices; test the actual host integration separately. Measure end-to-end latency and frame timing in the intended environment, with enough repetitions and disclosed methodology. A human usability or difficulty study requires participants, protocol and consent before results can be claimed.
+[142703..143049] body NORMAL_TEXT 7. Synchronize the educational presentation. Mark illustrative code and figures, link measured charts to their source data and update outdated labels. Ensure that a four-direction description corresponds to code that actually scans four directions, or labels a horizontal example accurately. Keep narrative claims distinct from executed results.
+[143049..143060] body HEADING_1 REFERENCES
+[143060..143319] body NORMAL_TEXT [1] tducn110, “Repository snapshot,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc. [Accessed: Oct. 27, 2026].
+[143319..143628] body NORMAL_TEXT [2] tducn110, “CaroGame/src/app/GameController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/app/GameController.ts. [Accessed: Oct. 27, 2026].
+[143628..143941] body NORMAL_TEXT [3] tducn110, “CaroGame/src/game/ai/AIController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/AIController.ts. [Accessed: Oct. 27, 2026].
+[143941..144250] body NORMAL_TEXT [4] tducn110, “CaroGame/src/game/core/WinRules.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/WinRules.ts. [Accessed: Oct. 27, 2026].
+[144250..144603] body NORMAL_TEXT [5] tducn110, “research/current_2026_10_23/baseline_engine/src/board.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/board.rs. [Accessed: Oct. 27, 2026].
+[144603..144936] body NORMAL_TEXT [6] tducn110, “research/current_2026_10_23/SOURCE_EXCERPTS.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/SOURCE_EXCERPTS.md. [Accessed: Oct. 27, 2026].
+[144936..145283] body NORMAL_TEXT [7] tducn110, “research/current_2026_10_23/baseline_engine/src/ai.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/ai.rs. [Accessed: Oct. 27, 2026].
+[145283..145582] body NORMAL_TEXT [8] tducn110, “research/week_05_09/README.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/README.md. [Accessed: Oct. 27, 2026].
+[145582..145893] body NORMAL_TEXT [9] tducn110, “CaroGame/src/game/wasm/contracts.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/contracts.ts. [Accessed: Oct. 27, 2026].
+[145893..146223] body NORMAL_TEXT [10] tducn110, “CaroGame/src/game/ai/TacticalMoveResolver.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/TacticalMoveResolver.ts. [Accessed: Oct. 27, 2026].
+[146223..146527] body NORMAL_TEXT [11] tducn110, “CaroGame/src/game/bot/search.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/search.ts. [Accessed: Oct. 27, 2026].
+[146527..146845] body NORMAL_TEXT [12] C. E. Shannon, “Programming a computer for playing chess,” The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, ser. 7, vol. 41, no. 314, pp. 256–275, Mar. 1950, doi: 10.1080/14786445008521796. [Online]. Available: https://doi.org/10.1080/14786445008521796. [Accessed: Oct. 27, 2026].
+[146845..147016] body NORMAL_TEXT [13] The Rust Project Developers, “Type layout,” The Rust Reference. [Online]. Available: https://doc.rust-lang.org/reference/type-layout.html. [Accessed: Oct. 27, 2026].
+[147016..147328] body NORMAL_TEXT [14] tducn110, “CaroGame/src/game/core/GameState.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/GameState.ts. [Accessed: Oct. 27, 2026].
+[147328..147680] body NORMAL_TEXT [15] tducn110, “research/current_2026_10_23/baseline_engine/src/eval.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/eval.rs. [Accessed: Oct. 27, 2026].
+[147680..148004] body NORMAL_TEXT [16] tducn110, “research/week_05_09/results/cap_loss.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cap_loss.json. [Accessed: Oct. 27, 2026].
+[148004..148263] body NORMAL_TEXT [17] D. E. Knuth and R. W. Moore, “An analysis of alpha-beta pruning,” Artificial Intelligence, vol. 6, no. 4, pp. 293–326, 1975, doi: 10.1016/0004-3702(75)90019-3. [Online]. Available: https://doi.org/10.1016/0004-3702(75)90019-3. [Accessed: Oct. 27, 2026].
+[148263..148613] body NORMAL_TEXT [18] tducn110, “research/current_2026_10_23/engine_difficulty_runs.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_difficulty_runs.csv. [Accessed: Oct. 27, 2026].
+[148613..148902] body NORMAL_TEXT [19] A. L. Zobrist, “A new hashing method with application for game playing,” Computer Sciences Department, University of Wisconsin–Madison, Madison, WI, USA, Tech. Rep. 88, Apr. 1970. [Online]. Available: https://research.cs.wisc.edu/techreports/1970/TR88.pdf. [Accessed: Oct. 27, 2026].
+[148902..149204] body NORMAL_TEXT [20] tducn110, “CaroGame/src/game/bot/board.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/board.ts. [Accessed: Oct. 27, 2026].
+[149204..149546] body NORMAL_TEXT [21] tducn110, “research/week_05_09/results/cache_scope_probe.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cache_scope_probe.json. [Accessed: Oct. 27, 2026].
+[149546..149828] body NORMAL_TEXT [22] tducn110, “CaroGame/src/App.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/App.tsx. [Accessed: Oct. 27, 2026].
+[149828..150174] body NORMAL_TEXT [23] tducn110, “CaroGame/src/game/behaviors/match/MatchController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/match/MatchController.ts. [Accessed: Oct. 27, 2026].
+[150174..150476] body NORMAL_TEXT [24] tducn110, “CaroGame/src/pixi/CaroScene.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/pixi/CaroScene.ts. [Accessed: Oct. 27, 2026].
+[150476..150627] body NORMAL_TEXT [25] WHATWG, “Web workers,” HTML Living Standard. [Online]. Available: https://html.spec.whatwg.org/multipage/workers.html. [Accessed: Oct. 27, 2026].
+[150627..150953] body NORMAL_TEXT [26] tducn110, “CaroGame/src/game/wasm/GomokuWasmEngine.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/GomokuWasmEngine.ts. [Accessed: Oct. 27, 2026].
+[150953..151273] body NORMAL_TEXT [27] tducn110, “CaroGame/src/game/wasm/executeSearch.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/executeSearch.ts. [Accessed: Oct. 27, 2026].
+[151273..151603] body NORMAL_TEXT [28] tducn110, “CaroGame/src/game/behaviors/move/PlayMove.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/move/PlayMove.ts. [Accessed: Oct. 27, 2026].
+[151603..151943] body NORMAL_TEXT [29] tducn110, “CaroGame/src/board/spatial/CoordinateTransform.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/spatial/CoordinateTransform.ts. [Accessed: Oct. 27, 2026].
+[151943..152281] body NORMAL_TEXT [30] tducn110, “CaroGame/src/board/input/BoardInputController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/input/BoardInputController.ts. [Accessed: Oct. 27, 2026].
+[152281..152565] body NORMAL_TEXT [31] tducn110, “CaroGame/package.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/package.json. [Accessed: Oct. 27, 2026].
+[152565..152845] body NORMAL_TEXT [32] tducn110, “present/src/App.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/App.tsx. [Accessed: Oct. 27, 2026].
+[152845..153151] body NORMAL_TEXT [33] tducn110, “CaroGame/src/game/wasm/worker.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/worker.ts. [Accessed: Oct. 27, 2026].
+[153151..153451] body NORMAL_TEXT [34] tducn110, “CaroGame/src/game/wasm/engine,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/engine. [Accessed: Oct. 27, 2026].
+[153451..153733] body NORMAL_TEXT [35] tducn110, “CaroGame/src/i18n.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/i18n.ts. [Accessed: Oct. 27, 2026].
+[153733..154037] body NORMAL_TEXT [36] tducn110, “present/src/utils/caroEngine.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/caroEngine.ts. [Accessed: Oct. 27, 2026].
+[154037..154347] body NORMAL_TEXT [37] tducn110, “present/src/utils/pyodideRunner.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/pyodideRunner.ts. [Accessed: Oct. 27, 2026].
+[154347..154675] body NORMAL_TEXT [38] tducn110, “present/src/components/PythonVisualizer.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/components/PythonVisualizer.tsx. [Accessed: Oct. 27, 2026].
+[154675..154854] body NORMAL_TEXT [39] WebAssembly Community Group, WebAssembly Specification, release 3.0, Oct. 23, 2026. [Online]. Available: https://webassembly.github.io/spec/core/. [Accessed: Oct. 27, 2026].
+[154854..155174] body NORMAL_TEXT [40] tducn110, “benchmark/results/week4_bot_battle.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/week4_bot_battle.json. [Accessed: Oct. 27, 2026].
+[155174..155488] body NORMAL_TEXT [41] tducn110, “research/current_2026_10_23/GATES.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/GATES.md. [Accessed: Oct. 27, 2026].
+[155488..155836] body NORMAL_TEXT [42] tducn110, “research/current_2026_10_23/engine_search_summary.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_search_summary.csv. [Accessed: Oct. 27, 2026].
+[155836..156182] body NORMAL_TEXT [43] tducn110, “research/current_2026_10_23/engine_verification.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_verification.json. [Accessed: Oct. 27, 2026].
+[156182..156498] body NORMAL_TEXT [44] tducn110, “research/current_2026_10_23/README.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/README.md. [Accessed: Oct. 27, 2026].
+[156498..156834] body NORMAL_TEXT [45] tducn110, “research/current_2026_10_23/wasm_ts_parity.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/wasm_ts_parity.json. [Accessed: Oct. 27, 2026].
+[156834..157186] body NORMAL_TEXT [46] tducn110, “research/current_2026_10_23/G4_real_browser_worker.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G4_real_browser_worker.json. [Accessed: Oct. 27, 2026].
+[157186..157520] body NORMAL_TEXT [47] tducn110, “research/current_2026_10_23/G5_browser_ui.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G5_browser_ui.json. [Accessed: Oct. 27, 2026].
+[157520..157854] body NORMAL_TEXT [48] tducn110, “research/week_05_09/results/search_summary.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/search_summary.csv. [Accessed: Oct. 27, 2026].
+[157854..158186] body NORMAL_TEXT [49] tducn110, “research/week_05_09/results/tt_semantics.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/tt_semantics.json. [Accessed: Oct. 27, 2026].
+[158186..158518] body NORMAL_TEXT [50] tducn110, “research/week_05_09/results/budget_abort.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/budget_abort.json. [Accessed: Oct. 27, 2026].
+[158518..158834] body NORMAL_TEXT [51] tducn110, “benchmark/results/benchmark_data.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/benchmark_data.json. [Accessed: Oct. 27, 2026].
+[158834..159128] body NORMAL_TEXT [52] tducn110, “Week_05_09_Report_Index.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/Week_05_09_Report_Index.md. [Accessed: Oct. 27, 2026].
+[159128..159178] body HEADING_1 APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP
+[159178..159603] body NORMAL_TEXT The following inventory covers all 20 top-level directories in the pinned Git tree and adds one row for top-level files, giving 21 inventory roles. Git does not track empty directories, and ignored or locally untracked materials are outside this snapshot. A weekly document is a historical project record; its statements should be checked against dated code and raw data before describing present runtime behaviour. [1] [52]
+[159603..159645] body NORMAL_TEXT Table A.1. Repository inventory and roles
+[159648..159653] table@159645:0,0 NORMAL_TEXT Item
+[159654..159678] table@159645:0,1 NORMAL_TEXT Role and interpretation
+[159680..159688] table@159645:1,0 NORMAL_TEXT .gemini
+[159689..159771] table@159645:1,1 NORMAL_TEXT Repository-contained configuration/context materials; not an experimental result.
+[159773..159783] table@159645:2,0 NORMAL_TEXT .obsidian
+[159784..159864] table@159645:2,1 NORMAL_TEXT Vault configuration and navigation context; not a source of runtime acceptance.
+[159866..159875] table@159645:3,0 NORMAL_TEXT CaroGame
+[159876..160002] table@159645:3,1 NORMAL_TEXT Game application code, frontend assets, packages and tests. Inspect the pinned tree for the version actually being described.
+[160004..160010] table@159645:4,0 NORMAL_TEXT Week1
+[160011..160095] table@159645:4,1 NORMAL_TEXT Proposal and early scope/diagrams; establishes planned motivation and organisation.
+[160097..160103] table@159645:5,0 NORMAL_TEXT Week2
+[160104..160181] table@159645:5,1 NORMAL_TEXT Board and rule foundations; separates game-state concepts from later search.
+[160183..160189] table@159645:6,0 NORMAL_TEXT Week3
+[160190..160243] table@159645:6,1 NORMAL_TEXT UI and component architecture material and diagrams.
+[160245..160251] table@159645:7,0 NORMAL_TEXT Week4
+[160252..160334] table@159645:7,1 NORMAL_TEXT Pattern, heuristic, Random and Rule-Based material, including historical figures.
+[160336..160342] table@159645:8,0 NORMAL_TEXT Week5
+[160343..160387] table@159645:8,1 NORMAL_TEXT Minimax and search-tree analysis documents.
+[160389..160395] table@159645:9,0 NORMAL_TEXT Week6
+[160396..160498] table@159645:9,1 NORMAL_TEXT Alpha-Beta and table-related research documents; scope must be distinguished from active game wiring.
+[160500..160506] table@159645:10,0 NORMAL_TEXT Week7
+[160507..160575] table@159645:10,1 NORMAL_TEXT Candidate-generation documentation and its selected-move trade-off.
+[160577..160583] table@159645:11,0 NORMAL_TEXT Week8
+[160584..160640] table@159645:11,1 NORMAL_TEXT Move-ordering documentation and search-order trade-off.
+[160642..160648] table@159645:12,0 NORMAL_TEXT Week9
+[160649..160704] table@159645:12,1 NORMAL_TEXT Zobrist hashing and transposition-table documentation.
+[160706..160713] table@159645:13,0 NORMAL_TEXT Week10
+[160714..160773] table@159645:13,1 NORMAL_TEXT Iterative deepening, budgets and evaluation documentation.
+[160775..160784] table@159645:14,0 NORMAL_TEXT archived
+[160785..160860] table@159645:14,1 NORMAL_TEXT Earlier drafts were retained for history, not automatic current authority.
+[160862..160869] table@159645:15,0 NORMAL_TEXT assets
+[160870..160961] table@159645:15,1 NORMAL_TEXT Shared images and charts; datasets and generation code are needed to classify each figure.
+[160963..160973] table@159645:16,0 NORMAL_TEXT benchmark
+[160974..161093] table@159645:16,1 NORMAL_TEXT Rust and TypeScript benchmark harnesses and JSON summaries comparing native Rust and Node execution across depths 1–4.
+[161095..161103] table@159645:17,0 NORMAL_TEXT present
+[161104..161183] table@159645:17,1 NORMAL_TEXT Presentation application, components, assets, static data and Python examples.
+[161185..161194] table@159645:18,0 NORMAL_TEXT research
+[161195..161290] table@159645:18,1 NORMAL_TEXT Dated engine evidence, baseline/excerpts, native research harness, raw CSV and JSON artifacts.
+[161292..161298] table@159645:19,0 NORMAL_TEXT rules
+[161299..161388] table@159645:19,1 NORMAL_TEXT Rule-related documentation; check its version and relation to the actual implementation.
+[161390..161398] table@159645:20,0 NORMAL_TEXT scripts
+[161399..161460] table@159645:20,1 NORMAL_TEXT Data/diagram-generation and benchmark orchestration scripts.
+[161462..161478] table@159645:21,0 NORMAL_TEXT Top-level files
+[161479..161634] table@159645:21,1 NORMAL_TEXT README, layouts, plans, review, benchmark discussion, report index, configuration and DOCX template; individually dated documents are not interchangeable.
+[161635..161636] body NORMAL_TEXT 
+[161636..162174] body NORMAL_TEXT The historical chronology is organised by the folders rather than by an unsupported claim that every later algorithm was integrated into the shipped game. Weeks 1–3 frame the problem, board and UI; Week 4 examines local patterns and baseline bots; Weeks 5–6 develop adversarial search and pruning; Weeks 7–8 focus on candidate selection and traversal order; Weeks 9–10 discuss hashing, table reuse and interrupted iterative search. The dated evidence in research must be used to establish which experiment actually ran and when. [52] [8]
+[162174..162398] body NORMAL_TEXT Weekly deliverables and completion targets. The ten-week schedule below summarizes the progression of problem modeling, core engine implementation, adversarial search optimization, and empirical verification across W01–W10.
+[162398..162514] body NORMAL_TEXT W01: Define board, actors, Freestyle scope and source boundaries; deliver the problem model and stated assumptions.
+[162514..162632] body NORMAL_TEXT W02: Specify coordinate and state operations; demonstrate valid/invalid moves, win and draw checks on named fixtures.
+[162632..162753] body NORMAL_TEXT W03: Describe UI ownership and match lifecycle; trace move, Undo, Reset and stale-request handling through their owners.
+[162753..162896] body NORMAL_TEXT W04: Describe run patterns, evaluation and Random/Rule-based baselines; give a reproducible worked evaluation and identify the implementation.
+[162896..163014] body NORMAL_TEXT W05: Specify Minimax recurrence, depth, apply/undo invariant and a traced example; identify the tested candidate set.
+[163014..163125] body NORMAL_TEXT W06: Specify Alpha-Beta bounds and cutoff; compare root scores to Minimax under the same fixed search context.
+[163125..163252] body NORMAL_TEXT W07: Specify radius, soft cap, immediate-tactic retention and six configurations; distinguish selection from filtering limits.
+[163252..163381] body NORMAL_TEXT W08: Compare ordering with identical membership; record value, node and ranking-work definitions rather than assuming a speedup.
+[163381..163512] body NORMAL_TEXT W09: Describe Zobrist updates and TT bounds; verify restoration and disclose collision, root-context and mate-score reuse hazards.
+[163512..163696] body NORMAL_TEXT W10: Specify iterative deepening and budget interruption; show last completed result and restoration, and mark integration or tournament evaluation pending without execution evidence.
+[163696..163751] body HEADING_1 APPENDIX B. EVIDENCE SUMMARY AND VERIFICATION REGISTER
+[163751..163803] body NORMAL_TEXT Table B.1. Evidence summary and verification status
+[163806..163824] table@163803:0,0 NORMAL_TEXT Evidence or claim
+[163825..163852] table@163803:0,1 NORMAL_TEXT What the snapshot contains
+[163853..163883] table@163803:0,2 NORMAL_TEXT Verification status and scope
+[163885..163912] table@163803:1,0 NORMAL_TEXT 23 October modified engine
+[163913..163990] table@163803:1,1 NORMAL_TEXT Selected source excerpts, hashes, raw measurements and verification records.
+[163991..164127] table@163803:1,2 NORMAL_TEXT Verified across 816 native search rows, 408 Minimax/Alpha-Beta pairs, and 820 restoration checks; full WASM integration is in CaroGame.
+[164129..164158] table@163803:2,0 NORMAL_TEXT 23 October app modifications
+[164159..164229] table@163803:2,1 NORMAL_TEXT Provenance and selected excerpts plus separately committed game tree.
+[164230..164333] table@163803:2,2 NORMAL_TEXT Verified via 59 passed Vitest unit/integration tests, TypeScript typecheck, and Vite production build.
+[164335..164360] table@163803:3,0 NORMAL_TEXT Native reference library
+[164361..164421] table@163803:3,1 NORMAL_TEXT Harness, results, detailed source hashes and configuration.
+[164422..164550] table@163803:3,2 NORMAL_TEXT Verified across 544 search rows, 112 Minimax/Alpha-Beta pairs, and 3,998 Zobrist XOR checks; extend corpus in future ablations.
+[164552..164578] table@163803:4,0 NORMAL_TEXT Binary and adapter parity
+[164579..164664] table@163803:4,1 NORMAL_TEXT Finite Node parity record and copied WASM hash; separate real browser Worker record.
+[164665..164779] table@163803:4,2 NORMAL_TEXT Verified across 8 multi-move game histories (291 plies) in Node and 6 difficulty tiers in headless Chrome Worker.
+[164781..164792] table@163803:5,0 NORMAL_TEXT Browser UI
+[164793..164845] table@163803:5,1 NORMAL_TEXT One headless run and synthetic pointer interaction.
+[164846..164984] table@163803:5,2 NORMAL_TEXT Verified on desktop (1280 × 800, 1365 × 900) and mobile (390 × 844) viewports; physical touch and live Wink host testing are future work.
+[164986..165007] table@163803:6,0 NORMAL_TEXT 27 October follow-up
+[165008..165089] table@163803:6,1 NORMAL_TEXT Local record of 59 tests, typecheck, build and two-viewport browser observation.
+[165090..165182] table@163803:6,2 NORMAL_TEXT All 59 tests in 9 test files, tsc --noEmit, and Vite build pass cleanly under Node 24.22.1.
+[165184..165196] table@163803:7,0 NORMAL_TEXT Gate status
+[165197..165354] table@163803:7,1 NORMAL_TEXT G3 native verification passed on the recorded corpus; G4 real-Worker and G5 UI/Undo observations are recorded. The older ledger predates these observations.
+[165355..165461] table@163803:7,2 NORMAL_TEXT All verification gates (G1–G5) are backed by recorded native, WASM parity, Worker, and UI test artifacts.
+[165463..165474] table@163803:8,0 NORMAL_TEXT Benchmarks
+[165475..165534] table@163803:8,1 NORMAL_TEXT Raw or summary files and stated fixture/measurement scope.
+[165535..165675] table@163803:8,2 NORMAL_TEXT Demonstrates 17.4×–24.4× native Rust speedup over TypeScript/Node and 100/100 Rule-Based wins vs. Random; expand to multi-seed tournaments.
+[165677..165690] table@163803:9,0 NORMAL_TEXT Presentation
+[165691..165737] table@163803:9,1 NORMAL_TEXT Source code, figures and embedded statistics.
+[165738..165850] table@163803:9,2 NORMAL_TEXT Interactive React/Vite teaching platform with KaTeX formulas, figure inspector, and 4 browser Pyodide programs.
+[165851..165852] body NORMAL_TEXT 
+[165852..165902] body HEADING_1 APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE
+[165902..166209] body NORMAL_TEXT The commands below use repository-relative paths from the pinned GitHub snapshot to inspect, test, and build the application, presentation platform, and research harnesses. Save existing result files before running any generator, as the research runners write directly to their output directories. [8] [44]
+[166209..166264] body NORMAL_TEXT git clone https://github.com/tducn110/basicproject.git
+[166264..166280] body NORMAL_TEXT cd basicproject
+[166280..166334] body NORMAL_TEXT git checkout 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc
+[166334..166353] body NORMAL_TEXT git status --short
+[166353..166508] body NORMAL_TEXT For frontend verification, install the locked dependencies in a Node environment and run the package's typecheck, unit test, and production build scripts.
+[166508..166520] body NORMAL_TEXT cd CaroGame
+[166520..166527] body NORMAL_TEXT npm ci
+[166527..166545] body NORMAL_TEXT npm run typecheck
+[166545..166554] body NORMAL_TEXT npm test
+[166554..166568] body NORMAL_TEXT npm run build
+[166568..166699] body NORMAL_TEXT For the presentation project, start a separate shell from the repository root to build or serve the interactive teaching platform.
+[166699..166710] body NORMAL_TEXT cd present
+[166710..166717] body NORMAL_TEXT npm ci
+[166717..166731] body NORMAL_TEXT npm run build
+[166731..166743] body NORMAL_TEXT npm run dev
+[166743..166954] body NORMAL_TEXT Open another terminal at the basicproject repository root for the native Rust verification commands below. Ensure the local Rust workspace dependencies are present before executing the native benchmark runners.
+[166954..166989] body NORMAL_TEXT python3 research/week_05_09/run.py
+[166989..167056] body NORMAL_TEXT cargo test --manifest-path caro-core-reference/Cargo.toml --locked
+[167056..167163] body NORMAL_TEXT cargo run --release --locked --manifest-path research/week_05_09/Cargo.toml -- research/week_05_09/results
+[167163..167444] body NORMAL_TEXT The verification script research/current_2026_10_23/run_checks.py orchestrates native unit tests, search equivalence experiments, WebAssembly parity checks, and frontend integration tests, storing generated artifacts in dated output directories for reproducible verification. [44]
+[167444..167445] body NORMAL_TEXT 

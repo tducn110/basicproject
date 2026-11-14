@@ -1,0 +1,9 @@
+{
+  "cell_bytes": 1,
+  "board_bytes": 240,
+  "usize_bytes": 8,
+  "coordinate_tuple_bytes": 16,
+  "address_offset_checks": 225,
+  "target": "x86_64-linux",
+  "wasm_layout_measured": false
+}

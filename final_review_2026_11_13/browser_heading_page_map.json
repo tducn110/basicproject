@@ -1,0 +1,666 @@
+[
+  {
+    "title": "ABSTRACT",
+    "id": "h.w863n5ynb1ud",
+    "page": 1,
+    "physical": 2,
+    "toc_page": 1,
+    "match": true
+  },
+  {
+    "title": "LIST OF FIGURES",
+    "id": "h.azn2ldeky5h7",
+    "page": 5,
+    "physical": 6,
+    "toc_page": 5,
+    "match": true
+  },
+  {
+    "title": "LIST OF TABLES",
+    "id": "h.phc670xhf3x7",
+    "page": 6,
+    "physical": 7,
+    "toc_page": 6,
+    "match": true
+  },
+  {
+    "title": "ABBREVIATIONS AND READING CONVENTIONS",
+    "id": "h.xgxpqvt19qw1",
+    "page": 7,
+    "physical": 8,
+    "toc_page": 7,
+    "match": true
+  },
+  {
+    "title": "CHAPTER 1. INTRODUCTION",
+    "id": "h.mbkundapb6fz",
+    "page": 1,
+    "physical": 9,
+    "toc_page": 1,
+    "match": true
+  },
+  {
+    "title": "1.1 Background and motivation",
+    "id": "h.28zjm4cj92dt",
+    "page": 1,
+    "physical": 9,
+    "toc_page": 1,
+    "match": true
+  },
+  {
+    "title": "1.2 Objectives and research questions",
+    "id": "h.s3shfhiwyz3d",
+    "page": 1,
+    "physical": 9,
+    "toc_page": 1,
+    "match": true
+  },
+  {
+    "title": "1.3 Scope, versions and source identity",
+    "id": "h.gewf96xcpzri",
+    "page": 2,
+    "physical": 10,
+    "toc_page": 2,
+    "match": true
+  },
+  {
+    "title": "1.4 Method and report structure",
+    "id": "h.16ldjhlw7ms6",
+    "page": 3,
+    "physical": 11,
+    "toc_page": 3,
+    "match": true
+  },
+  {
+    "title": "CHAPTER 2. ALGORITHMS AND DATA STRUCTURES",
+    "id": "h.tb4zab5ysoyn",
+    "page": 4,
+    "physical": 12,
+    "toc_page": 4,
+    "match": true
+  },
+  {
+    "title": "2.1 Scope, evidence, and notation",
+    "id": "h.f564q6ofb9iz",
+    "page": 4,
+    "physical": 12,
+    "toc_page": 4,
+    "match": true
+  },
+  {
+    "title": "2.2 Board representation and legal updates",
+    "id": "h.ox3085n6q948",
+    "page": 5,
+    "physical": 13,
+    "toc_page": 5,
+    "match": true
+  },
+  {
+    "title": "2.2.1 Matrix, index conversion, and state ownership",
+    "id": "h.v5ssqmhnici6",
+    "page": 5,
+    "physical": 13,
+    "toc_page": 5,
+    "match": true
+  },
+  {
+    "title": "2.2.2 Apply and undo",
+    "id": "h.ixliekovwady",
+    "page": 6,
+    "physical": 14,
+    "toc_page": 6,
+    "match": true
+  },
+  {
+    "title": "2.3 Freestyle win detection",
+    "id": "h.llgaaxp2vihy",
+    "page": 8,
+    "physical": 16,
+    "toc_page": 8,
+    "match": true
+  },
+  {
+    "title": "2.4 Baselines: random play and rule-based play",
+    "id": "h.t89694iwlib",
+    "page": 10,
+    "physical": 18,
+    "toc_page": 10,
+    "match": true
+  },
+  {
+    "title": "2.4.1 Random baseline",
+    "id": "h.gf3ld6hrgsyr",
+    "page": 10,
+    "physical": 18,
+    "toc_page": 10,
+    "match": true
+  },
+  {
+    "title": "2.4.2 Immediate tactics and one-ply heuristic",
+    "id": "h.e7kjz3j76vr2",
+    "page": 11,
+    "physical": 19,
+    "toc_page": 11,
+    "match": true
+  },
+  {
+    "title": "2.5 Static evaluation and terminal utility",
+    "id": "h.oh14t8qso23p",
+    "page": 13,
+    "physical": 21,
+    "toc_page": 13,
+    "match": true
+  },
+  {
+    "title": "2.5.1 Evaluation of nonterminal positions",
+    "id": "h.odpwbopwyu4e",
+    "page": 13,
+    "physical": 21,
+    "toc_page": 13,
+    "match": true
+  },
+  {
+    "title": "2.5.2 Terminal states and the score hierarchy",
+    "id": "h.ty6bcng513tg",
+    "page": 15,
+    "physical": 23,
+    "toc_page": 15,
+    "match": true
+  },
+  {
+    "title": "2.6 Candidate generation and a soft tactical cap",
+    "id": "h.n2msphwxgbc8",
+    "page": 16,
+    "physical": 24,
+    "toc_page": 16,
+    "match": true
+  },
+  {
+    "title": "2.6.1 Spatial neighborhood",
+    "id": "h.ki6ogpu2c3b0",
+    "page": 16,
+    "physical": 24,
+    "toc_page": 16,
+    "match": true
+  },
+  {
+    "title": "2.6.2 Tactical preservation and membership",
+    "id": "h.uooxa7pye6zy",
+    "page": 18,
+    "physical": 26,
+    "toc_page": 18,
+    "match": true
+  },
+  {
+    "title": "2.7 Move ordering versus move selection",
+    "id": "h.mop38wrt6f8f",
+    "page": 19,
+    "physical": 27,
+    "toc_page": 19,
+    "match": true
+  },
+  {
+    "title": "2.8 Minimax search",
+    "id": "h.ka1fnecs6on7",
+    "page": 21,
+    "physical": 29,
+    "toc_page": 21,
+    "match": true
+  },
+  {
+    "title": "2.8.1 Recurrence and contract",
+    "id": "h.qona5aytdcz9",
+    "page": 21,
+    "physical": 29,
+    "toc_page": 21,
+    "match": true
+  },
+  {
+    "title": "2.8.2 Proof, example and complexity",
+    "id": "h.mfxc5fc4ntt7",
+    "page": 22,
+    "physical": 30,
+    "toc_page": 22,
+    "match": true
+  },
+  {
+    "title": "2.9 Alpha-Beta pruning",
+    "id": "h.m2zshj9xhidg",
+    "page": 24,
+    "physical": 32,
+    "toc_page": 24,
+    "match": true
+  },
+  {
+    "title": "2.9.1 Bounds and pseudocode",
+    "id": "h.fl4c0ur4c4wj",
+    "page": 24,
+    "physical": 32,
+    "toc_page": 24,
+    "match": true
+  },
+  {
+    "title": "2.9.2 Worked cutoff and correctness boundary",
+    "id": "h.chp989x4d9hw",
+    "page": 25,
+    "physical": 33,
+    "toc_page": 25,
+    "match": true
+  },
+  {
+    "title": "2.10 Iterative deepening and budgets",
+    "id": "h.4nux9as0w8f4",
+    "page": 26,
+    "physical": 34,
+    "toc_page": 26,
+    "match": true
+  },
+  {
+    "title": "2.11 Zobrist hashing and incremental state",
+    "id": "h.u6wnsrodysn",
+    "page": 28,
+    "physical": 36,
+    "toc_page": 28,
+    "match": true
+  },
+  {
+    "title": "2.11.1 Definition and update",
+    "id": "h.uew8hqaidmzp",
+    "page": 28,
+    "physical": 36,
+    "toc_page": 28,
+    "match": true
+  },
+  {
+    "title": "2.12 Transposition table: entries, bounds and context",
+    "id": "h.4v52azsb4fkd",
+    "page": 30,
+    "physical": 38,
+    "toc_page": 30,
+    "match": true
+  },
+  {
+    "title": "2.12.1 Meaning of stored values",
+    "id": "h.kd6sx6kollmi",
+    "page": 30,
+    "physical": 38,
+    "toc_page": 30,
+    "match": true
+  },
+  {
+    "title": "2.12.2 Why reuse can be wrong",
+    "id": "h.wblsbkp7rwlb",
+    "page": 31,
+    "physical": 39,
+    "toc_page": 31,
+    "match": true
+  },
+  {
+    "title": "2.13 Quiescence search in the legacy TypeScript bot",
+    "id": "h.w6poqxjs9r4h",
+    "page": 33,
+    "physical": 41,
+    "toc_page": 33,
+    "match": true
+  },
+  {
+    "title": "2.14 Legacy bitmask patterns and incremental line counts",
+    "id": "h.u1io5ql1vutd",
+    "page": 35,
+    "physical": 43,
+    "toc_page": 35,
+    "match": true
+  },
+  {
+    "title": "2.15 Difficulty configurations and the active request path",
+    "id": "h.aousdh82aqys",
+    "page": 38,
+    "physical": 46,
+    "toc_page": 38,
+    "match": true
+  },
+  {
+    "title": "2.16 Synthesis and limits of the algorithmic claims",
+    "id": "h.deo9zlys1cxk",
+    "page": 40,
+    "physical": 48,
+    "toc_page": 40,
+    "match": true
+  },
+  {
+    "title": "CHAPTER 3. SYSTEM ANALYSIS AND DESIGN",
+    "id": "h.9ty3awaoyfn1",
+    "page": 42,
+    "physical": 50,
+    "toc_page": 42,
+    "match": true
+  },
+  {
+    "title": "3.1 Decision problem and algorithmic requirements",
+    "id": "h.cezhdukw22a5",
+    "page": 42,
+    "physical": 50,
+    "toc_page": 42,
+    "match": true
+  },
+  {
+    "title": "3.2 Non-functional requirements and acceptance boundaries",
+    "id": "h.l93wek48u6pv",
+    "page": 45,
+    "physical": 53,
+    "toc_page": 45,
+    "match": true
+  },
+  {
+    "title": "3.3 Architecture and ownership",
+    "id": "h.44ilrwr6m6hi",
+    "page": 45,
+    "physical": 53,
+    "toc_page": 45,
+    "match": true
+  },
+  {
+    "title": "3.4 Board state, history and legal transition contract",
+    "id": "h.ykhczgk1573",
+    "page": 47,
+    "physical": 55,
+    "toc_page": 47,
+    "match": true
+  },
+  {
+    "title": "3.5 Match phases and state transitions",
+    "id": "h.o3qnfo717c4z",
+    "page": 47,
+    "physical": 55,
+    "toc_page": 47,
+    "match": true
+  },
+  {
+    "title": "3.6 Asynchronous request protocol and cancellation",
+    "id": "h.rbfbaqfupooi",
+    "page": 48,
+    "physical": 56,
+    "toc_page": 48,
+    "match": true
+  },
+  {
+    "title": "3.7 Coordinate transformation and gesture interpretation",
+    "id": "h.xsluc2cfh6fq",
+    "page": 49,
+    "physical": 57,
+    "toc_page": 49,
+    "match": true
+  },
+  {
+    "title": "3.8 Search-result contract and presentation of telemetry",
+    "id": "h.pj0epyw80iuc",
+    "page": 50,
+    "physical": 58,
+    "toc_page": 50,
+    "match": true
+  },
+  {
+    "title": "3.9 Verification scenarios derived from the design",
+    "id": "h.uqgphbx7d2i",
+    "page": 51,
+    "physical": 59,
+    "toc_page": 51,
+    "match": true
+  },
+  {
+    "title": "CHAPTER 4. IMPLEMENTATION",
+    "id": "h.3opfa5jx1z65",
+    "page": 53,
+    "physical": 61,
+    "toc_page": 53,
+    "match": true
+  },
+  {
+    "title": "4.1 Toolchain and project organization",
+    "id": "h.hefb34yw4eqb",
+    "page": 53,
+    "physical": 61,
+    "toc_page": 53,
+    "match": true
+  },
+  {
+    "title": "4.2 Accepted move processing",
+    "id": "h.kuw4himka0b",
+    "page": 53,
+    "physical": 61,
+    "toc_page": 53,
+    "match": true
+  },
+  {
+    "title": "4.3 AI dispatch, Worker execution and WASM hydration",
+    "id": "h.7yn47n5rr1d9",
+    "page": 54,
+    "physical": 62,
+    "toc_page": 54,
+    "match": true
+  },
+  {
+    "title": "4.4 Board rendering and interface synchronization",
+    "id": "h.duk1kwe4t3bo",
+    "page": 56,
+    "physical": 64,
+    "toc_page": 56,
+    "match": true
+  },
+  {
+    "title": "4.5 Presentation website and interactive explanation",
+    "id": "h.ivnxw4hj6ag2",
+    "page": 56,
+    "physical": 64,
+    "toc_page": 56,
+    "match": true
+  },
+  {
+    "title": "4.6 Python/Pyodide execution and four instructional programs",
+    "id": "h.vgxp54qbkd6t",
+    "page": 57,
+    "physical": 65,
+    "toc_page": 57,
+    "match": true
+  },
+  {
+    "title": "4.6.1 Pattern scanner",
+    "id": "h.htgwz1b54vki",
+    "page": 57,
+    "physical": 65,
+    "toc_page": 57,
+    "match": true
+  },
+  {
+    "title": "4.6.2 Heuristic calculator",
+    "id": "h.c1ks7fdjnbzp",
+    "page": 58,
+    "physical": 66,
+    "toc_page": 58,
+    "match": true
+  },
+  {
+    "title": "4.6.3 Chebyshev candidate example",
+    "id": "h.j6j4kiyfvtac",
+    "page": 58,
+    "physical": 66,
+    "toc_page": 58,
+    "match": true
+  },
+  {
+    "title": "4.6.4 Empirical-analysis snippet",
+    "id": "h.s01h91bc9g9k",
+    "page": 59,
+    "physical": 67,
+    "toc_page": 59,
+    "match": true
+  },
+  {
+    "title": "4.7 Implementation traceability and limits",
+    "id": "h.8vkuvzj3tl0r",
+    "page": 60,
+    "physical": 68,
+    "toc_page": 60,
+    "match": true
+  },
+  {
+    "title": "CHAPTER 5. RESULTS AND EVALUATION",
+    "id": "h.x4gzqixf87qm",
+    "page": 61,
+    "physical": 69,
+    "toc_page": 61,
+    "match": true
+  },
+  {
+    "title": "5.1 Evaluation questions, evidence and boundaries",
+    "id": "h.ksknugug3ebp",
+    "page": 61,
+    "physical": 69,
+    "toc_page": 61,
+    "match": true
+  },
+  {
+    "title": "5.2 Native board and search checks of the 23 October engine",
+    "id": "h.4e3feq1vanay",
+    "page": 61,
+    "physical": 69,
+    "toc_page": 61,
+    "match": true
+  },
+  {
+    "title": "5.3 WebAssembly parity and browser observations",
+    "id": "h.um9mbintoly",
+    "page": 63,
+    "physical": 71,
+    "toc_page": 63,
+    "match": true
+  },
+  {
+    "title": "5.3.1 Follow-up application validation",
+    "id": "h.vjc9kyj8offy",
+    "page": 64,
+    "physical": 72,
+    "toc_page": 64,
+    "match": true
+  },
+  {
+    "title": "5.4 Separate native reference experiments",
+    "id": "h.ehsapit9nzy8",
+    "page": 64,
+    "physical": 72,
+    "toc_page": 64,
+    "match": true
+  },
+  {
+    "title": "5.4.1 A paired Minimax and Alpha-Beta example",
+    "id": "h.yyqb9ygo25hr",
+    "page": 65,
+    "physical": 73,
+    "toc_page": 65,
+    "match": true
+  },
+  {
+    "title": "5.4.2 Candidate caps, ordering and tactical completeness",
+    "id": "h.sep6934wxqpa",
+    "page": 66,
+    "physical": 74,
+    "toc_page": 66,
+    "match": true
+  },
+  {
+    "title": "5.4.3 Hash, table scope and interrupted search",
+    "id": "h.h6oy75sv7019",
+    "page": 67,
+    "physical": 75,
+    "toc_page": 67,
+    "match": true
+  },
+  {
+    "title": "5.5 Historical cross-language and Week 4 datasets",
+    "id": "h.aidtnilmd7op",
+    "page": 67,
+    "physical": 75,
+    "toc_page": 67,
+    "match": true
+  },
+  {
+    "title": "5.6 Presentation examples and evidence quality",
+    "id": "h.5c7dfs581ttj",
+    "page": 69,
+    "physical": 77,
+    "toc_page": 69,
+    "match": true
+  },
+  {
+    "title": "5.7 Threats to validity and interpretation",
+    "id": "h.sx6fri3t6972",
+    "page": 69,
+    "physical": 77,
+    "toc_page": 69,
+    "match": true
+  },
+  {
+    "title": "CHAPTER 6. CONCLUSION AND FUTURE WORK",
+    "id": "h.h3dln88p2eyp",
+    "page": 71,
+    "physical": 79,
+    "toc_page": 71,
+    "match": true
+  },
+  {
+    "title": "6.1 Work completed and contribution",
+    "id": "h.wmsu1zxcto6s",
+    "page": 71,
+    "physical": 79,
+    "toc_page": 71,
+    "match": true
+  },
+  {
+    "title": "6.2 Limitations",
+    "id": "h.ihchg45onn57",
+    "page": 72,
+    "physical": 80,
+    "toc_page": 72,
+    "match": true
+  },
+  {
+    "title": "6.3 Future development",
+    "id": "h.n7j98jjv0ht2",
+    "page": 72,
+    "physical": 80,
+    "toc_page": 72,
+    "match": true
+  },
+  {
+    "title": "REFERENCES",
+    "id": "h.in9eplkodgeb",
+    "page": 74,
+    "physical": 82,
+    "toc_page": 74,
+    "match": true
+  },
+  {
+    "title": "APPENDIX A. REPOSITORY INVENTORY AND EVIDENCE MAP",
+    "id": "h.4lvh3lnoi9vc",
+    "page": 82,
+    "physical": 90,
+    "toc_page": 82,
+    "match": true
+  },
+  {
+    "title": "APPENDIX B. EVIDENCE AND VERIFICATION REGISTER",
+    "id": "h.a1ruwmryb0b5",
+    "page": 84,
+    "physical": 92,
+    "toc_page": 84,
+    "match": true
+  },
+  {
+    "title": "APPENDIX C. READING AND REPRODUCIBILITY PROCEDURE",
+    "id": "h.r2ne5nnz9baa",
+    "page": 87,
+    "physical": 95,
+    "toc_page": 87,
+    "match": true
+  }
+]

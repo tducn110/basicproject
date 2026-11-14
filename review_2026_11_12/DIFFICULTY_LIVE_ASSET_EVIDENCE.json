@@ -1,0 +1,109 @@
+{
+  "captured_at_utc": "2026-11-12T16:59:47.703800+00:00",
+  "scope": "Read-only GET of deployed JS/worker/WASM; source and deployment not mutated; raw downloaded JS preserved for analysis",
+  "artifacts": [
+    {
+      "url": "https://10-caro.vercel.app/",
+      "bytes": 5358,
+      "sha256": "07b2b30fdfa5830cc7dfaeff54123f65fb3686ba5721ba2dc4417113292fb2b6",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "1222",
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Disposition": "inline",
+        "Content-Length": "5358",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Thu, 12 Nov 2026 16:59:46 GMT",
+        "Etag": "\"c3ba9e2ccd99d6c58d380c9b1ad751af\"",
+        "Last-Modified": "Thu, 12 Nov 2026 16:39:24 GMT",
+        "Server": "Vercel",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+        "X-Vercel-Cache": "HIT",
+        "X-Vercel-Id": "hkg1::5mjsn-1794502786681-f8d0994b1ed4",
+        "Connection": "close"
+      }
+    },
+    {
+      "url": "https://10-caro.vercel.app/assets/index-CHy0JjkV.js",
+      "bytes": 747224,
+      "sha256": "e69bbb81a72729ce01ff5cddee4cdfb026e33b44a957c5359faf93acfedab6d7",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "424",
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Disposition": "inline; filename=\"index-CHy0JjkV.js\"",
+        "Content-Length": "747224",
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Date": "Thu, 12 Nov 2026 16:59:46 GMT",
+        "Etag": "\"3092037755f98b1e4d48418deb696d39\"",
+        "Last-Modified": "Thu, 12 Nov 2026 16:52:42 GMT",
+        "Server": "Vercel",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+        "X-Vercel-Cache": "HIT",
+        "X-Vercel-Id": "hkg1::sdxjr-1794502786913-b5d0611621c6",
+        "Connection": "close"
+      },
+      "excerpts": {
+        "var hm=": "var hm=[`easy`,`normal`,`hard`,`expert`];function gm(){let{t:e,i18n:t}=kt(),[n,r]=(0,C.useState)(!1),i=cm();(0,C.useEffect)(()=>{fm(25);let e=dm(e=>{fm(Math.min(95,e))}),t=i.readyPromise??Promise.resolve(null);return Promise.allSettled([e,t]).then(()=>{pm()}),mm(()=>{})},[i.readyPromise]),(0,C.useEffect)(()=>{let e=e=>{e.preventDefault()};return document.addEventListener(`copy`,e,!0),document.addEventListener(`cut`,e,!0),document.addEventListener(`selectstart`,e,!0),document.addEventListener(`dragstart`,e,!0),document.addEventListener(`contextmenu`,e,!0),()=>{document.removeEventListener(`copy",
+        "let y=": "let y=[m,a,u];if(y.t=m,y.i18n=a,y.ready=u,u||!u&&!s)return y;throw new Promise(e=>{t.lng?ut(a,t.lng,l,()=>e()):lt(a,l,()=>e())})},At=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),F=o(((e,t)=>{t.exports=At()}))();function jt({wink:e,onClose:t}){let{t:n}=kt(),[r,i]=(0,C.useState)(!0);(0,C.useEffect)(()=>{let t=!0;",
+        "requestMove(e,t,n)": "requestMove(e,t,n){let r=++this.nextRequestId,i=Ht(e,`O`);if(i)return Promise.resolve({requestId:r,roundId:t,move:i,stats:{depth:0,nodes:0,elapsedMs:0,reason:`completed`}});let a={requestId:r,roundId:t,difficulty:n,history:e.getHistory().map(e=>({...e,cell:{...e.cell}}))};return this.engine.search(a)}cancelPending(){this.engine.cancelPending()}destroy(){this.engine.destroy()}},qt=class{state=new Mt;match=new It;winRule=new Ft;ai;currentPlayer=`X`;aiThinking=!1;paused=!1;turnToken=0;listeners=new Set;cachedSnapshot;constructor(e=new Kt){this.ai=e,this.cachedSnapshot=this.makeSnapshot()}makeSnap"
+      }
+    },
+    {
+      "url": "https://10-caro.vercel.app/assets/worker-DdGmBecY.js",
+      "bytes": 5846,
+      "sha256": "8d3a2b4518cbbac39a72abebf7fa744ef517065eb164929611447f7e6c0b288c",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "1079",
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Disposition": "inline; filename=\"worker-DdGmBecY.js\"",
+        "Content-Length": "5846",
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Date": "Thu, 12 Nov 2026 16:59:47 GMT",
+        "Etag": "\"ecfd1bbb52c2b58513e83822ebfcf3f6\"",
+        "Last-Modified": "Thu, 12 Nov 2026 16:41:47 GMT",
+        "Server": "Vercel",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+        "X-Vercel-Cache": "HIT",
+        "X-Vercel-Id": "hkg1::m7cd8-1794502787319-4f03246591fc",
+        "Connection": "close"
+      },
+      "excerpts": {
+        "let y=": "let y={easy:0,normal:1,hard:2,expert:3,master:4},b={easy:1,normal:2,hard:4,expert:6,master:8},x=null;function S(){return x??=v().then(()=>void 0),x}function C(t){let n=new e;for(let e of t)if(!n.play_move(e.cell.col,e.cell.row))throw n.free(),Error(`Unable to hydrate Gomoku engine at move ${e.index}`);return n}self.onmessage=async e=>{let{id:t,request:n}=e.data;if(e.data.type===`search`)try{await S();let e=performance.now(),r=C(n.history),i=r.ai_move(y[n.difficulty]);r.free();let a={requestId:n.requestId,roundId:n.roundId,move:i?{row:i.y,col:i.x}:null,stats:{depth:b[n.difficulty],nodes:0,elaps"
+      }
+    },
+    {
+      "url": "https://10-caro.vercel.app/assets/gomoku_engine_bg-Du90GCPD.wasm",
+      "bytes": 48549,
+      "sha256": "51cc2fa5c2b1b7edf7406e032cf9b5385e5d3419085c3e893b954c41823cf6f0",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "567",
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Disposition": "inline; filename=\"gomoku_engine_bg-Du90GCPD.wasm\"",
+        "Content-Length": "48549",
+        "Content-Type": "application/wasm",
+        "Date": "Thu, 12 Nov 2026 16:59:47 GMT",
+        "Etag": "\"54aa78d82fd4f8dac191c5bd8c25dc00\"",
+        "Last-Modified": "Thu, 12 Nov 2026 16:50:19 GMT",
+        "Server": "Vercel",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+        "X-Vercel-Cache": "HIT",
+        "X-Vercel-Id": "hkg1::m7cd8-1794502787570-3a95d12e05e8",
+        "Connection": "close"
+      }
+    }
+  ],
+  "historical_git_wasm": {
+    "revision": "c1e7447532e4c5ff5590f2c5562dd21cd0acf7b9",
+    "path": "src/game/wasm/engine/gomoku_engine_bg.wasm",
+    "bytes": 48549,
+    "sha256": "51cc2fa5c2b1b7edf7406e032cf9b5385e5d3419085c3e893b954c41823cf6f0"
+  },
+  "conclusion": "Live app explicitly renders four levels; live worker includes Master ID4 but UI excludes it. Live WASM is byte-identical to old tracked WASM. Exact deployment source commit requires deployment metadata."
+}

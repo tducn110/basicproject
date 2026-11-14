@@ -1,0 +1,285 @@
+{
+  "status": "VERIFIED for the checks below; user acceptance not inferred",
+  "final_pdf": "/home/pro/Downloads/vnuk/basicProject/final_review_2026_11_13/English_Report_Caro_Algorithm_Final_2026_11_13.pdf",
+  "sha256": "385ffef03caef0af92c86eb1eaec2df9239df6c3109b010b555084374be74ea9",
+  "physical_pages": 96,
+  "native_revision": "AHj4eMS6gN8UFDrgMWytdAPQSSC3AUi9079S8rJkti1FJCfIZXx3FgvDNw_3-P_iJNqOdyPzBxzyIbfSp_t79otoiUTmMvhD2-xtLCtFQiM",
+  "independent_heading_page_checks": {
+    "total": 83,
+    "pass": 83,
+    "fail": []
+  },
+  "independent_toc_named_destination_checks": {
+    "total": 83,
+    "pass": 83,
+    "fail": []
+  },
+  "independent_caption_body_page_checks": {
+    "total": 28,
+    "pass": 28,
+    "fail": []
+  },
+  "independent_LOF_LOT_pdf_number_checks": {
+    "total": 28,
+    "pass": 28,
+    "fail": [],
+    "entries": [
+      {
+        "title": "Figure 2.1. Row-major board representation",
+        "pdf_list_page": 6,
+        "listed": 6,
+        "expected_body_footer": 6,
+        "match": true
+      },
+      {
+        "title": "Figure 2.2. Search must restore its caller state",
+        "pdf_list_page": 6,
+        "listed": 8,
+        "expected_body_footer": 8,
+        "match": true
+      },
+      {
+        "title": "Figure 2.3. Last-move scan along four axes",
+        "pdf_list_page": 6,
+        "listed": 10,
+        "expected_body_footer": 10,
+        "match": true
+      },
+      {
+        "title": "Figure 2.4. Rule-based tactical priorities",
+        "pdf_list_page": 6,
+        "listed": 13,
+        "expected_body_footer": 13,
+        "match": true
+      },
+      {
+        "title": "Figure 2.5. Contiguous-run weights of the archived Rust evaluator",
+        "pdf_list_page": 6,
+        "listed": 15,
+        "expected_body_footer": 15,
+        "match": true
+      },
+      {
+        "title": "Figure 2.6. Radius and board edges affect candidate membership",
+        "pdf_list_page": 6,
+        "listed": 18,
+        "expected_body_footer": 18,
+        "match": true
+      },
+      {
+        "title": "Figure 2.7. Alternative traversal orders on identical membership",
+        "pdf_list_page": 6,
+        "listed": 21,
+        "expected_body_footer": 21,
+        "match": true
+      },
+      {
+        "title": "Figure 2.8. A two-level Minimax example",
+        "pdf_list_page": 6,
+        "listed": 23,
+        "expected_body_footer": 23,
+        "match": true
+      },
+      {
+        "title": "Figure 2.9. Alpha-Beta cutoff on an unchanged tree",
+        "pdf_list_page": 6,
+        "listed": 26,
+        "expected_body_footer": 26,
+        "match": true
+      },
+      {
+        "title": "Figure 2.10. Iterative deepening and incomplete work",
+        "pdf_list_page": 6,
+        "listed": 28,
+        "expected_body_footer": 28,
+        "match": true
+      },
+      {
+        "title": "Figure 2.11. Incremental XOR and turn-key handling",
+        "pdf_list_page": 6,
+        "listed": 30,
+        "expected_body_footer": 30,
+        "match": true
+      },
+      {
+        "title": "Figure 2.12. Bound semantics in a transposition table",
+        "pdf_list_page": 6,
+        "listed": 33,
+        "expected_body_footer": 33,
+        "match": true
+      },
+      {
+        "title": "Figure 3.1. Responsibilities in the playable application",
+        "pdf_list_page": 6,
+        "listed": 46,
+        "expected_body_footer": 46,
+        "match": true
+      },
+      {
+        "title": "Figure 3.2. Match phases and the separate AI waiting flag",
+        "pdf_list_page": 6,
+        "listed": 48,
+        "expected_body_footer": 48,
+        "match": true
+      },
+      {
+        "title": "Figure 3.3. Inverse camera transform before board bounds checking",
+        "pdf_list_page": 6,
+        "listed": 50,
+        "expected_body_footer": 50,
+        "match": true
+      },
+      {
+        "title": "Figure 4.1. Tactical and Rust routes converge at the guarded commit",
+        "pdf_list_page": 6,
+        "listed": 55,
+        "expected_body_footer": 55,
+        "match": true
+      },
+      {
+        "title": "Figure 4.2. Union of clipped Chebyshev neighborhoods",
+        "pdf_list_page": 6,
+        "listed": 59,
+        "expected_body_footer": 59,
+        "match": true
+      },
+      {
+        "title": "Figure 5.1. Recorded native engine nodes on the center fixture",
+        "pdf_list_page": 6,
+        "listed": 63,
+        "expected_body_footer": 63,
+        "match": true
+      },
+      {
+        "title": "Figure 5.2. Native reference node counts (ranking cost excluded)",
+        "pdf_list_page": 6,
+        "listed": 66,
+        "expected_body_footer": 66,
+        "match": true
+      },
+      {
+        "title": "Figure 5.3. Historical native-versus-Node benchmark on one midgame fixture",
+        "pdf_list_page": 6,
+        "listed": 68,
+        "expected_body_footer": 68,
+        "match": true
+      },
+      {
+        "title": "Table 2.1. Recorded Rust difficulty configurations and frontend request path",
+        "pdf_list_page": 7,
+        "listed": 39,
+        "expected_body_footer": 39,
+        "match": true
+      },
+      {
+        "title": "Table 3.1. Algorithmic requirements AR01–AR09",
+        "pdf_list_page": 7,
+        "listed": 42,
+        "expected_body_footer": 42,
+        "match": true
+      },
+      {
+        "title": "Table 3.2. Verification scenarios and expected outcomes",
+        "pdf_list_page": 7,
+        "listed": 51,
+        "expected_body_footer": 51,
+        "match": true
+      },
+      {
+        "title": "Table 5.1. Native engine search on the center fixture at depth two",
+        "pdf_list_page": 7,
+        "listed": 62,
+        "expected_body_footer": 62,
+        "match": true
+      },
+      {
+        "title": "Table 5.2. Native reference search on the clustered fixture at depth two",
+        "pdf_list_page": 7,
+        "listed": 65,
+        "expected_body_footer": 65,
+        "match": true
+      },
+      {
+        "title": "Table 5.3. Historical native Rust and TypeScript/Node benchmark",
+        "pdf_list_page": 7,
+        "listed": 68,
+        "expected_body_footer": 68,
+        "match": true
+      },
+      {
+        "title": "Table A.1. Repository inventory and roles",
+        "pdf_list_page": 7,
+        "listed": 82,
+        "expected_body_footer": 82,
+        "match": true
+      },
+      {
+        "title": "Table B.1. Evidence summary and verification status",
+        "pdf_list_page": 7,
+        "listed": 84,
+        "expected_body_footer": 84,
+        "match": true
+      }
+    ],
+    "numeric_right_edge_range_points": [
+      520.2999877929688,
+      520.2999877929688
+    ],
+    "visually_inspected_physical_pages": [
+      6,
+      7
+    ],
+    "visual_result": "All28 entries have one-line captions, aligned right-hand numbers and no overlap/clipping."
+  },
+  "body_comparison_to_prior_browser_pdf": {
+    "changed_physical_pages": [
+      50,
+      67,
+      74
+    ],
+    "other_changed_pages": [
+      6,
+      7
+    ],
+    "normalized_body_equals_prior_after_exact_expected_changes": true,
+    "expected_changes": [
+      "Add [33] to the state-contract introduction citation cluster: [2], [4], [33].",
+      "Shorten Figure4.2 caption to Union of clipped Chebyshev neighborhoods.",
+      "Shorten Figure5.2 caption to Native reference node counts (ranking cost excluded)."
+    ],
+    "all_other_body_text_preserved": true
+  },
+  "independent_citation_checks": {
+    "first_use_1_to_53": true,
+    "bibliography_entries_1_to_53": true
+  },
+  "final_text_residue_scan": {
+    "chatbot_TODO_unverified": 0,
+    "raw_latex": 0,
+    "carets": 0
+  },
+  "preserved_inventory_from_same_body": {
+    "figures": 20,
+    "tables": 8,
+    "body_images": 20,
+    "cover_images": 1,
+    "native_superscript_ranges": 12
+  },
+  "remaining_findings": [],
+  "limitations": [
+    "Independent text comparison strips layout whitespace; source facts were preserved and were not re-audited against the repository in this final pass.",
+    "All96pages of the previous browser export received contact-sheet inspection; this final pass visually inspected the changed List of Figures/Tables pages and verified only the stated three body text edits.",
+    "No native document or PDF mutation performed."
+  ],
+  "final_cosmetic_verification": {
+    "previous_sha256": "bcc7e612b497a425aa11ccec6a35484ea28440afb994e17f864fab3150a1616c",
+    "backup_pdf": "/home/pro/Downloads/vnuk/basicProject/final_review_2026_11_13/before_contents_title_final.pdf",
+    "new_sha256": "385ffef03caef0af92c86eb1eaec2df9239df6c3109b010b555084374be74ea9",
+    "independent_page_count": 96,
+    "independent_text_delta_pages": [],
+    "independent_pixel_delta_pages_half_scale": [
+      3
+    ],
+    "description": "Only physical page3 renders differently; extracted text is identical on all96pages. CONTENTS title styling changed, with no heading/caption/page-number change."
+  }
+}

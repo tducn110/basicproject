@@ -1,0 +1,129 @@
+{
+  "scope": "Read-only final pagination/TOC and language/LaTeX QA; no native document mutation.",
+  "source_files": {
+    "before.pdf": "bc7c662ed072754ec56632894c5d4b1428160763c92d1fa2bdefce76f91ba905",
+    "layout1.pdf": "c3fe7a0faaff35d8f6c58205c5b2074e6b3e1d9fab2f8b83461865082edfb164",
+    "layout2.pdf": "c02f82ed6ec7fcf70e6ad7de0e31573d007866ee385022d2be60b16d0da38ba5",
+    "verify_native_toc.py": "b3c3b3464af7c8fde1db2fc98cf056072ee8d9a9507a7dea83b4576af75f23f2",
+    "layout2_heading_page_map.json": "69b94ff61cd207d84664bc46a617980fec286a881c6381119e33bbe800ecb9d3",
+    "native_toc_heads.json": "5046cde008ca4264519f4953359043ca3c7c30f6fa4e3e17db1afcc974ec9ec0",
+    "current_items.json": "81621b83897af262aa0bc65f5f3031cb63f21482f6745de164eec8fd373cddff"
+  },
+  "findings": [
+    {
+      "id": "QA-TOC-01",
+      "severity": "material_output_mismatch",
+      "status": "verified",
+      "description": "layout2.pdf native TOC displays page numbers that disagree with the corresponding PDF body footers for 68 of 83 headings. All 83 native TOC links resolve to the actual heading pages, so the discrepancy is in displayed page labels, not missing targets or a heading-search artifact.",
+      "examples": [
+        {
+          "title": "2.4 Baselines",
+          "toc_label": 10,
+          "physical_pdf_page": 19,
+          "body_footer": 11
+        },
+        {
+          "title": "Chapter 3",
+          "toc_label": 42,
+          "physical_pdf_page": 52,
+          "body_footer": 44
+        },
+        {
+          "title": "Chapter 4",
+          "toc_label": 53,
+          "physical_pdf_page": 63,
+          "body_footer": 55
+        },
+        {
+          "title": "Appendix A",
+          "toc_label": 82,
+          "physical_pdf_page": 96,
+          "body_footer": 88
+        },
+        {
+          "title": "Appendix C",
+          "toc_label": 87,
+          "physical_pdf_page": 101,
+          "body_footer": 93
+        }
+      ],
+      "verification": "Independently reproduced 83 heading matches and 68 numeric discrepancies; inspected PDF internal named-destination links for every heading. verify_native_toc.py correctly excludes TOC pages and reads body footers for this snapshot."
+    }
+  ],
+  "pagination_evidence": {
+    "before": {
+      "total_physical_pages": 150,
+      "english_pages": 100,
+      "review_start_physical": 101
+    },
+    "layout1": {
+      "total_physical_pages": 152,
+      "english_pages": 102,
+      "review_start_physical": 103
+    },
+    "layout2": {
+      "total_physical_pages": 152,
+      "english_pages": 102,
+      "review_start_physical": 103,
+      "body_footer_sequence": "1–94 on physical pages 9–102; all consecutive, no gaps or resets"
+    },
+    "layout1_vs_layout2": "Extracted page text differs only at physical pages 3, 4, 5 (TOC) and 98 (Appendix B title). All other pages are text-identical, with unchanged English page count and heading pages.",
+    "before_vs_latest_heading_examples": [
+      {
+        "heading": "Chapter 3",
+        "before_physical": 52,
+        "latest_physical": 52
+      },
+      {
+        "heading": "Chapter 4",
+        "before_physical": 62,
+        "latest_physical": 63
+      },
+      {
+        "heading": "Chapter 5",
+        "before_physical": 69,
+        "latest_physical": 71
+      },
+      {
+        "heading": "References",
+        "before_physical": 83,
+        "latest_physical": 85
+      },
+      {
+        "heading": "Appendix C",
+        "before_physical": 99,
+        "latest_physical": 101
+      }
+    ],
+    "stable_early_example": "Section 2.4 is on body page 11/physical 19 in before, layout1 and layout2. The original manual TOC says 11; the current native TOC says 10.",
+    "conclusion": "The exported PDF physically contains the body flow and page footers described above. Replacing/refreshing the TOC and shortening Appendix B did not reflow the layout1/layout2 body. The client-reported 96-page English layout versus 102-page server export is not explained by a six-page numbering restart or missing named destinations. The exact cause of client/server pagination divergence is not established by these artifacts."
+  },
+  "latest_language_scan": {
+    "snapshot": "current_items.json",
+    "items": 1062,
+    "native_toc_items": 83,
+    "non_toc_items": 979,
+    "snapshot_limit": "Predates Appendix B title shortening only; layout2.pdf contains the shortened heading.",
+    "findings": [],
+    "counts": {
+      "TODO_TBD_FIXME_GPT_ChatGPT_unverified_placeholder_instruction_residue": 0,
+      "raw_LaTeX_commands_or_delimiters": 0,
+      "carets": 0,
+      "old_F01_F09_requirement_ids": 0,
+      "old_A01_A09_requirement_ids_in_English_report": 0
+    },
+    "legitimate_hits": "pending/partial are runtime states or explicitly historical gates; unknown occurs within wasm32-unknown-unknown; occupied placeholder is an implementation explanation; review/draft mentions describe provenance and repository history."
+  },
+  "visual_samples_inspected": [
+    19,
+    35,
+    50,
+    53,
+    54,
+    85,
+    86,
+    95
+  ],
+  "visual_sample_result": "No clipped or overlapping content observed in these sampled pages. Section 2.4, algorithm requirements, worked example, compound-exponent typography and reference wrapping were visually inspected. This is a sample, not a 102-page visual certification.",
+  "edits_performed": "Only local QA artifacts and rendered inspection PNGs created; native Doc unchanged."
+}

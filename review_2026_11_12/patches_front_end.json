@@ -1,0 +1,1259 @@
+[
+  {
+    "start": 298,
+    "old": "This project studies the design and implementation of a Caro web application together with a set of adversarial-search experiments and teaching materials. The report specifies a 15 × 15 Freestyle game, the board and move-history contracts, and the algorithms used to select and evaluate moves. It explains random and rule-based baselines, contiguous-run heuristics, tactical checks, Chebyshev candidate generation, soft candidate caps, Minimax and Alpha-Beta. It also treats iterative deepening, Zobrist hashing, transposition-table bounds, quiescence and incremental pattern counting in their corresponding reference or legacy implementations. Each algorithm is presented with its inputs, state, decision procedure, invariants, complexity, worked examples and limitations.",
+    "new": "This project develops a web application for Caro on a 15 × 15 board under Freestyle rules and uses the game to study adversarial search. The application combines a React interface, a PixiJS board and a Rust engine compiled to WebAssembly, with search executed in a Web Worker. The report explains board representation, legal moves, win detection, heuristic evaluation, candidate selection, Minimax and Alpha-Beta pruning. It also examines hashing, transposition tables, quiescence and iterative deepening in separate reference and legacy implementations. The recorded native engine experiment contains 816 search measurements, including 408 paired Minimax and Alpha-Beta comparisons and 820 state-restoration checks. Separate records examine agreement between the JavaScript adapter and the WebAssembly binary, browser Worker responses and selected interface interactions. The reference experiments show that fewer visited nodes can coincide with longer execution time when move ranking adds work. They also identify immediate tactics lost by a hard candidate cap and an incorrect score caused by reusing cached entries after the root player changes. These results connect search algorithms to an interactive application and show why candidate policy, state restoration and cache context must be specified alongside search depth.",
+    "reason": "Condense three inventory-like paragraphs into a coherent self-contained abstract with concrete results and no inflated claim.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/worker.ts"
+    ]
+  },
+  {
+    "start": 1072,
+    "old": "The application combines React interface components, a Pixi board, an authoritative controller and a Worker-based Rust/WebAssembly route. Request identity, round identity, cancellation, coordinate conversion and telemetry validation preserve the connection between a proposed AI move and the round in which it may be committed. The separate presentation website provides interactive explanations and Python/Pyodide examples. Its demonstrations are analysed individually rather than treated as measurements of the game engine.",
+    "new": "",
+    "reason": "Merge the abstract into one paragraph; remove duplicated implementation inventory.",
+    "evidence": [
+      "Abstract consolidated at paragraph 298"
+    ]
+  },
+  {
+    "start": 1598,
+    "old": "Evaluation distinguishes published native experiments, binary/adapter parity, actual browser Worker observations, selected UI interactions and historical cross-language benchmarks. GitHub references identify immutable source and evidence snapshots. The analysis includes negative findings such as tactical moves discarded by a reference candidate cap, increased timing despite fewer searched nodes, and unsafe table reuse across a changed context. The resulting report connects algorithmic principles to concrete implementation while stating the boundaries of finite tests, source availability and reproducibility.",
+    "new": "",
+    "reason": "Merge the abstract into one paragraph; retain concrete findings in the consolidated abstract.",
+    "evidence": [
+      "Abstract consolidated at paragraph 298"
+    ]
+  },
+  {
+    "start": 2213,
+    "old": "Keywords: Caro; Gomoku; Minimax; Alpha-Beta; candidate generation; Rust; WebAssembly; game-state consistency.",
+    "new": "Keywords: Caro; adversarial search; Alpha-Beta pruning; selective search; WebAssembly.",
+    "reason": "Use five focused index terms rather than an eight-item component inventory.",
+    "evidence": [
+      "https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-the-text-of-your-article/structure-your-article/"
+    ]
+  },
+  {
+    "start": 7042,
+    "old": "PvP — Two people playing on the same application.",
+    "new": "PvP — Player versus player; two people share one application.",
+    "reason": "Define the standard expansion before the project-specific meaning.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/behaviors/match/MatchController.ts"
+    ]
+  },
+  {
+    "start": 7092,
+    "old": "PvE — A person playing against the computer in this report.",
+    "new": "PvE — Player versus environment; in this project, one person plays against the computer.",
+    "reason": "Define the abbreviation and explain its local use.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/behaviors/match/MatchController.ts"
+    ]
+  },
+  {
+    "start": 7417,
+    "old": "Evidence — Published source, a recorded experiment and an author observation are identified separately.",
+    "new": "Evidence — Source code explains implementation mechanisms; experiment records provide results for the stated inputs and environment.",
+    "reason": "Replace audit instruction with a clear reading convention.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/README.md"
+    ]
+  },
+  {
+    "start": 8183,
+    "old": "The project develops both a playable web application and material for explaining its algorithms. In the application, React supplies the surrounding interface, Pixi renders the board and a controller coordinates accepted moves, match state and AI requests. The AI path combines a TypeScript tactical check with a Worker-based WebAssembly engine. The repository also preserves a TypeScript search implementation, native Rust benchmark programs, baseline Rust engine code, weekly research reports and a separate presentation website. These modules form a cohesive architecture spanning interactive gameplay, WebAssembly search execution, and reproducible algorithmic benchmarks. [1] [2] [3]",
+    "new": "The project includes a playable web application and a separate website for explaining its algorithms. React provides the interface, PixiJS renders the board, and GameController coordinates accepted moves, match state and AI requests. Move selection combines a TypeScript tactical check with a Rust/WebAssembly search executed in a Worker. The repository also contains an earlier TypeScript search module, native benchmark programs and weekly project reports. The application, benchmarks and teaching examples share the game domain but execute through different entry points. [1] [2] [3] [22] [24] [26] [33]",
+    "reason": "Remove the unsupported claim that independent legacy, native and browser modules form one cohesive executable architecture; standardize PixiJS terminology.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/ai/AIController.ts"
+    ]
+  },
+  {
+    "start": 8871,
+    "old": "The practical problem is to return a legal and useful move while maintaining coherent application state. A search that produces a high score is insufficient if it changes the caller's board, uses an incompatible win rule, blocks interaction unnecessarily or commits a result after the user has reset the round. The report therefore considers both the mathematical search problem and the application boundary at which a result becomes a move. It also distinguishes an observed counter from a configured limit and a native experiment from a browser measurement.",
+    "new": "The practical problem is to select a legal move while preserving the state of an interactive match. Search must leave its input board unchanged, follow the selected win rule and return a result that belongs to the active round. Reset, Undo and asynchronous computation make these requirements part of the algorithm integration. The report therefore studies move quality together with the controller checks that determine whether an AI response can be committed.",
+    "reason": "Replace repeated cautionary meta-commentary with the concrete system problem.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/GomokuWasmEngine.ts"
+    ]
+  },
+  {
+    "start": 9469,
+    "old": "The first objective is to specify the actual game rules and state transitions. A 15 × 15 board and a five-stone target do not uniquely define a Caro variant. The application's Freestyle rule accepts a contiguous line of at least five stones, including longer lines. Its implementation is explained from the last-move scan, with the assumptions under which that local test is valid. The second objective is to specify the AI algorithms precisely: their inputs, outputs, recurrence or decision policy, candidate membership, state mutation and restoration, stopping conditions and computational cost. [4]",
+    "new": "The first objective is to define the game rules and state transitions. The application uses a 15 × 15 board and the Freestyle win condition: a contiguous line of at least five stones wins, including longer lines. The report explains the last-move scan and the assumptions that make it sufficient. The second objective is to describe move selection through its inputs, evaluation policy, candidate set, recursive decisions, state restoration and computational cost. [4]",
+    "reason": "Make objectives direct and remove redundant framing without changing the game contract.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/WinRules.ts"
+    ]
+  },
+  {
+    "start": 10071,
+    "old": "The third objective is to connect those algorithms to the implementation. The report identifies which component owns the board, who may commit a move, how history is replayed into the Rust/WASM object and how stale responses are rejected. The fourth objective is to evaluate the published experiment records without turning limited measurements into universal claims. In particular, it asks whether Minimax and Alpha-Beta agree on the same selected tree, whether ordering reduces total work or only visited nodes, and whether a cap can discard an immediate tactical completion.",
+    "new": "The third objective is to explain how the algorithms connect to the application: board ownership, guarded move commitment, history replay into WebAssembly and rejection of stale responses. The fourth objective is to evaluate search under controlled conditions. The experiments compare Minimax with Alpha-Beta on the same candidate tree, separate move-ranking work from recursive search visits, and examine whether selective candidate policies retain immediate winning and blocking moves.",
+    "reason": "State the objective positively and replace evidence-policing language with actual comparison methods.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json"
+    ]
+  },
+  {
+    "start": 10649,
+    "old": "These objectives lead to four research questions. RQ1 asks how legal board state and the Freestyle win condition can be represented and checked deterministically. RQ2 asks how evaluation, candidate generation and adversarial recursion produce a move, and which assumptions preserve correctness. RQ3 asks how pruning, ordering and caching affect the measured search, including counterexamples and context hazards. RQ4 asks how the native and browser components preserve a consistent game when requests are asynchronous. The evaluation chapter answers each question using the corresponding source implementation, mathematical invariants, and empirical benchmark records.",
+    "new": "Four research questions guide the report. RQ1 concerns deterministic board updates and Freestyle win detection. RQ2 concerns how heuristic evaluation, candidate selection and adversarial recursion produce a move. RQ3 examines the effects of pruning, ordering and caching on search results and computational work. RQ4 concerns state consistency when native search components are used through an asynchronous browser interface. Chapter 5 relates each question to the corresponding implementation and experimental records.",
+    "reason": "Use parallel research-question language and avoid implying formal or universal answers from finite experiments.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/README.md",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md"
+    ]
+  },
+  {
+    "start": 11358,
+    "old": "The public project reference used throughout this English report is the immutable tducn110/basicproject revision 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc. The application is under CaroGame; the report also covers present, the weekly folders, benchmark and research. The active game implementation under CaroGame is paired with the Rust board and engine modules in research/current_2026_10_23/baseline_engine/src/board.rs and the WebAssembly package in CaroGame/src/game/wasm/engine. [1] [5]",
+    "new": "The published source reference is tducn110/basicproject at revision 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc. CaroGame contains the application source and its WebAssembly package; present contains the teaching website. The weekly folders, benchmark and research contain documentation and experimental records. The Rust baseline in research/current_2026_10_23/baseline_engine is an earlier implementation. The modified engine used for the 23 October experiments is identified by source hashes and selected excerpts in the dated research directory. [1] [5] [6] [44]",
+    "reason": "Correct the baseline/current-engine identity: archived board.rs is not the source of the active modified binary.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/README.md",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md"
+    ]
+  },
+  {
+    "start": 11849,
+    "old": "The repository integrates a TypeScript/React/Pixi frontend with a Rust engine compiled to WebAssembly, alongside native Rust benchmark harnesses and a legacy TypeScript search module. To maintain architectural clarity across these modules, this report explicitly distinguishes the active Rust/WASM application engine, the baseline Rust engine, the legacy TypeScript bot, and the native Rust reference benchmark library. [6] [7] [8]",
+    "new": "Four implementations are distinguished throughout the analysis: the Rust/WebAssembly engine used by the application, the archived Rust baseline, the legacy TypeScript bot, and the native Rust reference library used by the separate research harness. An algorithm or measurement is attributed to the implementation that supplies it. [6] [7] [8]",
+    "reason": "Remove circular architecture-clarity wording and define a consistent naming convention.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/SOURCE_EXCERPTS.md",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md"
+    ]
+  },
+  {
+    "start": 12281,
+    "old": "The work excludes an online multiplayer server, a training pipeline, a learned neural policy and a demonstrated tournament ranking. These are not required to explain the implemented algorithms. Browser and host behaviour are discussed only to the extent supported by source and recorded observations. A rule recommendation, a future experiment and an implemented feature are labelled separately. This scope allows the report to be detailed without claiming capabilities absent from the project.",
+    "new": "The implemented scope is local two-player play, play against the computer, and interactive algorithm demonstrations. Online multiplayer, learned policies and model training are outside the project. Search strength and user experience are evaluated through the experiments and observations described in Chapter 5; broader evaluation and further development are discussed in Chapter 6.",
+    "reason": "Keep scope readable and move repeated absence/verification narration to the final limitations.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/App.tsx",
+      "/home/pro/Downloads/basicproject/present/src/App.tsx"
+    ]
+  },
+  {
+    "start": 12808,
+    "old": "The analysis follows the path from an input to its visible consequence: pointer event, cell coordinate, legal move check, board mutation, win or draw evaluation, next-turn decision, AI request, validated response, committed move and updated display. Source inspection establishes the mechanism. Published test and measurement records establish what was exercised on their particular corpus and environment. Primary literature explains general search concepts; it is not used as proof that the project implements a feature. All project citations in the reference list resolve to GitHub resources rather than machine-specific file paths.",
+    "new": "The method combines source inspection with analysis of recorded experiments. The implementation trace follows pointer input, coordinate conversion, move validation, board updates, terminal-state checks, AI dispatch, response validation and display updates. Search comparisons keep the rule, evaluation weights, depth and candidate policy fixed where equivalence is being tested. Primary literature supplies the theoretical basis for search and hashing, while the project references identify the code and datasets used in the analysis.",
+    "reason": "Replace audit instructions and source-policing rhetoric with an academic methods paragraph.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/README.md",
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md"
+    ]
+  },
+  {
+    "start": 13444,
+    "old": "Chapter 2 specifies the data structures and algorithms. Chapter 3 gives the requirements, ownership boundaries and state/data flows. Chapter 4 explains the implementation of the playable application and presentation project. Chapter 5 evaluates the published native, WASM, Worker, UI and benchmark records with explicit limits. Chapter 6 states the achieved outcomes and development directions. The appendices inventory the repository and explain how to inspect or reproduce the work without silently substituting a different engine.",
+    "new": "Chapter 2 presents the data structures and algorithms. Chapter 3 explains the requirements, component responsibilities and state transitions. Chapter 4 describes the application and teaching website. Chapter 5 analyzes the native experiments, WebAssembly adapter checks, browser observations and benchmark datasets. Chapter 6 summarizes the contribution, limitations and future work. The appendices provide the repository inventory, a summary of experimental records and instructions for inspecting and building the published snapshot.",
+    "reason": "Remove repeated disclaimer language and accurately describe the corrected appendices.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/README.md"
+    ]
+  },
+  {
+    "start": 137604,
+    "old": "The project combines a playable Caro application with an educational sequence on representation, rules, heuristic evaluation and adversarial search. The application repository provides the user interface and game-side code; the weekly material documents the development sequence from initial proposal to search and advanced techniques. The presentation project supplies visual and executable teaching examples. Separate research artifacts provide controlled search data and record experimental boundaries. These products have different purposes and should not be treated as one executable engine. [1] [52]",
+    "new": "The project implements a Caro web application and a teaching website for board representation, Freestyle rules, heuristic evaluation and adversarial search. The application connects a React interface and PixiJS board to a Rust/WebAssembly search Worker. The teaching website provides visual explanations and executable Python examples. Weekly reports and native research artifacts document the algorithmic development and its experimental evaluation. [1] [52]",
+    "reason": "Make the conclusion describe delivered work rather than instruct the reader how not to interpret it.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/App.tsx",
+      "/home/pro/Downloads/basicproject/present/src/App.tsx"
+    ]
+  },
+  {
+    "start": 138210,
+    "old": "The technical contribution is the mapping from game decisions to data structures and algorithms. A board state supports legal placement, directional line checks, history and rollback. A heuristic gives a bounded estimate for nonterminal positions, while terminal outcomes take precedence. Minimax specifies alternating decisions; Alpha-Beta can discard branches that cannot alter the selected-tree value. Candidate generation restricts the search space, and ordering changes traversal order. The reference experiments further evaluate incremental Zobrist hashing, transposition-table bounds, and iterative-deepening budgets on controlled native benchmarks. The application and reference implementations must each be described through their own source and evidence. [44] [8]",
+    "new": "The main contribution is an implementation-level account of how game decisions depend on representation and search policy. Board updates, history and rollback support recursive exploration. Terminal utility takes precedence over the static heuristic. Minimax defines alternating decisions, and Alpha-Beta pruning preserves the value of the same selected search tree while omitting branches that cannot change it. Candidate filtering changes the tree itself; ordering changes the sequence in which its moves are examined. The reference experiments extend this analysis to Zobrist hashing, transposition-table bounds and interrupted iterative search. [44] [8]",
+    "reason": "Remove repetitive audit instructions and use precise algorithm terminology.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json"
+    ]
+  },
+  {
+    "start": 138984,
+    "old": "The 23 October native record reports agreement and restoration on its finite corpus, and the separate Node and browser artifacts exercise selected integration paths. The reference data shows a substantial node reduction in one paired example and also shows that ordering can consume enough additional evaluation work to remove the elapsed-time benefit. The cap-loss and cross-root cache probes expose concrete correctness risks. These findings are more useful than a single headline speedup because they identify both the assumptions under which the method works and the conditions that require more care.",
+    "new": "The recorded native engine experiment reports 408 Minimax/Alpha-Beta comparisons with matching values and 820 successful restoration checks. Separate adapter and browser records exercise the connection between search and the application. In the reference experiments, move ordering reduced visited nodes on some positions, but its additional evaluation work could outweigh the saving in elapsed time. A hard candidate cap discarded immediate wins in one fixture, and cache reuse after a root-player change produced an incorrect score in another. These results show that search depth and node count alone are insufficient to assess correctness or efficiency. [43] [45] [46] [48] [16] [21]",
+    "reason": "Replace evaluative rhetoric with the concrete results and their implication.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json"
+    ]
+  },
+  {
+    "start": 139606,
+    "old": "First, while the engine's soft tactical cap preserves all immediate 1-ply winning and blocking moves, tightening the non-tactical candidate cap at higher depths (from 15 at Hard to 8 at Master) trades broad positional exploration for deeper 5-ply tactical calculation.",
+    "new": "The active search is selective. Its soft tactical cap retains immediate winning and blocking completions, but deeper positional moves remain subject to the candidate limit. The configured limit falls from 15 at Hard to 8 at Master as depth rises from two to five plies. The static evaluator scores contiguous runs; gapped formations and intersecting threats depend on tactical assessment and deeper search. Persistent transposition tables and iterative-deepening budgets are studied in separate implementations rather than used by the active Rust search. [6] [18] [8]",
+    "reason": "Combine the actual algorithm limitations without calling fixed-depth search a complete anytime implementation.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/ai.rs::Difficulty",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/candidates.rs::select_candidates",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/eval.rs",
+      "/home/pro/Downloads/vnuk/basicProject/gomoku-main/engine/src/search.rs"
+    ]
+  },
+  {
+    "start": 139875,
+    "old": "Second, the active WebAssembly engine uses stateless fixed-depth Alpha-Beta search per turn without a persistent cross-turn transposition table or wall-clock iterative deepening, and empirical evaluation is currently scoped to controlled benchmark fixtures and automated bot-versus-bot matches rather than large-scale human tournament play. [41] [44] [8] [40]",
+    "new": "The implementation review also identifies boundary cases for further correction. GameController starts a round before validating the first direct move request, and the core coordinate predicate checks bounds without requiring integer indices. The normal pointer path supplies integer cells, while Worker responses have a separate integer check. Drag detection compares consecutive pointer positions, which can miss a slow drag made of small steps. In the teaching website, a failed or missing Pyodide loader can leave initialization state or waiting callers unresolved. [2] [29] [30] [37]",
+    "reason": "Keep confirmed source defects in the final limitations; distinguish direct API exposure from normal UI behavior.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts::playCell",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/BoardBounds.ts::isBoardCell",
+      "/home/pro/Downloads/basicproject/CaroGame/src/board/input/BoardInputController.ts::pointerMove",
+      "/home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts::getPyodide"
+    ]
+  },
+  {
+    "start": 140235,
+    "old": "Third, the static heuristic evaluator scans maximal contiguous runs and therefore relies on multi-ply search recursion and the tactical candidate assessor to recognize gapped formations (such as XX_XX) or multi-axis forks, motivating the future enhancements outlined below.",
+    "new": "The measurements cover a finite corpus and specific native or browser environments. The published snapshot includes the application and its binary, but the complete modified Rust engine and the caro-core-reference dependency are absent from that Git tree, limiting reproduction from a fresh clone. Historical timing and bot-match summaries also have narrower provenance than the controlled research records. Physical-device interaction, live host integration, human usability and calibrated playing strength remain subjects for further evaluation. [1] [8] [40] [41] [44] [51]",
+    "reason": "Collect true reproducibility and validation limitations in the concluding chapter.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/run_checks.py",
+      "/home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/provenance.json"
+    ]
+  },
+  {
+    "start": 140532,
+    "old": "1. Publish a reproducible source bundle. Include the exact current Rust engine, reference library, manifests, lockfiles, harnesses, recorded hashes and build instructions under immutable revisions. Record any local modifications instead of presenting an earlier baseline as the measured source. Provide a script that compares binary hashes and states the platform and toolchain.",
+    "new": "Reproducibility is the first development priority. A complete release should include the modified engine and reference library together with their manifests, lockfiles, experiment harnesses and build commands. Each experiment should identify the source revision, toolchain, platform and binary hash. The earlier baseline should remain available for comparison under its own identity.",
+    "reason": "Replace numbered imperative checklist with academic future-work prose.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/provenance.json"
+    ]
+  },
+  {
+    "start": 140911,
+    "old": "2. Expand rule and tactical testing. Add board-edge and long-line cases, occupied and out-of-range inputs, full-board draws, simultaneous threats, undo after terminal states and independently checked randomized move sequences. Compare TypeScript and WebAssembly outcomes under an explicit terminal-turn convention. Each new rule variant needs its own contract and oracle.",
+    "new": "Input validation and lifecycle handling should be strengthened at their owning boundaries. The core should require integer coordinates and validate a move before advancing the match phase. Gesture classification should use displacement from the initial press, and the Pyodide loader should settle all waiting requests and permit retry after failure. Regression cases should include invalid first moves, fractional inputs, slow drags and failed runtime initialization.",
+    "reason": "Prioritize source-backed defects and concrete discriminating regressions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/src/app/GameController.ts::playCell",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/core/BoardBounds.ts::isBoardCell",
+      "/home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts::getPyodide"
+    ]
+  },
+  {
+    "start": 141283,
+    "old": "3. Measure candidates and order policies separately. Use a fixed corpus of reachable positions, include known immediate wins and blocks, compare all-legal and selective search, and report missed tactics, decision quality, ranking evaluations, nodes and elapsed time. Separate soft-cap tactical retention from a hard cap; record ties and ordering cost.",
+    "new": "Further search evaluation should separate candidate selection from move ordering. A fixed corpus of reachable positions can compare all-legal search with radius and cap policies, including known wins, blocks and intersecting threats. Useful outputs include missed tactics, chosen moves, root values, ranking evaluations, recursive visits and elapsed time. Multiple seeds and explicit tie handling would make the comparison less dependent on one fixture.",
+    "reason": "Express a concrete evaluation design without implying it has already been executed.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/README.md",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cap_loss.json"
+    ]
+  },
+  {
+    "start": 141635,
+    "old": "4. Harden and test table reuse. Specify the key namespace for rules, evaluation weights, root perspective and mate distance; validate exact/lower/upper entry semantics at varying depths and windows. Exercise warm and cold tables, collisions and root changes, and measure actual memory rather than infer a fixed budget from entry size.",
+    "new": "Persistent caching requires a defined compatibility context. Future work should include rules, evaluation weights, root perspective and mate-distance treatment in the cache design, then test exact, lower and upper bounds across depths and search windows. Warm-table and cold-table comparisons should include root changes and collisions. Memory measurements should include map capacity and allocation overhead as well as entry size.",
+    "reason": "Retain the measured cache defect and precise future design implications in natural academic prose.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/cache_scope_probe.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/tt_semantics.json"
+    ]
+  },
+  {
+    "start": 141970,
+    "old": "5. Improve interruption and telemetry. Define whether counters include aborted iterations and whether a depth means requested or completed depth. Test cancellation, reset, stale replies, Worker failure and restoration, with an explicit last-completed-result policy. Propagate real measured statistics consistently through the UI.",
+    "new": "An anytime search could combine iterative deepening with cancellation and an explicit last-completed-result policy. Its telemetry should distinguish requested depth from completed depth and count work spent in aborted iterations. Tests should cover Reset, Undo, stale replies and Worker failure while confirming that interrupted search restores the input position.",
+    "reason": "Remove checklist command voice; connect the proposed feature to the observed counter limitation.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/budget_abort.json",
+      "/home/pro/Downloads/basicproject/CaroGame/src/game/wasm/GomokuWasmEngine.ts"
+    ]
+  },
+  {
+    "start": 142300,
+    "old": "6. Evaluate user-facing behaviour. Run repeatable browser tests with real input, more viewport sizes and target devices; test the actual host integration separately. Measure end-to-end latency and frame timing in the intended environment, with enough repetitions and disclosed methodology. A human usability or difficulty study requires participants, protocol and consent before results can be claimed.",
+    "new": "Application evaluation should extend to physical target devices and the intended host environment. Repeated measurements of response latency and frame timing would complement the present automated checks. A participant study could examine control usability and perceived difficulty, while a multi-seed tournament against stated opponents could assess playing strength. Both require a documented protocol before their results can support conclusions.",
+    "reason": "Move unexecuted human/device/strength work to the future section without invented outcomes.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_ui.json",
+      "/home/pro/Downloads/basicproject/benchmark/results/week4_bot_battle.json"
+    ]
+  },
+  {
+    "start": 142703,
+    "old": "7. Synchronize the educational presentation. Mark illustrative code and figures, link measured charts to their source data and update outdated labels. Ensure that a four-direction description corresponds to code that actually scans four directions, or labels a horizontal example accurately. Keep narrative claims distinct from executed results.",
+    "new": "The teaching website should remain synchronized with the implementations it explains. Illustrative programs need explicit scope, especially where a horizontal example accompanies a four-direction rule description. Charts should link to the data and generation procedure that produced them. This would let readers move from an explanation to the corresponding source or experiment without confusing a demonstration with a measurement.",
+    "reason": "Remove repetitive meta-instructions while retaining specific educational fidelity work.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts",
+      "/home/pro/Downloads/basicproject/present/src/components/PythonVisualizer.tsx"
+    ]
+  },
+  {
+    "start": 143060,
+    "old": "[1] tducn110, “Repository snapshot,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc. [Accessed: Oct. 27, 2026].",
+    "new": "[1] tducn110, “Repository snapshot,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 143319,
+    "old": "[2] tducn110, “CaroGame/src/app/GameController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/app/GameController.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[2] tducn110, “CaroGame/src/app/GameController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/app/GameController.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/app/GameController.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 143628,
+    "old": "[3] tducn110, “CaroGame/src/game/ai/AIController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/AIController.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[3] tducn110, “CaroGame/src/game/ai/AIController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/AIController.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/AIController.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 143941,
+    "old": "[4] tducn110, “CaroGame/src/game/core/WinRules.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/WinRules.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[4] tducn110, “CaroGame/src/game/core/WinRules.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/WinRules.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/WinRules.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 144250,
+    "old": "[5] tducn110, “research/current_2026_10_23/baseline_engine/src/board.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/board.rs. [Accessed: Oct. 27, 2026].",
+    "new": "[5] tducn110, “research/current_2026_10_23/baseline_engine/src/board.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/board.rs",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/board.rs",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 144603,
+    "old": "[6] tducn110, “research/current_2026_10_23/SOURCE_EXCERPTS.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/SOURCE_EXCERPTS.md. [Accessed: Oct. 27, 2026].",
+    "new": "[6] tducn110, “research/current_2026_10_23/SOURCE_EXCERPTS.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/SOURCE_EXCERPTS.md",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/SOURCE_EXCERPTS.md",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 144936,
+    "old": "[7] tducn110, “research/current_2026_10_23/baseline_engine/src/ai.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/ai.rs. [Accessed: Oct. 27, 2026].",
+    "new": "[7] tducn110, “research/current_2026_10_23/baseline_engine/src/ai.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/ai.rs",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/ai.rs",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 145283,
+    "old": "[8] tducn110, “research/week_05_09/README.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/README.md. [Accessed: Oct. 27, 2026].",
+    "new": "[8] tducn110, “research/week_05_09/README.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/README.md",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/README.md",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 145582,
+    "old": "[9] tducn110, “CaroGame/src/game/wasm/contracts.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/contracts.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[9] tducn110, “CaroGame/src/game/wasm/contracts.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/contracts.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/contracts.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 145893,
+    "old": "[10] tducn110, “CaroGame/src/game/ai/TacticalMoveResolver.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/TacticalMoveResolver.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[10] tducn110, “CaroGame/src/game/ai/TacticalMoveResolver.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/TacticalMoveResolver.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/TacticalMoveResolver.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 146223,
+    "old": "[11] tducn110, “CaroGame/src/game/bot/search.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/search.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[11] tducn110, “CaroGame/src/game/bot/search.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/search.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/search.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 146527,
+    "old": "[12] C. E. Shannon, “Programming a computer for playing chess,” The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, ser. 7, vol. 41, no. 314, pp. 256–275, Mar. 1950, doi: 10.1080/14786445008521796. [Online]. Available: https://doi.org/10.1080/14786445008521796. [Accessed: Oct. 27, 2026].",
+    "new": "[12] C. E. Shannon, “Programming a computer for playing chess,” The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, ser. 7, vol. 41, no. 314, pp. 256–275, Mar. 1950, doi: 10.1080/14786445008521796. [Online]. Available: https://doi.org/10.1080/14786445008521796",
+    "reason": "Keep verified publisher metadata and DOI; remove redundant access-date bracket and final punctuation after the online DOI URL.",
+    "evidence": [
+      "https://doi.org/10.1080/14786445008521796",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 146845,
+    "old": "[13] The Rust Project Developers, “Type layout,” The Rust Reference. [Online]. Available: https://doc.rust-lang.org/reference/type-layout.html. [Accessed: Oct. 27, 2026].",
+    "new": "[13] The Rust Project Developers, “Type layout,” The Rust Reference. Accessed: Nov. 12, 2026. [Online]. Available: https://doc.rust-lang.org/reference/type-layout.html",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://doc.rust-lang.org/reference/type-layout.html",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 147016,
+    "old": "[14] tducn110, “CaroGame/src/game/core/GameState.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/GameState.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[14] tducn110, “CaroGame/src/game/core/GameState.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/GameState.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/GameState.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 147328,
+    "old": "[15] tducn110, “research/current_2026_10_23/baseline_engine/src/eval.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/eval.rs. [Accessed: Oct. 27, 2026].",
+    "new": "[15] tducn110, “research/current_2026_10_23/baseline_engine/src/eval.rs,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/eval.rs",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/eval.rs",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 147680,
+    "old": "[16] tducn110, “research/week_05_09/results/cap_loss.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cap_loss.json. [Accessed: Oct. 27, 2026].",
+    "new": "[16] tducn110, “research/week_05_09/results/cap_loss.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cap_loss.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cap_loss.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 148004,
+    "old": "[17] D. E. Knuth and R. W. Moore, “An analysis of alpha-beta pruning,” Artificial Intelligence, vol. 6, no. 4, pp. 293–326, 1975, doi: 10.1016/0004-3702(75)90019-3. [Online]. Available: https://doi.org/10.1016/0004-3702(75)90019-3. [Accessed: Oct. 27, 2026].",
+    "new": "[17] D. E. Knuth and R. W. Moore, “An analysis of alpha-beta pruning,” Artificial Intelligence, vol. 6, no. 4, pp. 293–326, 1975, doi: 10.1016/0004-3702(75)90019-3. [Online]. Available: https://doi.org/10.1016/0004-3702(75)90019-3",
+    "reason": "Keep verified publisher metadata and DOI; remove redundant access-date bracket and final punctuation after the online DOI URL.",
+    "evidence": [
+      "https://doi.org/10.1016/0004-3702(75)90019-3",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 148263,
+    "old": "[18] tducn110, “research/current_2026_10_23/engine_difficulty_runs.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_difficulty_runs.csv. [Accessed: Oct. 27, 2026].",
+    "new": "[18] tducn110, “research/current_2026_10_23/engine_difficulty_runs.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_difficulty_runs.csv",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_difficulty_runs.csv",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 148613,
+    "old": "[19] A. L. Zobrist, “A new hashing method with application for game playing,” Computer Sciences Department, University of Wisconsin–Madison, Madison, WI, USA, Tech. Rep. 88, Apr. 1970. [Online]. Available: https://research.cs.wisc.edu/techreports/1970/TR88.pdf. [Accessed: Oct. 27, 2026].",
+    "new": "[19] A. L. Zobrist, “A new hashing method with application for game playing,” Computer Sciences Department, University of Wisconsin–Madison, Madison, WI, USA, Tech. Rep. 88, Apr. 1970. Accessed: Nov. 12, 2026. [Online]. Available: https://research.cs.wisc.edu/techreports/1970/TR88.pdf",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://research.cs.wisc.edu/techreports/1970/TR88.pdf",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 148902,
+    "old": "[20] tducn110, “CaroGame/src/game/bot/board.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/board.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[20] tducn110, “CaroGame/src/game/bot/board.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/board.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/board.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 149204,
+    "old": "[21] tducn110, “research/week_05_09/results/cache_scope_probe.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cache_scope_probe.json. [Accessed: Oct. 27, 2026].",
+    "new": "[21] tducn110, “research/week_05_09/results/cache_scope_probe.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cache_scope_probe.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cache_scope_probe.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 149546,
+    "old": "[22] tducn110, “CaroGame/src/App.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/App.tsx. [Accessed: Oct. 27, 2026].",
+    "new": "[22] tducn110, “CaroGame/src/App.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/App.tsx",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/App.tsx",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 149828,
+    "old": "[23] tducn110, “CaroGame/src/game/behaviors/match/MatchController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/match/MatchController.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[23] tducn110, “CaroGame/src/game/behaviors/match/MatchController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/match/MatchController.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/match/MatchController.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 150174,
+    "old": "[24] tducn110, “CaroGame/src/pixi/CaroScene.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/pixi/CaroScene.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[24] tducn110, “CaroGame/src/pixi/CaroScene.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/pixi/CaroScene.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/pixi/CaroScene.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 150476,
+    "old": "[25] WHATWG, “Web workers,” HTML Living Standard. [Online]. Available: https://html.spec.whatwg.org/multipage/workers.html. [Accessed: Oct. 27, 2026].",
+    "new": "[25] WHATWG, “Web workers,” HTML Living Standard. Accessed: Nov. 12, 2026. [Online]. Available: https://html.spec.whatwg.org/multipage/workers.html",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://html.spec.whatwg.org/multipage/workers.html",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 150627,
+    "old": "[26] tducn110, “CaroGame/src/game/wasm/GomokuWasmEngine.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/GomokuWasmEngine.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[26] tducn110, “CaroGame/src/game/wasm/GomokuWasmEngine.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/GomokuWasmEngine.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/GomokuWasmEngine.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 150953,
+    "old": "[27] tducn110, “CaroGame/src/game/wasm/executeSearch.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/executeSearch.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[27] tducn110, “CaroGame/src/game/wasm/executeSearch.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/executeSearch.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/executeSearch.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 151273,
+    "old": "[28] tducn110, “CaroGame/src/game/behaviors/move/PlayMove.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/move/PlayMove.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[28] tducn110, “CaroGame/src/game/behaviors/move/PlayMove.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/move/PlayMove.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/move/PlayMove.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 151603,
+    "old": "[29] tducn110, “CaroGame/src/board/spatial/CoordinateTransform.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/spatial/CoordinateTransform.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[29] tducn110, “CaroGame/src/board/spatial/CoordinateTransform.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/spatial/CoordinateTransform.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/spatial/CoordinateTransform.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 151943,
+    "old": "[30] tducn110, “CaroGame/src/board/input/BoardInputController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/input/BoardInputController.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[30] tducn110, “CaroGame/src/board/input/BoardInputController.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/input/BoardInputController.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/input/BoardInputController.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 152281,
+    "old": "[31] tducn110, “CaroGame/package.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/package.json. [Accessed: Oct. 27, 2026].",
+    "new": "[31] tducn110, “CaroGame/package.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/package.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/package.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 152565,
+    "old": "[32] tducn110, “present/src/App.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/App.tsx. [Accessed: Oct. 27, 2026].",
+    "new": "[32] tducn110, “present/src/App.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/App.tsx",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/App.tsx",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 152845,
+    "old": "[33] tducn110, “CaroGame/src/game/wasm/worker.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/worker.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[33] tducn110, “CaroGame/src/game/wasm/worker.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/worker.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/worker.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 153151,
+    "old": "[34] tducn110, “CaroGame/src/game/wasm/engine,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/engine. [Accessed: Oct. 27, 2026].",
+    "new": "[34] tducn110, “CaroGame/src/game/wasm/engine,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/engine",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/engine",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 153451,
+    "old": "[35] tducn110, “CaroGame/src/i18n.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/i18n.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[35] tducn110, “CaroGame/src/i18n.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/i18n.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/i18n.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 153733,
+    "old": "[36] tducn110, “present/src/utils/caroEngine.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/caroEngine.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[36] tducn110, “present/src/utils/caroEngine.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/caroEngine.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/caroEngine.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 154037,
+    "old": "[37] tducn110, “present/src/utils/pyodideRunner.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/pyodideRunner.ts. [Accessed: Oct. 27, 2026].",
+    "new": "[37] tducn110, “present/src/utils/pyodideRunner.ts,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/pyodideRunner.ts",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/pyodideRunner.ts",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 154347,
+    "old": "[38] tducn110, “present/src/components/PythonVisualizer.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/components/PythonVisualizer.tsx. [Accessed: Oct. 27, 2026].",
+    "new": "[38] tducn110, “present/src/components/PythonVisualizer.tsx,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/components/PythonVisualizer.tsx",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/components/PythonVisualizer.tsx",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 154675,
+    "old": "[39] WebAssembly Community Group, WebAssembly Specification, release 3.0, Oct. 23, 2026. [Online]. Available: https://webassembly.github.io/spec/core/. [Accessed: Oct. 27, 2026].",
+    "new": "[39] WebAssembly Community Group, “WebAssembly Specification,” release 3.0, Nov. 4, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://webassembly.github.io/spec/core/",
+    "reason": "Correct the current living specification date from the official title page and standardize IEEE online-reference punctuation.",
+    "evidence": [
+      "https://webassembly.github.io/spec/core/",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 154854,
+    "old": "[40] tducn110, “benchmark/results/week4_bot_battle.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/week4_bot_battle.json. [Accessed: Oct. 27, 2026].",
+    "new": "[40] tducn110, “benchmark/results/week4_bot_battle.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/week4_bot_battle.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/week4_bot_battle.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 155174,
+    "old": "[41] tducn110, “research/current_2026_10_23/GATES.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/GATES.md. [Accessed: Oct. 27, 2026].",
+    "new": "[41] tducn110, “research/current_2026_10_23/GATES.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/GATES.md",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/GATES.md",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 155488,
+    "old": "[42] tducn110, “research/current_2026_10_23/engine_search_summary.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_search_summary.csv. [Accessed: Oct. 27, 2026].",
+    "new": "[42] tducn110, “research/current_2026_10_23/engine_search_summary.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_search_summary.csv",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_search_summary.csv",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 155836,
+    "old": "[43] tducn110, “research/current_2026_10_23/engine_verification.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_verification.json. [Accessed: Oct. 27, 2026].",
+    "new": "[43] tducn110, “research/current_2026_10_23/engine_verification.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_verification.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_verification.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 156182,
+    "old": "[44] tducn110, “research/current_2026_10_23/README.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/README.md. [Accessed: Oct. 27, 2026].",
+    "new": "[44] tducn110, “research/current_2026_10_23/README.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/README.md",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/README.md",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 156498,
+    "old": "[45] tducn110, “research/current_2026_10_23/wasm_ts_parity.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/wasm_ts_parity.json. [Accessed: Oct. 27, 2026].",
+    "new": "[45] tducn110, “research/current_2026_10_23/wasm_ts_parity.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/wasm_ts_parity.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/wasm_ts_parity.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 156834,
+    "old": "[46] tducn110, “research/current_2026_10_23/G4_real_browser_worker.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G4_real_browser_worker.json. [Accessed: Oct. 27, 2026].",
+    "new": "[46] tducn110, “research/current_2026_10_23/G4_real_browser_worker.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G4_real_browser_worker.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G4_real_browser_worker.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 157186,
+    "old": "[47] tducn110, “research/current_2026_10_23/G5_browser_ui.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G5_browser_ui.json. [Accessed: Oct. 27, 2026].",
+    "new": "[47] tducn110, “research/current_2026_10_23/G5_browser_ui.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G5_browser_ui.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G5_browser_ui.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 157520,
+    "old": "[48] tducn110, “research/week_05_09/results/search_summary.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/search_summary.csv. [Accessed: Oct. 27, 2026].",
+    "new": "[48] tducn110, “research/week_05_09/results/search_summary.csv,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/search_summary.csv",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/search_summary.csv",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 157854,
+    "old": "[49] tducn110, “research/week_05_09/results/tt_semantics.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/tt_semantics.json. [Accessed: Oct. 27, 2026].",
+    "new": "[49] tducn110, “research/week_05_09/results/tt_semantics.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/tt_semantics.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/tt_semantics.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 158186,
+    "old": "[50] tducn110, “research/week_05_09/results/budget_abort.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/budget_abort.json. [Accessed: Oct. 27, 2026].",
+    "new": "[50] tducn110, “research/week_05_09/results/budget_abort.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/budget_abort.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/budget_abort.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 158518,
+    "old": "[51] tducn110, “benchmark/results/benchmark_data.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/benchmark_data.json. [Accessed: Oct. 27, 2026].",
+    "new": "[51] tducn110, “benchmark/results/benchmark_data.json,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/benchmark_data.json",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/benchmark_data.json",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 158834,
+    "old": "[52] tducn110, “Week_05_09_Report_Index.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/Week_05_09_Report_Index.md. [Accessed: Oct. 27, 2026].",
+    "new": "[52] tducn110, “Week_05_09_Report_Index.md,” tducn110/basicproject, GitHub, commit 7e1e2d51321a4e6b2e26493c34f0a485d4de39cc, 2026. Accessed: Nov. 12, 2026. [Online]. Available: https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/Week_05_09_Report_Index.md",
+    "reason": "Standardize IEEE web-source access-date placement and URL punctuation; preserve verified title, path, revision and authorship.",
+    "evidence": [
+      "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/Week_05_09_Report_Index.md",
+      "https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf"
+    ]
+  },
+  {
+    "start": 159178,
+    "old": "The following inventory covers all 20 top-level directories in the pinned Git tree and adds one row for top-level files, giving 21 inventory roles. Git does not track empty directories, and ignored or locally untracked materials are outside this snapshot. A weekly document is a historical project record; its statements should be checked against dated code and raw data before describing present runtime behaviour. [1] [52]",
+    "new": "Table A.1 inventories the 20 top-level directories in the pinned Git tree and groups the top-level files in one additional row. The inventory describes the published repository; Git excludes empty directories and local untracked files. Weekly reports provide the project chronology, while dated source and experimental artifacts identify the implementation associated with a technical result. [1] [52]",
+    "reason": "Retain the verified complete inventory and replace prescriptive audit language with description.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject@7e1e2d5:git ls-tree",
+      "https://api.github.com/repos/tducn110/basicproject/git/trees/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc?recursive=1"
+    ]
+  },
+  {
+    "start": 159689,
+    "old": "Repository-contained configuration/context materials; not an experimental result.",
+    "new": "Repository configuration and project working-context files.",
+    "reason": "Use a consistent concise inventory voice.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/.gemini"
+    ]
+  },
+  {
+    "start": 159784,
+    "old": "Vault configuration and navigation context; not a source of runtime acceptance.",
+    "new": "Obsidian vault configuration and navigation files.",
+    "reason": "Remove repeated acceptance disclaimer from the inventory.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/.obsidian"
+    ]
+  },
+  {
+    "start": 159876,
+    "old": "Game application code, frontend assets, packages and tests. Inspect the pinned tree for the version actually being described.",
+    "new": "Playable application, interface components, board rendering, WebAssembly package, assets and tests.",
+    "reason": "Describe the artifact directly.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame"
+    ]
+  },
+  {
+    "start": 160011,
+    "old": "Proposal and early scope/diagrams; establishes planned motivation and organisation.",
+    "new": "Project proposal, initial scope and early diagrams.",
+    "reason": "Use descriptive noun phrases consistently.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week1"
+    ]
+  },
+  {
+    "start": 160104,
+    "old": "Board and rule foundations; separates game-state concepts from later search.",
+    "new": "Board representation and game-rule foundations.",
+    "reason": "Remove contrastive narration.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week2"
+    ]
+  },
+  {
+    "start": 160396,
+    "old": "Alpha-Beta and table-related research documents; scope must be distinguished from active game wiring.",
+    "new": "Alpha-Beta pruning and related search documentation.",
+    "reason": "Keep the inventory factual; engine separation is defined in Section 1.3.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week6"
+    ]
+  },
+  {
+    "start": 160785,
+    "old": "Earlier drafts were retained for history, not automatic current authority.",
+    "new": "Earlier report drafts retained as project history.",
+    "reason": "Use descriptive inventory wording.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/archived"
+    ]
+  },
+  {
+    "start": 160870,
+    "old": "Shared images and charts; datasets and generation code are needed to classify each figure.",
+    "new": "Shared figures, screenshots and charts.",
+    "reason": "Describe contents and leave provenance assessment in the evidence appendix.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/assets"
+    ]
+  },
+  {
+    "start": 161299,
+    "old": "Rule-related documentation; check its version and relation to the actual implementation.",
+    "new": "Repository working rules and layout guidance.",
+    "reason": "Correct misleading suggestion that rules directory contains game-rule implementation; actual files are layout guidance.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/rules/LAYOUT.md",
+      "/home/pro/Downloads/basicproject/rules/layout.md",
+      "/home/pro/Downloads/basicproject/rules/roadmap.md",
+      "/home/pro/Downloads/basicproject/rules/visual_evidence.md"
+    ]
+  },
+  {
+    "start": 161479,
+    "old": "README, layouts, plans, review, benchmark discussion, report index, configuration and DOCX template; individually dated documents are not interchangeable.",
+    "new": "Repository overview, layout and planning documents, review reports, benchmark discussion, report index, configuration and report template.",
+    "reason": "Remove repeated source-authority warnings from inventory.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject@7e1e2d5:git ls-tree"
+    ]
+  },
+  {
+    "start": 161636,
+    "old": "The historical chronology is organised by the folders rather than by an unsupported claim that every later algorithm was integrated into the shipped game. Weeks 1–3 frame the problem, board and UI; Week 4 examines local patterns and baseline bots; Weeks 5–6 develop adversarial search and pruning; Weeks 7–8 focus on candidate selection and traversal order; Weeks 9–10 discuss hashing, table reuse and interrupted iterative search. The dated evidence in research must be used to establish which experiment actually ran and when. [52] [8]",
+    "new": "The weekly documentation follows the development topics. Weeks 1–3 cover the problem, board and interface; Week 4 covers local patterns and baseline bots; Weeks 5–6 examine adversarial search and pruning; Weeks 7–8 examine candidate selection and ordering; Weeks 9–10 address hashing, table reuse and interrupted search. The dated research records give the experimental context for these topics. [52] [8]",
+    "reason": "Replace negative provenance lecture with a concise project chronology.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 162174,
+    "old": "Weekly deliverables and completion targets. The ten-week schedule below summarizes the progression of problem modeling, core engine implementation, adversarial search optimization, and empirical verification across W01–W10.",
+    "new": "The ten-week documentation sequence is summarized below. Each entry names the topic covered in the corresponding weekly material.",
+    "reason": "The original paragraph mislabeled imperative review targets as delivered milestones.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 162398,
+    "old": "W01: Define board, actors, Freestyle scope and source boundaries; deliver the problem model and stated assumptions.",
+    "new": "W01: Problem definition, actors, board model and project scope.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 162514,
+    "old": "W02: Specify coordinate and state operations; demonstrate valid/invalid moves, win and draw checks on named fixtures.",
+    "new": "W02: Coordinates, board updates, legal moves and terminal-state rules.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 162632,
+    "old": "W03: Describe UI ownership and match lifecycle; trace move, Undo, Reset and stale-request handling through their owners.",
+    "new": "W03: Interface components, application ownership and match lifecycle.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 162753,
+    "old": "W04: Describe run patterns, evaluation and Random/Rule-based baselines; give a reproducible worked evaluation and identify the implementation.",
+    "new": "W04: Local run patterns, heuristic evaluation, Random and Rule-Based baselines.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 162896,
+    "old": "W05: Specify Minimax recurrence, depth, apply/undo invariant and a traced example; identify the tested candidate set.",
+    "new": "W05: Minimax recurrence, search depth, recursive state updates and rollback.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 163014,
+    "old": "W06: Specify Alpha-Beta bounds and cutoff; compare root scores to Minimax under the same fixed search context.",
+    "new": "W06: Alpha-Beta bounds, cutoffs and comparison with Minimax.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 163125,
+    "old": "W07: Specify radius, soft cap, immediate-tactic retention and six configurations; distinguish selection from filtering limits.",
+    "new": "W07: Candidate neighborhoods, selective search and difficulty configuration.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 163252,
+    "old": "W08: Compare ordering with identical membership; record value, node and ranking-work definitions rather than assuming a speedup.",
+    "new": "W08: Move ordering, search visits and the cost of ranking candidates.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 163381,
+    "old": "W09: Describe Zobrist updates and TT bounds; verify restoration and disclose collision, root-context and mate-score reuse hazards.",
+    "new": "W09: Zobrist hashing, incremental updates and transposition-table bounds.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 163512,
+    "old": "W10: Specify iterative deepening and budget interruption; show last completed result and restoration, and mark integration or tournament evaluation pending without execution evidence.",
+    "new": "W10: Iterative deepening, search interruption and evaluation.",
+    "reason": "Convert instruction-like review targets into accurate topic descriptions.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md"
+    ]
+  },
+  {
+    "start": 163853,
+    "old": "Verification status and scope",
+    "new": "Recorded result and scope",
+    "reason": "Avoid turning an artifact summary into a blanket verification stamp.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md"
+    ]
+  },
+  {
+    "start": 163991,
+    "old": "Verified across 816 native search rows, 408 Minimax/Alpha-Beta pairs, and 820 restoration checks; full WASM integration is in CaroGame.",
+    "new": "engine_verification.json reports 816 search rows, 408 Minimax/Alpha-Beta pairs and 820 restoration checks in native execution. [43]",
+    "reason": "Tie counts to the exact historical record and preserve the native-only boundary.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json"
+    ]
+  },
+  {
+    "start": 164159,
+    "old": "Provenance and selected excerpts plus separately committed game tree.",
+    "new": "Application source, tests and the vendored WebAssembly package are present in CaroGame.",
+    "reason": "Replace vague provenance statement with the published artifact identity.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame"
+    ]
+  },
+  {
+    "start": 164230,
+    "old": "Verified via 59 passed Vitest unit/integration tests, TypeScript typecheck, and Vite production build.",
+    "new": "The package defines Vitest tests, TypeScript checking and a Vite build; results must be associated with the revision and environment of the test run. [31]",
+    "reason": "Remove unsubstantiated claim that the old source excerpts alone establish59 executed tests.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/package.json"
+    ]
+  },
+  {
+    "start": 164422,
+    "old": "Verified across 544 search rows, 112 Minimax/Alpha-Beta pairs, and 3,998 Zobrist XOR checks; extend corpus in future ablations.",
+    "new": "The reference records report 544 timed search rows, 112 Minimax/Alpha-Beta comparisons, 551 root restorations and 3,998 forward plus 3,998 undo hash checks. [8]",
+    "reason": "Restore exact counter definitions and avoid universal correctness language.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/verification.json"
+    ]
+  },
+  {
+    "start": 164665,
+    "old": "Verified across 8 multi-move game histories (291 plies) in Node and 6 difficulty tiers in headless Chrome Worker.",
+    "new": "The Node record covers 8 histories and 291 plies. A separate headless Chrome Worker record exercises all 6 difficulty configurations on one clustered position. [45] [46]",
+    "reason": "Separate two different corpora and environments instead of one combined parity claim.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/wasm_ts_parity.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G4_real_browser_worker.json"
+    ]
+  },
+  {
+    "start": 164793,
+    "old": "One headless run and synthetic pointer interaction.",
+    "new": "Headless browser records of synthetic pointer input, Undo and viewport layout.",
+    "reason": "Name the actual observed behaviors.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_ui.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_viewports.json"
+    ]
+  },
+  {
+    "start": 164846,
+    "old": "Verified on desktop (1280 × 800, 1365 × 900) and mobile (390 × 844) viewports; physical touch and live Wink host testing are future work.",
+    "new": "The UI record exercises one move/Undo sequence at 1280 × 800. The viewport artifact records layout at 1280 × 800, 390 × 844 and 320 × 568. [47]",
+    "reason": "Correct viewport evidence and separate layout observations from physical-device interaction.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_ui.json",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/G5_browser_viewports.json"
+    ]
+  },
+  {
+    "start": 164986,
+    "old": "27 October follow-up",
+    "new": "12 November revalidation",
+    "reason": "Replace an unsupported historical-only row with the current recorded revalidation.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs"
+    ]
+  },
+  {
+    "start": 165008,
+    "old": "Local record of 59 tests, typecheck, build and two-viewport browser observation.",
+    "new": "Current frontend and native test logs; rerun search outputs compared with the archived non-timing fields.",
+    "reason": "Describe concrete current validation evidence.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs",
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/rerun_comparison.json"
+    ]
+  },
+  {
+    "start": 165090,
+    "old": "All 59 tests in 9 test files, tsc --noEmit, and Vite build pass cleanly under Node 24.22.1.",
+    "new": "The review rerun passed 59 frontend tests in 9 files, typecheck and the Vite 8.3.1 build under Node 22.23.3/npm 10.9.9. Native tests passed: 38 unit and 7 integration tests for the current engine, and 6 unit and 3 integration tests for the reference library, using rustc 1.93.1. All 816 engine rows and 544 reference rows reproduced the archived decisions and counters; timing fields were excluded from this comparison.",
+    "reason": "Replace unsupported historical environment claim with current executed checks; retain timing as historical.",
+    "evidence": [
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/app-test.log",
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/app-typecheck.log",
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/app-build.log",
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/engine-test.log",
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/logs/reference-test.log",
+      "/home/pro/Downloads/vnuk/basicProject/review_2026_11_12/rerun_comparison.json"
+    ]
+  },
+  {
+    "start": 165197,
+    "old": "G3 native verification passed on the recorded corpus; G4 real-Worker and G5 UI/Undo observations are recorded. The older ledger predates these observations.",
+    "new": "An early gate ledger and later native, adapter, Worker and interface artifacts.",
+    "reason": "Separate the chronological ledger from subsequent evidence.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md",
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/engine_verification.json"
+    ]
+  },
+  {
+    "start": 165355,
+    "old": "All verification gates (G1–G5) are backed by recorded native, WASM parity, Worker, and UI test artifacts.",
+    "new": "The ledger lists G3 as pending, G4 as partial and G5 as pending. Later files supply specific observations; they do not constitute an updated sign-off for every gate. [41] [43] [45] [46] [47]",
+    "reason": "Correct the false all-gates-verified claim and preserve source conflict explicitly.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/GATES.md"
+    ]
+  },
+  {
+    "start": 165535,
+    "old": "Demonstrates 17.4×–24.4× native Rust speedup over TypeScript/Node and 100/100 Rule-Based wins vs. Random; expand to multi-seed tournaments.",
+    "new": "The historical summaries report native Rust/Node time ratios of 17.4–24.4 on one midgame fixture and 100 Rule-Based wins in 100 matches against Random. These are dataset-specific results. [40] [51]",
+    "reason": "Qualify the historical speed and win-rate claims without discarding their source values.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/benchmark/results/benchmark_data.json",
+      "/home/pro/Downloads/basicproject/benchmark/results/week4_bot_battle.json"
+    ]
+  },
+  {
+    "start": 165738,
+    "old": "Interactive React/Vite teaching platform with KaTeX formulas, figure inspector, and 4 browser Pyodide programs.",
+    "new": "The source provides React/Vite explanations, KaTeX formulas, a figure inspector and four Pyodide program definitions. [32] [37] [38]",
+    "reason": "Code presence does not itself establish successful execution of all browser programs.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/present/src/App.tsx",
+      "/home/pro/Downloads/basicproject/present/src/utils/pyodideRunner.ts",
+      "/home/pro/Downloads/basicproject/present/src/components/PythonVisualizer.tsx"
+    ]
+  },
+  {
+    "start": 165902,
+    "old": "The commands below use repository-relative paths from the pinned GitHub snapshot to inspect, test, and build the application, presentation platform, and research harnesses. Save existing result files before running any generator, as the research runners write directly to their output directories. [8] [44]",
+    "new": "The following procedure inspects the published revision and runs the frontend package scripts. The native research directories retain their original harnesses, manifests, result files and provenance. Their local source dependencies differ from the published repository layout, as explained at the end of this appendix. [1] [8] [44]",
+    "reason": "Remove false claim that every native reproduction command works in the pinned GitHub snapshot.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/run_checks.py",
+      "/home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml"
+    ]
+  },
+  {
+    "start": 166353,
+    "old": "For frontend verification, install the locked dependencies in a Node environment and run the package's typecheck, unit test, and production build scripts.",
+    "new": "From the repository root, install the game dependencies from its lockfile, then run the declared typecheck, test and build scripts. Use a Node version compatible with the locked packages and record node --version and npm --version with the results.",
+    "reason": "Specify reproducible frontend commands without inventing package success.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/CaroGame/package.json",
+      "/home/pro/Downloads/basicproject/CaroGame/package-lock.json"
+    ]
+  },
+  {
+    "start": 166568,
+    "old": "For the presentation project, start a separate shell from the repository root to build or serve the interactive teaching platform.",
+    "new": "In a separate terminal at the repository root, install and build the presentation website. The development command starts its interactive preview.",
+    "reason": "Make shell starting directory explicit.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/present/package.json"
+    ]
+  },
+  {
+    "start": 166743,
+    "old": "Open another terminal at the basicproject repository root for the native Rust verification commands below. Ensure the local Rust workspace dependencies are present before executing the native benchmark runners.",
+    "new": "To inspect the native experiment provenance from the repository root, read the manifests and recorded results below. These commands do not regenerate the datasets.",
+    "reason": "Replace misleading executable native reproduction sequence with commands valid for the published tree.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json",
+      "/home/pro/Downloads/basicproject/research/week_05_09/results/provenance.json"
+    ]
+  },
+  {
+    "start": 166954,
+    "old": "python3 research/week_05_09/run.py",
+    "new": "cat research/week_05_09/Cargo.toml research/week_05_09/results/provenance.json",
+    "reason": "The original command requires an absent local reference library and would overwrite results after dependencies were restored.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml"
+    ]
+  },
+  {
+    "start": 166989,
+    "old": "cargo test --manifest-path caro-core-reference/Cargo.toml --locked",
+    "new": "cat research/current_2026_10_23/provenance.json",
+    "reason": "The original cargo test command names a manifest absent from the pinned tree.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/provenance.json"
+    ]
+  },
+  {
+    "start": 167056,
+    "old": "cargo run --release --locked --manifest-path research/week_05_09/Cargo.toml -- research/week_05_09/results",
+    "new": "git ls-tree -d --name-only HEAD",
+    "reason": "Use a read-only command that exposes actual published top-level dependencies.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject@7e1e2d5:git ls-tree"
+    ]
+  },
+  {
+    "start": 167163,
+    "old": "The verification script research/current_2026_10_23/run_checks.py orchestrates native unit tests, search equivalence experiments, WebAssembly parity checks, and frontend integration tests, storing generated artifacts in dated output directories for reproducible verification. [44]",
+    "new": "The original reference runner requires caro-core-reference at the repository root. The current-engine runner requires gomoku-main/engine and an application directory named 10_caro, and its wasm stage copies generated files into that application. The pinned Git tree instead publishes CaroGame, an earlier Rust baseline and selected modified-engine excerpts. Regenerating those native datasets therefore requires restoring the exact dependency sources from their recorded hashes and adapting paths in a separate workspace. Complete source publication is proposed in Section 6.3. [8] [44]",
+    "reason": "Correct false orchestration/reproducibility claim and disclose write behavior and missing source dependencies.",
+    "evidence": [
+      "/home/pro/Downloads/basicproject/research/current_2026_10_23/run_checks.py::ENGINE,APP",
+      "/home/pro/Downloads/basicproject/research/week_05_09/run.py",
+      "/home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml"
+    ]
+  }
+]

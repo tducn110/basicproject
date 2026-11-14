@@ -1,0 +1,11 @@
+# Narrow final QA — concrete findings
+
+1. **Verified output mismatch:** layout2.pdf has 83 native TOC headings; **68 displayed page labels disagree with PDF body footers**. All 83 named-destination links point to the actual corresponding heading pages. Examples: section 2.4 says 10 but appears at footer 11 / physical 19; Chapter 3 says 42 but appears at 44 / physical 52; Appendix C says 87 but appears at 93 / physical 101. This is a page-label/pagination mismatch, not broken TOC links or a heading-search artifact.
+
+2. **Verified physical layout:** before.pdf has 100 English pages; layout1.pdf and layout2.pdf each have 102, with review starting at physical 103. In layout2, body footers are consecutive 1–94 at physical 9–102, without gaps or resets. Between layout1 and layout2, page text changes only on physical 3–5 (TOC) and 98 (Appendix B title); the remaining body pages are text-identical. Hence refreshing/shortening those elements did not remove or introduce six physical body pages. Section 2.4 is at footer 11 in all three PDFs; the original manual TOC says 11, while the latest native TOC says 10. The exact cause of the client-reported 96-page layout versus the 102-page PDF export is not established by these files.
+
+3. **Latest language/LaTeX scan:** current_items.json has 1,062 items, including 83 TOC items and 979 non-TOC items. No TODO/TBD/FIXME, GPT/ChatGPT review residue, unverified instruction, raw LaTeX command/delimiter, caret or old F01–F09/A01–A09 requirement ID was found in the English report content. Pending/partial/unknown and review/draft hits retain legitimate runtime, historical-gate, target-name and provenance meanings. The snapshot predates only Appendix B title shortening; layout2 shows the shortened title. No further language patch is justified by this scan.
+
+4. **Visual sample:** physical pages 19, 35, 50, 53, 54, 85, 86 and 95 were rendered and inspected, covering section 2.4, mathematical exponents, the Caro worked example, algorithm-requirement rows and reference wrapping. No clipping/overlap was observed in those samples. This is not a claim that every one of the 102 English pages received visual inspection.
+
+No native document mutation was performed. Detailed structured evidence is in final_narrow_qa.json.

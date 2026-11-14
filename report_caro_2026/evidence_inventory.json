@@ -1,0 +1,572 @@
+{
+  "scope": "Read-only inventory of /home/pro/Downloads/basicproject; no source mutation or rerun. File list excludes .git internals, node_modules, target and dist. Historical logs referenced by source are in separate reporting workspace when present.",
+  "root": "/home/pro/Downloads/basicproject",
+  "root_entries": [
+    {
+      "path": "/home/pro/Downloads/basicproject/.gemini",
+      "kind": "directory",
+      "role": "project local instruction settings",
+      "file_count": 3,
+      "files": [
+        ".gemini/rules/layout.md",
+        ".gemini/rules/roadmap.md",
+        ".gemini/rules/visual_evidence.md"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/.git",
+      "kind": "directory",
+      "role": "repository metadata",
+      "file_count": null,
+      "files": []
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/.gitattributes",
+      "kind": "file",
+      "size_bytes": 7728
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/.gitignore",
+      "kind": "file",
+      "size_bytes": 522
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/.mise.toml",
+      "kind": "file",
+      "size_bytes": 43
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/.obsidian",
+      "kind": "directory",
+      "role": "Obsidian workspace settings",
+      "file_count": 4,
+      "files": [
+        ".obsidian/app.json",
+        ".obsidian/appearance.json",
+        ".obsidian/core-plugins.json",
+        ".obsidian/graph.json"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/BENCHMARK_RUST_VS_TYPESCRIPT.md",
+      "kind": "file",
+      "size_bytes": 6408
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Bao_cao_do_an_co_so_Caro_Nguyen_Tam_Duc.docx",
+      "kind": "file",
+      "size_bytes": 202749
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/CaroGame",
+      "kind": "directory",
+      "role": "React/Pixi game app, TS game logic, Worker WASM, tests and config",
+      "file_count": 83,
+      "files": [
+        "CaroGame/.gitattributes",
+        "CaroGame/.gitignore",
+        "CaroGame/.mise.toml",
+        "CaroGame/index.html",
+        "CaroGame/package-lock.json",
+        "CaroGame/package.json",
+        "CaroGame/public/assets/brand/PapaStudio_Logo_Full_Black.png",
+        "CaroGame/public/assets/brand/PapaStudio_Logo_Full_White.png",
+        "CaroGame/public/assets/brand/PapaStudio_Logo_Symbol_Black.png",
+        "CaroGame/public/assets/brand/PapaStudio_Logo_Symbol_White.png",
+        "CaroGame/src/App.tsx",
+        "CaroGame/src/app/GameController.ts",
+        "CaroGame/src/board/input/BoardInputController.ts",
+        "CaroGame/src/board/render/GridRenderer.ts",
+        "CaroGame/src/board/render/HighlightRenderer.ts",
+        "CaroGame/src/board/render/StoneRenderer.ts",
+        "CaroGame/src/board/spatial/Camera.ts",
+        "CaroGame/src/board/spatial/CoordinateTransform.ts",
+        "CaroGame/src/board/spatial/VisibleBounds.ts",
+        "CaroGame/src/components/Info.tsx",
+        "CaroGame/src/components/LeaderboardModal.tsx",
+        "CaroGame/src/components/Piece.tsx",
+        "CaroGame/src/components/Player.tsx",
+        "CaroGame/src/components/SearchFeedback.tsx",
+        "CaroGame/src/components/WinBanner.tsx",
+        "CaroGame/src/game/ai/AIController.ts",
+        "CaroGame/src/game/ai/SearchPositionBuilder.ts",
+        "CaroGame/src/game/ai/TacticalMoveResolver.ts",
+        "CaroGame/src/game/ai/contracts.ts",
+        "CaroGame/src/game/behaviors/match/MatchController.ts",
+        "CaroGame/src/game/behaviors/match/MatchState.ts",
+        "CaroGame/src/game/behaviors/move/PlayMove.ts",
+        "CaroGame/src/game/bot/board.ts",
+        "CaroGame/src/game/bot/eval.ts",
+        "CaroGame/src/game/bot/index.ts",
+        "CaroGame/src/game/bot/interface.ts",
+        "CaroGame/src/game/bot/search.ts",
+        "CaroGame/src/game/bot/worker.ts",
+        "CaroGame/src/game/core/BoardBounds.ts",
+        "CaroGame/src/game/core/GameState.ts",
+        "CaroGame/src/game/core/MoveRules.ts",
+        "CaroGame/src/game/core/WinRules.ts",
+        "CaroGame/src/game/core/types.ts",
+        "CaroGame/src/game/rules.ts",
+        "CaroGame/src/game/state.ts",
+        "CaroGame/src/game/types.ts",
+        "CaroGame/src/game/wasm/GomokuWasmEngine.ts",
+        "CaroGame/src/game/wasm/contracts.ts",
+        "CaroGame/src/game/wasm/engine/.gitignore",
+        "CaroGame/src/game/wasm/engine/gomoku_engine.d.ts",
+        "CaroGame/src/game/wasm/engine/gomoku_engine.js",
+        "CaroGame/src/game/wasm/engine/gomoku_engine_bg.wasm",
+        "CaroGame/src/game/wasm/engine/gomoku_engine_bg.wasm.d.ts",
+        "CaroGame/src/game/wasm/engine/package.json",
+        "CaroGame/src/game/wasm/executeSearch.ts",
+        "CaroGame/src/game/wasm/worker.ts",
+        "CaroGame/src/i18n.ts",
+        "CaroGame/src/index.css",
+        "CaroGame/src/integrations/wink/__tests__/winkIntegration.test.ts",
+        "CaroGame/src/integrations/wink/types.ts",
+        "CaroGame/src/integrations/wink/useWinkIntegration.ts",
+        "CaroGame/src/main.tsx",
+        "CaroGame/src/pixi/CaroGameCanvas.tsx",
+        "CaroGame/src/pixi/CaroScene.ts",
+        "CaroGame/src/pixi/devtools.ts",
+        "CaroGame/src/utils/buttonClick.ts",
+        "CaroGame/src/utils/game-loader.ts",
+        "CaroGame/src/utils/loading-controller.ts",
+        "CaroGame/src/vite-env.d.ts",
+        "CaroGame/tests/game/app-controls.test.tsx",
+        "CaroGame/tests/game/controller-lifecycle.test.ts",
+        "CaroGame/tests/game/core.test.ts",
+        "CaroGame/tests/game/match.test.ts",
+        "CaroGame/tests/game/wasm-contract.test.ts",
+        "CaroGame/tests/game/wasm-runtime.test.ts",
+        "CaroGame/tests/game/worker-lifecycle.test.ts",
+        "CaroGame/tests/pixi/scene.test.ts",
+        "CaroGame/tsconfig.json",
+        "CaroGame/vercel.json",
+        "CaroGame/vite.config.ts",
+        "CaroGame/vitest.config.ts",
+        "CaroGame/vitest.setup.ts",
+        "CaroGame/wink.game.json"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Caro_Rules_Heuristic_Rust_WASM_Review.md",
+      "kind": "file",
+      "size_bytes": 46777
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/LAYOUT.md",
+      "kind": "file",
+      "size_bytes": 5951
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Mau bao cao do an co so.docx",
+      "kind": "file",
+      "size_bytes": 27957
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/PLAN.md",
+      "kind": "file",
+      "size_bytes": 15979
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/README.md",
+      "kind": "file",
+      "size_bytes": 9771
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/ROADMAP.md",
+      "kind": "file",
+      "size_bytes": 16766
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week1",
+      "kind": "directory",
+      "role": "proposal, rule and state research plus figures",
+      "file_count": 6,
+      "files": [
+        "Week1/LAYOUT.md",
+        "Week1/Tuần 1.md",
+        "Week1/mermaid-diagram (1).png",
+        "Week1/mermaid-diagram (2).png",
+        "Week1/mermaid-diagram.png",
+        "Week1/ĐỀ CƯƠNG ĐỒ ÁN CƠ SỞ.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week10",
+      "kind": "directory",
+      "role": "iterative deepening and planned tournament report",
+      "file_count": 3,
+      "files": [
+        "Week10/Week_10_Iterative_Deepening_Time_Budget_and_Evaluation.docx",
+        "Week10/Week_10_Iterative_Deepening_Time_Budget_and_Evaluation.md",
+        "Week10/Week_10_Iterative_Deepening_Time_Budget_and_Evaluation.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week2",
+      "kind": "directory",
+      "role": "TypeScript core and verification notes",
+      "file_count": 2,
+      "files": [
+        "Week2/LAYOUT.md",
+        "Week2/Tuan 2.md"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week3",
+      "kind": "directory",
+      "role": "UI/lifecycle architecture report and diagrams",
+      "file_count": 4,
+      "files": [
+        "Week3/LAYOUT.md",
+        "Week3/Tuan 3.md",
+        "Week3/assets/component_hierarchy.png",
+        "Week3/assets/ui_architecture_flow.png"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week4",
+      "kind": "directory",
+      "role": "pattern, heuristic, baseline bot reports and visuals",
+      "file_count": 10,
+      "files": [
+        "Week4/LAYOUT.md",
+        "Week4/Tuan 4.md",
+        "Week4/Xây dựng Heuristic Evaluation.md",
+        "Week4/Xây dựng Pattern Detection.md",
+        "Week4/Xây dựng Random Bot.md",
+        "Week4/Xây dựng Rule-Based Bot.md",
+        "Week4/assets/bot_decision_flow.png",
+        "Week4/assets/pattern_taxonomy.png",
+        "Week4/assets/week4_bot_battle_and_pruning.png",
+        "Week4/assets/week4_decision_latency.png"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week5",
+      "kind": "directory",
+      "role": "minimax research report with reference experiment",
+      "file_count": 4,
+      "files": [
+        "Week5/LAYOUT.md",
+        "Week5/Week_05_Rust_Minimax_Search_Tree_Analysis.docx",
+        "Week5/Week_05_Rust_Minimax_Search_Tree_Analysis.md",
+        "Week5/Week_05_Rust_Minimax_Search_Tree_Analysis.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week6",
+      "kind": "directory",
+      "role": "alpha-beta research report",
+      "file_count": 4,
+      "files": [
+        "Week6/LAYOUT.md",
+        "Week6/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.docx",
+        "Week6/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.md",
+        "Week6/Week_06_Rust_Alpha_Beta_Pruning_and_Transposition_Tables.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week7",
+      "kind": "directory",
+      "role": "candidate generation report",
+      "file_count": 3,
+      "files": [
+        "Week7/Week_07_Candidate_Move_Generation.docx",
+        "Week7/Week_07_Candidate_Move_Generation.md",
+        "Week7/Week_07_Candidate_Move_Generation.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week8",
+      "kind": "directory",
+      "role": "move ordering reference report",
+      "file_count": 3,
+      "files": [
+        "Week8/Week_08_Move_Ordering_Optimization.docx",
+        "Week8/Week_08_Move_Ordering_Optimization.md",
+        "Week8/Week_08_Move_Ordering_Optimization.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week9",
+      "kind": "directory",
+      "role": "Zobrist and transposition table reference report",
+      "file_count": 3,
+      "files": [
+        "Week9/Week_09_Zobrist_Hashing_and_Transposition_Table.docx",
+        "Week9/Week_09_Zobrist_Hashing_and_Transposition_Table.md",
+        "Week9/Week_09_Zobrist_Hashing_and_Transposition_Table.pdf"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/Week_05_09_Report_Index.md",
+      "kind": "file",
+      "size_bytes": 9795
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/archived",
+      "kind": "directory",
+      "role": "historical drafts and roadmaps; not current source",
+      "file_count": 7,
+      "files": [
+        "archived/CaroGame_src_ROADMAP.md",
+        "archived/Hoàn Thiện Đề Cương.md",
+        "archived/LAYOUT.md",
+        "archived/Untitled.md",
+        "archived/docs_src_ROADMAP.md",
+        "archived/docs_src_roadmap.md",
+        "archived/week2_review_draft.md"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/assets",
+      "kind": "directory",
+      "role": "charts, architecture diagrams and board illustration",
+      "file_count": 8,
+      "files": [
+        "assets/LAYOUT.md",
+        "assets/charts/rust_vs_ts_performance.png",
+        "assets/charts/search_scaling_comparison.png",
+        "assets/charts/week4_bot_battle_and_pruning.png",
+        "assets/charts/week4_decision_latency.png",
+        "assets/debug/board_state_example.png",
+        "assets/diagrams/caro_architecture.mmd",
+        "assets/diagrams/caro_architecture.png"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/benchmark",
+      "kind": "directory",
+      "role": "Rust native and TypeScript Node harnesses, aggregate result JSON",
+      "file_count": 8,
+      "files": [
+        "benchmark/LAYOUT.md",
+        "benchmark/results/benchmark_data.json",
+        "benchmark/results/week4_bot_battle.json",
+        "benchmark/rust_bench/Cargo.lock",
+        "benchmark/rust_bench/Cargo.toml",
+        "benchmark/rust_bench/src/bin/week4_experiment.rs",
+        "benchmark/rust_bench/src/main.rs",
+        "benchmark/ts_bench/benchmark.ts"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/present",
+      "kind": "directory",
+      "role": "independent interactive report website and static data copies",
+      "file_count": 46,
+      "files": [
+        "present/README.md",
+        "present/index.html",
+        "present/package-lock.json",
+        "present/package.json",
+        "present/public/assets/bot_decision_flow.png",
+        "present/public/assets/chebyshev_heatmap.png",
+        "present/public/assets/component_hierarchy.png",
+        "present/public/assets/pattern_taxonomy.png",
+        "present/public/assets/pattern_weights_distribution.png",
+        "present/public/assets/rust_vs_ts_speedup.png",
+        "present/public/assets/ui_architecture_flow.png",
+        "present/public/assets/week4_bot_battle_and_pruning.png",
+        "present/public/assets/week4_decision_latency.png",
+        "present/public/data/benchmark_data.json",
+        "present/public/data/week4_bot_battle.json",
+        "present/scripts/generate_charts.py",
+        "present/src/App.tsx",
+        "present/src/components/BenchmarkSection.tsx",
+        "present/src/components/FigureInspectorModal.tsx",
+        "present/src/components/Footer.tsx",
+        "present/src/components/HeroSection.tsx",
+        "present/src/components/InteractiveCaroBoard.tsx",
+        "present/src/components/Latex.tsx",
+        "present/src/components/Navbar.tsx",
+        "present/src/components/ProjectOverview.tsx",
+        "present/src/components/PythonVisualizer.tsx",
+        "present/src/components/RoadmapSection.tsx",
+        "present/src/components/TopWeekBanner.tsx",
+        "present/src/components/TransitionPvE.tsx",
+        "present/src/components/Week3Decoupling.tsx",
+        "present/src/components/Week4RustEngine.tsx",
+        "present/src/components/Week5Minimax.tsx",
+        "present/src/components/Week6AlphaBeta.tsx",
+        "present/src/components/Week7CandidatesAndTiers.tsx",
+        "present/src/components/Week7Production.tsx",
+        "present/src/components/Week8To10AdvancedAI.tsx",
+        "present/src/index.css",
+        "present/src/main.tsx",
+        "present/src/utils/audio.ts",
+        "present/src/utils/caroEngine.ts",
+        "present/src/utils/figureRegistry.ts",
+        "present/src/utils/pyodideRunner.ts",
+        "present/src/vite-env.d.ts",
+        "present/tsconfig.json",
+        "present/vercel.json",
+        "present/vite.config.ts"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/research",
+      "kind": "directory",
+      "role": "dated native reference/current engine evidence datasets and snapshots",
+      "file_count": 66,
+      "files": [
+        "research/current_2026_10_23/G1_review.json",
+        "research/current_2026_10_23/G2_ponytail.json",
+        "research/current_2026_10_23/G3_ponytail.json",
+        "research/current_2026_10_23/G4_ponytail.json",
+        "research/current_2026_10_23/G4_real_browser_worker.json",
+        "research/current_2026_10_23/G4_real_browser_worker_initial.json",
+        "research/current_2026_10_23/G5_browser_ui.json",
+        "research/current_2026_10_23/G5_browser_viewports.json",
+        "research/current_2026_10_23/G5_ponytail.json",
+        "research/current_2026_10_23/G5_resize_after.json",
+        "research/current_2026_10_23/G5_resize_before.json",
+        "research/current_2026_10_23/GATES.md",
+        "research/current_2026_10_23/README.md",
+        "research/current_2026_10_23/SOURCE_EXCERPTS.md",
+        "research/current_2026_10_23/baseline/10_caro/src/App.tsx",
+        "research/current_2026_10_23/baseline/10_caro/src/game/ai/contracts.ts",
+        "research/current_2026_10_23/baseline/10_caro/src/game/core/GameState.ts",
+        "research/current_2026_10_23/baseline/10_caro/src/game/wasm/contracts.ts",
+        "research/current_2026_10_23/baseline/10_caro/src/game/wasm/worker.ts",
+        "research/current_2026_10_23/baseline/10_caro/src/i18n.ts",
+        "research/current_2026_10_23/baseline/git_diff.txt",
+        "research/current_2026_10_23/baseline/git_diff_staged.txt",
+        "research/current_2026_10_23/baseline/git_status.txt",
+        "research/current_2026_10_23/baseline/gomoku-main/engine/Cargo.toml",
+        "research/current_2026_10_23/baseline/gomoku-main/engine/src/ai.rs",
+        "research/current_2026_10_23/baseline/gomoku-main/engine/src/board.rs",
+        "research/current_2026_10_23/baseline/gomoku-main/engine/src/eval.rs",
+        "research/current_2026_10_23/baseline/gomoku-main/engine/src/lib.rs",
+        "research/current_2026_10_23/baseline/source_manifest.json",
+        "research/current_2026_10_23/baseline_engine/Cargo.lock",
+        "research/current_2026_10_23/baseline_engine/Cargo.toml",
+        "research/current_2026_10_23/baseline_engine/src/ai.rs",
+        "research/current_2026_10_23/baseline_engine/src/board.rs",
+        "research/current_2026_10_23/baseline_engine/src/eval.rs",
+        "research/current_2026_10_23/baseline_engine/src/lib.rs",
+        "research/current_2026_10_23/baseline_engine/tests/wasm.rs",
+        "research/current_2026_10_23/engine_address_offsets.csv",
+        "research/current_2026_10_23/engine_candidates.csv",
+        "research/current_2026_10_23/engine_difficulty_runs.csv",
+        "research/current_2026_10_23/engine_native_layout.json",
+        "research/current_2026_10_23/engine_search_runs.csv",
+        "research/current_2026_10_23/engine_search_summary.csv",
+        "research/current_2026_10_23/engine_verification.json",
+        "research/current_2026_10_23/preservation_checks.json",
+        "research/current_2026_10_23/provenance.json",
+        "research/current_2026_10_23/run_checks.py",
+        "research/current_2026_10_23/sources/drive_0.json",
+        "research/current_2026_10_23/sources/drive_1.json",
+        "research/current_2026_10_23/wasm_package.json",
+        "research/current_2026_10_23/wasm_ts_parity.json",
+        "research/week_05_09/.gitignore",
+        "research/week_05_09/Cargo.lock",
+        "research/week_05_09/Cargo.toml",
+        "research/week_05_09/README.md",
+        "research/week_05_09/delivery_manifest.json",
+        "research/week_05_09/results/budget_abort.json",
+        "research/week_05_09/results/cache_scope_probe.json",
+        "research/week_05_09/results/candidates.csv",
+        "research/week_05_09/results/cap_loss.json",
+        "research/week_05_09/results/provenance.json",
+        "research/week_05_09/results/search_runs.csv",
+        "research/week_05_09/results/search_summary.csv",
+        "research/week_05_09/results/tt_semantics.json",
+        "research/week_05_09/results/verification.json",
+        "research/week_05_09/run.py",
+        "research/week_05_09/src/main.rs"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/rules",
+      "kind": "directory",
+      "role": "project guidance on layout, roadmap and visual evidence",
+      "file_count": 4,
+      "files": [
+        "rules/LAYOUT.md",
+        "rules/layout.md",
+        "rules/roadmap.md",
+        "rules/visual_evidence.md"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/scripts",
+      "kind": "directory",
+      "role": "generation, benchmark and roadmap automation scripts",
+      "file_count": 7,
+      "files": [
+        "scripts/LAYOUT.md",
+        "scripts/benchmark_rust_vs_ts.py",
+        "scripts/export_diagrams.py",
+        "scripts/export_visuals.py",
+        "scripts/generate_week3_diagrams.py",
+        "scripts/generate_week4_visuals.py",
+        "scripts/roadmap_progress.py"
+      ]
+    },
+    {
+      "path": "/home/pro/Downloads/basicproject/templatereport.docx",
+      "kind": "file",
+      "size_bytes": 153477
+    }
+  ],
+  "data_file_checks": {
+    "benchmark/results/benchmark_data.json": {
+      "sha256": "b968d75164420ce66fa7dfe6883ba3414178d331650cb586103b977e6eb51fe2",
+      "bytes": 1631
+    },
+    "present/public/data/benchmark_data.json": {
+      "sha256": "b968d75164420ce66fa7dfe6883ba3414178d331650cb586103b977e6eb51fe2",
+      "bytes": 1631
+    },
+    "benchmark/results/week4_bot_battle.json": {
+      "sha256": "c58413a2ee1239368b5031f6c563a77edf81f5a82791752560d75c7be984e671",
+      "bytes": 1088
+    },
+    "present/public/data/week4_bot_battle.json": {
+      "sha256": "c58413a2ee1239368b5031f6c563a77edf81f5a82791752560d75c7be984e671",
+      "bytes": 1088
+    },
+    "research/current_2026_10_23/engine_search_runs.csv": {
+      "sha256": "83bee175512e3c4c24bd72f6a09f7a9f383c74024e12ba81bdd6bda8c1343293",
+      "bytes": 58601,
+      "data_rows": 816
+    },
+    "research/week_05_09/results/search_runs.csv": {
+      "sha256": "f1806ff95509b5d8b97b746c47df66c72ed92ce37977de71d352498e719702f7",
+      "bytes": 45523,
+      "data_rows": 544
+    },
+    "CaroGame/src/game/wasm/engine/gomoku_engine_bg.wasm": {
+      "sha256": "1ff854e6493b39727d07cfcf69b0af06e349a748249d85d688741a4f85017989",
+      "bytes": 111582
+    }
+  },
+  "evidence_cautions": [
+    "Benchmark JSON records one midgame fixture at four depths and aggregated times; no per-run raw timing or measured FPS.",
+    "Week4 results JSON records aggregate 100 seeded games, not per-game raw results; present 42.24us conflicts with JSON 251.26us.",
+    "present static charts and Week8-10 values require source-specific checks before quantitative use.",
+    "Current and reference experiment CSVs are native; actual browser and WASM checks are separate."
+  ],
+  "dependency_resolution": [
+    {
+      "manifest": "/home/pro/Downloads/basicproject/benchmark/rust_bench/Cargo.toml",
+      "configured_path": "../../../../vnuk/basicProject/caro-core-reference",
+      "resolved_path": "/home/pro/vnuk/basicProject/caro-core-reference",
+      "exists": false
+    },
+    {
+      "manifest": "/home/pro/Downloads/basicproject/research/week_05_09/Cargo.toml",
+      "configured_path": "../../caro-core-reference",
+      "resolved_path": "/home/pro/Downloads/basicproject/caro-core-reference",
+      "exists": false
+    },
+    {
+      "reference_checkout": "/home/pro/Downloads/vnuk/basicProject/caro-core-reference",
+      "exists": true
+    }
+  ]
+}

@@ -1,0 +1,314 @@
+[
+  {
+    "number": 1,
+    "url": "https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "Repository root tree; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 2,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/app/GameController.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/app/GameController.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 3,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/AIController.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/ai/AIController.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 4,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/WinRules.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/core/WinRules.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 5,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/board.rs",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/baseline_engine/src/board.rs; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 6,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/SOURCE_EXCERPTS.md",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/SOURCE_EXCERPTS.md; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 7,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/ai.rs",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/baseline_engine/src/ai.rs; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 8,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/README.md",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/week_05_09/README.md; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 9,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/contracts.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/wasm/contracts.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 10,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/ai/TacticalMoveResolver.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/ai/TacticalMoveResolver.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 11,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/search.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/bot/search.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 12,
+    "url": "https://doi.org/10.1080/14786445008521796",
+    "status": "Publisher article metadata verified through Crossref DOI registration",
+    "note": "title, C. E. Shannon, journal, ser.7, vol.41, no.314, pp.256–275, Mar.1950, DOI matched; publisher direct GET403"
+  },
+  {
+    "number": 13,
+    "url": "https://doc.rust-lang.org/reference/type-layout.html",
+    "status": "Official Rust Reference opened",
+    "note": "Type layout title and URL verified; living reference access refreshed"
+  },
+  {
+    "number": 14,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/core/GameState.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/core/GameState.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 15,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/baseline_engine/src/eval.rs",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/baseline_engine/src/eval.rs; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 16,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cap_loss.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/week_05_09/results/cap_loss.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 17,
+    "url": "https://doi.org/10.1016/0004-3702(75)90019-3",
+    "status": "Official Elsevier article page opened",
+    "note": "D. E. Knuth and R. W. Moore; Artificial Intelligence6(4),293–326,1975; DOI matched"
+  },
+  {
+    "number": 18,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_difficulty_runs.csv",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/engine_difficulty_runs.csv; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 19,
+    "url": "https://research.cs.wisc.edu/techreports/1970/TR88.pdf",
+    "status": "University of Wisconsin original PDF cover rendered and read",
+    "note": "A. L. Zobrist, title, Technical Report88, Apr.1970 matched"
+  },
+  {
+    "number": 20,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/bot/board.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/bot/board.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 21,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/cache_scope_probe.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/week_05_09/results/cache_scope_probe.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 22,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/App.tsx",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/App.tsx; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 23,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/match/MatchController.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/behaviors/match/MatchController.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 24,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/pixi/CaroScene.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/pixi/CaroScene.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 25,
+    "url": "https://html.spec.whatwg.org/multipage/workers.html",
+    "status": "Official WHATWG HTML Living Standard opened",
+    "note": "Web workers chapter and URL verified; living reference access refreshed"
+  },
+  {
+    "number": 26,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/GomokuWasmEngine.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/wasm/GomokuWasmEngine.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 27,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/executeSearch.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/wasm/executeSearch.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 28,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/behaviors/move/PlayMove.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/behaviors/move/PlayMove.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 29,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/spatial/CoordinateTransform.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/board/spatial/CoordinateTransform.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 30,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/board/input/BoardInputController.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/board/input/BoardInputController.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 31,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/package.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/package.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 32,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/App.tsx",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "present/src/App.tsx; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 33,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/worker.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/wasm/worker.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 34,
+    "url": "https://github.com/tducn110/basicproject/tree/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/game/wasm/engine",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/game/wasm/engine; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 35,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/CaroGame/src/i18n.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "CaroGame/src/i18n.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 36,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/caroEngine.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "present/src/utils/caroEngine.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 37,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/utils/pyodideRunner.ts",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "present/src/utils/pyodideRunner.ts; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 38,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/present/src/components/PythonVisualizer.tsx",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "present/src/components/PythonVisualizer.tsx; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 39,
+    "url": "https://webassembly.github.io/spec/core/",
+    "status": "Official WebAssembly specification opened",
+    "note": "Release3.0 date2026-11-04; corrected original2026-10-23; access refreshed"
+  },
+  {
+    "number": 40,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/week4_bot_battle.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "benchmark/results/week4_bot_battle.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 41,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/GATES.md",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/GATES.md; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 42,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_search_summary.csv",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/engine_search_summary.csv; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 43,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/engine_verification.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/engine_verification.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 44,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/README.md",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/README.md; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 45,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/wasm_ts_parity.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/wasm_ts_parity.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 46,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G4_real_browser_worker.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/G4_real_browser_worker.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 47,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/current_2026_10_23/G5_browser_ui.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/current_2026_10_23/G5_browser_ui.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 48,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/search_summary.csv",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/week_05_09/results/search_summary.csv; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 49,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/tt_semantics.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/week_05_09/results/tt_semantics.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 50,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/research/week_05_09/results/budget_abort.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "research/week_05_09/results/budget_abort.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 51,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/benchmark/results/benchmark_data.json",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "benchmark/results/benchmark_data.json; author handle, repository, revision and path preserved"
+  },
+  {
+    "number": 52,
+    "url": "https://github.com/tducn110/basicproject/blob/7e1e2d51321a4e6b2e26493c34f0a485d4de39cc/Week_05_09_Report_Index.md",
+    "status": "Pinned local Git object and connected GitHub recursive tree verified",
+    "note": "Week_05_09_Report_Index.md; author handle, repository, revision and path preserved"
+  }
+]

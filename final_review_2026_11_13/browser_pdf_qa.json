@@ -1,0 +1,83 @@
+{
+  "scope": "Browser-export English PDF and latest textual snapshot. Native document unchanged.",
+  "pdf": "/home/pro/Downloads/vnuk/basicProject/final_review_2026_11_13/browser_layout.pdf",
+  "pdf_sha256": "905a568433c4f689f46378ac5989d722feb643e787e7f4b6061f8ea4b352ffa0",
+  "physical_pages": 96,
+  "body_footer_sequence": "1–88 at physical9–96",
+  "body_footer_issues": [],
+  "toc": {
+    "headings": 83,
+    "correct_page_numbers": 83,
+    "correct_named_destination_targets": 83,
+    "wrong_targets": []
+  },
+  "inventory": {
+    "body_figures": 20,
+    "body_figure_images": 20,
+    "cover_images": 1,
+    "body_tables": 8,
+    "table_labels": [
+      "2.1",
+      "3.1",
+      "3.2",
+      "5.1",
+      "5.2",
+      "5.3",
+      "A.1",
+      "B.1"
+    ],
+    "algorithm_requirement_rows": "AR01–AR09 present across physical50–52",
+    "native_superscript_ranges": 12,
+    "pdf_superscript_font_spans": 16,
+    "reason_spans_exceed_ranges": "Each compound ceiling/floor exponent occupies three spans rather than one.",
+    "exponents": [
+      "64",
+      "d",
+      "d",
+      "d",
+      "d",
+      "d",
+      "⌈d/2⌉",
+      "⌊d/2⌋",
+      "(d/2)",
+      "q",
+      "L",
+      "5"
+    ]
+  },
+  "visual_review": {
+    "all_pages_rendered": 96,
+    "all_pages_contact_sheet_inspected": 96,
+    "contact_sheet_count": 8,
+    "detailed_pages_inspected": [
+      19,
+      25,
+      31,
+      33,
+      43,
+      45,
+      47,
+      50,
+      51,
+      52,
+      96
+    ],
+    "out_of_page_text_or_image_blocks": 0,
+    "observed_clipping_or_overlap": 0,
+    "scope_limit": "Contact sheets check gross layout, intact content blocks and page flow; detail inspection covers all twelve native superscripts and algorithm-table continuation. This is not a new factual/source audit of every line."
+  },
+  "textual_scan": {
+    "source": "current_items.json",
+    "snapshot_limit": "Predates only Appendix B title shortening. Browser PDF has the shortened title.",
+    "new_editorial_findings": [],
+    "raw_LaTeX_commands_or_delimiters": 0,
+    "carets": 0,
+    "TODO_GPT_unverified_residue": 0,
+    "old_F01_F09_or_A01_A09_requirements": 0
+  },
+  "known_in_progress": [
+    "List of Figures/List of Tables page labels in this browser snapshot still reflect the previous values; root is updating these separately. Re-export and check those labels after the update."
+  ],
+  "supersedes": "The connector-layout2 102-page/68-TOC-mismatch result does not apply to the 96-page browser export. Its export-route cause was not established or needed for this verification.",
+  "algorithm_focus": "The revised objectives, Chapter2 derivations and integrated Caro example, AR01–AR09 requirements and Chapter4 dataflow frame the work as algorithm analysis. State/history/rollback and Worker sections serve decision correctness; research limitations remain explicit."
+}
