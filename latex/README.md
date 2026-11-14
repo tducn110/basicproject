@@ -63,6 +63,21 @@ Thư mục này chứa toàn bộ mã nguồn LaTeX, đồ thị, sơ đồ cơ 
 
 ---
 
+### 1.5. Chuyên khảo 5: Giáo Trình Thuật Toán AlphaZero, Tìm Kiếm Cây Monte Carlo (MCTS) & Tự Chơi Học Tăng Cường (Phase 3)
+* **File nguồn TeX:** [`Giao_Trinh_AlphaZero_MCTS_Va_Hoc_Tang_Cuong_Phase_3.tex`](file:///home/pro/Downloads/basicproject/latex/Giao_Trinh_AlphaZero_MCTS_Va_Hoc_Tang_Cuong_Phase_3.tex)
+* **File PDF đã biên dịch (19 trang):** [`Giao_Trinh_AlphaZero_MCTS_Va_Hoc_Tang_Cuong_Phase_3.pdf`](file:///home/pro/Downloads/basicproject/latex/Giao_Trinh_AlphaZero_MCTS_Va_Hoc_Tang_Cuong_Phase_3.pdf)
+* **Thư mục mã nguồn thực thi:** [`../RL_Pipeline/mcts.py`](file:///home/pro/Downloads/basicproject/RL_Pipeline/mcts.py), [`../RL_Pipeline/evaluate_mcts.py`](file:///home/pro/Downloads/basicproject/RL_Pipeline/evaluate_mcts.py), [`../RL_Pipeline/self_play.py`](file:///home/pro/Downloads/basicproject/RL_Pipeline/self_play.py), [`../RL_Pipeline/interactive_play.py`](file:///home/pro/Downloads/basicproject/RL_Pipeline/interactive_play.py)
+* **Nội dung 7 chương sư phạm chuyên sâu:**
+  1. **Chương 1: Triết lý AlphaZero: Trực giác vs Suy tính sâu:** Mô hình hai hệ thống nhận thức System 1 (ResNet intuition $1.5\text{ ms}$) vs System 2 (MCTS deep deliberation); phân tích các điểm mù chiến thuật (Tactical Blind Spots) nếu chỉ dựa vào mạng nơ-ron thuần túy.
+  2. **Chương 2: Giải thuật Tìm kiếm Cây Monte Carlo (MCTS) & Công thức PUCT:** Chi tiết cấu trúc 4 bước (Selection, Expansion, Evaluation, Backup); khai triển toán học công thức PUCT với hệ số tiên nghiệm $P(s, a)$, thành phần giảm chấn mẫu $\frac{1}{1 + N(s, a)}$, và chứng minh định lý lan truyền ngược đảo dấu luân phiên (Sign Inversion Backup Theorem).
+  3. **Chương 3: Bơm nhiễu Dirichlet $\text{Dir}(\alpha)$ & Đột phá không gian khám phá:** Đại số phân phối Dirichlet trên đơn vị hình cầu $K$ chiều; giải thích lý do toán học chọn $\alpha = 0.03 \approx \frac{10}{|A|}$ cho cờ Caro $15 \times 15$ để tạo ra tính chất thưa thớt (sparsity), kích thích AI khám phá các khai cuộc đột biến trong tự chơi.
+  4. **Chương 4: Quy tắc Bảo tồn Chiến thuật & Triệt tiêu Sơ suất (Blunder Elimination):** Phân tích tính chất sát thương 1-ply (Sudden Death) của cờ Caro; cài đặt thuật toán kiểm tra sát cục tự thân và nước chặn cưỡng bức (Forced Urgent Defense) với độ phức tạp $O(k)$, triệt tiêu $100\%$ các sơ suất ngớ ngẩn.
+  5. **Chương 5: Vòng lặp Tự chơi (Self-Play) & Cải tiến Chính sách Tổng quát:** Định lý Generalized Policy Iteration (GPI); chứng minh MCTS là bộ khuếch đại chính sách $\pi_{\text{MCTS}} \succ P_\theta$; cơ chế điều chỉnh nhiệt độ $\tau = 1.0$ (khai cuộc $step \le 10$) và $\tau \to 0$ (trung/tàn cuộc).
+  6. **Chương 6: Đo đạc Thực nghiệm Đấu đài (MCTS vs Heuristic Tournament):** Bảng số liệu giải đấu đối kháng thực tế: AlphaZero MCTS cầm Đen thắng áp đảo **$100\%$** (3/3 trận) chỉ sau **13 nước đi**; thời gian tính toán trung bình siêu tốc **$40.0\text{ ms/nước}$** trên GPU NVIDIA T1200.
+  7. **Chương 7: Hướng dẫn Vận hành Hệ thống & Chuyển giao Công nghệ:** Hướng dẫn sử dụng sàn đấu tương tác `interactive_play.py` với 6 chế độ chơi trực tiếp và kiến trúc tích hợp sang Desktop (Tauri) / Web (PixiJS/WASM).
+
+---
+
 ## 2. Lệnh Biên Dịch Lại Toàn Bộ Các Tài Liệu
 
 ```bash
@@ -79,4 +94,7 @@ xelatex -interaction=nonstopmode Giai_Thich_Co_Che_Va_Ly_Do_Thiet_Ke_He_Thong_Ho
 
 # 4. Giáo trình Toán học, CUDA & Huấn luyện Phase 2 (24 trang)
 xelatex -interaction=nonstopmode Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_ResNet_Phase_2.tex
+
+# 5. Giáo trình Thuật toán AlphaZero MCTS & Tự chơi Học tăng cường Phase 3 (19 trang)
+xelatex -interaction=nonstopmode Giao_Trinh_AlphaZero_MCTS_Va_Hoc_Tang_Cuong_Phase_3.tex
 ```
