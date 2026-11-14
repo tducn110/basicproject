@@ -51,3 +51,10 @@ cargo-target-*/
 **/before_contents_title_final.pdf
 review_2026_11_12/*.zip
 review_2026_11_12/Caro_Local_Defense_2026_11_13/
+
+# LaTeX intermediate build files
+*.aux
+*.out
+*.toc
+*.synctex.gz
+
