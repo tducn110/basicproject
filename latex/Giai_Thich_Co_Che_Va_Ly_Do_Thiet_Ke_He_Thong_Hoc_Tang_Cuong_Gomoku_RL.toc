@@ -1,0 +1,34 @@
+\contentsline {chapter}{Lời Mở Đầu: Triết Lý "Hiểu Rõ Bản Chất"}{i}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Tại Sao Cần Khởi Động Ấm (Warm-Start) Thay Vì Học Từ Con Số 0 (Tabula Rasa)?}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Ảo Tưởng Về AlphaGo Zero Và Khoảng Trống Tài Nguyên Tính Toán}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Bản Chất Toán Học Của "Bẫy Ngẫu Nhiên" (The Random Walk Barrier)}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Tại Sao 10,000 Ván Đấu Heuristic Lại Là Giải Pháp Vàng?}{2}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Tại Sao Lại Mã Hóa Tensor 3 Mặt Phẳng ($3 \times 15 \times 15$)?}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Sai Lầm Ngây Thơ: Nạp Ma Trận Số Nguyên $15 \times 15$}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Tại Sao Không Dùng 2 Mặt Phẳng Tuyệt Đối (Mặt Phẳng Đen \& Mặt Phẳng Trắng)?}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Bản Chất Của Tensor Phối Cảnh: Chuyển Dịch Hệ Quy Chiếu (Egocentric View)}{5}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Tại sao vẫn cần Mặt phẳng 2 (Plane 2 -- Chỉ thị màu lượt đi)?}{6}{subsection.2.3.1}%
+\contentsline {chapter}{\numberline {3}Tại Sao Lại Là Nhóm Nhị Diện $D_4$ ($8\times $) Và Bí Mật Đằng Sau Ca Lỗi $k=7$?}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Bản Chất Hình Học Đẳng Hướng Của Bàn Cờ Gomoku}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Chứng Minh Đại Số Về Cấp Của Nhóm $D_4$}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Giải Phẫu Ca Lỗi $k=7$ (Anti-Diagonal Reflection Bug): Bài Học Kỹ Thuật Đắt Giá}{8}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Hiện tượng lỗi xảy ra như thế nào?}{8}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Bản chất đại số: Tính không giao hoán của phép phản xạ và phép quay}{8}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Giải pháp triệt để và Bài học thiết kế Unit Test}{9}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Tại Sao Không Lưu Sẵn $2.95\text {M}$ Mẫu Ra Đĩa Cứng?}{9}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Tại Sao Phân Chia Ngẫu Nhiên Lại Gây Thảm Họa (Data Leakage)?}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Bản Chất Của Bệnh Lý Rò Rỉ Quỹ Đạo (Trajectory Leakage)}{10}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Cơ Chế Khóa Ván Đấu (Match-Level Zero-Leakage Protocol)}{11}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Tại Sao Lại Chọn Kiến Trúc Dual-Head ResNet-6?}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}So Sánh Với Các Kiến Trúc Thay Thế: CNN Thuần Túy Và Transformer}{12}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Bản Chất Toán Học Của Khối Phần Dư (Residual Block)}{12}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Tại Sao Lại Chọn Cấu Hình 6 Khối Residual (ResNet-6) Với 64 Kênh?}{13}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Tại Sao Hàm Mất Mát Lại Là $\text {CrossEntropy} + 0.5 \cdot \text {MSE}$?}{15}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Bản Chất Của Hàm Mất Mát Chính Sách (Policy Loss)}{15}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Bản Chất Của Hàm Mất Mát Giá Trị (Value Loss)}{16}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Tại Sao Hệ Số Cân Bằng Lại Là $\lambda = 0.5$?}{16}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Bộ Câu Hỏi Phản Biện Và Hướng Dẫn Trả Lời Khi Bảo Vệ Đồ Án}{18}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Kết Luận: Bản Đồ Tư Duy Và Lời Khuyên Dành Cho Sinh Viên}{23}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Tóm Tắt Bản Đồ Kiến Trúc Hệ Thống (Architectural Mindmap)}{23}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Lời Khuyên Chiến Lược Khi Trình Bày Trước Hội Đồng}{23}{section.8.2}%
+\contentsline {chapter}{Tài Liệu Tham Khảo}{25}{chapter*.19}%
