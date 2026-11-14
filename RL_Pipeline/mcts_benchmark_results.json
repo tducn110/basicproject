@@ -1,0 +1,11 @@
+{
+  "num_matches": 6,
+  "mcts_simulations": 40,
+  "mcts_wins": 3,
+  "mcts_losses": 3,
+  "draws": 0,
+  "win_rate_pct": 50.0,
+  "avg_mcts_time_ms": 39.976066918600175,
+  "avg_heur_time_ms": 24.127552433619417,
+  "avg_game_plies": 27.0
+}
