@@ -66,8 +66,8 @@ fn assess(board: &Board, mv: Move, player: Cell) -> RankedMove {
         ranked.score += match opp { 4.. => 9_000, 3 => 900, 2 => 80, 1 => 5, _ => 0 };
     }
     let center = (SIZE / 2) as i32;
-    ranked.score += (2 * center - (mv.0 as i32 - center).abs()
-        - (mv.1 as i32 - center).abs()) / 2;
+    let chebyshev = (mv.0 as i32 - center).abs().max((mv.1 as i32 - center).abs());
+    ranked.score += (center - chebyshev).max(0) * 10;
     ranked
 }
 

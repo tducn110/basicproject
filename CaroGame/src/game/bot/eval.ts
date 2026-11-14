@@ -166,18 +166,21 @@ export function evaluatePosition(board: BotBoard, sideToMove: number): number {
   if (pCounts[PATTERN_FIVE] > 0) return SCORE_WIN
   if (oppCounts[PATTERN_FIVE] > 0) return -SCORE_WIN
 
-  let score = 0
-  score += pCounts[PATTERN_OPEN_FOUR] * 1000000
-  score -= oppCounts[PATTERN_OPEN_FOUR] * 1000000
+  let scoreOwn = 0
+  let scoreOpp = 0
 
-  score += pCounts[PATTERN_FOUR] * 10000
-  score -= oppCounts[PATTERN_FOUR] * 10000
+  scoreOwn += pCounts[PATTERN_OPEN_FOUR] * 1000000
+  scoreOpp += oppCounts[PATTERN_OPEN_FOUR] * 1000000
 
-  score += pCounts[PATTERN_OPEN_THREE] * 5000
-  score -= oppCounts[PATTERN_OPEN_THREE] * 5000
+  scoreOwn += pCounts[PATTERN_FOUR] * 10000
+  scoreOpp += oppCounts[PATTERN_FOUR] * 10000
 
-  score += pCounts[PATTERN_BROKEN_THREE] * 100
-  score -= oppCounts[PATTERN_BROKEN_THREE] * 100
+  scoreOwn += pCounts[PATTERN_OPEN_THREE] * 6500
+  scoreOpp += oppCounts[PATTERN_OPEN_THREE] * 6500
 
+  scoreOwn += pCounts[PATTERN_BROKEN_THREE] * 4500
+  scoreOpp += oppCounts[PATTERN_BROKEN_THREE] * 4500
+
+  const score = scoreOwn - Math.round(scoreOpp * 1.15)
   return score
 }

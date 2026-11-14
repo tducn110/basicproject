@@ -40,11 +40,11 @@
     },
     {
       "path": "engine/src/candidates.rs",
-      "sha256": "9a83974ad61d8bcae016561f1db35ebb45a8b826c3ee8ec524cd12277ff776ea"
+      "sha256": "5666cae74ed112d0b012f0d191c15b200855e8118c75c168ef6ffed7311dbcfe"
     },
     {
       "path": "engine/src/eval.rs",
-      "sha256": "eec5757ca15216c782820588c2e7fc250fa7fe5e34a4737dee740063534f0d15"
+      "sha256": "570f3ea8fa7808ee401ee2c3f8e16fbbf8f83e6c11fa54e7fb0735a35e2c9e6f"
     },
     {
       "path": "engine/src/lib.rs",
@@ -72,8 +72,8 @@
     },
     {
       "path": "src/game/wasm/engine/gomoku_engine_bg.wasm",
-      "bytes": 111582,
-      "sha256": "1ff854e6493b39727d07cfcf69b0af06e349a748249d85d688741a4f85017989"
+      "bytes": 112113,
+      "sha256": "3c4e9b30632e0ceead4ce84315af0a05094aabded91e769b9e2ce79e14d73f9e"
     },
     {
       "path": "src/game/wasm/engine/gomoku_engine_bg.wasm.d.ts",
