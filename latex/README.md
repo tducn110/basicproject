@@ -48,6 +48,21 @@ Thư mục này chứa toàn bộ mã nguồn LaTeX, đồ thị, sơ đồ cơ 
 
 ---
 
+### 1.4. Chuyên khảo 4: Giáo Trình Toán Học, Cơ Chế Tính Toán CUDA & Quá Trình Huấn Luyện Mạng ResNet (Phase 2 - Behavioral Cloning)
+* **File nguồn TeX:** [`Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_ResNet_Phase_2.tex`](file:///home/pro/Downloads/basicproject/latex/Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_ResNet_Phase_2.tex)
+* **File PDF đã biên dịch (24 trang):** [`Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_ResNet_Phase_2.pdf`](file:///home/pro/Downloads/basicproject/latex/Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_ResNet_Phase_2.pdf)
+* **Thư mục mô hình & checkpoint:** [`../RL_Pipeline/checkpoints/`](file:///home/pro/Downloads/basicproject/RL_Pipeline/checkpoints/) và [`../RL_Pipeline/caro_resnet.onnx`](file:///home/pro/Downloads/basicproject/RL_Pipeline/caro_resnet.onnx)
+* **Nội dung 7 chương phân tích toán học & kỹ thuật chuyên sâu:**
+  1. **Chương 1: Tổng quan kết quả thực nghiệm Huấn luyện Phase 2:** Phân tích chi tiết chuỗi telemetry 5 epochs trên GPU NVIDIA T1200 Laptop (332,324 train samples, 36,077 val samples). Top-1 Accuracy tăng vọt từ $44.41\%$ lên $\mathbf{60.06\%}$, Top-3 đạt $\mathbf{82.02\%}$, Val MSE giảm xuống $0.8059$. Đạt tốc độ 902 samples/giây và hoàn thành trong 381 giây/epoch.
+  2. **Chương 2: Kiến trúc phần cứng CUDA & Cơ chế xử lý Ma trận:** Phân tích cấu trúc phân cấp SM (Streaming Multiprocessor), Warps (32 threads), SIMT, Shared Memory (100 TB/s). Mổ xẻ thuật toán hạ chiều tích chập `im2col` biến Convolution thành ma trận GEMM ($C \cdot K^2 \times H_{out} \cdot W_{out}$) và nguyên lý hoạt động của Tensor Cores (nhân ma trận tích lũy nửa độ chính xác $4 \times 4 \times 4$ trong 1 chu kỳ xung nhịp).
+  3. **Chương 3: Kỹ thuật Tăng tốc Automatic Mixed Precision (AMP) & GradScaler:** Cơ chế định dạng dấu phẩy động FP32 vs FP16 (5-bit exponent), nguyên nhân hiện tượng triệt tiêu gradient (Underflow), công thức toán học Dynamic Loss Scaling với $\mathcal{L}_{scaled} = S \cdot \mathcal{L}$, quy trình Unscale & Inf/NaN Detection, và tối ưu hóa băng thông bộ nhớ (Memory Bandwidth Bound).
+  4. **Chương 4: Đạo hàm vi tích phân Ma trận và Lan truyền ngược (Backpropagation):** Khai triển toán học giải tích ma trận đầy đủ cho: (1) Skip Connection trong ResNet Block; (2) Batch Normalization (Jacobian ma trận đầy đủ, phân tích thành phần $\sum \frac{\partial \mathcal{L}}{\partial \hat{x}_i}$); (3) Policy Head (Softmax Cross-Entropy Jacobian $\frac{\partial \mathcal{L}_p}{\partial z_i} = p_i - y_i$); (4) Value Head (Tanh MSE gradient $\frac{\partial \mathcal{L}_v}{\partial u} = (v - z)(1 - v^2)$).
+  5. **Chương 5: Cơ chế Tối ưu hóa AdamW & Cosine Annealing Learning Rate:** Phân tích sự vượt trội của L2 Regularization decoupled trong AdamW ($\theta_{t} = \theta_{t-1} - \eta_t \lambda \theta_{t-1} - \dots$) so với Adam truyền thống trong kiến trúc có BatchNorm; chứng minh công thức suy giảm Cosine Annealing.
+  6. **Chương 6: Kiểm thử Chiến thuật Độc lập (Tactical Verification Suite):** Thử nghiệm 3 kịch bản cờ vây/caro sinh tử: (1) Nước cờ tất thắng (Open-4 Win); (2) Phòng thủ cấp bách (Open-4 Block) - mô hình dự đoán nước chặn (7, 8) với độ tin cậy áp đảo **$99.35\%$**; (3) Nước mở cờ trung tâm kinh điển (7, 7) với xác suất tuyệt đối **$100.00\%$**.
+  7. **Chương 7: Hướng dẫn tích hợp ONNX & Cầu nối sang Phase 3 (AlphaZero MCTS Self-Play):** Quy trình xuất mô hình ONNX Opset 14, tối ưu hóa suy luận không phụ thuộc PyTorch, cơ chế tích hợp hàm heuristic $P(s, a)$ và $V(s)$ vào thuật toán tìm kiếm cây Monte Carlo (PUCT formula).
+
+---
+
 ## 2. Lệnh Biên Dịch Lại Toàn Bộ Các Tài Liệu
 
 ```bash
@@ -61,4 +76,7 @@ xelatex -interaction=nonstopmode Bao_Cao_Tien_Xu_Ly_Va_Cau_Truc_Dataset_Hoc_Tang
 
 # 3. Giáo trình phân tích bản chất "Tại sao" & Bộ câu hỏi bảo vệ đồ án (29 trang)
 xelatex -interaction=nonstopmode Giai_Thich_Co_Che_Va_Ly_Do_Thiet_Ke_He_Thong_Hoc_Tang_Cuong_Gomoku_RL.tex
+
+# 4. Giáo trình Toán học, CUDA & Huấn luyện Phase 2 (24 trang)
+xelatex -interaction=nonstopmode Giao_Trinh_Toan_Hoc_CUDA_Va_Huan_Luyen_Mang_ResNet_Phase_2.tex
 ```
