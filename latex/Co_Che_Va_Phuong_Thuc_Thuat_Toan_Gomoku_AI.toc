@@ -1,0 +1,52 @@
+\contentsline {chapter}{Lời Mở Đầu \& Tôn Chỉ Khoa Học}{i}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Cơ Chế Không Gian Trạng Thái \& Biểu Diễn Bàn Cờ}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Không gian trạng thái bàn cờ $15 \times 15$}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Cơ chế lựa chọn kích thước bàn cờ $N = 15$}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Chuyển đổi chỉ số và tính đóng cục bộ của bộ nhớ (Cache Locality)}{1}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Cơ chế Apply - Undo và Bất biến Bảo toàn Trạng thái}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Nguyên lý làm việc trên bản sao duy nhất (`In-Place Search`)}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Bất biến bảo toàn (Equivalence Invariant)}{2}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Cơ chế Quét tia cục bộ 4 hướng $O(1)$ (Local Raycast Win Detection)}{2}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Bản chất cơ chế}{2}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Chứng minh toán học độ phức tạp $O(1)$}{3}{subsection.1.3.2}%
+\contentsline {chapter}{\numberline {2}Cơ Chế Lượng Giá Tĩnh Heuristic \& Đột Phá Chiến Thuật}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Bản chất của Hàm Lượng Giá Tĩnh}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Cơ chế Available Span Verification (Chống Dồn Góc/Mép)}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Bệnh lý chiến thuật: Cái bẫy điểm ảo ở góc chết}{4}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Quy tắc triệt tiêu nhánh cụt (Dead-Line Pruning)}{5}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Cơ chế Gapped Pattern Scanning (Chống Đánh Tách Lẻ)}{5}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Hiểm họa của thế cờ có khoảng trống}{5}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Cơ chế Lookahead 1 ô trống}{5}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Cơ chế Nhân Khoảng Cách Chebyshev Tâm Bàn (Chebyshev Kernel)}{6}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}So sánh toán học: Tại sao Chebyshev vượt trội Manhattan trong Gomoku?}{6}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Công thức Nhân Chebyshev tối ưu}{7}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}Phương Thức Chọn Lựa Tham Số \& Điểm Cân Bằng Pareto}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Phương thức Tối ưu hóa Leo Đồi qua Tự Đối Kháng}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Phương thức chọn Trọng số $W(\text {Open 3}) = 6{,}500$}{8}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Quy luật Đường cong Hình Chuông (Bell Curve)}{8}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Phương thức chọn Hệ số Phòng thủ $\beta = 1.15$ \& Bệnh lý Thiên thủ}{9}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Hiện tượng Bệnh lý Thiên thủ (Defensive Paralysis)}{9}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Cơ chế suy thoái của chiến lược thiên thủ}{10}{subsection.3.3.2}%
+\contentsline {chapter}{\numberline {4}Cơ Chế Cắt Tỉa Alpha-Beta, Move Ordering \& Transposition}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Cơ chế Cắt tỉa Alpha-Beta ($\alpha $-$\beta $ Pruning)}{11}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Ý nghĩa toán học của khoảng giá trị $[\alpha , \beta ]$}{11}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Cơ chế kích hoạt sự kiện Cutoff}{12}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Cơ chế Sắp Xếp Nước Đi (Move Ordering)}{12}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Tầm quan trọng sống còn của thứ tự duyệt}{12}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Cơ chế chấm điểm nhanh $O(1)$ trong Candidate Assessment}{12}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Cơ chế Bảng Băm Zobrist 64-bit \& Transposition Table}{13}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Cơ chế khử tính hoán vị của nước cờ (Transposition)}{13}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Đại số Boolean của phép XOR trong Zobrist Hashing}{13}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Cơ chế lưu trữ 3 loại Bound trong Transposition Table}{13}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Cơ Chế Cắt Mềm Không Gian Ứng Viên (Soft Cap)}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Bán kính Lân cận Chebyshev $r \le 2$}{14}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Khử 89\% không gian rác ở khai cuộc}{14}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Cơ chế Bảo Tồn Chiến Thuật Tuyệt Đối (Tactical Retention Rule)}{14}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Hiểm họa của giới hạn cứng (Hard Cap Loss)}{14}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Công thức Cắt Mềm Chiến Thuật (Soft Cap)}{15}{subsection.5.2.2}%
+\contentsline {chapter}{\numberline {6}Hướng Dẫn Sử Dụng \& Luồng Điều Phối Trong Engine Thực Tế}{16}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Kiến trúc Đa Luồng Web Worker \& WebAssembly}{16}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Cấu hình Chi Tiết 6 Cấp Độ Bot trong `CaroGame`}{17}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Tổng Hợp \& Giới Hạn Nghiên Cứu}{18}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Bảng đối chiếu tổng hợp các cơ chế thuật toán}{18}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Giới hạn nghiên cứu và Hướng phát triển}{18}{section.7.2}%
